@@ -1,0 +1,98 @@
+"""User models and schemas."""
+
+from pydantic import BaseModel, EmailStr, Field, field_validator
+from datetime import datetime
+from typing import Optional, List
+from enum import Enum
+from bson import ObjectId
+
+
+class UserRole(str, Enum):
+    CUSTOMER = "CUSTOMER"
+    SUPPORT_AGENT = "SUPPORT_AGENT"
+    COMPLIANCE_OFFICER = "COMPLIANCE_OFFICER"
+    FINANCE_OPS = "FINANCE_OPS"
+    ADMIN = "ADMIN"
+    SUPER_ADMIN = "SUPER_ADMIN"
+
+
+class UserStatus(str, Enum):
+    ACTIVE = "ACTIVE"
+    DISABLED = "DISABLED"
+    PENDING = "PENDING"
+
+
+class User(BaseModel):
+    id: str = Field(default_factory=lambda: str(ObjectId()), alias="_id")
+    email: EmailStr
+    phone: Optional[str] = None
+    password_hash: str
+    
+    first_name: str
+    last_name: str
+    
+    role: UserRole = UserRole.CUSTOMER
+    status: UserStatus = UserStatus.PENDING
+    
+    email_verified: bool = False
+    phone_verified: bool = False
+    
+    mfa_enabled: bool = False
+    mfa_secret: Optional[str] = None
+    
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    last_login_at: Optional[datetime] = None
+    
+    class Config:
+        populate_by_name = True
+        json_encoders = {datetime: lambda v: v.isoformat()}
+
+
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str
+    first_name: str
+    last_name: str
+    phone: Optional[str] = None
+    
+    @field_validator('password')
+    @classmethod
+    def validate_password(cls, v):
+        if len(v) < 8:
+            raise ValueError('Password must be at least 8 characters')
+        return v
+
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+    totp_token: Optional[str] = None
+
+
+class UserResponse(BaseModel):
+    id: str
+    email: EmailStr
+    first_name: str
+    last_name: str
+    role: UserRole
+    status: UserStatus
+    email_verified: bool
+    mfa_enabled: bool
+    created_at: datetime
+    last_login_at: Optional[datetime] = None
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    user: UserResponse
+
+
+class MFASetupResponse(BaseModel):
+    secret: str
+    qr_code_uri: str
+
+
+class MFAVerifyRequest(BaseModel):
+    token: str
