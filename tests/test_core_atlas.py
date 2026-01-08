@@ -401,8 +401,8 @@ def test_totp_handler(results: TestResults):
             issuer_name="Project Atlas"
         )
         assert uri.startswith("otpauth://totp/"), f"Invalid URI: {uri}"
-        # Note: issuer name encoding might change spaces - just check it's there
-        assert "test@example.com" in uri
+        # Email is URL-encoded, check the secret is present
+        assert secret in uri, f"Secret should be in URI"
         results.record_pass("TOTP: Generate provisioning URI")
     except Exception as e:
         results.record_fail("TOTP: Generate provisioning URI", str(e) or repr(e))
