@@ -26,7 +26,7 @@ class UserStatus(str, Enum):
 
 class User(BaseModel):
     id: str = Field(default_factory=lambda: str(ObjectId()), alias="_id")
-    email: EmailStr
+    email: str
     phone: Optional[str] = None
     password_hash: str
     
@@ -45,6 +45,15 @@ class User(BaseModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     last_login_at: Optional[datetime] = None
+    
+    @field_validator('email')
+    @classmethod
+    def validate_email(cls, v):
+        # Allow .local domains for development/demo
+        email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$|^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.local$'
+        if not re.match(email_pattern, v):
+            raise ValueError('Invalid email address')
+        return v.lower()
     
     class Config:
         populate_by_name = True
