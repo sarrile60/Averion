@@ -101,7 +101,7 @@ class UserLogin(BaseModel):
 
 class UserResponse(BaseModel):
     id: str
-    email: EmailStr
+    email: str
     first_name: str
     last_name: str
     role: UserRole
@@ -110,6 +110,15 @@ class UserResponse(BaseModel):
     mfa_enabled: bool
     created_at: datetime
     last_login_at: Optional[datetime] = None
+    
+    @field_validator('email')
+    @classmethod
+    def validate_email(cls, v):
+        # Allow .local domains for development/demo
+        email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$|^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.local$'
+        if not re.match(email_pattern, v):
+            raise ValueError('Invalid email address')
+        return v.lower()
 
 
 class TokenResponse(BaseModel):
