@@ -1,10 +1,12 @@
 """User models and schemas."""
 
 from pydantic import BaseModel, EmailStr, Field, field_validator
+from pydantic_core import PydanticCustomError
 from datetime import datetime
-from typing import Optional, List
+from typing import Optional, List, Annotated
 from enum import Enum
 from bson import ObjectId
+import re
 
 
 class UserRole(str, Enum):
