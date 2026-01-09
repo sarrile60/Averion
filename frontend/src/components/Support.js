@@ -181,7 +181,12 @@ function CreateTicketForm({ onClose, onSuccess }) {
       await api.post('/tickets/create', formData);
       onSuccess();
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to create ticket');
+      const errorMsg = err.response?.data?.detail 
+        ? (typeof err.response.data.detail === 'string' 
+            ? err.response.data.detail 
+            : JSON.stringify(err.response.data.detail))
+        : err.message || 'Failed to create ticket';
+      setError(errorMsg);
     } finally {
       setSubmitting(false);
     }
