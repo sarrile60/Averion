@@ -14,6 +14,7 @@ import { SupportTickets } from './components/Support';
 import { NotificationBell } from './components/Notifications';
 import { CustomerProfile } from './components/Profile';
 import { ToastProvider, useToast } from './components/Toast';
+import { ProfessionalDashboard } from './components/ProfessionalDashboard';
 
 // Auth Context
 const AuthContext = React.createContext(null);
