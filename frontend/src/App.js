@@ -16,6 +16,7 @@ import { CustomerProfile } from './components/Profile';
 import { ToastProvider, useToast } from './components/Toast';
 import { ProfessionalDashboard } from './components/ProfessionalDashboard';
 import { AdminSidebar, AdminLayout } from './components/AdminLayout';
+import { MobileBottomTabs } from './components/MobileNav';
 
 // Auth Context
 const AuthContext = React.createContext(null);
@@ -549,6 +550,9 @@ function CustomerDashboard() {
 
       {/* Professional Dashboard Content */}
       <ProfessionalDashboard user={user} logout={logout} />
+      
+      {/* Mobile Bottom Tabs */}
+      <MobileBottomTabs />
     </div>
   );
 }
