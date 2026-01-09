@@ -1,30 +1,70 @@
 [
   {
-    "content": "Phase 1 POC: All tests passed - Core proven and working",
-    "status": "completed"
+    "content": "Phase 3: MFA enrollment UI with QR code display",
+    "status": "in_progress"
   },
   {
-    "content": "Phase 2: Get design guidelines from design_agent",
-    "status": "completed"
+    "content": "Phase 3: Device management dashboard for customers",
+    "status": "pending"
   },
   {
-    "content": "Phase 2: Backend implementation (auth, KYC, ledger, admin)",
-    "status": "completed"
+    "content": "Phase 3: Security alerts and notifications system",
+    "status": "pending"
   },
   {
-    "content": "Phase 2: Frontend implementation (customer + admin portals)",
-    "status": "completed"
+    "content": "Phase 4: Complete KYC submission UI with document upload",
+    "status": "pending"
   },
   {
-    "content": "Phase 2: Seed script with demo data",
-    "status": "completed"
+    "content": "Phase 4: Admin document viewer and approval workflow",
+    "status": "pending"
   },
   {
-    "content": "Phase 2: End-to-end testing via testing agent",
-    "status": "completed"
+    "content": "Phase 4: KYC status tracking for customers",
+    "status": "pending"
   },
   {
-    "content": "Phase 2: All user stories covered in development and testing",
-    "status": "completed"
+    "content": "Phase 5: Transaction details modal with ledger entries",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 5: Transaction reversal UI for admins",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 5: Advanced transaction filters and CSV export",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 6: Comprehensive audit log viewer",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 6: Internal transfers between users",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 6: Advanced user search and bulk operations",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 7: Monthly statement PDF generation UI",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 7: Admin reports dashboard with analytics",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 8: PWA service worker and manifest",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 8: Push notifications setup",
+    "status": "pending"
+  },
+  {
+    "content": "Final: Comprehensive testing of all new features",
+    "status": "pending"
   }
 ]
