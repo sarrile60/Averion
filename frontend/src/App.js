@@ -696,37 +696,6 @@ function AdminDashboard() {
   }, [users, searchQuery, statusFilter, roleFilter]);
 
   const applyFilters = () => {
-    let filtered = [...users];
-
-    // Search filter
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(u => 
-        u.first_name.toLowerCase().includes(query) ||
-        u.last_name.toLowerCase().includes(query) ||
-        u.email.toLowerCase().includes(query) ||
-        (u.id && u.id.toLowerCase().includes(query))
-      );
-    }
-
-    // Status filter
-    if (statusFilter !== 'all') {
-      filtered = filtered.filter(u => u.status === statusFilter);
-    }
-
-    // Role filter
-    if (roleFilter !== 'all') {
-      filtered = filtered.filter(u => u.role === roleFilter);
-    }
-
-    setFilteredUsers(filtered);
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
     try {
       const response = await api.get('/admin/users');
       setUsers(response.data);
@@ -738,11 +707,14 @@ function AdminDashboard() {
   };
 
   const viewUserDetails = async (userId) => {
+    console.log('Fetching user details for:', userId);
     try {
       const response = await api.get(`/admin/users/${userId}`);
+      console.log('User details response:', response.data);
       setSelectedUser(response.data);
     } catch (err) {
-      alert('Failed to fetch user details');
+      console.error('Failed to fetch user details:', err);
+      alert('Failed to fetch user details: ' + (err.response?.data?.detail || err.message));
     }
   };
 
