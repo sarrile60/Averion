@@ -1,22 +1,22 @@
 [
   {
-    "content": "UI REFACTOR: Design system updated - solid white, red accent",
+    "content": "UI REFACTOR: Design system complete - solid white, red accent",
     "status": "completed"
   },
   {
-    "content": "UI REFACTOR: Rebuild customer dashboard to match reference",
+    "content": "UI REFACTOR: Professional customer dashboard component created",
+    "status": "completed"
+  },
+  {
+    "content": "UI REFACTOR: Replace old dashboard with new professional one",
     "status": "in_progress"
   },
   {
-    "content": "UI REFACTOR: Admin portal - sidebar layout",
+    "content": "UI REFACTOR: Admin sidebar layout",
     "status": "pending"
   },
   {
-    "content": "UI REFACTOR: Loading skeletons",
-    "status": "pending"
-  },
-  {
-    "content": "UI REFACTOR: Mobile responsive",
+    "content": "UI REFACTOR: Mobile bottom tabs",
     "status": "pending"
   },
   {
