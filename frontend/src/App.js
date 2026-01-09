@@ -363,6 +363,7 @@ function CustomerDashboard() {
 // Admin Dashboard
 function AdminDashboard() {
   const { user, logout } = useAuth();
+  const [activeTab, setActiveTab] = useState('users'); // users, kyc
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [loading, setLoading] = useState(true);
