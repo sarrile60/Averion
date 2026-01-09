@@ -261,68 +261,74 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center hero-gradient">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white/95 backdrop-blur rounded-xl shadow-blue border border-blue-100">
-        <div className="blue-corner">
-          <h2 className="text-3xl font-bold text-center text-gradient-blue" style={{ fontFamily: 'Space Grotesk' }}>
-            {APP_NAME}
-          </h2>
-          <p className="mt-2 text-center text-gray-600">Sign in to your account</p>
+    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-semibold text-gray-900 mb-2">{APP_NAME}</h1>
+          <p className="text-sm text-gray-600">Sign in to your account</p>
         </div>
-        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-800 rounded-lg p-3 text-sm">
-              {error}
+        
+        <div className="card p-8">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-800 rounded-lg p-3 text-sm">
+                {error}
+              </div>
+            )}
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="input-field"
+                data-testid="email-input"
+              />
             </div>
-          )}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="input-enhanced w-full"
-              data-testid="email-input"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="input-enhanced w-full"
-              data-testid="password-input"
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full btn-primary btn-glow"
-            data-testid="login-button"
-          >
-            {loading ? 'Signing in...' : 'Sign in'}
-          </button>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="input-field"
+                data-testid="password-input"
+              />
+            </div>
 
-          <div className="text-center pt-4 border-t border-gray-200">
-            <p className="text-sm text-gray-600 mb-3">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full btn-primary"
+              data-testid="login-button"
+            >
+              {loading ? 'Signing in...' : 'Sign in'}
+            </button>
+          </form>
+
+          <div className="mt-6 pt-6 border-t border-gray-200 text-center">
+            <p className="text-sm text-gray-600 mb-4">
               Don't have an account?{' '}
               <button
                 type="button"
                 onClick={() => navigate('/signup')}
-                className="text-blue-600 hover:text-blue-700 font-medium"
+                className="font-medium text-red-600 hover:text-red-700"
                 data-testid="goto-signup"
               >
                 Create Account
               </button>
             </p>
-            <p className="text-xs font-medium text-gray-700 mb-1">Demo credentials:</p>
-            <p className="text-xs text-gray-600">Customer: customer@demo.com / Demo@123456</p>
-            <p className="text-xs text-gray-600">Admin: admin@atlas.local / Admin@123456</p>
+            <div className="text-xs text-gray-500 space-y-1">
+              <p className="font-medium mb-1">Demo credentials:</p>
+              <p>Customer: customer@demo.com / Demo@123456</p>
+              <p>Admin: admin@atlas.local / Admin@123456</p>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

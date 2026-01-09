@@ -1,18 +1,34 @@
 [
   {
-    "content": "UI REFACTOR: Login & signup pages updated to professional style",
+    "content": "UI REFACTOR: Login page updated - solid white, red accent",
     "status": "completed"
   },
   {
-    "content": "UI REFACTOR: Build professional admin sidebar layout",
+    "content": "UI REFACTOR: Build professional admin sidebar component",
     "status": "in_progress"
+  },
+  {
+    "content": "UI REFACTOR: Rebuild admin user management as table",
+    "status": "pending"
   },
   {
     "content": "UI REFACTOR: Mobile bottom tabs",
     "status": "pending"
   },
   {
-    "content": "Final: Test all refactored UI",
+    "content": "FEATURE: Complete missing backend APIs",
+    "status": "pending"
+  },
+  {
+    "content": "FEATURE: Customer P2P transfers",
+    "status": "pending"
+  },
+  {
+    "content": "FEATURE: Analytics dashboard",
+    "status": "pending"
+  },
+  {
+    "content": "Final: Complete testing",
     "status": "pending"
   }
 ]
