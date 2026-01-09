@@ -698,11 +698,39 @@ function AdminDashboard() {
   }, [users, searchQuery, statusFilter, roleFilter]);
 
   const applyFilters = () => {
+    let filtered = [...users];
+
+    // Search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(u => 
+        u.first_name.toLowerCase().includes(query) ||
+        u.last_name.toLowerCase().includes(query) ||
+        u.email.toLowerCase().includes(query) ||
+        (u.id && u.id.toLowerCase().includes(query))
+      );
+    }
+
+    // Status filter
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(u => u.status === statusFilter);
+    }
+
+    // Role filter
+    if (roleFilter !== 'all') {
+      filtered = filtered.filter(u => u.role === roleFilter);
+    }
+
+    setFilteredUsers(filtered);
+  };
+
+  const fetchUsers = async () => {
     try {
       const response = await api.get('/admin/users');
       setUsers(response.data);
     } catch (err) {
       console.error('Failed to fetch users:', err);
+      toast.error('Failed to fetch users');
     } finally {
       setLoading(false);
     }
@@ -716,7 +744,7 @@ function AdminDashboard() {
       setSelectedUser(response.data);
     } catch (err) {
       console.error('Failed to fetch user details:', err);
-      toast.error('Failed to fetch user details: ' + (err.response?.data?.detail || err.message));
+      toast.error('Failed to fetch user details');
     }
   };
 
