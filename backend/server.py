@@ -18,9 +18,11 @@ from services.kyc_service import KYCService
 from services.banking_service import BankingService
 from services.ledger_service import LedgerEngine
 from services.statement_service import StatementService
+from services.ticket_service import TicketService
 from schemas.users import UserCreate, UserLogin, TokenResponse, UserResponse, MFASetupResponse, MFAVerifyRequest
 from schemas.kyc import KYCSubmitRequest, KYCReviewRequest, DocumentType
 from schemas.banking import AccountResponse
+from schemas.tickets import TicketCreate, MessageCreate, TicketStatus
 from providers import LocalS3Storage
 from pydantic import BaseModel
 from core.ledger import EntryDirection
@@ -643,6 +645,102 @@ async def get_audit_logs(
         })
     
     return logs
+
+
+# ==================== SUPPORT TICKETS ====================
+
+@app.post("/api/v1/tickets/create")
+async def create_ticket(
+    data: TicketCreate,
+    current_user: dict = Depends(get_current_user),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Create a new support ticket."""
+    auth_service = AuthService(db)
+    user = await auth_service.get_user(current_user["id"])
+    
+    ticket_service = TicketService(db)
+    ticket = await ticket_service.create_ticket(
+        user_id=current_user["id"],
+        user_name=f"{user.first_name} {user.last_name}",
+        data=data
+    )
+    return ticket.model_dump()
+
+
+@app.get("/api/v1/tickets")
+async def get_my_tickets(
+    current_user: dict = Depends(get_current_user),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Get current user's tickets."""
+    ticket_service = TicketService(db)
+    tickets = await ticket_service.get_user_tickets(current_user["id"])
+    return [t.model_dump() for t in tickets]
+
+
+@app.post("/api/v1/tickets/{ticket_id}/messages")
+async def add_ticket_message(
+    ticket_id: str,
+    data: MessageCreate,
+    current_user: dict = Depends(get_current_user),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Add a message to a ticket."""
+    # Verify ticket belongs to user or user is admin
+    ticket_doc = await db.tickets.find_one({"_id": ticket_id})
+    if not ticket_doc:
+        raise HTTPException(status_code=404, detail="Ticket not found")
+    
+    if ticket_doc["user_id"] != current_user["id"] and current_user["role"] not in ["ADMIN", "SUPER_ADMIN", "SUPPORT_AGENT"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    auth_service = AuthService(db)
+    user = await auth_service.get_user(current_user["id"])
+    is_staff = current_user["role"] in ["ADMIN", "SUPER_ADMIN", "SUPPORT_AGENT"]
+    
+    ticket_service = TicketService(db)
+    ticket = await ticket_service.add_message(
+        ticket_id=ticket_id,
+        sender_id=current_user["id"],
+        sender_name=f"{user.first_name} {user.last_name}",
+        is_staff=is_staff,
+        data=data
+    )
+    return ticket.model_dump()
+
+
+@app.get("/api/v1/admin/tickets")
+async def get_all_tickets(
+    status: Optional[str] = None,
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Get all tickets (admin)."""
+    ticket_service = TicketService(db)
+    tickets = await ticket_service.get_all_tickets(status_filter=status)
+    return [t.model_dump() for t in tickets]
+
+
+class UpdateTicketStatus(BaseModel):
+    status: TicketStatus
+
+
+@app.patch("/api/v1/admin/tickets/{ticket_id}/status")
+async def update_ticket_status(
+    ticket_id: str,
+    data: UpdateTicketStatus,
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Update ticket status (admin)."""
+    ticket_service = TicketService(db)
+    ticket = await ticket_service.update_ticket_status(
+        ticket_id=ticket_id,
+        new_status=data.status,
+        assigned_to=current_user["id"]
+    )
+    return ticket.model_dump()
 
 
 @app.get("/api/health")
