@@ -20,10 +20,12 @@ from services.ledger_service import LedgerEngine
 from services.statement_service import StatementService
 from services.ticket_service import TicketService
 from services.notification_service import NotificationService
+from services.transfer_service import TransferService
 from schemas.users import UserCreate, UserLogin, TokenResponse, UserResponse, MFASetupResponse, MFAVerifyRequest
 from schemas.kyc import KYCSubmitRequest, KYCReviewRequest, DocumentType
 from schemas.banking import AccountResponse
 from schemas.tickets import TicketCreate, MessageCreate, TicketStatus
+from schemas.transfers import P2PTransferRequest
 from providers import LocalS3Storage
 from pydantic import BaseModel
 from core.ledger import EntryDirection
@@ -878,6 +880,28 @@ async def mark_all_notifications_read(
     notif_service = NotificationService(db)
     count = await notif_service.mark_all_as_read(current_user["id"])
     return {"marked_read": count}
+
+
+# ==================== P2P TRANSFERS ====================
+
+@app.post("/api/v1/transfers/p2p")
+async def create_p2p_transfer(
+    data: P2PTransferRequest,
+    current_user: dict = Depends(get_current_user),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Create P2P transfer between customers."""
+    ledger_engine = LedgerEngine(db)
+    transfer_service = TransferService(db, ledger_engine)
+    
+    result = await transfer_service.p2p_transfer(
+        from_user_id=current_user["id"],
+        to_email=data.to_email,
+        amount=data.amount,
+        reason=data.reason
+    )
+    
+    return result
 
 
 @app.get("/api/health")

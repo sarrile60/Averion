@@ -17,6 +17,7 @@ import { ToastProvider, useToast } from './components/Toast';
 import { ProfessionalDashboard } from './components/ProfessionalDashboard';
 import { AdminSidebar, AdminLayout } from './components/AdminLayout';
 import { MobileBottomTabs } from './components/MobileNav';
+import { P2PTransferForm } from './components/P2PTransfer';
 
 // Auth Context
 const AuthContext = React.createContext(null);

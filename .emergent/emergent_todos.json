@@ -1,18 +1,18 @@
 [
   {
-    "content": "BUG FIX: Admin activeTab variable error fixed",
+    "content": "FEATURE: P2P transfers backend + UI complete",
     "status": "completed"
   },
   {
-    "content": "FEATURE: Add P2P customer transfers backend + UI",
+    "content": "FEATURE: Analytics dashboard with Recharts",
     "status": "in_progress"
   },
   {
-    "content": "FEATURE: Analytics dashboard",
+    "content": "POLISH: Replace all remaining alerts with toast",
     "status": "pending"
   },
   {
-    "content": "Final: Complete testing",
+    "content": "Final: Complete end-to-end testing",
     "status": "pending"
   }
 ]
