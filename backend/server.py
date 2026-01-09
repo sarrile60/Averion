@@ -79,7 +79,21 @@ async def get_current_user(
         if not user_id:
             raise HTTPException(status_code=401, detail="Invalid token")
         
+        # Try to find user by _id (handle both ObjectId and string)
+        from bson import ObjectId
+        from bson.errors import InvalidId
+        
+        user_doc = None
+        # First try as string (for seed data)
         user_doc = await db.users.find_one({"_id": user_id})
+        
+        # If not found and it looks like an ObjectId, try as ObjectId
+        if not user_doc:
+            try:
+                user_doc = await db.users.find_one({"_id": ObjectId(user_id)})
+            except InvalidId:
+                pass
+        
         if not user_doc:
             raise HTTPException(status_code=401, detail="User not found")
         
