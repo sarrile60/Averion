@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
+import { P2PTransferForm } from './P2PTransfer';
 
 export function ProfessionalDashboard({ user, logout }) {
   const navigate = useNavigate();
@@ -238,9 +239,17 @@ export function ProfessionalDashboard({ user, logout }) {
           </div>
         </div>
 
-        {/* Right: Cards Widget (Placeholder) */}
-        <div>
-          <div className="section-header">Cards</div>
+        {/* Right: Cards Widget + P2P Transfer */}
+        <div className="space-y-6">
+          {/* P2P Transfer Form */}
+          <div>
+            <div className="section-header">Send Money</div>
+            <P2PTransferForm onSuccess={fetchDashboardData} />
+          </div>
+          
+          {/* Cards Widget */}
+          <div>
+            <div className="section-header">Cards</div>
           <div className="card p-6">
             <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-6 text-white mb-4" style={{ aspectRatio: '1.586' }}>
               <div className="flex justify-between items-start mb-8">
@@ -270,6 +279,7 @@ export function ProfessionalDashboard({ user, logout }) {
             <p className="text-xs text-gray-500 text-center mt-4">Virtual cards coming soon</p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
