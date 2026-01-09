@@ -678,7 +678,8 @@ function CustomerDashboard() {
 // Admin Dashboard
 function AdminDashboard() {
   const { user, logout } = useAuth();
-  const [activeTab, setActiveTab] = useState('users'); // users, kyc, audit
+  const toast = useToast();
+  const [activeTab, setActiveTab] = useState('users'); // users, kyc, support, audit
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -715,7 +716,7 @@ function AdminDashboard() {
       setSelectedUser(response.data);
     } catch (err) {
       console.error('Failed to fetch user details:', err);
-      alert('Failed to fetch user details: ' + (err.response?.data?.detail || err.message));
+      toast.error('Failed to fetch user details: ' + (err.response?.data?.detail || err.message));
     }
   };
 
@@ -730,10 +731,10 @@ function AdminDashboard() {
         amount: parseInt(amount),
         reason
       });
-      alert('Top-up successful!');
+      toast.success('Top-up successful!');
       viewUserDetails(selectedUser.user.id);
     } catch (err) {
-      alert('Top-up failed: ' + (err.response?.data?.detail || err.message));
+      toast.error('Top-up failed: ' + (err.response?.data?.detail || err.message));
     }
   };
 
