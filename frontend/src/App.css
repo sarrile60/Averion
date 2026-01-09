@@ -1,243 +1,229 @@
-/* Project Atlas - Enhanced App Styles */
+/* Project Atlas - App Specific Styles (Professional Banking) */
 
-/* Smooth transitions for all interactive elements */
-* {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-duration: 200ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+/* Remove all gradient backgrounds */
+body {
+  background: #FFFFFF !important;
 }
 
-/* Enhanced Page Background with Subtle Pattern */
-.page-background {
-  background: 
-    radial-gradient(circle at 20% 50%, hsla(200, 85%, 95%, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, hsla(200, 50%, 95%, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, hsla(162, 85%, 95%, 0.2) 0%, transparent 50%),
-    linear-gradient(180deg, #F9FAFB 0%, #EFF6FF 100%);
-}
-
-/* Account Card with Blue Gradient Border */
-.account-card {
+/* Overview Balance Card */
+.overview-card {
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
+  border: 1px solid #EAEAEA;
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 24px;
 }
 
-.account-card::before {
+.overview-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #757575;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.overview-label::before {
   content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  padding: 2px;
-  background: linear-gradient(135deg, #0B5D8F, #5BA3C5, #0B7D5A);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.6;
+  width: 3px;
+  height: 12px;
+  background: #D32F2F;
+  display: inline-block;
+  margin-right: 8px;
 }
 
-/* Blue Corner Decoration */
-.blue-corner {
-  position: relative;
+.balance-large {
+  font-size: 48px;
+  font-weight: 700;
+  color: #212121;
+  font-variant-numeric: tabular-nums;
 }
 
-.blue-corner::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 120px;
-  height: 120px;
-  background: radial-gradient(circle at top right, hsla(200, 85%, 85%, 0.4) 0%, transparent 70%);
-  border-radius: 0 0 0 100%;
-  pointer-events: none;
+.balance-small {
+  font-size: 14px;
+  color: #757575;
+  margin-top: 4px;
 }
 
-/* Header with Gradient Underline */
-.header-gradient {
-  background: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  border-bottom: 3px solid;
-  border-image: linear-gradient(90deg, #0B5D8F 0%, #5BA3C5 50%, #0B5D8F 100%) 1;
+/* Stat Tiles Grid */
+.stat-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
-/* Transaction Card Hover Effect */
+@media (max-width: 1024px) {
+  .stat-tiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .stat-tiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Account List Item */
+.account-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #EAEAEA;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: all 0.15s;
+}
+
+.account-item:hover {
+  border-color: #D32F2F;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* Transaction List */
 .transaction-item {
-  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #F5F5F5;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
 }
 
 .transaction-item:hover {
-  background: linear-gradient(90deg, #ffffff 0%, #EBF5FF 100%);
-  border-left: 3px solid #0B5D8F;
-  padding-left: calc(1rem - 3px);
+  background: #FAFAFA;
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
-/* Button with Blue Glow */
-.btn-glow {
-  box-shadow: 0 4px 14px hsla(200, 85%, 31%, 0.25);
-  transition: all 0.3s ease;
+/* Admin Sidebar */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
 }
 
-.btn-glow:hover {
-  box-shadow: 0 6px 20px hsla(200, 85%, 31%, 0.35);
-  transform: translateY(-1px);
+.admin-sidebar {
+  width: 240px;
+  background: white;
+  border-right: 1px solid #EAEAEA;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
 }
 
-/* Balance Display with Gradient */
-.balance-display {
-  font-family: 'IBM Plex Mono', monospace;
-  background: linear-gradient(135deg, #0B7D5A, #0B5D8F);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
+.admin-content {
+  margin-left: 240px;
+  flex: 1;
+  background: white;
+  min-height: 100vh;
 }
 
-/* Modal Overlay with Blue Tint */
-.modal-overlay {
-  background: linear-gradient(135deg, rgba(11, 93, 143, 0.1), rgba(91, 163, 197, 0.1));
-  backdrop-filter: blur(4px);
-}
-
-/* Card with Subtle Blue Shadow */
-.card-blue-shadow {
-  box-shadow: 
-    0 1px 3px rgba(11, 93, 143, 0.1),
-    0 0 0 1px rgba(11, 93, 143, 0.05);
-}
-
-.card-blue-shadow:hover {
-  box-shadow: 
-    0 4px 12px rgba(11, 93, 143, 0.15),
-    0 0 0 1px rgba(11, 93, 143, 0.1);
-}
-
-/* Status Badge with Enhanced Colors */
-.status-badge {
-  display: inline-flex;
+.sidebar-nav-item {
+  display: flex;
   align-items: center;
-  padding: 0.375rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
+  padding: 12px 16px;
+  margin: 4px 8px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 500;
-  border: 1px solid;
+  color: #616161;
+  cursor: pointer;
+  transition: all 0.15s;
 }
 
-/* Blue Accent Bar */
-.accent-bar {
-  position: relative;
-  padding-left: 1rem;
+.sidebar-nav-item:hover {
+  background: #FAFAFA;
+  color: #212121;
 }
 
-.accent-bar::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(180deg, #0B5D8F, #5BA3C5);
-  border-radius: 2px;
+.sidebar-nav-item-active {
+  background: #FFEBEE;
+  color: #D32F2F;
+  border-left: 3px solid #D32F2F;
+  margin-left: 8px;
+  padding-left: 13px;
 }
 
-/* Decorative Circle Pattern */
-.circle-pattern {
-  position: relative;
-}
-
-.circle-pattern::before {
-  content: '';
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, hsla(200, 85%, 85%, 0.2) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-/* Input Focus with Blue Glow */
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: #0B5D8F;
-  box-shadow: 0 0 0 3px hsla(200, 85%, 31%, 0.1);
-}
-
-/* Animated Gradient Background for Hero Sections */
-.hero-gradient {
-  background: linear-gradient(135deg, 
-    hsl(200, 85%, 95%) 0%, 
-    hsl(200, 50%, 97%) 50%, 
-    hsl(162, 85%, 95%) 100%
-  );
-  background-size: 200% 200%;
-  animation: gradientShift 15s ease infinite;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Tab Navigation with Blue Indicator */
-.tab-nav {
-  position: relative;
-}
-
-.tab-nav::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #5BA3C5, transparent);
-}
-
-/* Section Divider with Blue Accent */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #0B5D8F, transparent);
-  margin: 2rem 0;
-}
-
-/* Enhanced Shadow for Important Elements */
-.shadow-blue {
-  box-shadow: 
-    0 10px 25px -5px rgba(11, 93, 143, 0.1),
-    0 10px 10px -5px rgba(11, 93, 143, 0.04);
-}
-
-/* Smooth Card Animation */
-.animate-card {
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+/* Mobile Bottom Tabs */
+@media (max-width: 768px) {
+  .admin-sidebar {
+    display: none;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .admin-content {
+    margin-left: 0;
+    padding-bottom: 70px;
+  }
+  
+  .bottom-tabs-mobile {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #EAEAEA;
+    height: 56px;
+    justify-content: space-around;
+    z-index: 100;
+  }
+  
+  .bottom-tab-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #9E9E9E;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  
+  .bottom-tab-item-active {
+    color: #D32F2F;
   }
 }
 
-/* Loading Skeleton with Blue Tint */
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    #F3F4F6 0%,
-    #EBF5FF 50%,
-    #F3F4F6 100%
-  );
+/* Loading Skeletons */
+.skeleton-text {
+  height: 16px;
+  background: linear-gradient(90deg, #F5F5F5 25%, #EEEEEE 50%, #F5F5F5 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-card {
+  height: 120px;
+  background: linear-gradient(90deg, #F5F5F5 25%, #EEEEEE 50%, #F5F5F5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
 }
 
 @keyframes shimmer {
@@ -245,25 +231,131 @@ input:focus, textarea:focus, select:focus {
   100% { background-position: 200% 0; }
 }
 
-/* Amount Display with Color Coding */
+/* Empty States */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: #9E9E9E;
+}
+
+.empty-state-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.3;
+}
+
+.empty-state-text {
+  font-size: 14px;
+  color: #757575;
+  margin-bottom: 16px;
+}
+
+/* Detail Drawer */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 40;
+}
+
+.drawer {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 480px;
+  background: white;
+  border-left: 1px solid #EAEAEA;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.08);
+  z-index: 50;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.drawer-open {
+  transform: translateX(0);
+}
+
+/* Amount Display */
 .amount-positive {
-  color: #0B7D5A;
-  font-weight: 700;
+  color: #2E7D32;
+  font-weight: 600;
 }
 
 .amount-negative {
-  color: #DC2626;
-  font-weight: 700;
+  color: #C62828;
+  font-weight: 600;
 }
 
-/* Blue Hover Highlight */
-.hover-blue-bg:hover {
-  background: linear-gradient(90deg, #ffffff 0%, #F0F9FF 100%);
+.amount-neutral {
+  color: #757575;
+  font-weight: 600;
 }
 
-/* Sidebar with Blue Accent (for future use) */
-.sidebar-enhanced {
-  background: linear-gradient(180deg, #ffffff 0%, #F8FBFF 100%);
-  border-right: 1px solid #E5E7EB;
-  box-shadow: 2px 0 8px rgba(11, 93, 143, 0.05);
+/* KYC Progress Steps */
+.progress-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.progress-step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #E0E0E0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  font-weight: 600;
+  font-size: 14px;
+  color: #9E9E9E;
+  z-index: 1;
+}
+
+.progress-step-active .progress-step-circle {
+  border-color: #D32F2F;
+  background: #D32F2F;
+  color: white;
+}
+
+.progress-step-complete .progress-step-circle {
+  border-color: #2E7D32;
+  background: #2E7D32;
+  color: white;
+}
+
+.progress-step-line {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #E0E0E0;
+  z-index: 0;
+}
+
+.progress-step-active .progress-step-line,
+.progress-step-complete .progress-step-line {
+  background: #D32F2F;
+}
+
+/* Remove all blue gradients and replace with solid */
+.hero-gradient,
+.page-background,
+.balance-card,
+.card-blue-accent,
+.header-gradient {
+  background: white !important;
 }

@@ -1,34 +1,26 @@
 [
   {
-    "content": "UI REFACTOR: Update design system - solid white, red accent, remove gradients",
+    "content": "UI REFACTOR: Design system updated - solid white, red accent",
+    "status": "completed"
+  },
+  {
+    "content": "UI REFACTOR: Rebuild customer dashboard to match reference",
     "status": "in_progress"
   },
   {
-    "content": "UI REFACTOR: Customer dashboard - overview card, 4 stat tiles, accounts/activity grid",
+    "content": "UI REFACTOR: Admin portal - sidebar layout",
     "status": "pending"
   },
   {
-    "content": "UI REFACTOR: Admin portal - sidebar layout, tables, detail drawers",
+    "content": "UI REFACTOR: Loading skeletons",
     "status": "pending"
   },
   {
-    "content": "UI REFACTOR: Loading skeletons for all data sections",
+    "content": "UI REFACTOR: Mobile responsive",
     "status": "pending"
   },
   {
-    "content": "UI REFACTOR: Empty states with helpful messages",
-    "status": "pending"
-  },
-  {
-    "content": "UI REFACTOR: Mobile responsive with bottom tabs",
-    "status": "pending"
-  },
-  {
-    "content": "UI REFACTOR: Forms and validation - inline errors",
-    "status": "pending"
-  },
-  {
-    "content": "Final: Test refactored UI end-to-end",
+    "content": "Final: Test refactored UI",
     "status": "pending"
   }
 ]
