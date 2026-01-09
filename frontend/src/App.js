@@ -144,18 +144,18 @@ function KYCPage() {
   const navigate = useNavigate();
 
   return (
-    <div className=\"min-h-screen bg-gray-50\">
-      <header className=\"bg-white shadow-sm\">
-        <div className=\"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8\">
-          <div className=\"flex justify-between items-center py-4\">
-            <h1 className=\"text-2xl font-bold\" style={{ fontFamily: 'Space Grotesk' }}>
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <h1 className="text-2xl font-bold" style={{ fontFamily: 'Space Grotesk' }}>
               {APP_NAME}
             </h1>
-            <div className=\"flex items-center space-x-4\">
-              <span className=\"text-sm text-gray-600\">
+            <div className="flex items-center space-x-4">
+              <span className="text-sm text-gray-600">
                 {user?.first_name} {user?.last_name}
               </span>
-              <button onClick={logout} className=\"text-sm text-gray-600 hover:text-gray-900\">
+              <button onClick={logout} className="text-sm text-gray-600 hover:text-gray-900">
                 Logout
               </button>
             </div>
@@ -163,22 +163,22 @@ function KYCPage() {
         </div>
       </header>
 
-      <div className=\"border-b border-gray-200 bg-white\">
-        <nav className=\"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-8\">
-          <button onClick={() => navigate('/dashboard')} className=\"py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700\">
+      <div className="border-b border-gray-200 bg-white">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-8">
+          <button onClick={() => navigate('/dashboard')} className="py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700">
             Accounts
           </button>
-          <button onClick={() => navigate('/kyc')} className=\"py-4 px-1 border-b-2 border-blue-600 font-medium text-sm text-blue-600\">
+          <button onClick={() => navigate('/kyc')} className="py-4 px-1 border-b-2 border-blue-600 font-medium text-sm text-blue-600">
             KYC
           </button>
-          <button onClick={() => navigate('/security')} className=\"py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700\">
+          <button onClick={() => navigate('/security')} className="py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700">
             Security
           </button>
         </nav>
       </div>
 
-      <main className=\"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8\">
-        <h2 className=\"text-2xl font-bold mb-6\">Identity Verification (KYC)</h2>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h2 className="text-2xl font-bold mb-6">Identity Verification (KYC)</h2>
         <KYCApplication />
       </main>
     </div>
