@@ -919,15 +919,14 @@ function AdminDashboard() {
                     <div className="flex space-x-2">
                       {selectedUser.user.status === 'ACTIVE' ? (
                         <button
-                          onClick={async () => {
+                          onClick={() => {
                             if (window.confirm('Disable this user? They will not be able to login.')) {
-                              try {
-                                await api.patch(`/admin/users/${selectedUser.user.id}/status`, { status: 'DISABLED' });
-                                alert('User disabled successfully');
-                                viewUserDetails(selectedUser.user.id);
-                              } catch (err) {
-                                alert('Failed to disable user');
-                              }
+                              api.patch(`/admin/users/${selectedUser.user.id}/status`, { status: 'DISABLED' })
+                                .then(() => {
+                                  toast.success('User disabled successfully');
+                                  viewUserDetails(selectedUser.user.id);
+                                })
+                                .catch(() => toast.error('Failed to disable user'));
                             }
                           }}
                           className="px-3 py-1 text-sm border border-red-600 text-red-600 rounded hover:bg-red-50"
@@ -937,14 +936,13 @@ function AdminDashboard() {
                         </button>
                       ) : (
                         <button
-                          onClick={async () => {
-                            try {
-                              await api.patch(`/admin/users/${selectedUser.user.id}/status`, { status: 'ACTIVE' });
-                              alert('User enabled successfully');
-                              viewUserDetails(selectedUser.user.id);
-                            } catch (err) {
-                              alert('Failed to enable user');
-                            }
+                          onClick={() => {
+                            api.patch(`/admin/users/${selectedUser.user.id}/status`, { status: 'ACTIVE' })
+                              .then(() => {
+                                toast.success('User enabled successfully');
+                                viewUserDetails(selectedUser.user.id);
+                              })
+                              .catch(() => toast.error('Failed to enable user'));
                           }}
                           className="px-3 py-1 text-sm border border-green-600 text-green-600 rounded hover:bg-green-50"
                           data-testid="enable-user-btn"
@@ -953,14 +951,11 @@ function AdminDashboard() {
                         </button>
                       )}
                       <button
-                        onClick={async () => {
+                        onClick={() => {
                           if (window.confirm('Revoke all active sessions for this user? They will be logged out from all devices.')) {
-                            try {
-                              await api.post(`/admin/users/${selectedUser.user.id}/revoke-sessions`);
-                              alert('All sessions revoked successfully');
-                            } catch (err) {
-                              alert('Failed to revoke sessions');
-                            }
+                            api.post(`/admin/users/${selectedUser.user.id}/revoke-sessions`)
+                              .then(() => toast.success('All sessions revoked successfully'))
+                              .catch(() => toast.error('Failed to revoke sessions'));
                           }
                         }}
                         className="px-3 py-1 text-sm border border-orange-600 text-orange-600 rounded hover:bg-orange-50"

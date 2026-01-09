@@ -1,14 +1,10 @@
 [
   {
-    "content": "CRITICAL FIX: Admin user details - added debugging",
+    "content": "CRITICAL FIX & Toast system complete",
     "status": "completed"
   },
   {
-    "content": "Enhancement: Toast notification system implemented",
-    "status": "completed"
-  },
-  {
-    "content": "Enhancement: Replace remaining alert() calls with toast",
+    "content": "Enhancement: Replace all remaining alert() with toast",
     "status": "in_progress"
   },
   {
@@ -16,23 +12,19 @@
     "status": "pending"
   },
   {
-    "content": "Enhancement: Better empty states with messaging",
+    "content": "Enhancement: Better empty states",
     "status": "pending"
   },
   {
-    "content": "Feature: Analytics dashboard with charts",
+    "content": "Feature: Analytics dashboard",
     "status": "pending"
   },
   {
-    "content": "Feature: Customer-to-customer transfers",
+    "content": "Feature: Customer P2P transfers",
     "status": "pending"
   },
   {
-    "content": "Feature: Transaction categories and insights",
-    "status": "pending"
-  },
-  {
-    "content": "Final: Complete end-to-end testing",
+    "content": "Final: Complete testing",
     "status": "pending"
   }
 ]
