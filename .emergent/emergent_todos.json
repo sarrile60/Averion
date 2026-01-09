@@ -8,20 +8,12 @@
     "status": "completed"
   },
   {
-    "content": "Phase 7: Monthly statement PDF generation backend",
-    "status": "in_progress"
-  },
-  {
-    "content": "Phase 7: Statement download UI",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 7: Admin reports dashboard with analytics",
-    "status": "pending"
+    "content": "Phase 7: Statement PDF generation backend and UI",
+    "status": "completed"
   },
   {
     "content": "Phase 8: PWA service worker and manifest",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Phase 8: Push notifications setup",
