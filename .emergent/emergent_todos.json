@@ -4,27 +4,27 @@
     "status": "completed"
   },
   {
-    "content": "Phase 5: Transaction details modal with ledger entries",
+    "content": "Phase 5: Transaction details modal and list",
     "status": "completed"
   },
   {
     "content": "Phase 5: Transaction reversal backend API",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
-    "content": "Phase 5: Transaction reversal UI for admins",
-    "status": "pending"
+    "content": "Phase 5: Transaction reversal UI component",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 5: Internal transfer API and UI",
+    "status": "completed"
   },
   {
     "content": "Phase 5: Advanced transaction filters and CSV export",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Phase 6: Comprehensive audit log viewer",
-    "status": "pending"
-  },
-  {
-    "content": "Phase 6: Internal transfers between users",
     "status": "pending"
   },
   {
@@ -32,7 +32,11 @@
     "status": "pending"
   },
   {
-    "content": "Phase 7: Monthly statement PDF generation UI",
+    "content": "Phase 7: Monthly statement PDF generation backend",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 7: Statement download UI",
     "status": "pending"
   },
   {
