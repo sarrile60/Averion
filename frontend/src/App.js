@@ -1059,6 +1059,8 @@ function AdminDashboard() {
         </div>
         ) : activeTab === 'kyc' ? (
           <AdminKYCReview />
+        ) : activeTab === 'support' ? (
+          <SupportTickets isAdmin={true} />
         ) : (
           <AuditLogViewer />
         )}
