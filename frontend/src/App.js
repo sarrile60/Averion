@@ -12,6 +12,7 @@ import { AuditLogViewer } from './components/AuditLogs';
 import { StatementDownload } from './components/Statements';
 import { SupportTickets } from './components/Support';
 import { NotificationBell } from './components/Notifications';
+import { CustomerProfile } from './components/Profile';
 
 // Auth Context
 const AuthContext = React.createContext(null);
@@ -1069,6 +1070,56 @@ function AdminDashboard() {
   );
 }
 
+// Profile Page
+function ProfilePage() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  return (
+    <div className="min-h-screen page-background">
+      <header className="header-gradient">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <h1 className="text-2xl font-bold text-gradient-blue" style={{ fontFamily: 'Space Grotesk' }}>
+              {APP_NAME}
+            </h1>
+            <div className="flex items-center space-x-4">
+              <NotificationBell />
+              <button onClick={logout} className="text-sm text-gray-600 hover:text-gray-900">
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="border-b border-gray-200 bg-white/80 backdrop-blur">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-8">
+          <button onClick={() => navigate('/dashboard')} className="tab-inactive">
+            Accounts
+          </button>
+          <button onClick={() => navigate('/kyc')} className="tab-inactive">
+            KYC
+          </button>
+          <button onClick={() => navigate('/security')} className="tab-inactive">
+            Security
+          </button>
+          <button onClick={() => navigate('/support')} className="tab-inactive">
+            Support
+          </button>
+          <button onClick={() => navigate('/profile')} className="tab-active">
+            Profile
+          </button>
+        </nav>
+      </div>
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <CustomerProfile user={user} />
+      </main>
+    </div>
+  );
+}
+
 // Support Page
 function SupportPage() {
   const { user, logout } = useAuth();
@@ -1181,6 +1232,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <SupportPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
               </ProtectedRoute>
             }
           />
