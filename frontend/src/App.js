@@ -678,9 +678,48 @@ function AdminDashboard() {
   const { user, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('users'); // users, kyc, audit
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [roleFilter, setRoleFilter] = useState('all');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    applyFilters();
+  }, [users, searchQuery, statusFilter, roleFilter]);
+
+  const applyFilters = () => {
+    let filtered = [...users];
+
+    // Search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(u => 
+        u.first_name.toLowerCase().includes(query) ||
+        u.last_name.toLowerCase().includes(query) ||
+        u.email.toLowerCase().includes(query) ||
+        (u.id && u.id.toLowerCase().includes(query))
+      );
+    }
+
+    // Status filter
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(u => u.status === statusFilter);
+    }
+
+    // Role filter
+    if (roleFilter !== 'all') {
+      filtered = filtered.filter(u => u.role === roleFilter);
+    }
+
+    setFilteredUsers(filtered);
+  };
 
   useEffect(() => {
     fetchUsers();
@@ -796,15 +835,70 @@ function AdminDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Users List */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow">
-              <div className="p-4 border-b">
+            <div className="card-enhanced">
+              <div className="p-4 border-b bg-blue-50/30">
                 <h2 className="text-lg font-semibold">Users</h2>
+                <p className="text-sm text-gray-600 mt-1">{filteredUsers.length} user(s)</p>
               </div>
+              
+              {/* Search and Filters */}
+              <div className="p-4 space-y-3 border-b bg-gray-50/50">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search by name, email..."
+                  className="input-enhanced w-full text-sm"
+                  data-testid="user-search"
+                />
+                <div className="grid grid-cols-2 gap-2">
+                  <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    className="input-enhanced text-sm"
+                    data-testid="status-filter"
+                  >
+                    <option value="all">All Status</option>
+                    <option value="ACTIVE">Active</option>
+                    <option value="PENDING">Pending</option>
+                    <option value="DISABLED">Disabled</option>
+                  </select>
+                  <select
+                    value={roleFilter}
+                    onChange={(e) => setRoleFilter(e.target.value)}
+                    className="input-enhanced text-sm"
+                    data-testid="role-filter"
+                  >
+                    <option value="all">All Roles</option>
+                    <option value="CUSTOMER">Customer</option>
+                    <option value="ADMIN">Admin</option>
+                    <option value="SUPER_ADMIN">Super Admin</option>
+                  </select>
+                </div>
+                {(searchQuery || statusFilter !== 'all' || roleFilter !== 'all') && (
+                  <button
+                    onClick={() => {
+                      setSearchQuery('');
+                      setStatusFilter('all');
+                      setRoleFilter('all');
+                    }}
+                    className="text-xs text-blue-600 hover:text-blue-700"
+                    data-testid="clear-user-filters"
+                  >
+                    Clear filters
+                  </button>
+                )}
+              </div>
+              
               <div className="divide-y max-h-[600px] overflow-y-auto">
                 {loading ? (
                   <div className="p-4 text-center">Loading...</div>
+                ) : filteredUsers.length === 0 ? (
+                  <div className="p-4 text-center text-gray-600">
+                    No users match your filters
+                  </div>
                 ) : (
-                  users.map((u) => (
+                  filteredUsers.map((u) => (
                     <div
                       key={u.id}
                       onClick={() => viewUserDetails(u.id)}
