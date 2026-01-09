@@ -137,12 +137,28 @@ class KYCService:
             {"$set": update_data}
         )
         
-        # Update user status if approved
+        # Update user status if approved (handle both ObjectId and string)
         if review.status == KYCStatus.APPROVED:
-            await self.db.users.update_one(
-                {"_id": app_doc["user_id"]},
+            from bson import ObjectId
+            from bson.errors import InvalidId
+            
+            user_id = app_doc["user_id"]
+            
+            # Try string first
+            result = await self.db.users.update_one(
+                {"_id": user_id},
                 {"$set": {"status": "ACTIVE"}}
             )
+            
+            # If no document was modified, try as ObjectId
+            if result.modified_count == 0:
+                try:
+                    await self.db.users.update_one(
+                        {"_id": ObjectId(user_id)},
+                        {"$set": {"status": "ACTIVE"}}
+                    )
+                except InvalidId:
+                    pass
         
         app_doc = await self.db.kyc_applications.find_one({"_id": application_id})
         return KYCApplication(**serialize_doc(app_doc))

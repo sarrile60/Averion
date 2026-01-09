@@ -593,12 +593,27 @@ async def get_user_details(
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
     """Get user details (admin)."""
+    from bson import ObjectId
+    from bson.errors import InvalidId
+    
+    # Try to find user by _id (handle both ObjectId and string)
     user_doc = await db.users.find_one({"_id": user_id})
+    
+    # If not found and it looks like an ObjectId, try as ObjectId
+    if not user_doc:
+        try:
+            user_doc = await db.users.find_one({"_id": ObjectId(user_id)})
+        except InvalidId:
+            pass
+    
     if not user_doc:
         raise HTTPException(status_code=404, detail="User not found")
     
+    # Use the actual _id for lookups (could be string or ObjectId)
+    actual_user_id = str(user_doc["_id"])
+    
     # Get accounts
-    accounts_cursor = db.bank_accounts.find({"user_id": user_id})
+    accounts_cursor = db.bank_accounts.find({"user_id": actual_user_id})
     accounts = []
     ledger_engine = LedgerEngine(db)
     
@@ -614,11 +629,11 @@ async def get_user_details(
         })
     
     # Get KYC
-    kyc = await db.kyc_applications.find_one({"user_id": user_id})
+    kyc = await db.kyc_applications.find_one({"user_id": actual_user_id})
     
     return {
         "user": {
-            "id": str(user_doc["_id"]),
+            "id": actual_user_id,
             "email": user_doc["email"],
             "first_name": user_doc["first_name"],
             "last_name": user_doc["last_name"],
