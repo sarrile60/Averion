@@ -253,3 +253,80 @@ class LedgerEngine:
             txns.append(LedgerTransaction(**serialize_doc(doc)))
         
         return txns
+    
+    async def reverse_transaction(
+        self,
+        original_txn_id: str,
+        external_id: Optional[str] = None,
+        reason: Optional[str] = None,
+        performed_by: Optional[str] = None
+    ) -> LedgerTransaction:
+        """Reverse a posted transaction by creating mirror entries."""
+        # Check idempotency
+        if external_id:
+            existing = await self.db.ledger_transactions.find_one({"external_id": external_id})
+            if existing:
+                return LedgerTransaction(**serialize_doc(existing))
+        
+        # Get original transaction
+        original_txn_doc = await self.db.ledger_transactions.find_one({"_id": original_txn_id})
+        if not original_txn_doc:
+            raise HTTPException(status_code=404, detail="Transaction not found")
+        
+        if original_txn_doc["status"] == "REVERSED":
+            raise HTTPException(status_code=400, detail="Transaction already reversed")
+        
+        # Get original entries
+        original_entries = []
+        entry_cursor = self.db.ledger_entries.find({"transaction_id": original_txn_id})
+        async for entry in entry_cursor:
+            original_entries.append(entry)
+        
+        # Create reversal transaction
+        reversal_txn = LedgerTransaction(
+            transaction_type="REVERSAL",
+            status=TransactionStatus.POSTED,
+            external_id=external_id,
+            reverses_txn_id=original_txn_id,
+            reason=reason or f"Reversal of {original_txn_id}",
+            performed_by=performed_by,
+            metadata={"original_txn_type": original_txn_doc["transaction_type"]}
+        )
+        
+        reversal_dict = reversal_txn.model_dump()
+        reversal_dict["_id"] = reversal_txn.id
+        await self.db.ledger_transactions.insert_one(reversal_dict)
+        
+        # Create mirror entries (swap direction)
+        reversal_entries = []
+        for orig_entry in original_entries:
+            reversed_direction = (
+                EntryDirection.CREDIT if orig_entry["direction"] == "DEBIT"
+                else EntryDirection.DEBIT
+            )
+            entry = LedgerEntry(
+                transaction_id=reversal_txn.id,
+                account_id=orig_entry["account_id"],
+                amount=orig_entry["amount"],
+                direction=reversed_direction,
+                currency=orig_entry["currency"]
+            )
+            entry_dict = entry.model_dump()
+            entry_dict["_id"] = entry.id
+            reversal_entries.append(entry_dict)
+        
+        if reversal_entries:
+            await self.db.ledger_entries.insert_many(reversal_entries)
+        
+        # Mark original as reversed
+        await self.db.ledger_transactions.update_one(
+            {"_id": original_txn_id},
+            {
+                "$set": {
+                    "status": "REVERSED",
+                    "reversed_by_txn_id": reversal_txn.id
+                }
+            }
+        )
+        
+        return reversal_txn
