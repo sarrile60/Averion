@@ -9,6 +9,7 @@ import { AdminKYCReview } from './components/AdminKYC';
 import { TransactionsList } from './components/Transactions';
 import { EnhancedLedgerTools } from './components/AdminLedger';
 import { AuditLogViewer } from './components/AuditLogs';
+import { StatementDownload } from './components/Statements';
 
 // Auth Context
 const AuthContext = React.createContext(null);
