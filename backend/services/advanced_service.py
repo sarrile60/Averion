@@ -1,7 +1,7 @@
 """Advanced banking features service."""
 
 from motor.motor_asyncio import AsyncIOMotorDatabase
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from typing import List, Optional
 from fastapi import HTTPException
 import uuid
