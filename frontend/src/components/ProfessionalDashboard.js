@@ -6,9 +6,11 @@ import { P2PTransferForm } from './P2PTransfer';
 import { BeneficiaryManager } from './Beneficiaries';
 import { ScheduledPayments } from './ScheduledPayments';
 import { SpendingInsights } from './SpendingInsights';
+import { useCopyToClipboard } from '../hooks/useCopyToClipboard';
 
 export function ProfessionalDashboard({ user, logout }) {
   const navigate = useNavigate();
+  const copyToClipboard = useCopyToClipboard();
   const [accounts, setAccounts] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [kycStatus, setKycStatus] = useState(null);
@@ -112,7 +114,11 @@ export function ProfessionalDashboard({ user, logout }) {
           </div>
           <div className="stat-tile-number">{accounts.length}</div>
           <div className="stat-tile-label">Accounts</div>
-          <button onClick={() => navigate('/dashboard')} className="stat-tile-link">
+          <button onClick={() => {
+            if (accounts.length > 0) {
+              navigate(`/accounts/${accounts[0].id}/transactions`);
+            }
+          }} className="stat-tile-link">
             <span>View</span>
             <span>→</span>
           </button>
@@ -140,7 +146,7 @@ export function ProfessionalDashboard({ user, logout }) {
           </div>
           <div className="stat-tile-number">{transactions.length}</div>
           <div className="stat-tile-label">Transfers</div>
-          <button onClick={() => accounts[0] && navigate(`/accounts/${accounts[0].id}/transactions`)} className="stat-tile-link">
+          <button onClick={() => navigate('/transfers')} className="stat-tile-link">
             <span>View</span>
             <span>→</span>
           </button>
@@ -154,7 +160,11 @@ export function ProfessionalDashboard({ user, logout }) {
           </div>
           <div className="stat-tile-number">0</div>
           <div className="stat-tile-label">Statements</div>
-          <button onClick={() => accounts[0] && navigate(`/accounts/${accounts[0].id}/transactions`)} className="stat-tile-link">
+          <button onClick={() => {
+            if (accounts.length > 0) {
+              navigate(`/accounts/${accounts[0].id}/transactions`);
+            }
+          }} className="stat-tile-link">
             <span>View</span>
             <span>→</span>
           </button>
@@ -192,7 +202,21 @@ export function ProfessionalDashboard({ user, logout }) {
                   <div key={account.id} className="account-item" data-testid={`account-${account.id}`}>
                     <div>
                       <p className="text-sm font-medium text-gray-900 mb-1">EUR e-Account</p>
-                      <p className="text-xs text-gray-500 font-mono">{account.iban || account.account_number}</p>
+                      <div className="flex items-center space-x-2">
+                        <p className="text-xs text-gray-500 font-mono">{account.iban || account.account_number}</p>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            copyToClipboard(account.iban || account.account_number, 'IBAN');
+                          }}
+                          className="text-gray-400 hover:text-red-600 transition"
+                          title="Copy IBAN"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                     <div className="text-right">
                       <p className="text-lg font-semibold text-gray-900">€{formatAmount(account.balance)}</p>
@@ -213,8 +237,14 @@ export function ProfessionalDashboard({ user, logout }) {
           <div>
             <div className="section-header">Recent Activity</div>
             {transactions.length === 0 ? (
-              <div className="card p-6">
-                <p className="text-sm text-gray-600">No recent transactions</p>
+              <div className="card p-8 text-center">
+                <svg className="w-12 h-12 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                <p className="text-sm text-gray-600 mb-4">No transactions yet</p>
+                <button onClick={() => navigate('/transfers')} className="btn-primary">
+                  Make Your First Transfer
+                </button>
               </div>
             ) : (
               <div className="card p-4">

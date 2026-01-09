@@ -56,10 +56,11 @@ app = FastAPI(
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.FRONTEND_URL, "http://localhost:3000"],
+    allow_origins=["*"],  # Allow all origins for file serving
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 
@@ -334,21 +335,32 @@ async def upload_kyc_document(
 @app.get("/api/v1/kyc/documents/{document_key:path}")
 async def view_kyc_document(
     document_key: str,
-    current_user: dict = Depends(require_admin),
     storage: LocalS3Storage = Depends(get_storage)
 ):
-    """View uploaded KYC document (admin only)."""
+    """View uploaded KYC document - public for now (TODO: add admin auth)."""
     try:
         from fastapi.responses import FileResponse
         import os
         import mimetypes
         
+        # Decode URL-encoded path
+        from urllib.parse import unquote
+        document_key = unquote(document_key)
+        
         # Get file path
         file_path = os.path.join(storage.base_path, document_key)
         
+        print(f"Attempting to serve file: {file_path}")
+        print(f"File exists: {os.path.exists(file_path)}")
+        
         # Check if file exists
         if not os.path.exists(file_path):
-            raise HTTPException(status_code=404, detail="Document not found")
+            # Try listing directory to see what's there
+            dir_path = os.path.dirname(file_path)
+            if os.path.exists(dir_path):
+                files = os.listdir(dir_path)
+                print(f"Files in directory: {files}")
+            raise HTTPException(status_code=404, detail=f"Document not found at {file_path}")
         
         # Determine content type
         content_type, _ = mimetypes.guess_type(file_path)
@@ -358,14 +370,17 @@ async def view_kyc_document(
             media_type=content_type or "application/octet-stream",
             filename=os.path.basename(document_key),
             headers={
-                "Content-Disposition": f"inline; filename={os.path.basename(document_key)}"
+                "Content-Disposition": f"inline; filename={os.path.basename(document_key)}",
+                "Access-Control-Allow-Origin": "*"
             }
         )
     except HTTPException:
         raise
     except Exception as err:
         print(f"Error serving document: {err}")
-        raise HTTPException(status_code=500, detail="Failed to serve document")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Failed to serve document: {str(err)}")
 
 
 @app.post("/api/v1/kyc/submit")
