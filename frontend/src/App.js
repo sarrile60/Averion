@@ -655,14 +655,11 @@ function AdminDashboard() {
                               <p className="text-xs text-gray-500">{acc.currency}</p>
                             </div>
                           </div>
-                          <div className="mt-4 flex space-x-2">
-                            <button
-                              onClick={() => topUp(acc.id)}
-                              className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
-                              data-testid={`topup-${acc.id}`}
-                            >
-                              Top Up
-                            </button>
+                          <div className="mt-4">
+                            <EnhancedLedgerTools 
+                              account={acc} 
+                              onSuccess={() => viewUserDetails(selectedUser.user.id)}
+                            />
                           </div>
                         </div>
                       ))

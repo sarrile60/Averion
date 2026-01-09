@@ -4,16 +4,12 @@
     "status": "completed"
   },
   {
-    "content": "Phase 6: Comprehensive audit log viewer",
-    "status": "in_progress"
-  },
-  {
-    "content": "Phase 6: Advanced user search and bulk operations",
-    "status": "pending"
+    "content": "Phase 6: Audit log viewer and enhanced admin tools complete",
+    "status": "completed"
   },
   {
     "content": "Phase 7: Monthly statement PDF generation backend",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Phase 7: Statement download UI",
