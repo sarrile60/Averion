@@ -165,8 +165,8 @@ export function KYCApplication() {
     return <div className="text-center py-8">Loading...</div>;
   }
 
-  // Show status if already submitted
-  if (application?.status && application.status !== 'DRAFT') {
+  // Show status if already submitted (but NOT for DRAFT, REJECTED, or NEEDS_MORE_INFO - those can edit)
+  if (application?.status && !['DRAFT', 'NEEDS_MORE_INFO', 'REJECTED'].includes(application.status)) {
     return (
       <div className="space-y-6">
         <div className="bg-white rounded-lg shadow p-6">
@@ -178,22 +178,16 @@ export function KYCApplication() {
                 <StatusBadge status={application.status} />
               </div>
             </div>
-            {application.status === 'NEEDS_MORE_INFO' && application.review_notes && (
-              <div className="p-4 bg-yellow-50 border border-yellow-200 rounded">
-                <p className="text-sm font-medium text-yellow-800">Action Required</p>
-                <p className="text-sm text-yellow-700 mt-1">{application.review_notes}</p>
-              </div>
-            )}
             {application.status === 'APPROVED' && (
               <div className="p-4 bg-green-50 border border-green-200 rounded">
                 <p className="text-sm font-medium text-green-800">✓ Your identity has been verified</p>
                 <p className="text-sm text-green-700 mt-1">You now have full access to all banking features.</p>
               </div>
             )}
-            {application.status === 'REJECTED' && application.rejection_reason && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded">
-                <p className="text-sm font-medium text-red-800">Application Rejected</p>
-                <p className="text-sm text-red-700 mt-1">{application.rejection_reason}</p>
+            {application.status === 'SUBMITTED' && (
+              <div className="p-4 bg-blue-50 border border-blue-200 rounded">
+                <p className="text-sm font-medium text-blue-800">Under Review</p>
+                <p className="text-sm text-blue-700 mt-1">Our team is reviewing your application.</p>
               </div>
             )}
             {application.submitted_at && (
@@ -208,8 +202,41 @@ export function KYCApplication() {
     );
   }
 
+  // For REJECTED or NEEDS_MORE_INFO, show message AND form below
+  const showRejectionMessage = application?.status === 'REJECTED' || application?.status === 'NEEDS_MORE_INFO';
+
   return (
     <div className="space-y-6">
+      {showRejectionMessage && (
+        <div className={`card p-6 ${
+          application.status === 'REJECTED' ? 'border-l-4 border-red-500' : 'border-l-4 border-yellow-500'
+        }`}>
+          <div className="flex items-start space-x-3">
+            <div className="flex-shrink-0">
+              {application.status === 'REJECTED' ? (
+                <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
+                  <span className="text-red-600 text-xl">✗</span>
+                </div>
+              ) : (
+                <div className="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                  <span className="text-yellow-600 text-xl">!</span>
+                </div>
+              )}
+            </div>
+            <div className="flex-1">
+              <h4 className="font-semibold text-lg">
+                {application.status === 'REJECTED' ? 'Application Rejected' : 'More Information Required'}
+              </h4>
+              <p className="text-sm text-gray-700 mt-2">
+                {application.rejection_reason || application.review_notes}
+              </p>
+              <p className="text-sm text-red-600 font-medium mt-3">
+                👇 Update your information below and resubmit your application
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Progress Steps */}
       <div className="bg-white rounded-lg shadow p-6">
         <div className="flex justify-between items-center">

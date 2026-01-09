@@ -2,11 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
 import { StatusBadge } from './KYC';
+import { useToast } from './Toast';
 
 export function AdminKYCReview() {
+  const toast = useToast();
   const [applications, setApplications] = useState([]);
   const [selectedApp, setSelectedApp] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [viewingDocument, setViewingDocument] = useState(null);
   const [reviewData, setReviewData] = useState({
     status: '',
     review_notes: '',
@@ -25,20 +28,24 @@ export function AdminKYCReview() {
       setApplications(response.data);
     } catch (err) {
       console.error('Failed to fetch KYC applications:', err);
-      setError('Failed to load applications');
+      toast.error('Failed to load applications');
     } finally {
       setLoading(false);
     }
   };
 
+  const viewDocument = (doc) => {
+    setViewingDocument(doc);
+  };
+
   const handleReview = async () => {
     if (!reviewData.status) {
-      setError('Please select a status');
+      toast.error('Please select a status');
       return;
     }
 
     if (reviewData.status === 'REJECTED' && !reviewData.rejection_reason) {
-      setError('Please provide a rejection reason');
+      toast.error('Please provide a rejection reason');
       return;
     }
 
@@ -47,12 +54,12 @@ export function AdminKYCReview() {
 
     try {
       await api.post(`/admin/kyc/${selectedApp.id}/review`, reviewData);
-      alert('KYC review submitted successfully');
+      toast.success('KYC review submitted successfully');
       setSelectedApp(null);
       setReviewData({ status: '', review_notes: '', rejection_reason: '' });
       fetchApplications();
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to submit review');
+      toast.error(err.response?.data?.detail || 'Failed to submit review');
     } finally {
       setSubmitting(false);
     }
@@ -175,7 +182,7 @@ export function AdminKYCReview() {
                         </p>
                       </div>
                       <button
-                        onClick={() => alert('Document viewer to be implemented')}
+                        onClick={() => viewDocument(doc)}
                         className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50"
                         data-testid={`view-doc-${idx}`}
                       >
@@ -292,6 +299,81 @@ export function AdminKYCReview() {
           </div>
         )}
       </div>
+      
+      {/* Document Viewer Modal */}
+      {viewingDocument && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b p-4 flex justify-between items-center">
+              <div>
+                <h3 className="text-lg font-semibold">{viewingDocument.document_type.replace('_', ' ')}</h3>
+                <p className="text-sm text-gray-600">{viewingDocument.file_name}</p>
+              </div>
+              <button onClick={() => setViewingDocument(null)} className="text-gray-400 hover:text-gray-600">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-6">
+              {viewingDocument.content_type?.startsWith('image/') ? (
+                <div className="text-center">
+                  <img 
+                    src={`${process.env.REACT_APP_BACKEND_URL}/api/v1/kyc/documents/${viewingDocument.file_key}`}
+                    alt={viewingDocument.document_type}
+                    className="max-w-full h-auto rounded-lg shadow-lg mx-auto"
+                    style={{ maxHeight: '70vh' }}
+                    onError={(e) => {
+                      console.error('Image load error:', e);
+                      e.target.style.display = 'none';
+                      e.target.nextElementSibling.style.display = 'block';
+                    }}
+                  />
+                  <div style={{ display: 'none' }} className="bg-yellow-50 border border-yellow-200 rounded p-8">
+                    <svg className="w-16 h-16 mx-auto text-yellow-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <p className="font-medium mb-2 text-yellow-800">Image could not be loaded</p>
+                    <p className="text-sm text-gray-600">{viewingDocument.file_name}</p>
+                    <p className="text-xs text-gray-500 mt-2">File path: {viewingDocument.file_key}</p>
+                  </div>
+                  <div className="mt-4 text-sm text-gray-600">
+                    <p className="font-medium">{viewingDocument.file_name}</p>
+                    <p>Size: {(viewingDocument.file_size / 1024).toFixed(2)} KB</p>
+                    <p className="text-xs mt-2">Uploaded: {new Date(viewingDocument.uploaded_at).toLocaleString()}</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center">
+                  <div className="bg-gray-100 rounded p-8">
+                    <svg className="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <p className="font-medium mb-2">{viewingDocument.file_name}</p>
+                    <p className="text-sm text-gray-600">Size: {(viewingDocument.file_size / 1024).toFixed(2)} KB</p>
+                    <p className="text-sm text-gray-600">Uploaded: {new Date(viewingDocument.uploaded_at).toLocaleString()}</p>
+                    <p className="text-xs text-gray-500 mt-4">Document preview not available for this file type</p>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="sticky bottom-0 bg-gray-50 border-t p-4 flex space-x-3">
+              <a
+                href={`${process.env.REACT_APP_BACKEND_URL}/api/v1/kyc/documents/${viewingDocument.file_key}`}
+                download={viewingDocument.file_name}
+                className="flex-1 btn-primary text-center"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download Document
+              </a>
+              <button onClick={() => setViewingDocument(null)} className="flex-1 btn-secondary">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

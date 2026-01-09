@@ -331,6 +331,43 @@ async def upload_kyc_document(
     return doc.model_dump()
 
 
+@app.get("/api/v1/kyc/documents/{document_key:path}")
+async def view_kyc_document(
+    document_key: str,
+    current_user: dict = Depends(require_admin),
+    storage: LocalS3Storage = Depends(get_storage)
+):
+    """View uploaded KYC document (admin only)."""
+    try:
+        from fastapi.responses import FileResponse
+        import os
+        import mimetypes
+        
+        # Get file path
+        file_path = os.path.join(storage.base_path, document_key)
+        
+        # Check if file exists
+        if not os.path.exists(file_path):
+            raise HTTPException(status_code=404, detail="Document not found")
+        
+        # Determine content type
+        content_type, _ = mimetypes.guess_type(file_path)
+        
+        return FileResponse(
+            path=file_path,
+            media_type=content_type or "application/octet-stream",
+            filename=os.path.basename(document_key),
+            headers={
+                "Content-Disposition": f"inline; filename={os.path.basename(document_key)}"
+            }
+        )
+    except HTTPException:
+        raise
+    except Exception as err:
+        print(f"Error serving document: {err}")
+        raise HTTPException(status_code=500, detail="Failed to serve document")
+
+
 @app.post("/api/v1/kyc/submit")
 async def submit_kyc(
     data: KYCSubmitRequest,
