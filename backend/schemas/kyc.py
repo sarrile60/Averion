@@ -40,7 +40,7 @@ class KYCApplication(BaseModel):
     
     # Personal details (optional for draft state)
     full_name: Optional[str] = None
-    date_of_birth: Optional[date] = None
+    date_of_birth: Optional[str] = None  # Changed from date to str
     nationality: Optional[str] = None
     
     # Address
@@ -79,7 +79,7 @@ class KYCApplication(BaseModel):
 
 class KYCSubmitRequest(BaseModel):
     full_name: str
-    date_of_birth: date
+    date_of_birth: str  # Changed from date to str to accept YYYY-MM-DD format
     nationality: str
     street_address: str
     city: str
