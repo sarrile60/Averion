@@ -1,11 +1,11 @@
 [
   {
-    "content": "Feature: Advanced admin user controls (disable/enable, force password reset)",
-    "status": "in_progress"
+    "content": "Feature: Advanced admin user controls complete",
+    "status": "completed"
   },
   {
     "content": "Feature: Enhanced user search with filters",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Feature: Admin support ticket management interface",
