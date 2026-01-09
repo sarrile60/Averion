@@ -680,7 +680,7 @@ function AdminDashboard() {
       <div className="border-b border-gray-200 bg-white">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-8">
           <button
-            onClick={() => setActiveTab('users')}
+            onClick={() => setActiveSection('users')}
             className={`py-4 px-1 border-b-2 font-medium text-sm ${
               activeSection === 'users'
                 ? 'border-blue-600 text-blue-600'
@@ -691,7 +691,7 @@ function AdminDashboard() {
             User Management
           </button>
           <button
-            onClick={() => setActiveTab('kyc')}
+            onClick={() => setActiveSection('kyc')}
             className={`py-4 px-1 border-b-2 font-medium text-sm ${
               activeSection === 'kyc'
                 ? 'border-blue-600 text-blue-600'
@@ -702,7 +702,7 @@ function AdminDashboard() {
             KYC Review
           </button>
           <button
-            onClick={() => setActiveTab('support')}
+            onClick={() => setActiveSection('support')}
             className={`py-4 px-1 border-b-2 font-medium text-sm ${
               activeSection === 'support'
                 ? 'border-blue-600 text-blue-600'
@@ -713,7 +713,7 @@ function AdminDashboard() {
             Support Tickets
           </button>
           <button
-            onClick={() => setActiveTab('audit')}
+            onClick={() => setActiveSection('audit')}
             className={`py-4 px-1 border-b-2 font-medium text-sm ${
               activeSection === 'audit'
                 ? 'border-blue-600 text-blue-600'
