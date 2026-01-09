@@ -1,10 +1,10 @@
 [
   {
-    "content": "CRITICAL FIX & Toast system complete",
+    "content": "CRITICAL FIX: Admin dashboard code errors fixed",
     "status": "completed"
   },
   {
-    "content": "Enhancement: Replace all remaining alert() with toast",
+    "content": "Enhancement: Systematically replace all alert() with toast",
     "status": "in_progress"
   },
   {
