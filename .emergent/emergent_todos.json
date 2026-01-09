@@ -1,19 +1,19 @@
 [
   {
     "content": "Phase 3: MFA enrollment UI with QR code display",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Phase 3: Device management dashboard for customers",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 3: Security alerts and notifications system",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 4: Complete KYC submission UI with document upload",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Phase 4: Admin document viewer and approval workflow",
