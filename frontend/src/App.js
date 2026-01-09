@@ -519,159 +519,27 @@ function SecurityPage() {
   );
 }
 
-// Customer Dashboard
+// Customer Dashboard - Professional UI
 function CustomerDashboard() {
   const { user, logout } = useAuth();
-  const [accounts, setAccounts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchAccounts();
-  }, []);
-
-  const fetchAccounts = async () => {
-    try {
-      const response = await api.get('/accounts');
-      setAccounts(response.data);
-    } catch (err) {
-      console.error('Failed to fetch accounts:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const createAccount = async () => {
-    try {
-      await api.post('/accounts/create');
-      fetchAccounts();
-    } catch (err) {
-      alert('Failed to create account');
-    }
-  };
-
-  const formatAmount = (cents) => {
-    return `€${(cents / 100).toFixed(2)}`;
-  };
 
   return (
-    <div className="min-h-screen page-background">
-      {/* Header */}
-      <header className="header-gradient">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <h1 className="text-2xl font-bold text-gradient-blue" style={{ fontFamily: 'Space Grotesk' }}>
-              {APP_NAME}
-            </h1>
-            <div className="flex items-center space-x-4">
-              <NotificationBell />
-              <span className="text-sm text-gray-600">
-                {user?.first_name} {user?.last_name}
-              </span>
-              <button
-                onClick={logout}
-                className="text-sm text-gray-600 hover:text-gray-900"
-                data-testid="logout-button"
-              >
-                Logout
-              </button>
-            </div>
+    <div className="min-h-screen bg-white">
+      {/* Simple Professional Header */}
+      <header className="header-bar">
+        <div className="container-main h-full flex justify-between items-center">
+          <h1 className="text-lg font-semibold text-gray-900">{APP_NAME}</h1>
+          <div className="flex items-center space-x-4">
+            <NotificationBell />
+            <button onClick={logout} className="text-sm text-gray-600 hover:text-gray-900" data-testid="logout-button">
+              Logout
+            </button>
           </div>
         </div>
       </header>
 
-      {/* Navigation Tabs */}
-      <div className="border-b border-gray-200 bg-white/80 backdrop-blur">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-8" aria-label="Tabs">
-          <button
-            onClick={() => navigate('/dashboard')}
-            className="tab-active"
-            data-testid="accounts-tab"
-          >
-            Accounts
-          </button>
-          <button
-            onClick={() => navigate('/kyc')}
-            className="tab-inactive"
-            data-testid="kyc-tab"
-          >
-            KYC
-          </button>
-          <button
-            onClick={() => navigate('/security')}
-            className="tab-inactive"
-            data-testid="security-tab"
-          >
-            Security
-          </button>
-          <button
-            onClick={() => navigate('/support')}
-            className="tab-inactive"
-            data-testid="support-tab"
-          >
-            Support
-          </button>
-        </nav>
-      </div>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl font-semibold">Your Accounts</h2>
-            {accounts.length === 0 && (
-              <button
-                onClick={createAccount}
-                className="btn-primary btn-glow"
-                data-testid="create-account-button"
-              >
-                Create Account
-              </button>
-            )}
-          </div>
-
-          {loading ? (
-            <div className="text-center py-8">
-              <div className="skeleton h-32 rounded-lg"></div>
-            </div>
-          ) : accounts.length === 0 ? (
-            <div className="card-blue-accent p-8 text-center animate-card">
-              <div className="circle-pattern">
-                <p className="text-gray-600">No accounts yet. Create your first account to get started!</p>
-              </div>
-            </div>
-          ) : (
-            <div className="grid gap-6">
-              {accounts.map((account) => (
-                <div key={account.id} className="balance-card p-6 hover-lift corner-accent animate-card">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <p className="text-sm text-gray-600 font-medium">Account</p>
-                      <p className="text-lg font-semibold font-mono mt-1">{account.account_number}</p>
-                      <p className="text-sm text-gray-600 font-medium mt-3">IBAN</p>
-                      <p className="text-base font-mono mt-1">{account.iban}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm text-gray-600 font-medium">Balance</p>
-                      <p className="text-4xl font-bold balance-display mt-1">
-                        {formatAmount(account.balance)}
-                      </p>
-                      <p className="text-xs text-gray-500 mt-1">{account.currency}</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => navigate(`/accounts/${account.id}/transactions`)}
-                    className="mt-6 text-sm text-blue-600 hover:text-blue-700 font-medium"
-                    data-testid={`view-transactions-${account.id}`}
-                  >
-                    View Transactions →
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </main>
+      {/* Professional Dashboard Content */}
+      <ProfessionalDashboard user={user} logout={logout} />
     </div>
   );
 }

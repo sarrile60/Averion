@@ -1,14 +1,10 @@
 [
   {
-    "content": "UI REFACTOR: Design system complete - solid white, red accent",
+    "content": "UI REFACTOR: Customer dashboard replaced with professional version",
     "status": "completed"
   },
   {
-    "content": "UI REFACTOR: Professional customer dashboard component created",
-    "status": "completed"
-  },
-  {
-    "content": "UI REFACTOR: Replace old dashboard with new professional one",
+    "content": "UI REFACTOR: Update login/signup pages - solid white, red accents",
     "status": "in_progress"
   },
   {
