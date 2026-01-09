@@ -576,6 +576,9 @@ function AdminDashboard() {
             )}
           </div>
         </div>
+        ) : (
+          <AdminKYCReview />
+        )}
       </main>
     </div>
   );

@@ -1,15 +1,11 @@
 [
   {
-    "content": "Phase 4: Admin KYC review interface - viewing applications",
-    "status": "in_progress"
-  },
-  {
-    "content": "Phase 4: Admin KYC approval/rejection workflow",
-    "status": "pending"
+    "content": "Phase 4: Admin KYC review interface complete",
+    "status": "completed"
   },
   {
     "content": "Phase 5: Transaction details modal with ledger entries",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Phase 5: Transaction reversal UI for admins",
