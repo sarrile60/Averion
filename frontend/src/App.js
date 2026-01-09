@@ -10,6 +10,7 @@ import { TransactionsList } from './components/Transactions';
 import { EnhancedLedgerTools } from './components/AdminLedger';
 import { AuditLogViewer } from './components/AuditLogs';
 import { StatementDownload } from './components/Statements';
+import { SupportTickets } from './components/Support';
 
 // Auth Context
 const AuthContext = React.createContext(null);
@@ -771,6 +772,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <SecurityPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/support"
+            element={
+              <ProtectedRoute>
+                <SupportPage />
               </ProtectedRoute>
             }
           />
