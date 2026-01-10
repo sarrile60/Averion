@@ -1,22 +1,26 @@
 [
   {
-    "content": "FIX: Wire admin ledger tools properly (top-up, withdraw visible and working)",
+    "content": "PHASE 2: Banking workflows service created",
+    "status": "completed"
+  },
+  {
+    "content": "PHASE 2: Add all API endpoints to server.py",
     "status": "in_progress"
   },
   {
-    "content": "ADD: Admin force password reset for users",
+    "content": "PHASE 2: Test endpoints and create API contract",
     "status": "pending"
   },
   {
-    "content": "ADD: Email-based 2FA / Email verification",
+    "content": "PHASE 3: Admin UI - Accounts, Transfers, Cards",
     "status": "pending"
   },
   {
-    "content": "FIX: Ensure all admin controls are visible in UI",
+    "content": "PHASE 4: User UI - Cards modal, Transfers modal",
     "status": "pending"
   },
   {
-    "content": "TEST: Verify all admin → user operations work",
+    "content": "PHASE 5: Final acceptance tests",
     "status": "pending"
   }
 ]
