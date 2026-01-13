@@ -790,8 +790,14 @@ function AdminDashboard() {
             )}
           </div>
         );
+      case 'accounts':
+        return <AdminAccountsControl />;
+      case 'card_requests':
+        return <AdminCardRequestsQueue />;
       case 'kyc':
         return <AdminKYCReview />;
+      case 'ledger':
+        return <AdminTransfersQueue />;
       case 'support':
         return <SupportTickets isAdmin={true} />;
       case 'audit':
@@ -799,7 +805,7 @@ function AdminDashboard() {
       case 'settings':
         return <AdminSettings />;
       default:
-        return <div className="card p-8 text-center"><p>Section under construction</p></div>;
+        return <div className="card p-8"><p>Select section</p></div>;
     }
   };
 
