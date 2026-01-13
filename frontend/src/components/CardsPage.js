@@ -1,10 +1,11 @@
-// Cards Management Page
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NotificationBell } from './Notifications';
-import { APP_NAME } from '../config';
 import { MobileBottomTabs } from './MobileNav';
+import { APP_NAME } from '../config';
 import { useToast } from './Toast';
+import { CardOrderingModal } from './CardOrderingModal';
+import api from '../api';
 
 export function CardsPage({ user, logout }) {
   const navigate = useNavigate();
