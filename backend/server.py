@@ -300,7 +300,7 @@ async def change_password(
     new_hash = hash_password(data.new_password)
     await db.users.update_one(
         {"_id": user_doc["_id"]},
-        {"$set": {"password_hash": new_hash, "updated_at": datetime.utcnow()}}
+        {"$set": {"password_hash": new_hash, "updated_at": datetime.now(timezone.utc)}}
     )
     
     # Revoke all sessions for security
@@ -796,7 +796,7 @@ async def update_user_status(
     # Update status
     result = await db.users.update_one(
         {"_id": user_doc["_id"]},
-        {"$set": {"status": data.status, "updated_at": datetime.utcnow()}}
+        {"$set": {"status": data.status, "updated_at": datetime.now(timezone.utc)}}
     )
     
     return {"success": True, "message": f"User status updated to {data.status}", "modified_count": result.modified_count}
@@ -863,7 +863,7 @@ async def admin_reset_password(
     new_hash = hash_password(temp_password)
     await db.users.update_one(
         {"_id": user_doc["_id"]},
-        {"$set": {"password_hash": new_hash, "updated_at": datetime.utcnow()}}
+        {"$set": {"password_hash": new_hash, "updated_at": datetime.now(timezone.utc)}}
     )
     
     # Revoke all sessions
@@ -889,7 +889,7 @@ async def admin_reset_password(
         "entity_type": "user",
         "entity_id": str(user_doc["_id"]),
         "description": f"Admin forced password reset for {user_doc['email']}",
-        "created_at": datetime.utcnow()
+        "created_at": datetime.now(timezone.utc)
     })
     
     return {
