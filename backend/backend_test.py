@@ -577,7 +577,7 @@ def main():
     tester.test_get_monthly_spending()
     
     print("\n" + "=" * 70)
-    print("SECTION 5: ADMIN FEATURES")
+    print("SECTION 6: ADMIN FEATURES")
     print("=" * 70)
     
     tester.test_admin_get_users()
