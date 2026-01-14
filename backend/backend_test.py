@@ -337,15 +337,63 @@ class AtlasBankingAPITester:
     def test_get_spending_insights(self):
         """Test getting spending insights"""
         success, response = self.run_test(
-            "Get Spending Insights",
+            "Get Spending Insights (30 days)",
             "GET",
             "/api/v1/insights/spending?days=30",
             200,
             token=self.customer_token,
-            description="Fetch spending breakdown by category"
+            description="Fetch spending breakdown by category for last 30 days"
         )
         if success:
-            print(f"   ✓ Spending categories: {list(response.keys()) if isinstance(response, dict) else 'N/A'}")
+            # Check response structure
+            if 'total' in response and 'categories' in response:
+                print(f"   ✓ Response structure correct: total={response['total']}, categories={list(response['categories'].keys())}")
+                print(f"   ✓ Total spending: €{response['total']/100:.2f}")
+                if response['categories']:
+                    for category, amount in response['categories'].items():
+                        print(f"   ✓ {category}: €{amount/100:.2f}")
+                return True
+            else:
+                print(f"   ⚠️  Response structure incorrect: {list(response.keys())}")
+                return False
+        return False
+
+    def test_get_monthly_spending(self):
+        """Test getting monthly spending (current calendar month)"""
+        success, response = self.run_test(
+            "Get Monthly Spending",
+            "GET",
+            "/api/v1/insights/monthly-spending",
+            200,
+            token=self.customer_token,
+            description="Fetch spending for current calendar month from real ledger data"
+        )
+        if success:
+            # Check response structure
+            required_fields = ['total', 'transaction_count', 'categories', 'period']
+            missing_fields = [f for f in required_fields if f not in response]
+            
+            if missing_fields:
+                print(f"   ❌ Missing fields: {missing_fields}")
+                return False
+            
+            print(f"   ✓ Response structure correct")
+            print(f"   ✓ Total spending: €{response['total']/100:.2f}")
+            print(f"   ✓ Transaction count: {response['transaction_count']}")
+            print(f"   ✓ Period: {response['period']['start'][:10]} to {response['period']['end'][:10]}")
+            
+            if response['categories']:
+                print(f"   ✓ Categories breakdown:")
+                for category, amount in response['categories'].items():
+                    print(f"      - {category}: €{amount/100:.2f}")
+            else:
+                print(f"   ✓ No spending this month (categories empty)")
+            
+            # Verify it's NOT the old hardcoded value
+            if response['total'] == 85000:  # €850.00 in cents
+                print(f"   ⚠️  WARNING: Still returning hardcoded €850.00!")
+                return False
+            
             return True
         return False
 
