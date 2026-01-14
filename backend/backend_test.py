@@ -443,7 +443,66 @@ def main():
         return 1
     
     print("\n" + "=" * 70)
-    print("SECTION 2: CUSTOMER FEATURES")
+    print("SECTION 2: DISABLED USER LOGIN BUG FIX TESTING")
+    print("=" * 70)
+    print("Testing the fix: Disabled users should NOT be able to login")
+    
+    # Get customer user ID for testing
+    customer_email = "customer@demo.com"
+    customer_password = "Demo@123456"
+    
+    # First, get all users to find customer ID
+    success, users_response = tester.run_test(
+        "Get Customer User ID",
+        "GET",
+        "/api/v1/admin/users",
+        200,
+        token=tester.admin_token,
+        description="Find customer user ID for testing"
+    )
+    
+    customer_user_id = None
+    if success and isinstance(users_response, list):
+        for user in users_response:
+            if user.get('email') == customer_email:
+                customer_user_id = user.get('id')
+                print(f"   ✓ Found customer user ID: {customer_user_id}")
+                break
+    
+    if not customer_user_id:
+        print("\n❌ Could not find customer user ID - stopping disabled user tests")
+    else:
+        # Test 1: Verify active user can login
+        print("\n--- Test 1: Active User Login ---")
+        if not tester.test_active_user_login(customer_email, customer_password):
+            print("❌ Active user login failed")
+        
+        # Test 2: Admin disables the user
+        print("\n--- Test 2: Admin Disables User ---")
+        if not tester.test_admin_disable_user(customer_user_id):
+            print("❌ Failed to disable user")
+        
+        # Test 3: Disabled user tries to login (should fail with 403)
+        print("\n--- Test 3: Disabled User Login Attempt ---")
+        if not tester.test_disabled_user_login(customer_email, customer_password):
+            print("❌ Disabled user login test failed")
+        
+        # Test 4: Admin re-enables the user
+        print("\n--- Test 4: Admin Re-enables User ---")
+        if not tester.test_admin_enable_user(customer_user_id):
+            print("❌ Failed to re-enable user")
+        
+        # Test 5: Re-enabled user can login again
+        print("\n--- Test 5: Re-enabled User Login ---")
+        if not tester.test_active_user_login(customer_email, customer_password):
+            print("❌ Re-enabled user login failed")
+        else:
+            # Update the customer token for subsequent tests
+            tester.customer_token = None
+            tester.test_customer_login()
+    
+    print("\n" + "=" * 70)
+    print("SECTION 3: CUSTOMER FEATURES")
     print("=" * 70)
     
     tester.test_get_customer_accounts()
@@ -453,7 +512,7 @@ def main():
     tester.test_p2p_transfer()
     
     print("\n" + "=" * 70)
-    print("SECTION 3: ADVANCED BANKING FEATURES")
+    print("SECTION 4: ADVANCED BANKING FEATURES")
     print("=" * 70)
     
     tester.test_add_beneficiary()
@@ -463,7 +522,7 @@ def main():
     tester.test_get_spending_insights()
     
     print("\n" + "=" * 70)
-    print("SECTION 4: ADMIN FEATURES")
+    print("SECTION 5: ADMIN FEATURES")
     print("=" * 70)
     
     tester.test_admin_get_users()
