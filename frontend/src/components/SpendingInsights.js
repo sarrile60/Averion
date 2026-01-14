@@ -5,6 +5,7 @@ import api from '../api';
 
 export function SpendingInsights() {
   const [data, setData] = useState([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [days, setDays] = useState(30);
 
@@ -15,22 +16,38 @@ export function SpendingInsights() {
   const fetchInsights = async () => {
     try {
       const response = await api.get(`/insights/spending?days=${days}`);
-      const chartData = Object.entries(response.data).map(([category, amount]) => ({
-        name: category.replace('_', ' '),
-        value: amount / 100,
-        amount: amount
-      }));
-      setData(chartData);
+      // Handle new response format: { total: number, categories: { ... } }
+      const responseData = response.data;
+      
+      if (responseData.categories) {
+        // New format
+        const chartData = Object.entries(responseData.categories).map(([category, amount]) => ({
+          name: category.replace(/_/g, ' '),
+          value: amount / 100,
+          amount: amount
+        }));
+        setData(chartData);
+        setTotal(responseData.total || 0);
+      } else {
+        // Legacy format (direct object)
+        const chartData = Object.entries(responseData).map(([category, amount]) => ({
+          name: category.replace(/_/g, ' '),
+          value: amount / 100,
+          amount: amount
+        }));
+        setData(chartData);
+        setTotal(chartData.reduce((sum, item) => sum + item.amount, 0));
+      }
     } catch (err) {
       console.error(err);
+      setData([]);
+      setTotal(0);
     } finally {
       setLoading(false);
     }
   };
 
   const COLORS = ['#D32F2F', '#F57C00', '#FBC02D', '#388E3C', '#1976D2', '#7B1FA2'];
-
-  const total = data.reduce((sum, item) => sum + item.amount, 0);
 
   return (
     <div className="card p-6">
@@ -45,45 +62,54 @@ export function SpendingInsights() {
 
       {loading ? (
         <div className="skeleton-card h-64"></div>
-      ) : data.length === 0 ? (
-        <p className="text-gray-600 text-sm">No spending data available</p>
+      ) : total === 0 ? (
+        <div className="text-center py-12">
+          <div className="text-gray-400 text-5xl mb-4">📊</div>
+          <p className="text-gray-600 font-medium">No spending this period</p>
+          <p className="text-gray-400 text-sm mt-1">Your spending data will appear here once you make transactions</p>
+        </div>
       ) : (
         <div>
           <div className="mb-6">
             <p className="text-sm text-gray-600 mb-1">Total Spending</p>
-            <p className="text-3xl font-bold text-gray-900">€{(total / 100).toFixed(2)}</p>
+            <p className="text-3xl font-bold text-gray-900" data-testid="insights-total">€{(total / 100).toFixed(2)}</p>
           </div>
           
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={data}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                outerRadius={100}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}              </Pie>
-              <Tooltip formatter={(value) => `€${value.toFixed(2)}`} />
-            </PieChart>
-          </ResponsiveContainer>
+          {data.length > 0 && (
+            <>
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={data}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                    outerRadius={100}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {data.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip formatter={(value) => `€${value.toFixed(2)}`} />
+                </PieChart>
+              </ResponsiveContainer>
 
-          <div className="mt-6 space-y-2">
-            {data.map((item, idx) => (
-              <div key={idx} className="flex justify-between items-center text-sm">
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }}></div>
-                  <span>{item.name}</span>
-                </div>
-                <span className="font-semibold">€{item.value.toFixed(2)}</span>
+              <div className="mt-6 space-y-2">
+                {data.map((item, idx) => (
+                  <div key={idx} className="flex justify-between items-center text-sm">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }}></div>
+                      <span>{item.name}</span>
+                    </div>
+                    <span className="font-semibold">€{item.value.toFixed(2)}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          )}
         </div>
       )}
     </div>
