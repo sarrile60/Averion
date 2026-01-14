@@ -270,6 +270,83 @@ class APITester:
             self.log_test("Admin Get User Details", False, str(e))
             return False
 
+    def test_admin_update_user_status(self):
+        """Test admin enable/disable user status (BUG FIX TEST)"""
+        if not self.admin_token:
+            self.log_test("Admin Update User Status", False, "No admin token available")
+            return False
+        
+        if not self.admin_users:
+            self.log_test("Admin Update User Status", False, "No users available")
+            return False
+        
+        try:
+            # Find a customer user to test with
+            customer_user = next((u for u in self.admin_users if u["email"] == CUSTOMER_EMAIL), None)
+            if not customer_user:
+                self.log_test("Admin Update User Status", False, "Customer user not found")
+                return False
+            
+            user_id = customer_user["id"]
+            original_status = customer_user["status"]
+            
+            # Test 1: Disable user (if currently active)
+            if original_status == "ACTIVE":
+                response = requests.patch(
+                    f"{BASE_URL}/admin/users/{user_id}/status",
+                    headers={"Authorization": f"Bearer {self.admin_token}"},
+                    json={"status": "DISABLED"},
+                    timeout=10
+                )
+                if response.status_code != 200:
+                    self.log_test("Admin Update User Status (Disable)", False, f"Status {response.status_code}: {response.text}")
+                    return False
+                
+                data = response.json()
+                if not data.get("success"):
+                    self.log_test("Admin Update User Status (Disable)", False, "Success flag not true")
+                    return False
+                
+                print(f"   ✓ Disabled user successfully")
+                
+                # Test 2: Re-enable user
+                response2 = requests.patch(
+                    f"{BASE_URL}/admin/users/{user_id}/status",
+                    headers={"Authorization": f"Bearer {self.admin_token}"},
+                    json={"status": "ACTIVE"},
+                    timeout=10
+                )
+                if response2.status_code != 200:
+                    self.log_test("Admin Update User Status (Enable)", False, f"Status {response2.status_code}: {response2.text}")
+                    return False
+                
+                data2 = response2.json()
+                if not data2.get("success"):
+                    self.log_test("Admin Update User Status (Enable)", False, "Success flag not true")
+                    return False
+                
+                print(f"   ✓ Enabled user successfully")
+                self.log_test("Admin Update User Status", True)
+                return True
+            else:
+                # If user is not active, just try to enable them
+                response = requests.patch(
+                    f"{BASE_URL}/admin/users/{user_id}/status",
+                    headers={"Authorization": f"Bearer {self.admin_token}"},
+                    json={"status": "ACTIVE"},
+                    timeout=10
+                )
+                if response.status_code == 200:
+                    self.log_test("Admin Update User Status", True)
+                    print(f"   ✓ Enabled user successfully")
+                    return True
+                else:
+                    self.log_test("Admin Update User Status", False, f"Status {response.status_code}: {response.text}")
+                    return False
+        except Exception as e:
+            self.log_test("Admin Update User Status", False, str(e))
+            return False
+
     def test_admin_top_up(self):
         """Test admin top-up functionality"""
         if not self.admin_token:
