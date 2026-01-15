@@ -482,7 +482,7 @@ export function EnhancedLedgerTools({ account, onSuccess }) {
             className="w-full py-3 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50 font-medium"
             data-testid="submit-debit"
           >
-            {loading ? 'Processing...' : `Debit ${debitForm.amount ? formatAmount(parseInt(debitForm.amount)) : '€0.00'}`}
+            {loading ? 'Processing...' : `Debit ${debitForm.amount ? formatAmountFromEuro(debitForm.amount) : '€0.00'}`}
           </button>
         </div>
       ) : (
@@ -496,18 +496,20 @@ export function EnhancedLedgerTools({ account, onSuccess }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Amount (cents) *</label>
-            <input
-              type="number"
-              value={simpleForm.amount}
-              onChange={(e) => setSimpleForm({ ...simpleForm, amount: e.target.value })}
-              placeholder="e.g., 10000 for €100"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              data-testid="amount-input"
-            />
-            {simpleForm.amount && (
-              <p className="text-xs text-gray-600 mt-1">= {formatAmount(parseInt(simpleForm.amount) || 0)}</p>
-            )}
+            <label className="block text-sm font-medium text-gray-700 mb-1">Amount (€) *</label>
+            <div className="relative">
+              <span className="absolute left-3 top-2 text-gray-500">€</span>
+              <input
+                type="number"
+                step="0.01"
+                min="0.01"
+                value={simpleForm.amount}
+                onChange={(e) => setSimpleForm({ ...simpleForm, amount: e.target.value })}
+                placeholder="e.g., 100.00"
+                className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md"
+                data-testid="amount-input"
+              />
+            </div>
           </div>
 
           {activeOperation === 'transfer' && (
