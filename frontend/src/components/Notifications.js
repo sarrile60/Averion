@@ -1,8 +1,10 @@
 // Notifications Component
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../api';
 
 export function NotificationBell() {
+  const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -43,6 +45,54 @@ export function NotificationBell() {
     }
   };
 
+  const handleNotificationClick = async (notif) => {
+    // Mark as read first
+    if (!notif.read) {
+      await markAsRead(notif.id);
+    }
+    
+    // Close dropdown
+    setShowDropdown(false);
+    
+    // Navigate based on entity type or notification type
+    const entityType = notif.entity_type?.toLowerCase() || '';
+    const notifType = notif.notification_type?.toLowerCase() || '';
+    const title = notif.title?.toLowerCase() || '';
+    
+    // Card-related notifications
+    if (entityType === 'card' || entityType === 'card_request' || title.includes('card')) {
+      navigate('/cards');
+      return;
+    }
+    
+    // Transaction-related notifications
+    if (entityType === 'transaction' || entityType === 'transfer' || notifType === 'transaction') {
+      navigate('/dashboard');
+      return;
+    }
+    
+    // KYC-related notifications
+    if (entityType === 'kyc' || notifType === 'kyc_update' || title.includes('kyc') || title.includes('verification')) {
+      navigate('/kyc');
+      return;
+    }
+    
+    // Support ticket notifications
+    if (entityType === 'ticket' || notifType === 'support' || title.includes('support') || title.includes('ticket')) {
+      navigate('/support');
+      return;
+    }
+    
+    // Account-related notifications
+    if (entityType === 'account' || notifType === 'account') {
+      navigate('/dashboard');
+      return;
+    }
+    
+    // Default to dashboard
+    navigate('/dashboard');
+  };
+
   const getTypeIcon = (type) => {
     const icons = {
       KYC_UPDATE: '📋',
@@ -66,6 +116,26 @@ export function NotificationBell() {
     if (diffHours < 24) return `${diffHours}h ago`;
     const diffDays = Math.floor(diffHours / 24);
     return `${diffDays}d ago`;
+  };
+
+  // Helper to determine if notification is clickable
+  const getClickHint = (notif) => {
+    const entityType = notif.entity_type?.toLowerCase() || '';
+    const title = notif.title?.toLowerCase() || '';
+    
+    if (entityType === 'card' || entityType === 'card_request' || title.includes('card')) {
+      return 'View your cards →';
+    }
+    if (entityType === 'transaction' || entityType === 'transfer') {
+      return 'View transactions →';
+    }
+    if (entityType === 'kyc' || title.includes('kyc') || title.includes('verification')) {
+      return 'Check KYC status →';
+    }
+    if (entityType === 'ticket' || title.includes('support')) {
+      return 'View support tickets →';
+    }
+    return 'View details →';
   };
 
   return (
@@ -113,8 +183,8 @@ export function NotificationBell() {
                 notifications.slice(0, 10).map((notif) => (
                   <div
                     key={notif.id}
-                    onClick={() => !notif.read && markAsRead(notif.id)}
-                    className={`p-4 border-b hover-blue-bg cursor-pointer ${
+                    onClick={() => handleNotificationClick(notif)}
+                    className={`p-4 border-b hover:bg-blue-50 cursor-pointer transition-colors ${
                       !notif.read ? 'bg-blue-50/30' : ''
                     }`}
                     data-testid={`notification-${notif.id}`}
@@ -127,11 +197,14 @@ export function NotificationBell() {
                             {notif.title}
                           </p>
                           {!notif.read && (
-                            <span className="ml-2 h-2 w-2 bg-blue-600 rounded-full"></span>
+                            <span className="ml-2 h-2 w-2 bg-blue-600 rounded-full flex-shrink-0"></span>
                           )}
                         </div>
                         <p className="text-sm text-gray-600 mt-1">{notif.message}</p>
-                        <p className="text-xs text-gray-500 mt-1">{formatTime(notif.created_at)}</p>
+                        <div className="flex items-center justify-between mt-2">
+                          <p className="text-xs text-gray-500">{formatTime(notif.created_at)}</p>
+                          <p className="text-xs text-red-600 font-medium">{getClickHint(notif)}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
