@@ -1190,6 +1190,14 @@ class APITester:
             self.test_admin_charge_fee()
         print()
         
+        # Professional Credit/Debit (NEW FEATURE)
+        print("--- Professional Admin Credit/Debit (NEW) ---")
+        if self.admin_token and self.customer_accounts:
+            self.test_admin_professional_credit()
+            self.test_admin_professional_debit()
+            self.test_customer_view_professional_transactions()
+        print()
+        
         # Admin audit logs
         print("--- Admin Audit Logs ---")
         if self.admin_token:
