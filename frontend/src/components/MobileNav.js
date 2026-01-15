@@ -25,14 +25,14 @@ export function MobileBottomTabs() {
   };
 
   return (
-    <div className="bottom-tabs-mobile md:hidden">
+    <div className="bottom-tabs md:hidden">
       {tabs.map(tab => {
         const isActive = location.pathname === tab.path;
         return (
           <button
             key={tab.path}
             onClick={() => navigate(tab.path)}
-            className={`bottom-tab-item ${isActive ? 'bottom-tab-item-active' : ''}`}
+            className={`bottom-tab ${isActive ? 'bottom-tab-active' : ''}`}
             data-testid={`mobile-tab-${tab.label.toLowerCase()}`}
           >
             {getIcon(tab.icon, isActive)}
