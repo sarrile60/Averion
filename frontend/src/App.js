@@ -1039,6 +1039,94 @@ function AdminDashboard() {
           {renderContent()}
         </div>
       </div>
+
+      {/* Tax Hold Modal */}
+      {showTaxHoldModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowTaxHoldModal(false)}>
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 p-6" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold text-gray-900">
+                {userTaxHold?.is_blocked ? 'Update Tax Hold' : 'Place Tax Hold'}
+              </h3>
+              <button 
+                onClick={() => setShowTaxHoldModal(false)}
+                className="text-gray-400 hover:text-gray-600 transition"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+              <div className="flex items-start space-x-3">
+                <svg className="w-5 h-5 text-amber-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <p className="text-sm text-amber-800">
+                  This will prevent the user from performing any banking operations including transfers, card requests, and withdrawals. The user will still be able to log in and view their account.
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Tax Amount Due (EUR)
+                </label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">€</span>
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0.01"
+                    value={taxHoldAmount}
+                    onChange={(e) => setTaxHoldAmount(e.target.value)}
+                    placeholder="500.00"
+                    className="input-field pl-8"
+                    data-testid="tax-amount-input"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Reason
+                </label>
+                <select
+                  value={taxHoldReason}
+                  onChange={(e) => setTaxHoldReason(e.target.value)}
+                  className="input-field"
+                  data-testid="tax-reason-select"
+                >
+                  <option value="Outstanding tax obligations">Outstanding tax obligations</option>
+                  <option value="Pending tax audit review">Pending tax audit review</option>
+                  <option value="Tax evasion investigation">Tax evasion investigation</option>
+                  <option value="Unpaid VAT obligations">Unpaid VAT obligations</option>
+                  <option value="Tax compliance verification required">Tax compliance verification required</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="mt-6 flex space-x-3">
+              <button
+                onClick={() => setShowTaxHoldModal(false)}
+                className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSetTaxHold}
+                disabled={taxHoldLoading || !taxHoldAmount}
+                className="flex-1 px-4 py-2.5 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 disabled:opacity-50 transition"
+                data-testid="confirm-tax-hold-btn"
+              >
+                {taxHoldLoading ? 'Processing...' : (userTaxHold?.is_blocked ? 'Update Hold' : 'Place Hold')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
