@@ -8,7 +8,7 @@ export function P2PTransferForm({ onSuccess }) {
   const [beneficiaries, setBeneficiaries] = useState([]);
   const [accounts, setAccounts] = useState([]);
   const [formData, setFormData] = useState({
-    to_email: '',
+    to_iban: '',
     to_name: '',
     amount: '',
     reason: '',
@@ -48,24 +48,34 @@ export function P2PTransferForm({ onSuccess }) {
     }
   };
 
-  const validateRecipient = async () => {
-    if (!formData.to_email) return;
+  const validateIBAN = () => {
+    if (!formData.to_iban) return;
     
     setValidating(true);
     try {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (emailRegex.test(formData.to_email)) {
+      // Basic IBAN validation (2 letters + 2 digits + up to 30 alphanumeric)
+      const cleanIban = formData.to_iban.replace(/\s/g, '').toUpperCase();
+      const ibanRegex = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{4,30}$/;
+      
+      if (ibanRegex.test(cleanIban) && cleanIban.length >= 15 && cleanIban.length <= 34) {
         setRecipientValid(true);
       } else {
         setRecipientValid(false);
-        toast.error('Invalid email format');
+        toast.error('Invalid IBAN format');
       }
     } catch (err) {
       setRecipientValid(false);
-      toast.error('Recipient validation failed');
+      toast.error('IBAN validation failed');
     } finally {
       setValidating(false);
     }
+  };
+
+  const formatIBANInput = (value) => {
+    // Remove all spaces and convert to uppercase
+    const clean = value.replace(/\s/g, '').toUpperCase();
+    // Add space every 4 characters for display
+    return clean.replace(/(.{4})/g, '$1 ').trim();
   };
 
   const availableBalance = selectedAccount?.balance || 0;
@@ -85,16 +95,19 @@ export function P2PTransferForm({ onSuccess }) {
     try {
       // Convert euros to cents for API
       const amountInCents = Math.round(parseFloat(formData.amount) * 100);
+      // Clean IBAN (remove spaces)
+      const cleanIban = formData.to_iban.replace(/\s/g, '').toUpperCase();
       
       const result = await api.post('/transfers/p2p', {
-        to_email: formData.to_email,
+        to_iban: cleanIban,
         amount: amountInCents,
         reason: formData.reason || 'P2P Transfer'
       });
       setTransactionResult({...result.data, amount: amountInCents});
       setShowConfirmation(true);
+      toast.success('Transfer successful!');
       setTimeout(() => {
-        setFormData({ to_email: '', to_name: '', amount: '', reason: '', reference: '' });
+        setFormData({ to_iban: '', to_name: '', amount: '', reason: '', reference: '' });
         setShowConfirmation(false);
         setRecipientValid(null);
         onSuccess && onSuccess();
@@ -109,10 +122,12 @@ export function P2PTransferForm({ onSuccess }) {
   const selectBeneficiary = (beneficiary) => {
     setFormData({
       ...formData, 
-      to_email: beneficiary.recipient_email, 
+      to_iban: beneficiary.recipient_iban || '', 
       to_name: beneficiary.recipient_name || beneficiary.nickname
     });
-    setRecipientValid(true);
+    if (beneficiary.recipient_iban) {
+      setRecipientValid(true);
+    }
   };
 
   const formatIBAN = (iban) => {
@@ -131,7 +146,10 @@ export function P2PTransferForm({ onSuccess }) {
           </div>
           <h3 className="text-2xl font-semibold text-gray-900 mb-2">Payment Successful!</h3>
           <p className="text-3xl font-bold text-gray-900 mb-2">€{(transactionResult.amount / 100).toFixed(2)}</p>
-          <p className="text-gray-600 mb-6">sent to {transactionResult.recipient}</p>
+          <p className="text-gray-600 mb-2">sent to {transactionResult.recipient}</p>
+          {transactionResult.recipient_iban && (
+            <p className="text-sm text-gray-500 font-mono mb-6">{formatIBAN(transactionResult.recipient_iban)}</p>
+          )}
           <div className="bg-gray-50 rounded-lg p-4 mb-6">
             <p className="text-xs text-gray-500 mb-1">Transaction ID</p>
             <p className="text-sm font-mono text-gray-700">{transactionResult.transaction_id}</p>
@@ -159,7 +177,7 @@ export function P2PTransferForm({ onSuccess }) {
             </svg>
           </div>
           <h2 className="text-xl font-semibold text-white">Send Money</h2>
-          <p className="text-red-100 text-sm mt-1">Transfer funds securely</p>
+          <p className="text-red-100 text-sm mt-1">Transfer funds securely via IBAN</p>
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
@@ -178,28 +196,29 @@ export function P2PTransferForm({ onSuccess }) {
             />
           </div>
 
-          {/* Recipient Account/Email */}
+          {/* Recipient IBAN */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Recipient account
+              Recipient IBAN
             </label>
             <div className="relative">
               <input
-                type="email"
-                value={formData.to_email}
+                type="text"
+                value={formData.to_iban}
                 onChange={(e) => {
-                  setFormData({...formData, to_email: e.target.value});
+                  const formatted = formatIBANInput(e.target.value);
+                  setFormData({...formData, to_iban: formatted});
                   setRecipientValid(null);
                 }}
-                onBlur={validateRecipient}
+                onBlur={validateIBAN}
                 required
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 transition-colors ${
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 transition-colors font-mono text-sm tracking-wider ${
                   recipientValid === true ? 'border-green-500 bg-green-50' : 
                   recipientValid === false ? 'border-red-500 bg-red-50' : 
                   'border-gray-300'
                 }`}
-                placeholder="recipient@email.com"
-                data-testid="transfer-email"
+                placeholder="DE89 3704 0044 0532 0130 00"
+                data-testid="transfer-iban"
               />
               {recipientValid === true && (
                 <div className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -209,25 +228,25 @@ export function P2PTransferForm({ onSuccess }) {
                 </div>
               )}
             </div>
-            {validating && <p className="text-xs text-gray-500 mt-1">Validating...</p>}
-            {recipientValid === true && <p className="text-xs text-green-600 mt-1">✓ Valid recipient</p>}
-            {recipientValid === false && <p className="text-xs text-red-600 mt-1">✗ Invalid email format</p>}
+            {validating && <p className="text-xs text-gray-500 mt-1">Validating IBAN...</p>}
+            {recipientValid === true && <p className="text-xs text-green-600 mt-1">✓ Valid IBAN format</p>}
+            {recipientValid === false && <p className="text-xs text-red-600 mt-1">✗ Invalid IBAN format</p>}
           </div>
 
           {/* Saved Recipients */}
-          {beneficiaries.length > 0 && (
+          {beneficiaries.length > 0 && beneficiaries.some(b => b.recipient_iban) && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Or select from saved recipients
               </label>
               <div className="flex flex-wrap gap-2">
-                {beneficiaries.slice(0, 4).map(b => (
+                {beneficiaries.filter(b => b.recipient_iban).slice(0, 4).map(b => (
                   <button
                     key={b.id}
                     type="button"
                     onClick={() => selectBeneficiary(b)}
                     className={`px-3 py-2 text-sm rounded-full border transition-colors ${
-                      formData.to_email === b.recipient_email
+                      formData.to_iban.replace(/\s/g, '') === (b.recipient_iban || '').replace(/\s/g, '')
                         ? 'border-red-600 bg-red-50 text-red-700'
                         : 'border-gray-300 hover:border-red-300 hover:bg-red-50'
                     }`}
@@ -363,7 +382,7 @@ export function P2PTransferForm({ onSuccess }) {
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading || !recipientValid || !hasEnoughBalance || !formData.amount || !formData.to_email}
+            disabled={loading || !recipientValid || !hasEnoughBalance || !formData.amount || !formData.to_iban}
             className="w-full py-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
             data-testid="submit-transfer"
           >
