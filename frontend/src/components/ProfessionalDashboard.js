@@ -250,25 +250,32 @@ export function ProfessionalDashboard({ user, logout }) {
               <div className="space-y-3">
                 {accounts.slice(0, 2).map((account) => (
                   <div key={account.id} className="account-item">
-                    <div>
+                    <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-900 mb-1">EUR e-Account</p>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-xs text-gray-500 font-medium">IBAN:</span>
-                        <span className="text-xs text-gray-700 font-mono">{account.iban ? account.iban.match(/.{1,4}/g)?.join(' ') : 'N/A'}</span>
+                        <span className="text-xs sm:text-xs text-gray-700 font-mono break-all">{account.iban ? account.iban.match(/.{1,4}/g)?.join(' ') : 'N/A'}</span>
                         {account.iban && (
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               try {
                                 navigator.clipboard.writeText(account.iban);
+                                // Show brief visual feedback
+                                const btn = e.currentTarget;
+                                const originalHTML = btn.innerHTML;
+                                btn.innerHTML = '<span class="text-green-600 text-xs font-medium">Copied!</span>';
+                                setTimeout(() => { btn.innerHTML = originalHTML; }, 1500);
                               } catch (err) {
                                 console.log('Clipboard write failed:', err);
+                                alert('IBAN: ' + account.iban);
                               }
                             }}
-                            className="text-gray-400 hover:text-red-600 transition"
+                            className="p-1.5 sm:p-1 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition touch-manipulation"
                             title="Copy IBAN"
+                            data-testid="copy-iban-btn"
                           >
-                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                             </svg>
                           </button>
