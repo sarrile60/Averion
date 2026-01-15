@@ -1440,7 +1440,9 @@ function App() {
             path="/insights"
             element={
               <ProtectedRoute>
-                <InsightsPage />
+                <TaxHoldRestrictedRoute>
+                  <InsightsPage />
+                </TaxHoldRestrictedRoute>
               </ProtectedRoute>
             }
           />
@@ -1458,7 +1460,9 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute>
-                <ProfilePage />
+                <TaxHoldRestrictedRoute>
+                  <ProfilePage />
+                </TaxHoldRestrictedRoute>
               </ProtectedRoute>
             }
           />
