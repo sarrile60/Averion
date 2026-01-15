@@ -107,8 +107,11 @@ export function EnhancedLedgerTools({ account, onSuccess }) {
     setError('');
 
     try {
+      // Convert euros to cents for the API
+      const amountInCents = Math.round(parseFloat(debitForm.amount) * 100);
+      
       await api.post(`/admin/accounts/${account.id}/withdraw`, {
-        amount: parseInt(debitForm.amount),
+        amount: amountInCents,
         display_type: debitForm.display_type,
         recipient_name: debitForm.recipient_name || null,
         recipient_iban: debitForm.recipient_iban || null,
@@ -117,7 +120,7 @@ export function EnhancedLedgerTools({ account, onSuccess }) {
         admin_note: debitForm.admin_note || null
       });
       
-      toast.success(`€${(parseInt(debitForm.amount) / 100).toFixed(2)} debited from account`);
+      toast.success(`€${parseFloat(debitForm.amount).toFixed(2)} debited from account`);
       setDebitForm({
         amount: '',
         display_type: 'Withdrawal',
