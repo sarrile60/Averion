@@ -257,18 +257,35 @@ export function ProfessionalDashboard({ user, logout }) {
                         <span className="text-xs sm:text-xs text-gray-700 font-mono break-all">{account.iban ? account.iban.match(/.{1,4}/g)?.join(' ') : 'N/A'}</span>
                         {account.iban && (
                           <button
-                            onClick={(e) => {
+                            onClick={async (e) => {
                               e.stopPropagation();
+                              const btn = e.currentTarget;
+                              const originalHTML = btn.innerHTML;
+                              
                               try {
-                                navigator.clipboard.writeText(account.iban);
-                                // Show brief visual feedback
-                                const btn = e.currentTarget;
-                                const originalHTML = btn.innerHTML;
+                                await navigator.clipboard.writeText(account.iban);
+                                // Show success feedback
                                 btn.innerHTML = '<span class="text-green-600 text-xs font-medium">Copied!</span>';
                                 setTimeout(() => { btn.innerHTML = originalHTML; }, 1500);
                               } catch (err) {
-                                console.log('Clipboard write failed:', err);
-                                alert('IBAN: ' + account.iban);
+                                console.log('Clipboard API failed, trying fallback:', err);
+                                // Fallback: Create a temporary input and copy from it
+                                try {
+                                  const tempInput = document.createElement('input');
+                                  tempInput.value = account.iban;
+                                  tempInput.style.position = 'fixed';
+                                  tempInput.style.left = '-9999px';
+                                  document.body.appendChild(tempInput);
+                                  tempInput.select();
+                                  tempInput.setSelectionRange(0, 99999);
+                                  document.execCommand('copy');
+                                  document.body.removeChild(tempInput);
+                                  btn.innerHTML = '<span class="text-green-600 text-xs font-medium">Copied!</span>';
+                                  setTimeout(() => { btn.innerHTML = originalHTML; }, 1500);
+                                } catch (fallbackErr) {
+                                  // Final fallback: show IBAN in prompt so user can copy manually
+                                  window.prompt('Copy your IBAN:', account.iban);
+                                }
                               }
                             }}
                             className="p-1.5 sm:p-1 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition touch-manipulation"
