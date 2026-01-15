@@ -917,7 +917,7 @@ async def set_tax_hold(
         user_id=actual_user_id,
         title="Account Restriction Notice",
         message=f"Your account has been restricted due to outstanding tax obligations. Amount due: €{data.tax_amount:.2f}. Please contact support for assistance.",
-        notification_type="alert"
+        notification_type="SECURITY"
     )
     
     return {
