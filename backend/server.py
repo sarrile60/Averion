@@ -1319,6 +1319,20 @@ async def create_p2p_transfer(
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
     """Create P2P transfer between customers using IBAN."""
+    # Check for tax hold
+    tax_hold = await check_tax_hold(current_user["id"], db)
+    if tax_hold:
+        tax_amount = tax_hold["tax_amount_cents"] / 100
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "code": "TAX_HOLD",
+                "message": "Your account is currently restricted due to outstanding tax obligations.",
+                "tax_amount_due": tax_amount,
+                "formatted_message": f"Account Restricted: Your account has been temporarily suspended due to outstanding tax obligations of €{tax_amount:,.2f}. To restore full access to your banking services, please settle the required amount. For assistance, contact our support team at support@projectatlas.eu"
+            }
+        )
+    
     ledger_engine = LedgerEngine(db)
     transfer_service = TransferService(db, ledger_engine)
     
