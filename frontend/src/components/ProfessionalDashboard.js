@@ -233,7 +233,18 @@ export function ProfessionalDashboard({ user, logout }) {
             {accounts.length === 0 ? (
               <div className="card p-6 text-center">
                 <p className="text-gray-600 mb-4">No accounts yet</p>
-                <button onClick={async () => { try { await api.post('/accounts/create'); fetchDashboardData(); } catch(e) {} }} className="btn-primary">Create Account</button>
+                <button 
+                  onClick={async () => {
+                    if (taxHoldStatus?.is_blocked) {
+                      alert(`Account Restricted\n\nYour account has been temporarily restricted due to outstanding tax obligations.\n\nAmount Due: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}\n\nPlease settle the required amount to restore full access. For assistance, contact support.`);
+                    } else {
+                      try { await api.post('/accounts/create'); fetchDashboardData(); } catch(e) {}
+                    }
+                  }} 
+                  className="btn-primary"
+                >
+                  Create Account
+                </button>
               </div>
             ) : (
               <div className="space-y-3">
