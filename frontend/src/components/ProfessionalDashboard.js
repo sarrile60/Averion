@@ -11,10 +11,21 @@ export function ProfessionalDashboard({ user, logout }) {
   const [monthlySpending, setMonthlySpending] = useState({ total: 0, categories: {} });
   const [loading, setLoading] = useState(true);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [taxHoldStatus, setTaxHoldStatus] = useState(null);
 
   useEffect(() => {
     fetchDashboardData();
+    fetchTaxStatus();
   }, []);
+
+  const fetchTaxStatus = async () => {
+    try {
+      const response = await api.get('/users/me/tax-status');
+      setTaxHoldStatus(response.data);
+    } catch (err) {
+      console.error('Failed to fetch tax status:', err);
+    }
+  };
 
   const fetchDashboardData = async () => {
     try {
