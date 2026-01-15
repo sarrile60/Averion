@@ -1422,7 +1422,9 @@ function App() {
             path="/transfers"
             element={
               <ProtectedRoute>
-                <TransfersPageWrapper />
+                <TaxHoldRestrictedRoute>
+                  <TransfersPageWrapper />
+                </TaxHoldRestrictedRoute>
               </ProtectedRoute>
             }
           />
@@ -1438,7 +1440,9 @@ function App() {
             path="/cards"
             element={
               <ProtectedRoute>
-                <CardsPageWrapper />
+                <TaxHoldRestrictedRoute>
+                  <CardsPageWrapper />
+                </TaxHoldRestrictedRoute>
               </ProtectedRoute>
             }
           />
