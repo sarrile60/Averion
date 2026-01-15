@@ -973,7 +973,7 @@ async def remove_tax_hold(
         user_id=actual_user_id,
         title="Account Restriction Lifted",
         message="Your account restrictions have been removed. You can now perform all banking operations.",
-        notification_type="info"
+        notification_type="ACCOUNT"
     )
     
     return {
