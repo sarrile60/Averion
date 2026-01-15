@@ -481,7 +481,7 @@ async def get_transactions(
     current_user: dict = Depends(get_current_user),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
-    """Get account transactions."""
+    """Get account transactions with professional display data."""
     # Verify account belongs to user
     account_doc = await db.bank_accounts.find_one({"_id": account_id})
     if not account_doc:
@@ -492,7 +492,7 @@ async def get_transactions(
     
     ledger_engine = LedgerEngine(db)
     transactions = await ledger_engine.get_transactions(account_doc["ledger_account_id"])
-    return [txn.model_dump() for txn in transactions]
+    return transactions  # Now returns dict with amount and direction included
 
 
 @app.get("/api/v1/accounts/{account_id}/statement/{year}/{month}")
