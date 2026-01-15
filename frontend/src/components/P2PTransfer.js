@@ -113,7 +113,15 @@ export function P2PTransferForm({ onSuccess }) {
         onSuccess && onSuccess();
       }, 3000);
     } catch (err) {
-      toast.error(err.response?.data?.detail || 'Transfer failed');
+      // Check for tax hold error
+      const errorDetail = err.response?.data?.detail;
+      if (errorDetail?.code === 'TAX_HOLD') {
+        toast.error('Account restricted due to tax obligations');
+        // Show detailed message in alert for better visibility
+        alert(errorDetail.formatted_message || 'Your account is restricted. Please contact support.');
+      } else {
+        toast.error(typeof errorDetail === 'string' ? errorDetail : 'Transfer failed');
+      }
     } finally {
       setLoading(false);
     }
