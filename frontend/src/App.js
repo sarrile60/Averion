@@ -427,8 +427,12 @@ function TransactionsPage() {
                         <p className="font-mono text-sm text-gray-900">{account.iban.match(/.{1,4}/g)?.join(' ')}</p>
                         <button
                           onClick={() => {
-                            navigator.clipboard.writeText(account.iban);
-                            alert('IBAN copied!');
+                            try {
+                              navigator.clipboard.writeText(account.iban);
+                              alert('IBAN copied!');
+                            } catch (err) {
+                              console.log('Clipboard write failed:', err);
+                            }
                           }}
                           className="text-gray-400 hover:text-red-600 transition"
                           title="Copy IBAN"
