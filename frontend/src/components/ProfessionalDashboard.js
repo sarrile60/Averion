@@ -10,6 +10,7 @@ export function ProfessionalDashboard({ user, logout }) {
   const [kycStatus, setKycStatus] = useState(null);
   const [monthlySpending, setMonthlySpending] = useState({ total: 0, categories: {} });
   const [loading, setLoading] = useState(true);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   useEffect(() => {
     fetchDashboardData();
@@ -50,6 +51,22 @@ export function ProfessionalDashboard({ user, logout }) {
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  };
+
+  const formatDateTime = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-GB', { 
+      day: '2-digit', 
+      month: 'short', 
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  const formatIBAN = (iban) => {
+    if (!iban) return null;
+    return iban.replace(/(.{4})/g, '$1 ').trim();
   };
 
   if (loading) {
