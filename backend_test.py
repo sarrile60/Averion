@@ -569,6 +569,164 @@ class APITester:
             self.log_test("Admin Charge Fee", False, str(e))
             return False
 
+    def test_admin_professional_credit(self):
+        """Test admin professional credit with metadata (NEW FEATURE)"""
+        if not self.admin_token:
+            self.log_test("Admin Professional Credit", False, "No admin token available")
+            return False
+        
+        if not self.customer_accounts:
+            self.log_test("Admin Professional Credit", False, "No customer accounts available")
+            return False
+        
+        try:
+            account_id = self.customer_accounts[0]["id"]
+            initial_balance = self.customer_accounts[0]["balance"]
+            
+            # Professional credit with full metadata
+            response = requests.post(
+                f"{BASE_URL}/admin/accounts/{account_id}/topup",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                json={
+                    "amount": 25000,  # €250
+                    "display_type": "SEPA Transfer",
+                    "sender_name": "Deutsche Bank AG",
+                    "sender_iban": "DE89370400440532013000",
+                    "sender_bic": "DEUTDEDB",
+                    "reference": "TRF2024011500123",
+                    "description": "Salary Payment January 2024",
+                    "admin_note": "Test professional credit from automated testing"
+                },
+                timeout=10
+            )
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("ok") and "new_balance" in data:
+                    self.log_test("Admin Professional Credit", True)
+                    print(f"   New balance: €{data['new_balance'] / 100:.2f}")
+                    print(f"   Balance increased: €{initial_balance / 100:.2f} → €{data['new_balance'] / 100:.2f}")
+                    return True
+                else:
+                    self.log_test("Admin Professional Credit", False, "Missing ok or new_balance in response")
+                    return False
+            else:
+                self.log_test("Admin Professional Credit", False, f"Status {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            self.log_test("Admin Professional Credit", False, str(e))
+            return False
+
+    def test_admin_professional_debit(self):
+        """Test admin professional debit with metadata (NEW FEATURE)"""
+        if not self.admin_token:
+            self.log_test("Admin Professional Debit", False, "No admin token available")
+            return False
+        
+        if not self.customer_accounts:
+            self.log_test("Admin Professional Debit", False, "No customer accounts available")
+            return False
+        
+        try:
+            account_id = self.customer_accounts[0]["id"]
+            
+            # Get current balance
+            response_balance = requests.get(
+                f"{BASE_URL}/accounts",
+                headers={"Authorization": f"Bearer {self.customer_token}"},
+                timeout=10
+            )
+            if response_balance.status_code != 200:
+                self.log_test("Admin Professional Debit", False, "Could not get current balance")
+                return False
+            
+            initial_balance = response_balance.json()[0]["balance"]
+            
+            # Professional debit with metadata
+            response = requests.post(
+                f"{BASE_URL}/admin/accounts/{account_id}/withdraw",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                json={
+                    "amount": 5000,  # €50
+                    "display_type": "Withdrawal",
+                    "recipient_name": "Amazon EU",
+                    "recipient_iban": "LU280019400644750000",
+                    "reference": "INV-2024-001",
+                    "description": "Monthly subscription payment",
+                    "admin_note": "Test professional debit from automated testing"
+                },
+                timeout=10
+            )
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("ok") and "new_balance" in data:
+                    self.log_test("Admin Professional Debit", True)
+                    print(f"   New balance: €{data['new_balance'] / 100:.2f}")
+                    print(f"   Balance decreased: €{initial_balance / 100:.2f} → €{data['new_balance'] / 100:.2f}")
+                    return True
+                else:
+                    self.log_test("Admin Professional Debit", False, "Missing ok or new_balance in response")
+                    return False
+            else:
+                self.log_test("Admin Professional Debit", False, f"Status {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            self.log_test("Admin Professional Debit", False, str(e))
+            return False
+
+    def test_customer_view_professional_transactions(self):
+        """Test customer can view professional transaction metadata (NEW FEATURE)"""
+        if not self.customer_token:
+            self.log_test("Customer View Professional Transactions", False, "No customer token available")
+            return False
+        
+        if not self.customer_accounts:
+            self.log_test("Customer View Professional Transactions", False, "No customer accounts available")
+            return False
+        
+        try:
+            account_id = self.customer_accounts[0]["id"]
+            response = requests.get(
+                f"{BASE_URL}/accounts/{account_id}/transactions",
+                headers={"Authorization": f"Bearer {self.customer_token}"},
+                timeout=10
+            )
+            if response.status_code == 200:
+                transactions = response.json()
+                if isinstance(transactions, list) and len(transactions) > 0:
+                    # Check if recent transactions have professional metadata
+                    professional_txns = []
+                    for txn in transactions[:5]:  # Check last 5 transactions
+                        metadata = txn.get("metadata", {})
+                        if metadata.get("display_type") or metadata.get("sender_name"):
+                            professional_txns.append({
+                                "display_type": metadata.get("display_type"),
+                                "sender_name": metadata.get("sender_name"),
+                                "reference": metadata.get("reference"),
+                                "description": metadata.get("description")
+                            })
+                    
+                    if professional_txns:
+                        self.log_test("Customer View Professional Transactions", True)
+                        print(f"   Found {len(professional_txns)} professional transaction(s)")
+                        for i, txn in enumerate(professional_txns[:2], 1):
+                            print(f"   Transaction {i}:")
+                            print(f"     Display Type: {txn.get('display_type', 'N/A')}")
+                            print(f"     Sender: {txn.get('sender_name', 'N/A')}")
+                            print(f"     Reference: {txn.get('reference', 'N/A')}")
+                        return True
+                    else:
+                        self.log_test("Customer View Professional Transactions", False, "No professional transactions found with metadata")
+                        return False
+                else:
+                    self.log_test("Customer View Professional Transactions", False, "No transactions available")
+                    return False
+            else:
+                self.log_test("Customer View Professional Transactions", False, f"Status {response.status_code}")
+                return False
+        except Exception as e:
+            self.log_test("Customer View Professional Transactions", False, str(e))
+            return False
+
     def test_admin_audit_logs(self):
         """Test get audit logs"""
         if not self.admin_token:
