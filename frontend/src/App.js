@@ -27,6 +27,7 @@ import { AdminCardRequestsQueue } from './components/AdminCardRequestsQueue';
 import { KYCReviewPage } from './components/KYCReviewPage';
 import { AdminTransfersQueue } from './components/AdminTransfersQueue';
 import { AdminAccountsControl } from './components/AdminAccountsControl';
+import { LandingPage } from './components/LandingPage';
 
 // Auth Context
 const AuthContext = React.createContext(null);
