@@ -1382,7 +1382,9 @@ function App() {
             path="/accounts/:accountId/transactions"
             element={
               <ProtectedRoute>
-                <TransactionsPage />
+                <TaxHoldRestrictedRoute>
+                  <TransactionsPage />
+                </TaxHoldRestrictedRoute>
               </ProtectedRoute>
             }
           />
@@ -1390,7 +1392,9 @@ function App() {
             path="/kyc"
             element={
               <ProtectedRoute>
-                <KYCPage />
+                <TaxHoldRestrictedRoute>
+                  <KYCPage />
+                </TaxHoldRestrictedRoute>
               </ProtectedRoute>
             }
           />
@@ -1398,7 +1402,9 @@ function App() {
             path="/kyc-review"
             element={
               <ProtectedRoute>
-                <KYCReviewPageWrapper />
+                <TaxHoldRestrictedRoute>
+                  <KYCReviewPageWrapper />
+                </TaxHoldRestrictedRoute>
               </ProtectedRoute>
             }
           />
@@ -1406,7 +1412,9 @@ function App() {
             path="/security"
             element={
               <ProtectedRoute>
-                <SecurityPage />
+                <TaxHoldRestrictedRoute>
+                  <SecurityPage />
+                </TaxHoldRestrictedRoute>
               </ProtectedRoute>
             }
           />
