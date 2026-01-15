@@ -224,6 +224,57 @@ export function NotificationBell() {
               )}
             </div>
           </div>
+          
+          {/* Mobile: Full-width centered dropdown */}
+          <div className="sm:hidden fixed left-4 right-4 top-16 bg-white rounded-lg shadow-xl border border-gray-200 z-20 overflow-hidden max-h-[70vh]">
+            <div className="p-4 border-b bg-gray-50 flex justify-between items-center sticky top-0">
+              <h3 className="font-semibold text-gray-900">Notifications</h3>
+              {unreadCount > 0 && (
+                <button
+                  onClick={markAllAsRead}
+                  className="text-sm text-red-600 hover:text-red-700 font-medium"
+                >
+                  Mark all read
+                </button>
+              )}
+            </div>
+            <div className="overflow-y-auto max-h-[calc(70vh-56px)]">
+              {notifications.length === 0 ? (
+                <div className="p-8 text-center text-gray-600">
+                  <p>No notifications</p>
+                </div>
+              ) : (
+                notifications.slice(0, 10).map((notif) => (
+                  <div
+                    key={`mobile-${notif.id}`}
+                    onClick={() => handleNotificationClick(notif)}
+                    className={`p-4 border-b hover:bg-gray-50 cursor-pointer transition-colors ${
+                      !notif.read ? 'bg-red-50/30' : ''
+                    }`}
+                  >
+                    <div className="flex items-start space-x-3">
+                      <span className="text-xl">{getTypeIcon(notif.notification_type)}</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <p className={`text-sm font-medium ${!notif.read ? 'text-gray-900' : 'text-gray-700'}`}>
+                            {notif.title}
+                          </p>
+                          {!notif.read && (
+                            <span className="ml-2 h-2 w-2 bg-red-500 rounded-full flex-shrink-0"></span>
+                          )}
+                        </div>
+                        <p className="text-sm text-gray-600 mt-1 line-clamp-2">{notif.message}</p>
+                        <div className="flex items-center justify-between mt-2">
+                          <p className="text-xs text-gray-500">{formatTime(notif.created_at)}</p>
+                          <p className="text-xs text-red-600 font-medium">{getClickHint(notif)}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
         </>
       )}
     </div>
