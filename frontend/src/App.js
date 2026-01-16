@@ -1431,8 +1431,7 @@ function TaxHoldRestrictedRoute({ children }) {
           setTaxStatus(response.data);
           
           if (response.data.is_blocked) {
-            // Show alert and redirect to dashboard
-            alert(`Account Restricted\n\nYour account has been temporarily restricted due to outstanding tax obligations.\n\nAmount Due: €${response.data.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}\n\nReason: ${response.data.reason || 'Outstanding tax obligations'}\n\nTo restore full access to your banking services, please settle the required amount. For assistance, contact our support team at support@projectatlas.eu`);
+            // Silently redirect to dashboard - alert is already shown by the button onClick handler
             navigate('/dashboard');
           }
         } catch (err) {

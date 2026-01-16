@@ -64,7 +64,7 @@ export function SupportTickets({ isAdmin = false }) {
         {!isAdmin && (
           <button
             onClick={() => setShowCreateForm(true)}
-            className="btn-primary btn-glow"
+            className="btn-primary text-sm px-4 py-2 whitespace-nowrap"
             data-testid="create-ticket-button"
           >
             Create New Ticket
