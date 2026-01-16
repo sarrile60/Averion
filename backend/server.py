@@ -47,6 +47,41 @@ logger = logging.getLogger(__name__)
 security = HTTPBearer()
 
 
+# ============== AUDIT LOGGING HELPER ==============
+async def create_audit_log(
+    db: AsyncIOMotorDatabase,
+    action: str,
+    entity_type: str,
+    entity_id: str,
+    description: str,
+    performed_by: str = None,
+    performed_by_role: str = None,
+    performed_by_email: str = None,
+    metadata: dict = None
+):
+    """
+    Create an audit log entry for tracking important actions.
+    This is a safe helper that won't raise exceptions to avoid breaking main flows.
+    """
+    try:
+        await db.audit_logs.insert_one({
+            "_id": str(uuid.uuid4()),
+            "performed_by": performed_by or "SYSTEM",
+            "performed_by_role": performed_by_role or "SYSTEM",
+            "performed_by_email": performed_by_email or "",
+            "action": action,
+            "entity_type": entity_type,
+            "entity_id": entity_id,
+            "description": description,
+            "metadata": metadata or {},
+            "created_at": datetime.now(timezone.utc)
+        })
+    except Exception as e:
+        # Log error but don't break the main flow
+        logger.error(f"Failed to create audit log: {e}")
+# ============== END AUDIT LOGGING HELPER ==============
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup and shutdown events."""
