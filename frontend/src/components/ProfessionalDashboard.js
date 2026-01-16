@@ -117,7 +117,7 @@ export function ProfessionalDashboard({ user, logout }) {
               </div>
               <p className="text-sm text-red-600 mt-3">
                 To restore full access to your banking services, please settle the required amount. 
-                For assistance, contact our support team at <a href="mailto:support@projectatlas.eu" className="underline font-medium">support@projectatlas.eu</a>
+                For assistance, <button onClick={() => navigate('/support')} className="underline font-medium hover:text-red-800 transition-colors">contact our support team</button>.
               </p>
             </div>
           </div>
