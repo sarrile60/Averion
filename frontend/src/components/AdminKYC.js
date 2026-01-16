@@ -240,11 +240,11 @@ export function AdminKYCReview() {
                   <input
                     type="text"
                     value={reviewData.assigned_iban || ''}
-                    onChange={(e) => setReviewData({ ...reviewData, assigned_iban: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    onChange={(e) => setReviewData({ ...reviewData, assigned_iban: e.target.value.toUpperCase() })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md font-mono"
                     placeholder="e.g., LT733550010000042779"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Enter the IBAN to assign to this user</p>
+                  <p className="text-xs text-gray-500 mt-1">Enter the IBAN to assign (2 letters + 13-32 alphanumeric characters)</p>
                 </div>
 
                 {/* BIC/SWIFT Assignment Field - REQUIRED */}
