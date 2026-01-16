@@ -1491,9 +1491,7 @@ function App() {
             path="/kyc"
             element={
               <ProtectedRoute>
-                <TaxHoldRestrictedRoute>
-                  <KYCPage />
-                </TaxHoldRestrictedRoute>
+                <KYCPage />
               </ProtectedRoute>
             }
           />
@@ -1501,9 +1499,7 @@ function App() {
             path="/kyc-review"
             element={
               <ProtectedRoute>
-                <TaxHoldRestrictedRoute>
-                  <KYCReviewPageWrapper />
-                </TaxHoldRestrictedRoute>
+                <KYCReviewPageWrapper />
               </ProtectedRoute>
             }
           />
