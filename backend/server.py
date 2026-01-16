@@ -1467,6 +1467,20 @@ async def update_ticket_status(
         new_status=data.status,
         assigned_to=current_user["id"]
     )
+    
+    # Audit: Ticket status change
+    await create_audit_log(
+        db=db,
+        action="TICKET_STATUS_CHANGED",
+        entity_type="ticket",
+        entity_id=ticket_id,
+        description=f"Ticket status changed to {data.status.value}",
+        performed_by=current_user["id"],
+        performed_by_role=current_user["role"],
+        performed_by_email=current_user["email"],
+        metadata={"new_status": data.status.value, "subject": ticket.subject}
+    )
+    
     return ticket.model_dump()
 
 
