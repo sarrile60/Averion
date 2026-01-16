@@ -122,6 +122,24 @@ class KYCService:
         if not app_doc:
             raise HTTPException(status_code=404, detail="Application not found")
         
+        # STRICT VALIDATION: If approving, IBAN and BIC are ALWAYS required
+        if review.status == KYCStatus.APPROVED:
+            if not review.assigned_iban or not review.assigned_iban.strip():
+                raise HTTPException(status_code=400, detail="IBAN is required to approve KYC")
+            if not review.assigned_bic or not review.assigned_bic.strip():
+                raise HTTPException(status_code=400, detail="BIC/SWIFT is required to approve KYC")
+            
+            # Basic IBAN format validation
+            import re
+            iban_clean = review.assigned_iban.replace(" ", "").upper()
+            if not re.match(r'^[A-Z]{2}[A-Z0-9]{13,32}$', iban_clean):
+                raise HTTPException(status_code=400, detail="Invalid IBAN format. Must start with 2 letters followed by 13-32 alphanumeric characters")
+            
+            # Basic BIC format validation (8 or 11 characters)
+            bic_clean = review.assigned_bic.replace(" ", "").upper()
+            if not re.match(r'^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$', bic_clean):
+                raise HTTPException(status_code=400, detail="Invalid BIC/SWIFT format. Must be 8 or 11 characters (e.g., ATLASLT21 or ATLASLT21XXX)")
+        
         # Update application
         update_data = {
             "status": review.status,
@@ -143,6 +161,10 @@ class KYCService:
             from bson.errors import InvalidId
             
             user_id = app_doc["user_id"]
+            
+            # Normalize IBAN and BIC
+            iban_clean = review.assigned_iban.replace(" ", "").upper()
+            bic_clean = review.assigned_bic.replace(" ", "").upper()
             
             # Try string first
             result = await self.db.users.update_one(
@@ -175,15 +197,9 @@ class KYCService:
                     pass
             
             if not account:
-                # No account exists - create one WITH admin-provided IBAN (REQUIRED!)
+                # No account exists - create one with IBAN and BIC
                 from services.ledger_service import LedgerEngine
                 from schemas.banking import BankAccount
-                
-                # STRICT: Require both IBAN and BIC for approval
-                if not review.assigned_iban:
-                    raise HTTPException(status_code=400, detail="IBAN is required to approve KYC")
-                if not review.assigned_bic:
-                    raise HTTPException(status_code=400, detail="BIC/SWIFT is required to approve KYC")
                 
                 # Create ledger account
                 ledger_acc_id = f"ledger_acc_{user_id}"
@@ -202,28 +218,22 @@ class KYCService:
                     "_id": bank_acc_id,
                     "user_id": user_id,
                     "account_number": generate_account_number(),
-                    "iban": review.assigned_iban,
-                    "bic": review.assigned_bic,
+                    "iban": iban_clean,
+                    "bic": bic_clean,
                     "currency": "EUR",
                     "status": "ACTIVE",
                     "ledger_account_id": ledger_acc_id,
                     "opened_at": datetime.utcnow()
                 })
             else:
-                # Account exists but no IBAN - assign both IBAN and BIC
-                if not account.get("iban"):
-                    if not review.assigned_iban:
-                        raise HTTPException(status_code=400, detail="IBAN is required to approve KYC")
-                    if not review.assigned_bic:
-                        raise HTTPException(status_code=400, detail="BIC/SWIFT is required to approve KYC")
-                    
-                    await self.db.bank_accounts.update_one(
-                        {"_id": account["_id"]},
-                        {"$set": {
-                            "iban": review.assigned_iban,
-                            "bic": review.assigned_bic
-                        }}
-                    )
+                # Account exists - always update IBAN and BIC to ensure they are set
+                await self.db.bank_accounts.update_one(
+                    {"_id": account["_id"]},
+                    {"$set": {
+                        "iban": iban_clean,
+                        "bic": bic_clean
+                    }}
+                )
         
         app_doc = await self.db.kyc_applications.find_one({"_id": application_id})
         return KYCApplication(**serialize_doc(app_doc))
