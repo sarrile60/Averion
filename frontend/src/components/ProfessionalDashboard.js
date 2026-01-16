@@ -31,15 +31,17 @@ export function ProfessionalDashboard({ user, logout }) {
 
   const fetchDashboardData = async () => {
     try {
-      const [accountsRes, kycRes, spendingRes] = await Promise.all([
+      const [accountsRes, kycRes, spendingRes, cardsRes] = await Promise.all([
         api.get('/accounts'),
         api.get('/kyc/application'),
-        api.get('/insights/monthly-spending').catch(() => ({ data: { total: 0, categories: {} } }))
+        api.get('/insights/monthly-spending').catch(() => ({ data: { total: 0, categories: {} } })),
+        api.get('/cards').catch(() => ({ data: { ok: true, data: [] } }))
       ]);
       
       setAccounts(accountsRes.data);
       setKycStatus(kycRes.data.status);
       setMonthlySpending(spendingRes.data);
+      setCards(cardsRes.data.data || []);
 
       if (accountsRes.data.length > 0) {
         const txnRes = await api.get(`/accounts/${accountsRes.data[0].id}/transactions`);
