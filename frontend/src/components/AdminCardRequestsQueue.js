@@ -63,7 +63,13 @@ export function AdminCardRequestsQueue() {
 
   const handleFulfill = async () => {
     try {
-      await api.post(`/admin/card-requests/${selectedRequest.id}/fulfill`, fulfillData);
+      // Convert exp_month and exp_year to integers
+      const payload = {
+        ...fulfillData,
+        exp_month: parseInt(fulfillData.exp_month, 10),
+        exp_year: parseInt(fulfillData.exp_year, 10)
+      };
+      await api.post(`/admin/card-requests/${selectedRequest.id}/fulfill`, payload);
       toast.success('Card fulfilled!');
       setSelectedRequest(null);
       setFulfillData({
@@ -79,7 +85,8 @@ export function AdminCardRequestsQueue() {
       });
       fetchRequests();
     } catch (err) {
-      toast.error('Failed to fulfill');
+      console.error('Fulfill error:', err);
+      toast.error('Failed to fulfill: ' + (err.response?.data?.detail || err.message));
     }
   };
 
