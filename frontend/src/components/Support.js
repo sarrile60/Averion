@@ -54,7 +54,7 @@ export function SupportTickets({ isAdmin = false }) {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
           <h2 className="text-2xl font-bold">Support Tickets</h2>
           <p className="text-sm text-gray-600 mt-1">
@@ -64,7 +64,7 @@ export function SupportTickets({ isAdmin = false }) {
         {!isAdmin && (
           <button
             onClick={() => setShowCreateForm(true)}
-            className="btn-primary text-sm px-4 py-2 whitespace-nowrap"
+            className="btn-primary text-sm px-4 py-2 whitespace-nowrap w-full sm:w-auto"
             data-testid="create-ticket-button"
           >
             Create New Ticket
