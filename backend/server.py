@@ -877,10 +877,25 @@ async def update_user_status(
     if not user_doc:
         raise HTTPException(status_code=404, detail="User not found")
     
+    old_status = user_doc.get("status", "UNKNOWN")
+    
     # Update status
     result = await db.users.update_one(
         {"_id": user_doc["_id"]},
         {"$set": {"status": data.status, "updated_at": datetime.now(timezone.utc)}}
+    )
+    
+    # Audit: User status change
+    await create_audit_log(
+        db=db,
+        action="USER_STATUS_CHANGED",
+        entity_type="user",
+        entity_id=str(user_doc["_id"]),
+        description=f"User {user_doc['email']} status changed from {old_status} to {data.status}",
+        performed_by=current_user["id"],
+        performed_by_role=current_user["role"],
+        performed_by_email=current_user["email"],
+        metadata={"old_status": old_status, "new_status": data.status}
     )
     
     return {"success": True, "message": f"User status updated to {data.status}", "modified_count": result.modified_count}
