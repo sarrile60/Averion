@@ -151,7 +151,7 @@ export function CardsPage({ user, logout }) {
                           </div>
 
                           {/* Card Holder & Expiry */}
-                          <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+                          <div className="absolute bottom-6 left-6 right-20 flex justify-between items-end">
                             <div>
                               <p className="text-white/40 text-[10px] uppercase tracking-widest mb-1">Card Holder</p>
                               <p className="text-white text-sm font-medium uppercase tracking-wider">
@@ -167,10 +167,10 @@ export function CardsPage({ user, logout }) {
                           </div>
 
                           {/* Mastercard Logo */}
-                          <div className="absolute bottom-6 right-6">
+                          <div className="absolute bottom-4 right-4">
                             <div className="flex">
-                              <div className="w-8 h-8 rounded-full bg-red-500 opacity-90"></div>
-                              <div className="w-8 h-8 rounded-full bg-yellow-400 opacity-90 -ml-3"></div>
+                              <div className="w-7 h-7 rounded-full bg-red-500 opacity-90"></div>
+                              <div className="w-7 h-7 rounded-full bg-yellow-400 opacity-90 -ml-2"></div>
                             </div>
                           </div>
 
