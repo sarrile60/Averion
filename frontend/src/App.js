@@ -693,7 +693,6 @@ function CustomerDashboard() {
               )}
             </div>
           </div>
-        </div>
       </header>
 
       {/* Professional Dashboard Content */}
