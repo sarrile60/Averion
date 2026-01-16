@@ -5,6 +5,28 @@ import { useNavigate } from 'react-router-dom';
 export function LandingPage() {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+
+  // Smooth scroll to section with animation
+  const scrollToSection = (sectionId) => {
+    setMobileMenuOpen(false);
+    setActiveSection(sectionId);
+    
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navHeight = 80; // Account for fixed nav
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+
+      // Reset active section after animation
+      setTimeout(() => setActiveSection(''), 1000);
+    }
+  };
 
   const features = [
     {
