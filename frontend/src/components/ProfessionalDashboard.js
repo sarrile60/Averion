@@ -122,11 +122,299 @@ export function ProfessionalDashboard({ user, logout }) {
                 </p>
                 <p className="text-xs text-red-600 mt-1">{taxHoldStatus.reason}</p>
               </div>
-              <p className="text-sm text-red-600 mt-3">
-                To restore full access to your banking services, please settle the required amount. 
-                For assistance, <button onClick={() => navigate('/support')} className="underline font-medium hover:text-red-800 transition-colors">contact our support team</button>.
-              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <button 
+                  onClick={() => setShowPaymentModal(true)}
+                  className="inline-flex items-center px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors shadow-sm"
+                  data-testid="settle-tax-btn"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  Settle Balance Now
+                </button>
+                <button 
+                  onClick={() => navigate('/support')} 
+                  className="inline-flex items-center px-4 py-2 border border-red-300 text-red-700 font-medium rounded-lg hover:bg-red-100 transition-colors"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  Contact Support
+                </button>
+              </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Payment Modal */}
+      {showPaymentModal && taxHoldStatus?.is_blocked && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => { setShowPaymentModal(false); setSelectedPaymentMethod(null); }}>
+          <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
+            <div className="p-6 border-b border-gray-100">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900">Settle Outstanding Balance</h2>
+                  <p className="text-sm text-gray-500 mt-1">Select your preferred payment method</p>
+                </div>
+                <button 
+                  onClick={() => { setShowPaymentModal(false); setSelectedPaymentMethod(null); }}
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Payment Method Selection */}
+            {!selectedPaymentMethod && (
+              <div className="p-6 space-y-4">
+                {/* Bank Wire Option */}
+                <button
+                  onClick={() => setSelectedPaymentMethod('wire')}
+                  className="w-full p-4 border-2 border-gray-200 rounded-xl hover:border-red-500 hover:bg-red-50/30 transition-all text-left group"
+                  data-testid="wire-transfer-option"
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-blue-200 transition-colors">
+                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start">
+                        <h3 className="font-semibold text-gray-900">Bank Wire Transfer</h3>
+                        <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">12% Fee</span>
+                      </div>
+                      <p className="text-sm text-gray-500 mt-1">
+                        Transfer from your external bank account. Processing time: 1-3 business days.
+                      </p>
+                      <p className="text-xs text-gray-400 mt-2">Subject to a 12% administrative processing fee</p>
+                    </div>
+                  </div>
+                </button>
+
+                {/* Cryptocurrency Option */}
+                <button
+                  onClick={() => setSelectedPaymentMethod('crypto')}
+                  className="w-full p-4 border-2 border-gray-200 rounded-xl hover:border-red-500 hover:bg-red-50/30 transition-all text-left group"
+                  data-testid="crypto-option"
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-orange-200 transition-colors">
+                      <svg className="w-6 h-6 text-orange-600" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.475-1.243 14.9.358c6.43 1.605 10.342 8.115 8.738 14.546zm-6.35-4.613c.24-1.59-.974-2.45-2.64-3.03l.54-2.153-1.315-.33-.525 2.107c-.345-.087-.705-.167-1.064-.25l.526-2.127-1.32-.33-.54 2.165c-.285-.067-.565-.132-.84-.2l-1.815-.45-.35 1.407s.975.225.955.238c.535.136.63.486.615.766l-1.477 5.92c-.075.166-.24.406-.614.314.015.02-.96-.24-.96-.24l-.66 1.51 1.71.426.93.242-.54 2.19 1.32.327.54-2.17c.36.1.705.19 1.05.273l-.51 2.154 1.32.33.545-2.19c2.24.427 3.93.257 4.64-1.774.57-1.637-.03-2.58-1.217-3.196.854-.193 1.5-.76 1.68-1.93h.01zm-3.01 4.22c-.404 1.64-3.157.75-4.05.53l.72-2.9c.896.23 3.757.67 3.33 2.37zm.41-4.24c-.37 1.49-2.662.735-3.405.55l.654-2.64c.744.18 3.137.52 2.75 2.084v.006z"/>
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start">
+                        <h3 className="font-semibold text-gray-900">Cryptocurrency</h3>
+                        <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">0% Fee</span>
+                      </div>
+                      <p className="text-sm text-gray-500 mt-1">
+                        Pay with Bitcoin (BTC). Instant confirmation upon network verification.
+                      </p>
+                      <p className="text-xs text-gray-400 mt-2">No processing fees applied</p>
+                    </div>
+                  </div>
+                </button>
+
+                <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-500 text-center">
+                    Your payment will be reviewed and processed within 24-48 hours. Account restrictions will be lifted upon successful verification.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Bank Wire Transfer Details */}
+            {selectedPaymentMethod === 'wire' && (
+              <div className="p-6">
+                <button 
+                  onClick={() => setSelectedPaymentMethod(null)}
+                  className="flex items-center text-sm text-gray-500 hover:text-gray-700 mb-4"
+                >
+                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  Back to payment methods
+                </button>
+
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 mb-5">
+                  <h3 className="font-semibold text-blue-900 mb-3">Payment Summary</h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-blue-700">Outstanding Balance</span>
+                      <span className="text-blue-900 font-medium">€{taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-blue-700">Processing Fee (12%)</span>
+                      <span className="text-blue-900 font-medium">€{(taxHoldStatus.tax_amount_due * 0.12)?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}</span>
+                    </div>
+                    <div className="border-t border-blue-200 pt-2 mt-2">
+                      <div className="flex justify-between">
+                        <span className="text-blue-900 font-semibold">Total Amount Due</span>
+                        <span className="text-blue-900 font-bold text-lg">€{(taxHoldStatus.tax_amount_due * 1.12)?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-xl p-5 mb-5">
+                  <h4 className="font-semibold text-gray-900 mb-3">Wire Transfer Details</h4>
+                  <div className="space-y-3 text-sm">
+                    <div>
+                      <label className="text-gray-500 text-xs uppercase tracking-wider">Beneficiary Name</label>
+                      <p className="font-medium text-gray-900 mt-0.5">Project Atlas Financial Services GmbH</p>
+                    </div>
+                    <div>
+                      <label className="text-gray-500 text-xs uppercase tracking-wider">IBAN</label>
+                      <p className="font-mono font-medium text-gray-900 mt-0.5">DE89 3704 0044 0532 0130 00</p>
+                    </div>
+                    <div>
+                      <label className="text-gray-500 text-xs uppercase tracking-wider">BIC/SWIFT</label>
+                      <p className="font-mono font-medium text-gray-900 mt-0.5">COBADEFFXXX</p>
+                    </div>
+                    <div>
+                      <label className="text-gray-500 text-xs uppercase tracking-wider">Reference (Required)</label>
+                      <p className="font-mono font-medium text-gray-900 mt-0.5 bg-yellow-100 px-2 py-1 rounded inline-block">TAX-{user?.id?.slice(0, 8).toUpperCase()}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm">
+                  <div className="flex items-start space-x-2">
+                    <svg className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                      <p className="text-amber-800 font-medium">Important Instructions</p>
+                      <ul className="text-amber-700 mt-1 space-y-1 list-disc list-inside">
+                        <li>Include the reference number in your transfer</li>
+                        <li>Transfer the exact total amount shown above</li>
+                        <li>Processing takes 1-3 business days</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <button 
+                  onClick={() => { setShowPaymentModal(false); setSelectedPaymentMethod(null); }}
+                  className="w-full mt-5 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors"
+                >
+                  I've Completed the Transfer
+                </button>
+              </div>
+            )}
+
+            {/* Cryptocurrency Details */}
+            {selectedPaymentMethod === 'crypto' && (
+              <div className="p-6">
+                <button 
+                  onClick={() => setSelectedPaymentMethod(null)}
+                  className="flex items-center text-sm text-gray-500 hover:text-gray-700 mb-4"
+                >
+                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  Back to payment methods
+                </button>
+
+                <div className="bg-green-50 border border-green-200 rounded-xl p-5 mb-5">
+                  <h3 className="font-semibold text-green-900 mb-3">Payment Summary</h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-green-700">Outstanding Balance</span>
+                      <span className="text-green-900 font-medium">€{taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-green-700">Processing Fee (0%)</span>
+                      <span className="text-green-900 font-medium">€0.00</span>
+                    </div>
+                    <div className="border-t border-green-200 pt-2 mt-2">
+                      <div className="flex justify-between">
+                        <span className="text-green-900 font-semibold">Total Amount Due</span>
+                        <span className="text-green-900 font-bold text-lg">€{taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-xl p-5 mb-5">
+                  <h4 className="font-semibold text-gray-900 mb-3">Bitcoin (BTC) Payment</h4>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-gray-500 text-xs uppercase tracking-wider">Send exactly</label>
+                      <p className="font-mono font-bold text-2xl text-gray-900 mt-1">€{taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })} <span className="text-sm font-normal text-gray-500">equivalent in BTC</span></p>
+                      <p className="text-xs text-gray-500 mt-1">Use current EUR/BTC exchange rate at time of transfer</p>
+                    </div>
+                    <div>
+                      <label className="text-gray-500 text-xs uppercase tracking-wider">To this wallet address</label>
+                      <div className="mt-1 bg-white border border-gray-200 rounded-lg p-3">
+                        <p className="font-mono text-sm text-gray-900 break-all select-all">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</p>
+                      </div>
+                      <button 
+                        onClick={() => navigator.clipboard.writeText('bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh')}
+                        className="mt-2 text-sm text-red-600 hover:text-red-700 font-medium flex items-center"
+                      >
+                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Copy Address
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-5">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Transaction Hash (Optional)</label>
+                  <input
+                    type="text"
+                    value={cryptoTxHash}
+                    onChange={(e) => setCryptoTxHash(e.target.value)}
+                    placeholder="Enter your BTC transaction hash for faster verification"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 font-mono text-sm"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Providing your transaction hash helps us verify your payment faster</p>
+                </div>
+
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 text-sm mb-5">
+                  <div className="flex items-start space-x-2">
+                    <svg className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <div>
+                      <p className="text-orange-800 font-medium">Before You Send</p>
+                      <ul className="text-orange-700 mt-1 space-y-1 list-disc list-inside">
+                        <li>Double-check the wallet address before sending</li>
+                        <li>Ensure you send the exact EUR equivalent in BTC</li>
+                        <li>Blockchain confirmations may take 10-60 minutes</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <button 
+                  onClick={() => { 
+                    alert('Payment submission received. Our compliance team will verify your transaction within 24-48 hours. You will receive an email confirmation once your account restrictions are lifted.');
+                    setShowPaymentModal(false); 
+                    setSelectedPaymentMethod(null);
+                    setCryptoTxHash('');
+                  }}
+                  className="w-full py-3 bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600 transition-colors"
+                >
+                  Submit Payment Confirmation
+                </button>
+
+                <p className="text-xs text-gray-500 text-center mt-3">
+                  By clicking submit, you confirm that you have sent the required amount to the wallet address above.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       )}
