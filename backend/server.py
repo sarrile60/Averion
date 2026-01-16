@@ -198,6 +198,7 @@ async def login(
 ):
     """Login with email and password."""
     auth_service = AuthService(db)
+    client_ip = request.client.host if request.client else "unknown"
     
     # Authenticate
     user = await auth_service.authenticate_user(
@@ -205,10 +206,30 @@ async def login(
         credentials.password
     )
     if not user:
+        # Audit: Failed login attempt
+        await create_audit_log(
+            db=db,
+            action="LOGIN_FAILED",
+            entity_type="auth",
+            entity_id=credentials.email,
+            description=f"Failed login attempt for {credentials.email}",
+            metadata={"ip_address": client_ip, "reason": "invalid_credentials"}
+        )
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
     # Check if user is disabled
     if user.status == "DISABLED":
+        # Audit: Disabled account login attempt
+        await create_audit_log(
+            db=db,
+            action="LOGIN_BLOCKED",
+            entity_type="auth",
+            entity_id=user.id,
+            description=f"Login blocked for disabled account: {user.email}",
+            performed_by=user.id,
+            performed_by_email=user.email,
+            metadata={"ip_address": client_ip, "reason": "account_disabled"}
+        )
         raise HTTPException(status_code=403, detail="Account is disabled. Please contact support.")
     
     # Check MFA
@@ -217,6 +238,17 @@ async def login(
             raise HTTPException(status_code=401, detail="MFA token required")
         
         if not await auth_service.verify_totp(user, credentials.totp_token):
+            # Audit: Failed MFA
+            await create_audit_log(
+                db=db,
+                action="MFA_FAILED",
+                entity_type="auth",
+                entity_id=user.id,
+                description=f"Failed MFA verification for {user.email}",
+                performed_by=user.id,
+                performed_by_email=user.email,
+                metadata={"ip_address": client_ip}
+            )
             raise HTTPException(status_code=401, detail="Invalid MFA token")
     
     # Create session
@@ -224,6 +256,19 @@ async def login(
         user,
         ip_address=request.client.host if request.client else None,
         user_agent=request.headers.get("user-agent")
+    )
+    
+    # Audit: Successful login
+    await create_audit_log(
+        db=db,
+        action="LOGIN_SUCCESS",
+        entity_type="auth",
+        entity_id=user.id,
+        description=f"Successful login for {user.email}",
+        performed_by=user.id,
+        performed_by_role=user.role,
+        performed_by_email=user.email,
+        metadata={"ip_address": client_ip, "mfa_used": user.mfa_enabled}
     )
     
     # Set refresh token cookie
