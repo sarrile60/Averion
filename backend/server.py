@@ -1084,6 +1084,19 @@ async def remove_tax_hold(
         notification_type="ACCOUNT"
     )
     
+    # Audit: Tax hold removed
+    await create_audit_log(
+        db=db,
+        action="TAX_HOLD_REMOVED",
+        entity_type="tax_hold",
+        entity_id=actual_user_id,
+        description=f"Tax hold removed from user {user_doc['email']}",
+        performed_by=current_user["id"],
+        performed_by_role=current_user["role"],
+        performed_by_email=current_user["email"],
+        metadata={"user_email": user_doc["email"]}
+    )
+    
     return {
         "success": True,
         "message": "Tax hold removed successfully",
