@@ -360,23 +360,23 @@ function LoginPage() {
               className="w-full btn-primary"
               data-testid="login-button"
             >
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? (t('loading')) : t('signIn')}
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-gray-200 text-center">
-            <p className="text-sm text-gray-600 mb-4">
-              Don't have an account?{' '}
+          <div className={`mt-6 pt-6 border-t text-center ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+            <p className={`text-sm mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              {t('dontHaveAccount')}{' '}
               <button
                 type="button"
                 onClick={() => navigate('/signup')}
                 className="font-medium text-red-600 hover:text-red-700"
                 data-testid="goto-signup"
               >
-                Create Account
+                {t('createAccount')}
               </button>
             </p>
-            <div className="text-xs text-gray-500 space-y-1">
+            <div className={`text-xs space-y-1 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
               <p className="font-medium mb-1">Demo credentials:</p>
               <p>Customer: customer@demo.com / Demo@123456</p>
               <p>Admin: admin@atlas.local / Admin@123456</p>
