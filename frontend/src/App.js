@@ -30,6 +30,14 @@ import { AdminAccountsControl } from './components/AdminAccountsControl';
 import { LandingPage } from './components/LandingPage';
 import { useLanguage, useTheme } from './contexts/AppContext';
 
+// Styled Logo Component - displays "ecomm" with "bx" in red
+const StyledLogo = ({ className = '', isDark = false }) => (
+  <span className={className}>
+    <span className={isDark ? 'text-white' : ''}>ecomm</span>
+    <span className="text-red-500">bx</span>
+  </span>
+);
+
 // Auth Context
 const AuthContext = React.createContext(null);
 
