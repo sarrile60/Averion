@@ -495,45 +495,45 @@ export function LandingPage() {
       </section>
 
       {/* Security Section */}
-      <section id="security" className="py-20 sm:py-28">
+      <section id="security" className={`py-20 sm:py-28 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Bank-grade security
+            <h2 className={`text-3xl sm:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              {t('securityTitle')}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Your security is our priority. We employ multiple layers of protection to keep your money and data safe.
+            <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              {t('securityDesc')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center p-8">
-              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 ${isDark ? 'bg-red-900/30' : 'bg-red-100'}`}>
                 <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">256-bit Encryption</h3>
-              <p className="text-gray-600">All data is encrypted using military-grade encryption standards.</p>
+              <h3 className={`text-xl font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('encryption')}</h3>
+              <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('encryptionDesc')}</p>
             </div>
             <div className="text-center p-8">
-              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 ${isDark ? 'bg-red-900/30' : 'bg-red-100'}`}>
                 <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Multi-Factor Auth</h3>
-              <p className="text-gray-600">Protect your account with biometrics, SMS, and authenticator apps.</p>
+              <h3 className={`text-xl font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('multiFactorAuth')}</h3>
+              <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('multiFactorAuthDesc')}</p>
             </div>
             <div className="text-center p-8">
-              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 ${isDark ? 'bg-red-900/30' : 'bg-red-100'}`}>
                 <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">24/7 Monitoring</h3>
-              <p className="text-gray-600">Real-time fraud detection and suspicious activity alerts.</p>
+              <h3 className={`text-xl font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('monitoring247')}</h3>
+              <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('monitoring247Desc')}</p>
             </div>
           </div>
         </div>
