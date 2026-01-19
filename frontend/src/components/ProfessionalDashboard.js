@@ -105,25 +105,25 @@ export function ProfessionalDashboard({ user, logout }) {
   }
 
   return (
-    <div className="container-main py-8">
+    <div className={`container-main py-8 ${isDark ? 'bg-gray-900' : ''}`}>
       {/* Tax Hold Banner */}
       {taxHoldStatus?.is_blocked && (
-        <div className="bg-red-50 border-l-4 border-red-500 rounded-lg p-4 mb-6" data-testid="tax-hold-banner">
+        <div className={`border-l-4 rounded-lg p-4 mb-6 ${isDark ? 'bg-red-900/20 border-red-600' : 'bg-red-50 border-red-500'}`} data-testid="tax-hold-banner">
           <div className="flex items-start space-x-3">
-            <svg className="w-6 h-6 text-red-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className={`w-6 h-6 mt-0.5 flex-shrink-0 ${isDark ? 'text-red-400' : 'text-red-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
             <div className="flex-1">
-              <h3 className="font-semibold text-red-800">Account Restricted</h3>
-              <p className="text-sm text-red-700 mt-1">
-                Your account has been temporarily restricted due to outstanding tax obligations.
+              <h3 className={`font-semibold ${isDark ? 'text-red-400' : 'text-red-800'}`}>{t('accountRestricted')}</h3>
+              <p className={`text-sm mt-1 ${isDark ? 'text-red-300' : 'text-red-700'}`}>
+                {t('accountRestrictedDesc')}
               </p>
-              <div className="mt-2 p-3 bg-white/50 rounded border border-red-200">
-                <p className="text-sm text-red-800">
-                  <span className="font-medium">Amount Due:</span>{' '}
+              <div className={`mt-2 p-3 rounded border ${isDark ? 'bg-gray-800/50 border-red-800' : 'bg-white/50 border-red-200'}`}>
+                <p className={`text-sm ${isDark ? 'text-red-300' : 'text-red-800'}`}>
+                  <span className="font-medium">{t('amountDue')}:</span>{' '}
                   <span className="font-bold text-lg">€{taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}</span>
                 </p>
-                <p className="text-xs text-red-600 mt-1">{taxHoldStatus.reason}</p>
+                <p className={`text-xs mt-1 ${isDark ? 'text-red-400' : 'text-red-600'}`}>{taxHoldStatus.reason}</p>
               </div>
               <div className="mt-4 flex flex-wrap gap-3">
                 <button 
@@ -134,16 +134,16 @@ export function ProfessionalDashboard({ user, logout }) {
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
-                  Settle Balance Now
+                  {t('settleBalanceNow')}
                 </button>
                 <button 
                   onClick={() => navigate('/support')} 
-                  className="inline-flex items-center px-4 py-2 border border-red-300 text-red-700 font-medium rounded-lg hover:bg-red-100 transition-colors"
+                  className={`inline-flex items-center px-4 py-2 border font-medium rounded-lg transition-colors ${isDark ? 'border-red-700 text-red-400 hover:bg-red-900/30' : 'border-red-300 text-red-700 hover:bg-red-100'}`}
                 >
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
-                  Contact Support
+                  {t('contactSupport')}
                 </button>
               </div>
             </div>
