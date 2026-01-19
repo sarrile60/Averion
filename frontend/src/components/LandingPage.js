@@ -279,6 +279,29 @@ export function LandingPage() {
                 </button>
               </div>
 
+              {/* PWA Install Button - Only shows when installable */}
+              {isInstallable && !isInstalled && (
+                <div className="mt-6 flex justify-center lg:justify-start">
+                  <button
+                    onClick={handleInstallClick}
+                    data-testid="pwa-install-btn"
+                    className={`flex items-center gap-3 px-6 py-3 rounded-full font-medium text-base transition-all duration-300 border-2 ${
+                      isDark 
+                        ? 'border-red-500 text-red-400 hover:bg-red-500/10' 
+                        : 'border-red-500 text-red-600 hover:bg-red-50'
+                    }`}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    <span>{t('installApp') || 'Install App'}</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                  </button>
+                </div>
+              )}
+
               {/* Trust Badges */}
               <div className={`mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
                 <div className="flex items-center space-x-2">
