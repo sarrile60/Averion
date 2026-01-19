@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage, useTheme } from '../contexts/AppContext';
+import { usePWAInstall } from '../hooks/usePWAInstall';
 
 export function LandingPage() {
   const navigate = useNavigate();
@@ -9,6 +10,13 @@ export function LandingPage() {
   const [activeSection, setActiveSection] = useState('');
   const { t, language, setLanguage } = useLanguage();
   const { isDark, toggleTheme } = useTheme();
+  const { isInstallable, isInstalled, installApp } = usePWAInstall();
+
+  // Handle PWA install
+  const handleInstallClick = async () => {
+    const result = await installApp();
+    console.log('[LandingPage] Install result:', result);
+  };
 
   // Smooth scroll to section with animation
   const scrollToSection = (sectionId) => {
