@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     
     # Database
     MONGO_URL: str = Field(default="mongodb://localhost:27017")
-    DATABASE_NAME: str = "atlas_banking"
+    DATABASE_NAME: str = Field(default="atlas_banking")
     
     # Storage
     S3_PROVIDER: str = "local"  # local, minio, aws
