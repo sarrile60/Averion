@@ -790,7 +790,7 @@ export function ProfessionalDashboard({ user, logout }) {
               <button 
                 onClick={() => {
                   if (taxHoldStatus?.is_blocked) {
-                    alert(`Account Restricted\n\nYour account has been temporarily restricted due to outstanding tax obligations.\n\nAmount Due: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}\n\nCard management is unavailable until the required amount is settled. For assistance, contact our support team.`);
+                    alert(`${t('accountRestricted')}\n\n${t('accountRestrictedDesc')}\n\n${t('amountDue')}: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}\n\n${t('cardManagementUnavailable')}`);
                   } else {
                     navigate('/cards');
                   }
