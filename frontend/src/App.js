@@ -800,7 +800,7 @@ function AccountsPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <span className={`logo-text ${isDark ? 'text-white' : ''}`}>{APP_NAME}</span>
+          <span className={`logo-text font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}><StyledLogo isDark={isDark} /></span>
         </div>
         <div className="flex items-center gap-3">
           <button
