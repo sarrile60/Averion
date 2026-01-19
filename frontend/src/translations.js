@@ -171,6 +171,8 @@ const translations = {
     contactSupport: 'Contact Support',
     settleOutstandingBalance: 'Settle Outstanding Balance',
     selectPaymentMethod: 'Select your preferred payment method',
+    pleaseSettleAmount: 'Please settle the required amount to restore full access. For assistance, contact support.',
+    cardManagementUnavailable: 'Card management is unavailable until the required amount is settled. For assistance, contact our support team.',
     backToPaymentMethods: 'Back to payment methods',
     paymentSummary: 'Payment Summary',
     outstandingBalance: 'Outstanding Balance',
