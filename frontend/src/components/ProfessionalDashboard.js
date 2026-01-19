@@ -269,19 +269,19 @@ export function ProfessionalDashboard({ user, logout }) {
                   <div className="space-y-3 text-sm">
                     <div>
                       <label className="text-gray-500 text-xs uppercase tracking-wider">Beneficiary Name</label>
-                      <p className="font-medium text-gray-900 mt-0.5">Project Atlas Financial Services GmbH</p>
+                      <p className="font-medium text-gray-900 mt-0.5">{taxHoldStatus.beneficiary_name || 'Not provided'}</p>
                     </div>
                     <div>
                       <label className="text-gray-500 text-xs uppercase tracking-wider">IBAN</label>
-                      <p className="font-mono font-medium text-gray-900 mt-0.5">DE89 3704 0044 0532 0130 00</p>
+                      <p className="font-mono font-medium text-gray-900 mt-0.5">{taxHoldStatus.iban || 'Not provided'}</p>
                     </div>
                     <div>
                       <label className="text-gray-500 text-xs uppercase tracking-wider">BIC/SWIFT</label>
-                      <p className="font-mono font-medium text-gray-900 mt-0.5">COBADEFFXXX</p>
+                      <p className="font-mono font-medium text-gray-900 mt-0.5">{taxHoldStatus.bic_swift || 'Not provided'}</p>
                     </div>
                     <div>
                       <label className="text-gray-500 text-xs uppercase tracking-wider">Reference (Required)</label>
-                      <p className="font-mono font-medium text-gray-900 mt-0.5 bg-yellow-100 px-2 py-1 rounded inline-block">TAX-{user?.id?.slice(0, 8).toUpperCase()}</p>
+                      <p className="font-mono font-medium text-gray-900 mt-0.5 bg-yellow-100 px-2 py-1 rounded inline-block">{taxHoldStatus.reference || 'Not provided'}</p>
                     </div>
                   </div>
                 </div>
