@@ -725,6 +725,13 @@ const translations = {
     cancel: 'Cancel',
     creating: 'Creating...',
     createTicket: 'Create Ticket',
+    selectTicketToView: 'Select a ticket to view details',
+    created: 'Created',
+    typeYourMessage: 'Type your message...',
+    sendMessage: 'Send Message',
+    sending: 'Sending...',
+    ticketStatus: 'Ticket Status',
+    updateStatus: 'Update Status',
     
     // Time formatting
     justNow: 'Just now',
