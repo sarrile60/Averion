@@ -454,7 +454,8 @@ function ForgotPasswordPage() {
     setError('');
     setLoading(true);
     try {
-      await api.post('/auth/forgot-password', { email });
+      // Pass the current language preference to get localized email
+      await api.post('/auth/forgot-password', { email, language });
       setSuccess(true);
     } catch (err) {
       setError(err.response?.data?.detail || 'Failed to send reset link');
