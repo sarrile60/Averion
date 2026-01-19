@@ -653,6 +653,13 @@ const translations = {
     interest: 'Interest',
     credit: 'Credit',
     debit: 'Debit',
+    salaryPayment: 'Salary Payment',
+    cashDeposit: 'Cash Deposit',
+    interestPayment: 'Interest Payment',
+    bonus: 'Bonus',
+    accountCorrection: 'Account Correction',
+    other: 'Other',
+    withdrawal: 'Withdrawal',
     
     // Time formatting
     justNow: 'Just now',
