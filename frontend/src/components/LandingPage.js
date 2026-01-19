@@ -305,7 +305,7 @@ export function LandingPage() {
                       {/* Mini Header */}
                       <div className="flex items-center justify-between mb-8">
                         <div>
-                          <p className="text-xs text-gray-500">Good morning</p>
+                          <p className="text-xs text-gray-500">{t('goodMorning')}</p>
                           <p className="text-lg font-semibold text-gray-900">John Doe</p>
                         </div>
                         <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold">
@@ -315,35 +315,40 @@ export function LandingPage() {
 
                       {/* Balance Card */}
                       <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-5 text-white mb-6">
-                        <p className="text-sm text-gray-400 mb-1">Total Balance</p>
+                        <p className="text-sm text-gray-400 mb-1">{t('totalBalance')}</p>
                         <p className="text-3xl font-bold mb-4">€12,458.90</p>
                         <div className="flex items-center text-sm">
                           <span className="text-green-400">↑ 12.5%</span>
-                          <span className="text-gray-400 ml-2">vs last month</span>
+                          <span className="text-gray-400 ml-2">{t('vsLastMonth')}</span>
                         </div>
                       </div>
 
                       {/* Quick Actions */}
                       <div className="grid grid-cols-4 gap-3 mb-6">
-                        {['Send', 'Request', 'Cards', 'More'].map((action) => (
-                          <div key={action} className="text-center">
+                        {[
+                          { key: 'send', label: t('send') },
+                          { key: 'request', label: t('request') },
+                          { key: 'cards', label: t('cards') },
+                          { key: 'more', label: t('more') }
+                        ].map((action) => (
+                          <div key={action.key} className="text-center">
                             <div className="w-12 h-12 mx-auto bg-red-50 rounded-xl flex items-center justify-center mb-2">
                               <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                             </div>
-                            <p className="text-xs text-gray-600">{action}</p>
+                            <p className="text-xs text-gray-600">{action.label}</p>
                           </div>
                         ))}
                       </div>
 
                       {/* Recent */}
-                      <p className="text-sm font-semibold text-gray-900 mb-3">Recent Activity</p>
+                      <p className="text-sm font-semibold text-gray-900 mb-3">{t('recentActivity')}</p>
                       <div className="space-y-3">
                         <div className="flex items-center justify-between py-2">
                           <div className="flex items-center space-x-3">
                             <div className="w-10 h-10 bg-gray-100 rounded-full"></div>
                             <div>
                               <p className="text-sm font-medium text-gray-900">Amazon EU</p>
-                              <p className="text-xs text-gray-500">Shopping</p>
+                              <p className="text-xs text-gray-500">{t('shopping')}</p>
                             </div>
                           </div>
                           <p className="text-sm font-semibold text-gray-900">-€49.99</p>
@@ -352,8 +357,8 @@ export function LandingPage() {
                           <div className="flex items-center space-x-3">
                             <div className="w-10 h-10 bg-green-100 rounded-full"></div>
                             <div>
-                              <p className="text-sm font-medium text-gray-900">Salary</p>
-                              <p className="text-xs text-gray-500">Income</p>
+                              <p className="text-sm font-medium text-gray-900">{t('salary')}</p>
+                              <p className="text-xs text-gray-500">{t('income')}</p>
                             </div>
                           </div>
                           <p className="text-sm font-semibold text-green-600">+€3,500</p>
@@ -372,8 +377,8 @@ export function LandingPage() {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Transfer</p>
-                      <p className="text-sm font-semibold text-gray-900">Complete</p>
+                      <p className="text-xs text-gray-500">{t('transfer')}</p>
+                      <p className="text-sm font-semibold text-gray-900">{t('complete')}</p>
                     </div>
                   </div>
                 </div>
@@ -386,8 +391,8 @@ export function LandingPage() {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Security</p>
-                      <p className="text-sm font-semibold text-gray-900">Protected</p>
+                      <p className="text-xs text-gray-500">{t('security')}</p>
+                      <p className="text-sm font-semibold text-gray-900">{t('protected')}</p>
                     </div>
                   </div>
                 </div>
