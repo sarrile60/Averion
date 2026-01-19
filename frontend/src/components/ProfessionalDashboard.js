@@ -756,7 +756,7 @@ export function ProfessionalDashboard({ user, logout }) {
                 }} 
                 className={`w-full ${taxHoldStatus?.is_blocked ? 'btn-secondary opacity-75' : 'btn-secondary'}`}
               >
-                Manage Cards
+                {t('manageCards')}
               </button>
             </div>
           </div>
