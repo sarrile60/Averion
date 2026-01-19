@@ -431,6 +431,302 @@ function LoginPage() {
   );
 }
 
+// Forgot Password Page
+function ForgotPasswordPage() {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const { t, language, setLanguage } = useLanguage();
+  const { isDark, toggleTheme } = useTheme();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    try {
+      await api.post('/auth/forgot-password', { email });
+      setSuccess(true);
+    } catch (err) {
+      setError(err.response?.data?.detail || 'Failed to send reset link');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className={`min-h-screen flex flex-col ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
+      {/* Header with Language/Theme toggles */}
+      <div className="flex justify-end items-center p-4 space-x-2">
+        <button
+          onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
+          className={`px-3 py-1.5 rounded-lg font-bold text-sm transition ${isDark ? 'bg-gray-800 hover:bg-gray-700 text-gray-300' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
+        >
+          {language === 'en' ? '🇬🇧 EN' : '🇮🇹 IT'}
+        </button>
+        <button
+          onClick={toggleTheme}
+          className={`p-2 rounded-lg transition ${isDark ? 'hover:bg-gray-800 text-yellow-400' : 'hover:bg-gray-100 text-gray-600'}`}
+        >
+          {isDark ? (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          ) : (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8">
+            <h1 className={`text-3xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{APP_NAME}</h1>
+            <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t('forgotPasswordTitle')}</p>
+          </div>
+
+          <div className={`rounded-xl p-8 ${isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white shadow-lg border border-gray-100'}`}>
+            {success ? (
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h2 className={`text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('resetLinkSent')}</h2>
+                <p className={`text-sm mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t('resetLinkSentDesc')}</p>
+                <button
+                  onClick={() => navigate('/login')}
+                  className="w-full py-3 px-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
+                >
+                  {t('backToLogin')}
+                </button>
+              </div>
+            ) : (
+              <>
+                <p className={`text-sm mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t('forgotPasswordDesc')}</p>
+                
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {error && (
+                    <div className={`rounded-lg p-3 text-sm ${isDark ? 'bg-red-900/30 border border-red-800 text-red-400' : 'bg-red-50 border border-red-200 text-red-800'}`}>
+                      {error}
+                    </div>
+                  )}
+
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{t('email')}</label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-red-500 focus:border-red-500 transition ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900'}`}
+                      placeholder="name@example.com"
+                      data-testid="forgot-email-input"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full py-3 px-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-red-500/30 transition-all duration-300 disabled:opacity-50"
+                    data-testid="send-reset-link-btn"
+                  >
+                    {loading ? t('sendingResetLink') : t('sendResetLink')}
+                  </button>
+                </form>
+
+                <div className={`mt-6 pt-6 border-t text-center ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+                  <button
+                    type="button"
+                    onClick={() => navigate('/login')}
+                    className={`text-sm font-medium ${isDark ? 'text-red-400 hover:text-red-300' : 'text-red-500 hover:text-red-600'}`}
+                  >
+                    ← {t('backToLogin')}
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Reset Password Page
+function ResetPasswordPage() {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { t, language, setLanguage } = useLanguage();
+  const { isDark, toggleTheme } = useTheme();
+
+  // Get token from URL
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get('token');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    
+    if (password !== confirmPassword) {
+      setError(t('passwordsDoNotMatch'));
+      return;
+    }
+    
+    if (password.length < 8) {
+      setError(t('passwordMinLength'));
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await api.post('/auth/reset-password', { token, new_password: password });
+      setSuccess(true);
+    } catch (err) {
+      setError(err.response?.data?.detail || t('invalidResetToken'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // If no token, show error
+  if (!token) {
+    return (
+      <div className={`min-h-screen flex flex-col ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
+        <div className="flex-1 flex items-center justify-center p-4">
+          <div className={`text-center p-8 rounded-xl ${isDark ? 'bg-gray-800' : 'bg-white shadow-lg'}`}>
+            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <h2 className={`text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('invalidResetToken')}</h2>
+            <button
+              onClick={() => navigate('/forgot-password')}
+              className="mt-4 px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            >
+              {t('forgotPassword')}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`min-h-screen flex flex-col ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
+      {/* Header with Language/Theme toggles */}
+      <div className="flex justify-end items-center p-4 space-x-2">
+        <button
+          onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
+          className={`px-3 py-1.5 rounded-lg font-bold text-sm transition ${isDark ? 'bg-gray-800 hover:bg-gray-700 text-gray-300' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
+        >
+          {language === 'en' ? '🇬🇧 EN' : '🇮🇹 IT'}
+        </button>
+        <button
+          onClick={toggleTheme}
+          className={`p-2 rounded-lg transition ${isDark ? 'hover:bg-gray-800 text-yellow-400' : 'hover:bg-gray-100 text-gray-600'}`}
+        >
+          {isDark ? (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          ) : (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8">
+            <h1 className={`text-3xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{APP_NAME}</h1>
+            <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t('resetPasswordTitle')}</p>
+          </div>
+
+          <div className={`rounded-xl p-8 ${isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white shadow-lg border border-gray-100'}`}>
+            {success ? (
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h2 className={`text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('passwordResetSuccess')}</h2>
+                <p className={`text-sm mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t('passwordResetSuccessDesc')}</p>
+                <button
+                  onClick={() => navigate('/login')}
+                  className="w-full py-3 px-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
+                >
+                  {t('goToLogin')}
+                </button>
+              </div>
+            ) : (
+              <>
+                <p className={`text-sm mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t('resetPasswordDesc')}</p>
+                
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {error && (
+                    <div className={`rounded-lg p-3 text-sm ${isDark ? 'bg-red-900/30 border border-red-800 text-red-400' : 'bg-red-50 border border-red-200 text-red-800'}`}>
+                      {error}
+                    </div>
+                  )}
+
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{t('newPassword')}</label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-red-500 focus:border-red-500 transition ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900'}`}
+                      placeholder="••••••••"
+                      data-testid="new-password-input"
+                    />
+                  </div>
+
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{t('confirmNewPassword')}</label>
+                    <input
+                      type="password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                      className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-red-500 focus:border-red-500 transition ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900'}`}
+                      placeholder="••••••••"
+                      data-testid="confirm-password-input"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full py-3 px-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-red-500/30 transition-all duration-300 disabled:opacity-50"
+                    data-testid="reset-password-btn"
+                  >
+                    {loading ? t('resettingPassword') : t('resetPasswordBtn')}
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Transactions Page
 function TransactionsPage() {
   const { accountId } = useParams();
