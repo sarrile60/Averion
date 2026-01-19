@@ -183,7 +183,7 @@ function SignupPage() {
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <h1 className={`text-3xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{APP_NAME}</h1>
+            <h1 className={`text-3xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}><StyledLogo isDark={isDark} /></h1>
             <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t('createAccount')}</p>
           </div>
           
