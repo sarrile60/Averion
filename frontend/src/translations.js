@@ -284,6 +284,18 @@ const translations = {
     kycSubmittedSuccess: 'KYC application submitted successfully! Our team will review it shortly.',
     kycValidationError: 'Validation error - please check all fields',
     kycSubmitFailed: 'Failed to submit KYC application',
+    kycApplicationBeingReviewed: 'Your application is being reviewed',
+    kycThankYouSubmitting: 'Thank you for submitting your verification. Our team is reviewing your application. This usually takes 1-2 business days.',
+    kycWhatHappensNext: 'What happens next?',
+    kycReviewProcess: 'Review process',
+    kycReviewProcessDesc: 'Our team verifies your documents and information',
+    kycAccountActivation: 'Account activation',
+    kycAccountActivationDesc: 'Once approved, your account and IBAN will be activated',
+    kycFullBankingAccess: 'Full banking access',
+    kycFullBankingAccessDesc: "You'll be able to send money, order cards, and use all features",
+    kycCheckStatus: 'Check Status',
+    kycStatus: 'KYC status',
+    kycCheckStatusFailed: 'Failed to check status',
     
     // Profile
     profile: 'Profile',
