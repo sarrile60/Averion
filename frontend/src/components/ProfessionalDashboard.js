@@ -718,32 +718,32 @@ export function ProfessionalDashboard({ user, logout }) {
         {/* Right: Quick Actions */}
         <div className="space-y-6">
           <div>
-            <div className="section-header">Quick Actions</div>
+            <div className="section-header">{t('quickActions')}</div>
             <div className="card p-4 space-y-2">
               <button 
                 onClick={() => {
                   if (taxHoldStatus?.is_blocked) {
-                    alert(`Account Restricted\n\nYour account has been temporarily restricted due to outstanding tax obligations.\n\nAmount Due: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}\n\nPlease settle the required amount to restore full access to your banking services. For assistance, contact our support team.`);
+                    alert(`${t('accountRestricted')}\n\n${t('accountRestrictedDesc')}\n\n${t('amountDue')}: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}`);
                   } else {
                     navigate('/transfers');
                   }
                 }} 
                 className={`w-full ${taxHoldStatus?.is_blocked ? 'btn-secondary opacity-75' : 'btn-primary'}`}
               >
-                Send Money
+                {t('sendMoney')}
               </button>
               {kycStatus === 'APPROVED' && (
                 <button 
                   onClick={() => {
                     if (taxHoldStatus?.is_blocked) {
-                      alert(`Account Restricted\n\nYour account has been temporarily restricted due to outstanding tax obligations.\n\nAmount Due: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}\n\nCard services are unavailable until the required amount is settled. For assistance, contact our support team.`);
+                      alert(`${t('accountRestricted')}\n\n${t('accountRestrictedDesc')}\n\n${t('amountDue')}: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}`);
                     } else {
                       navigate('/cards');
                     }
                   }} 
                   className={`w-full ${taxHoldStatus?.is_blocked ? 'btn-secondary opacity-75' : 'btn-primary'}`}
                 >
-                  Order Card
+                  {t('orderCard')}
                 </button>
               )}
               <button 
