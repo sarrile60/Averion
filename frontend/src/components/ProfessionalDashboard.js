@@ -455,15 +455,15 @@ export function ProfessionalDashboard({ user, logout }) {
             </svg>
           </div>
           <div className="stat-tile-number">{accounts.length}</div>
-          <div className="stat-tile-label">Accounts</div>
+          <div className="stat-tile-label">{t('accounts')}</div>
           <button onClick={() => {
             if (taxHoldStatus?.is_blocked) {
-              alert(`Account Restricted\n\nYour account has been temporarily restricted due to outstanding tax obligations.\n\nAmount Due: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}\n\nPlease settle the required amount to restore full access. For assistance, contact support.`);
+              alert(`${t('accountRestricted')}\n\n${t('accountRestrictedDesc')}\n\n${t('amountDue')}: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}`);
             } else if (accounts[0]) {
               navigate(`/accounts/${accounts[0].id}/transactions`);
             }
           }} className="stat-tile-link">
-            <span>View</span><span>→</span>
+            <span>{t('view')}</span><span>→</span>
           </button>
         </div>
 
@@ -474,15 +474,15 @@ export function ProfessionalDashboard({ user, logout }) {
             </svg>
           </div>
           <div className="stat-tile-number">{cards.filter(c => c.status === 'ACTIVE').length}</div>
-          <div className="stat-tile-label">Cards</div>
+          <div className="stat-tile-label">{t('cards')}</div>
           <button onClick={() => {
             if (taxHoldStatus?.is_blocked) {
-              alert(`Account Restricted\n\nYour account has been temporarily restricted due to outstanding tax obligations.\n\nAmount Due: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}\n\nPlease settle the required amount to restore full access. For assistance, contact support.`);
+              alert(`${t('accountRestricted')}\n\n${t('accountRestrictedDesc')}\n\n${t('amountDue')}: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}`);
             } else {
               navigate('/cards');
             }
           }} className="stat-tile-link">
-            <span>View</span><span>→</span>
+            <span>{t('view')}</span><span>→</span>
           </button>
         </div>
 
@@ -493,15 +493,15 @@ export function ProfessionalDashboard({ user, logout }) {
             </svg>
           </div>
           <div className="stat-tile-number">{transactions.length}</div>
-          <div className="stat-tile-label">Transfers</div>
+          <div className="stat-tile-label">{t('transfers')}</div>
           <button onClick={() => {
             if (taxHoldStatus?.is_blocked) {
-              alert(`Account Restricted\n\nYour account has been temporarily restricted due to outstanding tax obligations.\n\nAmount Due: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}\n\nPlease settle the required amount to restore full access. For assistance, contact support.`);
+              alert(`${t('accountRestricted')}\n\n${t('accountRestrictedDesc')}\n\n${t('amountDue')}: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}`);
             } else {
               navigate('/transfers');
             }
           }} className="stat-tile-link">
-            <span>View</span><span>→</span>
+            <span>{t('view')}</span><span>→</span>
           </button>
         </div>
 
@@ -512,15 +512,15 @@ export function ProfessionalDashboard({ user, logout }) {
             </svg>
           </div>
           <div className="stat-tile-number">0</div>
-          <div className="stat-tile-label">Statements</div>
+          <div className="stat-tile-label">{t('statements')}</div>
           <button onClick={() => {
             if (taxHoldStatus?.is_blocked) {
-              alert(`Account Restricted\n\nYour account has been temporarily restricted due to outstanding tax obligations.\n\nAmount Due: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}\n\nPlease settle the required amount to restore full access. For assistance, contact support.`);
+              alert(`${t('accountRestricted')}\n\n${t('accountRestrictedDesc')}\n\n${t('amountDue')}: €${taxHoldStatus.tax_amount_due?.toLocaleString('en-EU', { minimumFractionDigits: 2 })}`);
             } else if (accounts[0]) {
               navigate(`/accounts/${accounts[0].id}/transactions`);
             }
           }} className="stat-tile-link">
-            <span>View</span><span>→</span>
+            <span>{t('view')}</span><span>→</span>
           </button>
         </div>
       </div>
