@@ -190,37 +190,37 @@ export function LandingPage() {
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="md:hidden py-4 border-t border-gray-100 animate-slideDown">
+            <div className={`md:hidden py-4 border-t ${isDark ? 'border-gray-800' : 'border-gray-100'} animate-slideDown`}>
               <div className="flex flex-col space-y-4">
                 <button
                   onClick={() => scrollToSection('features')}
-                  className="text-left text-gray-600 hover:text-red-600 font-medium transition-colors"
+                  className={`text-left font-medium transition-colors ${isDark ? 'text-gray-300 hover:text-red-400' : 'text-gray-600 hover:text-red-600'}`}
                 >
-                  Features
+                  {language === 'it' ? 'Funzionalità' : 'Features'}
                 </button>
                 <button
                   onClick={() => scrollToSection('about')}
-                  className="text-left text-gray-600 hover:text-red-600 font-medium transition-colors"
+                  className={`text-left font-medium transition-colors ${isDark ? 'text-gray-300 hover:text-red-400' : 'text-gray-600 hover:text-red-600'}`}
                 >
-                  About
+                  {language === 'it' ? 'Chi Siamo' : 'About'}
                 </button>
                 <button
                   onClick={() => scrollToSection('security')}
-                  className="text-left text-gray-600 hover:text-red-600 font-medium transition-colors"
+                  className={`text-left font-medium transition-colors ${isDark ? 'text-gray-300 hover:text-red-400' : 'text-gray-600 hover:text-red-600'}`}
                 >
-                  Security
+                  {language === 'it' ? 'Sicurezza' : 'Security'}
                 </button>
                 <button
                   onClick={() => navigate('/login')}
-                  className="text-left text-gray-700 hover:text-gray-900 font-medium"
+                  className={`text-left font-medium ${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'}`}
                 >
-                  Sign In
+                  {t('signIn')}
                 </button>
                 <button
                   onClick={() => navigate('/signup')}
                   className="w-full py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-full"
                 >
-                  Get Started
+                  {t('getStarted')}
                 </button>
               </div>
             </div>
@@ -240,12 +240,12 @@ export function LandingPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="text-center lg:text-left">
-              <div className="inline-flex items-center space-x-2 bg-red-50 text-red-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <div className={`inline-flex items-center space-x-2 ${isDark ? 'bg-red-900/30 text-red-400' : 'bg-red-50 text-red-600'} px-4 py-2 rounded-full text-sm font-medium mb-6`}>
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                 </span>
-                <span>EU Licensed Digital Bank</span>
+                <span>{language === 'it' ? 'Banca Digitale con Licenza UE' : 'EU Licensed Digital Bank'}</span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
