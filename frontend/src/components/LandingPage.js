@@ -112,7 +112,7 @@ export function LandingPage() {
                 className={`p-2 rounded-lg transition ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
                 title={language === 'en' ? 'Switch to Italian' : 'Passa all\'Inglese'}
               >
-                <span className="text-lg">{language === 'en' ? '🇬🇧' : '🇮🇹'}</span>
+                <span className="text-sm font-semibold">{language === 'en' ? 'EN' : 'IT'}</span>
               </button>
               
               {/* Theme Toggle */}
@@ -169,7 +169,7 @@ export function LandingPage() {
                 onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
                 className="p-2"
               >
-                <span className="text-lg">{language === 'en' ? '🇬🇧' : '🇮🇹'}</span>
+                <span className="text-sm font-semibold">{language === 'en' ? 'EN' : 'IT'}</span>
               </button>
               
               <button
