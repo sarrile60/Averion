@@ -553,7 +553,7 @@ export function ProfessionalDashboard({ user, logout }) {
                 {accounts.slice(0, 2).map((account) => (
                   <div key={account.id} className="account-item">
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 mb-1">EUR e-Account</p>
+                      <p className={`text-sm font-medium mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('eurEAccount')}</p>
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-xs text-gray-500 font-medium">IBAN:</span>
                         <span className="text-xs sm:text-xs text-gray-700 font-mono break-all">{account.iban ? account.iban.match(/.{1,4}/g)?.join(' ') : 'N/A'}</span>
