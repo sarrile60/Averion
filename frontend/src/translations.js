@@ -264,6 +264,7 @@ const translations = {
     currentBalance: 'Current Balance',
     accountReference: 'Account reference (for support)',
     ibanCopied: 'IBAN copied!',
+    copied: 'Copied!',
     accountNotFound: 'Account not found',
     
     // Transactions
