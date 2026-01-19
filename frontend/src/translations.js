@@ -637,6 +637,23 @@ const translations = {
     sepaTransfer: 'SEPA Transfer',
     transaction: 'Transaction',
     
+    // Transaction Types (display names)
+    bankTransfer: 'Bank Transfer',
+    wireTransfer: 'Wire Transfer',
+    internalTransfer: 'Internal Transfer',
+    cardPayment: 'Card Payment',
+    atmWithdrawal: 'ATM Withdrawal',
+    directDebit: 'Direct Debit',
+    standingOrder: 'Standing Order',
+    instantPayment: 'Instant Payment',
+    refund: 'Refund',
+    topUpDisplay: 'Top Up',
+    withdrawDisplay: 'Withdraw',
+    feeDisplay: 'Fee',
+    interest: 'Interest',
+    credit: 'Credit',
+    debit: 'Debit',
+    
     // Time formatting
     justNow: 'Just now',
     minutesAgo: 'm ago',
