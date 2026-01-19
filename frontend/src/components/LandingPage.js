@@ -203,21 +203,21 @@ export function LandingPage() {
                 </button>
                 <button
                   onClick={() => scrollToSection('security')}
-                  className="text-left text-gray-600 hover:text-red-600 font-medium transition-colors"
+                  className={`text-left font-medium transition-colors ${isDark ? 'text-gray-300 hover:text-red-400' : 'text-gray-600 hover:text-red-600'}`}
                 >
-                  Security
+                  {t('security')}
                 </button>
                 <button
                   onClick={() => navigate('/login')}
-                  className="text-left text-gray-700 hover:text-gray-900 font-medium"
+                  className={`text-left font-medium ${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'}`}
                 >
-                  Sign In
+                  {t('signIn')}
                 </button>
                 <button
                   onClick={() => navigate('/signup')}
                   className="w-full py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-full"
                 >
-                  Get Started
+                  {t('getStarted')}
                 </button>
               </div>
             </div>
