@@ -122,7 +122,7 @@ export function CardsPage({ user, logout }) {
               {/* Active Cards */}
               {cards.length > 0 && (
                 <div>
-                  <h2 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">Active Cards</h2>
+                  <h2 className={`text-sm font-medium uppercase tracking-wider mb-4 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('activeCards')}</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {cards.map((card) => (
                       <div key={card.id} className="space-y-3" data-testid={`card-${card.id}`}>
