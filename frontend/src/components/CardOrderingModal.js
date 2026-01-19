@@ -129,7 +129,7 @@ export function CardOrderingModal({ onClose, onSuccess }) {
               <div className={`w-48 h-48 rounded-full flex items-center justify-center ${isDark ? 'bg-teal-900/30' : 'bg-teal-100'}`}>
                 <div className="bg-gradient-to-br from-teal-400 to-teal-600 rounded-lg p-4 shadow-lg transform rotate-12" style={{width: '140px', height: '88px'}}>
                   <div className="w-8 h-6 bg-yellow-400 rounded opacity-80 mb-2"></div>
-                  <div className="text-white text-xs">Project Atlas</div>
+                  <div className="text-white text-xs">ecommbx</div>
                 </div>
               </div>
             </div>
