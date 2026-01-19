@@ -142,6 +142,8 @@ const translations = {
     viewAccount: 'View Account',
     verified: 'Verified',
     accounts: 'Accounts',
+    noAccounts: 'No accounts yet',
+    account: 'Account',
     cards: 'Cards',
     transfers: 'Transfers',
     statements: 'Statements',
