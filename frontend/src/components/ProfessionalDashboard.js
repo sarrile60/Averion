@@ -613,7 +613,7 @@ export function ProfessionalDashboard({ user, logout }) {
                         }} 
                         className="text-xs text-red-600 hover:text-red-700 font-medium mt-1"
                       >
-                        View transactions →
+                        {t('viewTransactions')}
                       </button>
                     </div>
                   </div>
