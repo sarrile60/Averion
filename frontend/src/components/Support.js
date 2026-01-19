@@ -423,7 +423,6 @@ function TicketStatusBadge({ status, t }) {
     <span className={`status-badge ${colors[status] || colors.OPEN}`}>
       {getStatusLabel(status)}
     </span>
-    </span>
   );
 }
 
