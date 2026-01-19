@@ -848,7 +848,7 @@ const translations = {
     
     // Features
     whyChooseAtlas: 'Perché scegliere ecommbx',
-    whyChooseDesc: 'Perché sappiamo che la tecnologia innovativa è valida solo quanto il servizio che la accompagna — il servizio Atlas 24/7.',
+    whyChooseDesc: 'Perché sappiamo che la tecnologia innovativa è valida solo quanto il servizio che la accompagna — il servizio ecommbx 24/7.',
     // Account Types
     eurEAccount: 'Conto e-EUR',
     personalAccounts: 'Conti e-Personali',
