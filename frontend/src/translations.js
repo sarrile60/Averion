@@ -1244,6 +1244,20 @@ const translations = {
     accountCreatedSuccess: 'Account creato con successo! Ora puoi accedere.',
     signupFailed: 'Registrazione fallita',
     creatingAccount: 'Creazione Account...',
+    
+    // Spending Insights
+    spendingInsights: 'Analisi delle Spese',
+    spendingBreakdown: 'Ripartizione Spese',
+    last7Days: 'Ultimi 7 giorni',
+    last30Days: 'Ultimi 30 giorni',
+    last90Days: 'Ultimi 90 giorni',
+    noSpendingThisPeriod: 'Nessuna spesa in questo periodo',
+    spendingDataWillAppear: 'I dati delle spese appariranno qui una volta effettuate le transazioni',
+    totalSpending: 'Spesa Totale',
+    switchToItalian: 'Passa a Italiano',
+    switchToEnglish: 'Passa a Inglese',
+    switchToLightMode: 'Passa a modalità chiara',
+    switchToDarkMode: 'Passa a modalità scura',
   }
 };
 
