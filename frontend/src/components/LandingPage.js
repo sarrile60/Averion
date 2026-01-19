@@ -412,14 +412,14 @@ export function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 sm:py-28">
+      <section id="features" className={`py-20 sm:py-28 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Why choose Project Atlas
+            <h2 className={`text-3xl sm:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              {t('whyChooseAtlas')}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Because we know that innovative technology is only as good as the service that accompanies it — the 24/7 Atlas service.
+            <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              {t('whyChooseDesc')}
             </p>
           </div>
 
@@ -427,13 +427,13 @@ export function LandingPage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="group p-8 bg-white border border-gray-200 rounded-2xl hover:border-red-200 hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300"
+                className={`group p-8 border rounded-2xl transition-all duration-300 ${isDark ? 'bg-gray-800 border-gray-700 hover:border-red-500/50 hover:shadow-xl hover:shadow-red-500/10' : 'bg-white border-gray-200 hover:border-red-200 hover:shadow-xl hover:shadow-red-500/5'}`}
               >
-                <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300">
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300 ${isDark ? 'bg-red-900/30' : 'bg-red-50'}`}>
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <h3 className={`text-xl font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>{feature.title}</h3>
+                <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>{feature.description}</p>
               </div>
             ))}
           </div>
