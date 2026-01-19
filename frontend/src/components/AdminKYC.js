@@ -405,7 +405,7 @@ export function AdminKYCReview() {
                   <div className="mt-4 text-sm text-gray-600">
                     <p className="font-medium">{viewingDocument.file_name}</p>
                     <p>Size: {(viewingDocument.file_size / 1024).toFixed(2)} KB</p>
-                    <p className="text-xs mt-2">Uploaded: {new Date(viewingDocument.uploaded_at).toLocaleString()}</p>
+                    <p className="text-xs mt-2">Uploaded: {new Date(viewingDocument.uploaded_at + (viewingDocument.uploaded_at?.endsWith('Z') ? '' : 'Z')).toLocaleString()}</p>
                   </div>
                 </div>
               ) : (
