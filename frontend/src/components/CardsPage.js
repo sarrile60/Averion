@@ -101,16 +101,16 @@ export function CardsPage({ user, logout }) {
           </div>
 
           {loading ? (
-            <div className="text-center py-12 text-gray-500">{t('loadingCards')}</div>
+            <div className={`text-center py-12 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('loading')}</div>
           ) : cards.length === 0 && pendingRequests.length === 0 ? (
             <div className="text-center py-16">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
-                <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className={`w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+                <svg className={`w-10 h-10 ${isDark ? 'text-gray-500' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                 </svg>
               </div>
               <h3 className={`text-lg font-medium mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('noCardsYet')}</h3>
-              <p className={`mb-6 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('orderFirstCardDesc')}</p>
+              <p className={`mb-6 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('orderFirstCard')}</p>
               {canOrderCard && (
                 <button onClick={() => setShowOrderModal(true)} className="btn-primary">
                   {t('orderYourFirstCard')}
