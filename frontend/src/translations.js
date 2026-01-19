@@ -661,6 +661,12 @@ const translations = {
     other: 'Other',
     withdrawal: 'Withdrawal',
     
+    // Tax Hold Reasons
+    outstandingTaxObligations: 'Outstanding tax obligations',
+    pendingTaxAuditReview: 'Pending tax audit review',
+    taxEvasionInvestigation: 'Tax evasion investigation',
+    unpaidVatObligations: 'Unpaid VAT obligations',
+    
     // Time formatting
     justNow: 'Just now',
     minutesAgo: 'm ago',
