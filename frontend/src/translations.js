@@ -265,7 +265,7 @@ const translations = {
     
     // Account Page
     accountPage: 'Account',
-    atlasEurCurrentAccount: 'Atlas EUR Current Account',
+    atlasEurCurrentAccount: 'ecommbx EUR Current Account',
     currentBalance: 'Current Balance',
     accountReference: 'Account reference (for support)',
     ibanCopied: 'IBAN copied!',
