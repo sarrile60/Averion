@@ -7,6 +7,7 @@ import { CardOrderingModal } from './CardOrderingModal';
 import { APP_NAME } from '../config';
 import { useToast } from './Toast';
 import api from '../api';
+import { useLanguage, useTheme } from '../contexts/AppContext';
 
 export function CardsPage({ user, logout }) {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ export function CardsPage({ user, logout }) {
   const [showOrderModal, setShowOrderModal] = useState(false);
   const [kycStatus, setKycStatus] = useState(null);
   const [showCardDetails, setShowCardDetails] = useState(null);
+  const { t } = useLanguage();
+  const { isDark } = useTheme();
 
   useEffect(() => {
     fetchData();
