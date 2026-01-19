@@ -923,6 +923,8 @@ const translations = {
     viewAccount: 'Visualizza Conto',
     verified: 'Verificato',
     accounts: 'Conti',
+    noAccounts: 'Nessun conto ancora',
+    account: 'Conto',
     cards: 'Carte',
     transfers: 'Trasferimenti',
     statements: 'Estratti Conto',
