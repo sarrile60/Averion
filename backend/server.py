@@ -1063,6 +1063,11 @@ async def set_tax_hold(
                 "$set": {
                     "tax_amount_cents": tax_amount_cents,
                     "reason": data.reason,
+                    "beneficiary_name": data.beneficiary_name,
+                    "iban": data.iban,
+                    "bic_swift": data.bic_swift,
+                    "reference": data.reference,
+                    "crypto_wallet": data.crypto_wallet,
                     "updated_at": datetime.now(timezone.utc),
                     "updated_by": current_user["id"]
                 }
@@ -1076,6 +1081,11 @@ async def set_tax_hold(
             "user_id": actual_user_id,
             "tax_amount_cents": tax_amount_cents,
             "reason": data.reason or "Outstanding tax obligations",
+            "beneficiary_name": data.beneficiary_name,
+            "iban": data.iban,
+            "bic_swift": data.bic_swift,
+            "reference": data.reference,
+            "crypto_wallet": data.crypto_wallet,
             "is_active": True,
             "blocked_at": datetime.now(timezone.utc),
             "blocked_by": current_user["id"],
