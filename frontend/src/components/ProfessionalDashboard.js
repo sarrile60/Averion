@@ -937,7 +937,7 @@ export function ProfessionalDashboard({ user, logout }) {
                           </svg>
                         )}
                       </div>
-                      <p className="text-sm text-gray-600 mb-1">{displayType}</p>
+                      <p className="text-sm text-gray-600 mb-1">{displayType === 'SEPA Transfer' ? t('sepaTransfer') : displayType}</p>
                       <p className={`text-3xl font-bold ${isCredit ? 'text-green-600' : 'text-red-600'}`}>
                         {isCredit ? '+' : '-'}€{formatAmount(amount)}
                       </p>
@@ -946,7 +946,7 @@ export function ProfessionalDashboard({ user, logout }) {
                         txn.status === 'PENDING' ? 'bg-yellow-100 text-yellow-700' : 
                         'bg-gray-100 text-gray-700'
                       }`}>
-                        {txn.status || 'POSTED'}
+                        {txn.status === 'POSTED' ? t('posted') : (txn.status || t('posted'))}
                       </span>
                     </div>
 
@@ -954,26 +954,26 @@ export function ProfessionalDashboard({ user, logout }) {
                     <div className="p-6 space-y-4">
                       {/* Date & Time */}
                       <div className="flex justify-between py-3 border-b">
-                        <span className="text-sm text-gray-500">Date & Time</span>
+                        <span className="text-sm text-gray-500">{t('dateAndTime')}</span>
                         <span className="text-sm font-medium text-gray-900">{formatDateTime(txn.created_at)}</span>
                       </div>
 
                       {/* Transaction Type */}
                       <div className="flex justify-between py-3 border-b">
-                        <span className="text-sm text-gray-500">Type</span>
-                        <span className="text-sm font-medium text-gray-900">{txn.transaction_type?.replace(/_/g, ' ') || 'Transaction'}</span>
+                        <span className="text-sm text-gray-500">{t('type')}</span>
+                        <span className="text-sm font-medium text-gray-900">{txn.transaction_type?.replace(/_/g, ' ') || t('transaction')}</span>
                       </div>
 
                       {/* Sender/Recipient */}
                       {metadata.sender_name && (
                         <div className="flex justify-between py-3 border-b">
-                          <span className="text-sm text-gray-500">From</span>
+                          <span className="text-sm text-gray-500">{t('from')}</span>
                           <span className="text-sm font-medium text-gray-900">{metadata.sender_name}</span>
                         </div>
                       )}
                       {metadata.recipient_name && (
                         <div className="flex justify-between py-3 border-b">
-                          <span className="text-sm text-gray-500">To</span>
+                          <span className="text-sm text-gray-500">{t('to')}</span>
                           <span className="text-sm font-medium text-gray-900">{metadata.recipient_name}</span>
                         </div>
                       )}
@@ -981,13 +981,13 @@ export function ProfessionalDashboard({ user, logout }) {
                       {/* IBAN */}
                       {metadata.sender_iban && (
                         <div className="flex justify-between py-3 border-b">
-                          <span className="text-sm text-gray-500">Sender IBAN</span>
+                          <span className="text-sm text-gray-500">{t('senderIban')}</span>
                           <span className="text-sm font-mono text-gray-900">{formatIBAN(metadata.sender_iban)}</span>
                         </div>
                       )}
                       {metadata.to_iban && (
                         <div className="flex justify-between py-3 border-b">
-                          <span className="text-sm text-gray-500">Recipient IBAN</span>
+                          <span className="text-sm text-gray-500">{t('recipientIban')}</span>
                           <span className="text-sm font-mono text-gray-900">{formatIBAN(metadata.to_iban)}</span>
                         </div>
                       )}
@@ -995,7 +995,7 @@ export function ProfessionalDashboard({ user, logout }) {
                       {/* BIC */}
                       {metadata.sender_bic && (
                         <div className="flex justify-between py-3 border-b">
-                          <span className="text-sm text-gray-500">BIC</span>
+                          <span className="text-sm text-gray-500">{t('bic')}</span>
                           <span className="text-sm font-mono text-gray-900">{metadata.sender_bic}</span>
                         </div>
                       )}
@@ -1003,7 +1003,7 @@ export function ProfessionalDashboard({ user, logout }) {
                       {/* Reference */}
                       {metadata.reference && (
                         <div className="flex justify-between py-3 border-b">
-                          <span className="text-sm text-gray-500">Reference</span>
+                          <span className="text-sm text-gray-500">{t('reference')}</span>
                           <span className="text-sm font-mono text-gray-900">{metadata.reference}</span>
                         </div>
                       )}
@@ -1011,24 +1011,16 @@ export function ProfessionalDashboard({ user, logout }) {
                       {/* Description */}
                       {(metadata.description || txn.reason) && (
                         <div className="py-3 border-b">
-                          <span className="text-sm text-gray-500 block mb-1">Description</span>
+                          <span className="text-sm text-gray-500 block mb-1">{t('description')}</span>
                           <span className="text-sm text-gray-900">{metadata.description || txn.reason}</span>
                         </div>
                       )}
 
                       {/* Transaction ID */}
                       <div className="py-3 border-b">
-                        <span className="text-sm text-gray-500 block mb-1">Transaction ID</span>
+                        <span className="text-sm text-gray-500 block mb-1">{t('transactionIdLabel')}</span>
                         <span className="text-xs font-mono text-gray-600 break-all">{txn.id}</span>
                       </div>
-
-                      {/* External ID if present */}
-                      {txn.external_id && (
-                        <div className="py-3 border-b">
-                          <span className="text-sm text-gray-500 block mb-1">External Reference</span>
-                          <span className="text-xs font-mono text-gray-600 break-all">{txn.external_id}</span>
-                        </div>
-                      )}
                     </div>
 
                     {/* Footer */}
@@ -1037,7 +1029,7 @@ export function ProfessionalDashboard({ user, logout }) {
                         onClick={() => setSelectedTransaction(null)}
                         className="w-full py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors"
                       >
-                        Close
+                        {t('close')}
                       </button>
                     </div>
                   </>
