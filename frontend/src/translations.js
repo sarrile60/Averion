@@ -743,6 +743,8 @@ const translations = {
     notifTransferCompleteMessage: 'Your transfer has been processed successfully.',
     notifWelcome: 'Welcome to Project Atlas',
     notifWelcomeMessage: 'Thank you for joining. Complete your KYC to unlock all features.',
+    notifAccountRestriction: 'Account Restriction Notice',
+    notifAccountRestrictionMessage: 'Your account has been restricted due to outstanding tax obligations. Amount due: {amount}. Please contact support for assistance.',
   },
   
   it: {
