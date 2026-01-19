@@ -187,7 +187,6 @@ export function LandingPage() {
               )}
             </button>
           </div>
-          </div>
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
@@ -404,13 +403,13 @@ export function LandingPage() {
       </section>
 
       {/* Stats Section */}
-      <section className={`py-12 border-y ${isDark ? 'bg-gray-800/50 border-gray-800' : 'bg-gray-50 border-gray-100'}`}>
+      <section className="py-12 bg-gray-50 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <p className={`text-3xl sm:text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{stat.value}</p>
-                <p className={`text-sm mt-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{stat.label}</p>
+                <p className="text-3xl sm:text-4xl font-bold text-gray-900">{stat.value}</p>
+                <p className="text-sm text-gray-600 mt-1">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -421,13 +420,11 @@ export function LandingPage() {
       <section id="features" className="py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className={`text-3xl sm:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              {language === 'it' ? 'Perché scegliere Project Atlas' : 'Why choose Project Atlas'}
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Why choose Project Atlas
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              {language === 'it' 
-                ? 'Perché sappiamo che la tecnologia innovativa è valida solo quanto il servizio che la accompagna — il servizio Atlas 24/7.'
-                : 'Because we know that innovative technology is only as good as the service that accompanies it — the 24/7 Atlas service.'}
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Because we know that innovative technology is only as good as the service that accompanies it — the 24/7 Atlas service.
             </p>
           </div>
 
@@ -435,9 +432,9 @@ export function LandingPage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`group p-8 border rounded-2xl hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300 ${isDark ? 'bg-gray-800 border-gray-700 hover:border-red-500/30' : 'bg-white border-gray-200 hover:border-red-200'}`}
+                className="group p-8 bg-white border border-gray-200 rounded-2xl hover:border-red-200 hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300"
               >
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300 ${isDark ? 'bg-red-900/30' : 'bg-red-50'}`}>
+                <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
@@ -454,28 +451,22 @@ export function LandingPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-                {language === 'it' ? 'Questo è Project Atlas' : 'This is Project Atlas'}
+                This is Project Atlas
               </h2>
               <p className="text-lg text-gray-300 mb-6">
-                {language === 'it' 
-                  ? 'Project Atlas rappresenta la nuova era del fintech, rivoluzionando il modo in cui aziende e privati gestiscono le loro transazioni globali.'
-                  : 'Project Atlas represents the new age of fintech, revolutionizing the way businesses and individuals handle their global transactions.'}
+                Project Atlas represents the new age of fintech, revolutionizing the way businesses and individuals handle their global transactions.
               </p>
               <p className="text-gray-400 mb-6">
-                {language === 'it'
-                  ? 'Siamo specializzati in gestione di conti elettronici, pagamenti transfrontalieri, carte personali e aziendali e conversioni multivaluta — tutto attraverso un\'unica piattaforma innovativa e intuitiva che ti dà accesso istantaneo a tutti i nostri servizi.'
-                  : 'We specialize in e-account management, cross-border payments, personal & business cards, and multi-currency conversions — all through a single, innovative and intuitive platform that gives you instant access to all of our services.'}
+                We specialize in e-account management, cross-border payments, personal & business cards, and multi-currency conversions — all through a single, innovative and intuitive platform that gives you instant access to all of our services.
               </p>
               <p className="text-gray-400 mb-8">
-                {language === 'it'
-                  ? 'Il nostro modello di servizio si basa su quattro pilastri: tecnologia all\'avanguardia progettata per il settore bancario globale; connessioni personalizzate con partner bancari in tutto il mondo; sicurezza rigorosa; e massima velocità operativa.'
-                  : 'Our service model is based on four cornerstones: cutting-edge technology designed for the global banking industry; customized connections with banking partners around the world; stringent security; and maximum operational speed.'}
+                Our service model is based on four cornerstones: cutting-edge technology designed for the global banking industry; customized connections with banking partners around the world; stringent security; and maximum operational speed.
               </p>
               <button
                 onClick={() => navigate('/signup')}
                 className="px-8 py-4 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition"
               >
-                {t('openAccount')}
+                Open Your Account
               </button>
             </div>
             <div className="relative">
@@ -483,23 +474,23 @@ export function LandingPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white/10 backdrop-blur rounded-2xl p-6">
                     <div className="text-3xl mb-2">🌍</div>
-                    <p className="text-lg font-semibold">{language === 'it' ? 'Portata Globale' : 'Global Reach'}</p>
-                    <p className="text-sm text-gray-400">{language === 'it' ? '150+ paesi' : '150+ countries'}</p>
+                    <p className="text-lg font-semibold">Global Reach</p>
+                    <p className="text-sm text-gray-400">150+ countries</p>
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-2xl p-6">
                     <div className="text-3xl mb-2">💱</div>
-                    <p className="text-lg font-semibold">{language === 'it' ? 'Multivaluta' : 'Multi-Currency'}</p>
-                    <p className="text-sm text-gray-400">{language === 'it' ? '30+ valute' : '30+ currencies'}</p>
+                    <p className="text-lg font-semibold">Multi-Currency</p>
+                    <p className="text-sm text-gray-400">30+ currencies</p>
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-2xl p-6">
                     <div className="text-3xl mb-2">⚡</div>
-                    <p className="text-lg font-semibold">{language === 'it' ? 'Istantaneo' : 'Instant'}</p>
-                    <p className="text-sm text-gray-400">{language === 'it' ? 'Trasferimenti in tempo reale' : 'Real-time transfers'}</p>
+                    <p className="text-lg font-semibold">Instant</p>
+                    <p className="text-sm text-gray-400">Real-time transfers</p>
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-2xl p-6">
                     <div className="text-3xl mb-2">🛡️</div>
-                    <p className="text-lg font-semibold">{language === 'it' ? 'Sicuro' : 'Secure'}</p>
-                    <p className="text-sm text-gray-400">{language === 'it' ? 'Sicurezza bancaria' : 'Bank-grade security'}</p>
+                    <p className="text-lg font-semibold">Secure</p>
+                    <p className="text-sm text-gray-400">Bank-grade security</p>
                   </div>
                 </div>
               </div>
@@ -512,56 +503,42 @@ export function LandingPage() {
       <section id="security" className="py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className={`text-3xl sm:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              {language === 'it' ? 'Sicurezza bancaria' : 'Bank-grade security'}
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Bank-grade security
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              {language === 'it' 
-                ? 'La tua sicurezza è la nostra priorità. Impieghiamo più livelli di protezione per mantenere al sicuro i tuoi soldi e i tuoi dati.'
-                : 'Your security is our priority. We employ multiple layers of protection to keep your money and data safe.'}
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Your security is our priority. We employ multiple layers of protection to keep your money and data safe.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center p-8">
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 ${isDark ? 'bg-red-900/30' : 'bg-red-100'}`}>
-                <svg className={`w-8 h-8 ${isDark ? 'text-red-400' : 'text-red-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+                <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <h3 className={`text-xl font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                {language === 'it' ? 'Crittografia 256-bit' : '256-bit Encryption'}
-              </h3>
-              <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>
-                {language === 'it' ? 'Tutti i dati sono crittografati con standard di crittografia di livello militare.' : 'All data is encrypted using military-grade encryption standards.'}
-              </p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">256-bit Encryption</h3>
+              <p className="text-gray-600">All data is encrypted using military-grade encryption standards.</p>
             </div>
             <div className="text-center p-8">
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 ${isDark ? 'bg-red-900/30' : 'bg-red-100'}`}>
-                <svg className={`w-8 h-8 ${isDark ? 'text-red-400' : 'text-red-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+                <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className={`text-xl font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                {language === 'it' ? 'Autenticazione Multi-Fattore' : 'Multi-Factor Auth'}
-              </h3>
-              <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>
-                {language === 'it' ? 'Proteggi il tuo account con biometria, SMS e app di autenticazione.' : 'Protect your account with biometrics, SMS, and authenticator apps.'}
-              </p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Multi-Factor Auth</h3>
+              <p className="text-gray-600">Protect your account with biometrics, SMS, and authenticator apps.</p>
             </div>
             <div className="text-center p-8">
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 ${isDark ? 'bg-red-900/30' : 'bg-red-100'}`}>
-                <svg className={`w-8 h-8 ${isDark ? 'text-red-400' : 'text-red-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+                <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </div>
-              <h3 className={`text-xl font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                {language === 'it' ? 'Monitoraggio 24/7' : '24/7 Monitoring'}
-              </h3>
-              <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>
-                {language === 'it' ? 'Rilevamento frodi in tempo reale e avvisi di attività sospette.' : 'Real-time fraud detection and suspicious activity alerts.'}
-              </p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">24/7 Monitoring</h3>
+              <p className="text-gray-600">Real-time fraud detection and suspicious activity alerts.</p>
             </div>
           </div>
         </div>
@@ -571,25 +548,23 @@ export function LandingPage() {
       <section className="py-20 sm:py-28 bg-gradient-to-r from-red-500 to-red-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            {language === 'it' ? 'Unisciti al futuro...' : 'Join the future...'}
+            Join the future...
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            {language === 'it'
-              ? 'Tutti i tuoi servizi di e-money e conto elettronico internazionali sono ora a portata di mano, per un banking digitale più facile, veloce e fluido… sempre e ovunque!'
-              : 'All your international e-money and e-account services are now at your fingertips, for easier, faster and smoother digital banking… anytime, anywhere!'}
+            All your international e-money and e-account services are now at your fingertips, for easier, faster and smoother digital banking… anytime, anywhere!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate('/signup')}
               className="px-8 py-4 bg-white text-red-600 font-semibold rounded-full text-lg hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1"
             >
-              {language === 'it' ? 'Crea Account Gratuito' : 'Create Free Account'}
+              Create Free Account
             </button>
             <button
               onClick={() => navigate('/login')}
               className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-full text-lg hover:bg-white/10 transition-all duration-300"
             >
-              {t('signIn')}
+              Sign In
             </button>
           </div>
         </div>
@@ -607,36 +582,34 @@ export function LandingPage() {
                 <span className="text-xl font-bold text-white">Project Atlas</span>
               </div>
               <p className="text-sm">
-                {language === 'it' 
-                  ? 'Piattaforma di Banking Digitale con Licenza UE. Rivoluzionando il modo in cui gestisci le transazioni globali.'
-                  : 'EU Licensed Digital Banking Platform. Revolutionizing the way you handle global transactions.'}
+                EU Licensed Digital Banking Platform. Revolutionizing the way you handle global transactions.
               </p>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-4">{language === 'it' ? 'Prodotti' : 'Products'}</h4>
+              <h4 className="text-white font-semibold mb-4">Products</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Conti Personali' : 'Personal Accounts'}</a></li>
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Conti Aziendali' : 'Business Accounts'}</a></li>
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Carte' : 'Cards'}</a></li>
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Trasferimenti' : 'Transfers'}</a></li>
+                <li><a href="#" className="hover:text-white transition">Personal Accounts</a></li>
+                <li><a href="#" className="hover:text-white transition">Business Accounts</a></li>
+                <li><a href="#" className="hover:text-white transition">Cards</a></li>
+                <li><a href="#" className="hover:text-white transition">Transfers</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-4">{language === 'it' ? 'Azienda' : 'Company'}</h4>
+              <h4 className="text-white font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Chi Siamo' : 'About Us'}</a></li>
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Lavora con Noi' : 'Careers'}</a></li>
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Stampa' : 'Press'}</a></li>
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Contatti' : 'Contact'}</a></li>
+                <li><a href="#" className="hover:text-white transition">About Us</a></li>
+                <li><a href="#" className="hover:text-white transition">Careers</a></li>
+                <li><a href="#" className="hover:text-white transition">Press</a></li>
+                <li><a href="#" className="hover:text-white transition">Contact</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-4">{language === 'it' ? 'Legale' : 'Legal'}</h4>
+              <h4 className="text-white font-semibold mb-4">Legal</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Privacy Policy' : 'Privacy Policy'}</a></li>
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Termini di Servizio' : 'Terms of Service'}</a></li>
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Cookie Policy' : 'Cookie Policy'}</a></li>
-                <li><a href="#" className="hover:text-white transition">{language === 'it' ? 'Conformità' : 'Compliance'}</a></li>
+                <li><a href="#" className="hover:text-white transition">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-white transition">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-white transition">Cookie Policy</a></li>
+                <li><a href="#" className="hover:text-white transition">Compliance</a></li>
               </ul>
             </div>
           </div>
