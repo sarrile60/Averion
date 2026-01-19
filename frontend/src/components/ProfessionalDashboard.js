@@ -764,7 +764,7 @@ export function ProfessionalDashboard({ user, logout }) {
           {/* My Cards Section */}
           {cards.filter(c => c.status === 'ACTIVE').length > 0 && (
             <div>
-              <div className="section-header">My Cards</div>
+              <div className="section-header">{t('myCards')}</div>
               <div className="space-y-4">
                 {cards.filter(c => c.status === 'ACTIVE').slice(0, 2).map((card) => (
                   <div key={card.id} className="relative">
