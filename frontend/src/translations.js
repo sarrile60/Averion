@@ -68,6 +68,8 @@ const translations = {
     // Features
     whyChooseAtlas: 'Why choose Project Atlas',
     whyChooseDesc: 'Because we know that innovative technology is only as good as the service that accompanies it — the 24/7 Atlas service.',
+    // Account Types
+    eurEAccount: 'EUR e-Account',
     personalAccounts: 'Personal e-Accounts',
     personalAccountsDesc: 'Multi-currency accounts with EU IBAN, instant setup and full control',
     businessAccounts: 'Business Accounts',
