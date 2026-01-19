@@ -641,7 +641,7 @@ export function LandingPage() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-12 pt-8 text-sm text-center">
-            <p>© 2026 Project Atlas. All rights reserved. Licensed by the European Banking Authority.</p>
+            <p>© 2026 Project Atlas. {t('footerRights')} {language === 'it' ? 'Autorizzato dall\'Autorità Bancaria Europea.' : 'Licensed by the European Banking Authority.'}</p>
           </div>
         </div>
       </footer>
