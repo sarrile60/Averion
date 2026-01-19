@@ -441,27 +441,27 @@ export function LandingPage() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 sm:py-28 bg-gray-900 text-white">
+      <section id="about" className={`py-20 sm:py-28 ${isDark ? 'bg-gray-800' : 'bg-gray-900'} text-white`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-                This is Project Atlas
+                {t('thisIsAtlas')}
               </h2>
               <p className="text-lg text-gray-300 mb-6">
-                Project Atlas represents the new age of fintech, revolutionizing the way businesses and individuals handle their global transactions.
+                {t('aboutDesc1')}
               </p>
               <p className="text-gray-400 mb-6">
-                We specialize in e-account management, cross-border payments, personal & business cards, and multi-currency conversions — all through a single, innovative and intuitive platform that gives you instant access to all of our services.
+                {t('aboutDesc2')}
               </p>
               <p className="text-gray-400 mb-8">
-                Our service model is based on four cornerstones: cutting-edge technology designed for the global banking industry; customized connections with banking partners around the world; stringent security; and maximum operational speed.
+                {t('aboutDesc3')}
               </p>
               <button
                 onClick={() => navigate('/signup')}
                 className="px-8 py-4 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition"
               >
-                Open Your Account
+                {t('openYourAccount')}
               </button>
             </div>
             <div className="relative">
@@ -469,23 +469,23 @@ export function LandingPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white/10 backdrop-blur rounded-2xl p-6">
                     <div className="text-3xl mb-2">🌍</div>
-                    <p className="text-lg font-semibold">Global Reach</p>
-                    <p className="text-sm text-gray-400">150+ countries</p>
+                    <p className="text-lg font-semibold">{t('globalReach')}</p>
+                    <p className="text-sm text-gray-400">150+ {t('countries')}</p>
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-2xl p-6">
                     <div className="text-3xl mb-2">💱</div>
-                    <p className="text-lg font-semibold">Multi-Currency</p>
-                    <p className="text-sm text-gray-400">30+ currencies</p>
+                    <p className="text-lg font-semibold">{t('multiCurrency')}</p>
+                    <p className="text-sm text-gray-400">30+ {t('currencies')}</p>
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-2xl p-6">
                     <div className="text-3xl mb-2">⚡</div>
-                    <p className="text-lg font-semibold">Instant</p>
-                    <p className="text-sm text-gray-400">Real-time transfers</p>
+                    <p className="text-lg font-semibold">{t('instant')}</p>
+                    <p className="text-sm text-gray-400">{t('realTimeTransfers')}</p>
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-2xl p-6">
                     <div className="text-3xl mb-2">🛡️</div>
-                    <p className="text-lg font-semibold">Secure</p>
-                    <p className="text-sm text-gray-400">Bank-grade security</p>
+                    <p className="text-lg font-semibold">{t('secure')}</p>
+                    <p className="text-sm text-gray-400">{t('bankGradeSecurity')}</p>
                   </div>
                 </div>
               </div>
