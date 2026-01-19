@@ -535,7 +535,7 @@ function DocumentUpload({ docType, uploaded, onUpload, uploading, t }) {
   );
 }
 
-function StatusBadge({ status }) {
+function StatusBadge({ status, t }) {
   const colors = {
     DRAFT: 'bg-gray-100 text-gray-800',
     SUBMITTED: 'bg-blue-100 text-blue-800',
@@ -545,9 +545,18 @@ function StatusBadge({ status }) {
     REJECTED: 'bg-red-100 text-red-800'
   };
 
+  const labels = {
+    DRAFT: t ? t('draft') : 'Draft',
+    SUBMITTED: t ? t('submitted') : 'Submitted',
+    UNDER_REVIEW: t ? t('underReview') : 'Under Review',
+    NEEDS_MORE_INFO: t ? t('needsMoreInfo') : 'Needs More Info',
+    APPROVED: t ? t('approved') : 'Approved',
+    REJECTED: t ? t('rejected') : 'Rejected'
+  };
+
   return (
     <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${colors[status] || colors.DRAFT}`}>
-      {status.replace('_', ' ')}
+      {labels[status] || status.replace('_', ' ')}
     </span>
   );
 }
