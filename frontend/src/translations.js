@@ -448,6 +448,10 @@ const translations = {
     orderCard: 'Ordina Carta',
     manageCards: 'Gestisci Carte',
     myCards: 'Le Mie Carte',
+    thisMonth: 'Questo Mese',
+    totalSpending: 'Spesa Totale',
+    viewFullBreakdown: 'Visualizza dettagli →',
+    viewTransactions: 'Visualizza transazioni →',
     
     // Account Restricted / Tax Hold
     accountRestricted: 'Conto Limitato',
