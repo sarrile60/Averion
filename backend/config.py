@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
     
     # App
-    APP_NAME: str = "Project Atlas"
+    APP_NAME: str = "ecommbx"
     APP_ENV: str = Field(default="development")
     DEBUG: bool = Field(default=True)
     
