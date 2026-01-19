@@ -1477,41 +1477,68 @@ function AdminDashboard() {
 function ProfilePage() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { t, language, setLanguage } = useLanguage();
+  const { isDark, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-screen page-background">
-      <header className="header-gradient">
+    <div className={`min-h-screen ${isDark ? 'bg-gray-900' : 'page-background'}`}>
+      <header className={`${isDark ? 'bg-gray-800' : 'header-gradient'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <h1 className="text-2xl font-bold text-gradient-blue" style={{ fontFamily: 'Space Grotesk' }}>
+            <h1 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gradient-blue'}`} style={{ fontFamily: 'Space Grotesk' }}>
               {APP_NAME}
             </h1>
             <div className="flex items-center space-x-4">
               <NotificationBell />
-              <button onClick={logout} className="text-sm text-gray-600 hover:text-gray-900">
-                Logout
+              {/* Language Toggle */}
+              <button
+                onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
+                className={`flex items-center space-x-1 px-3 py-1.5 rounded-md text-sm font-medium transition ${isDark ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-700'}`}
+                title={language === 'en' ? 'Switch to Italian' : 'Passa a Inglese'}
+              >
+                <span className="text-base">{language === 'en' ? '🇬🇧' : '🇮🇹'}</span>
+                <span className="hidden sm:inline">{language === 'en' ? 'EN' : 'IT'}</span>
+              </button>
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className={`p-2 rounded-md transition ${isDark ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-700'}`}
+                title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {isDark ? (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                )}
+              </button>
+              <button onClick={logout} className={`text-sm ${isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'}`}>
+                {t('logout')}
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="border-b border-gray-200 bg-white/80 backdrop-blur">
+      <div className={`border-b ${isDark ? 'border-gray-700 bg-gray-800/80' : 'border-gray-200 bg-white/80 backdrop-blur'}`}>
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-8">
-          <button onClick={() => navigate('/dashboard')} className="tab-inactive">
-            Accounts
+          <button onClick={() => navigate('/dashboard')} className={`py-4 px-1 border-b-2 border-transparent font-medium text-sm ${isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-700'}`}>
+            {t('accounts')}
           </button>
-          <button onClick={() => navigate('/kyc')} className="tab-inactive">
+          <button onClick={() => navigate('/kyc')} className={`py-4 px-1 border-b-2 border-transparent font-medium text-sm ${isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-700'}`}>
             KYC
           </button>
-          <button onClick={() => navigate('/security')} className="tab-inactive">
-            Security
+          <button onClick={() => navigate('/security')} className={`py-4 px-1 border-b-2 border-transparent font-medium text-sm ${isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-700'}`}>
+            {t('securitySettings')}
           </button>
-          <button onClick={() => navigate('/support')} className="tab-inactive">
-            Support
+          <button onClick={() => navigate('/support')} className={`py-4 px-1 border-b-2 border-transparent font-medium text-sm ${isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-700'}`}>
+            {t('support')}
           </button>
-          <button onClick={() => navigate('/profile')} className="tab-active">
-            Profile
+          <button onClick={() => navigate('/profile')} className="py-4 px-1 border-b-2 border-blue-600 font-medium text-sm text-blue-600">
+            {t('profile')}
           </button>
         </nav>
       </div>
