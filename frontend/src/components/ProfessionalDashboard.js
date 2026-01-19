@@ -646,7 +646,35 @@ export function ProfessionalDashboard({ user, logout }) {
                 {transactions.map((txn) => {
                   // Professional display from metadata
                   const metadata = txn.metadata || {};
-                  const displayType = metadata.display_type || txn.transaction_type?.replace(/_/g, ' ') || 'Transaction';
+                  const rawDisplayType = metadata.display_type || txn.transaction_type?.replace(/_/g, ' ') || 'Transaction';
+                  
+                  // Translate display type
+                  const translateDisplayType = (type) => {
+                    if (!type) return t('transaction');
+                    const typeLower = type.toLowerCase();
+                    if (typeLower === 'sepa transfer') return t('sepaTransfer');
+                    if (typeLower === 'bank transfer') return t('bankTransfer');
+                    if (typeLower === 'wire transfer') return t('wireTransfer');
+                    if (typeLower === 'internal transfer') return t('internalTransfer');
+                    if (typeLower === 'card payment') return t('cardPayment');
+                    if (typeLower === 'atm withdrawal') return t('atmWithdrawal');
+                    if (typeLower === 'direct debit') return t('directDebit');
+                    if (typeLower === 'standing order') return t('standingOrder');
+                    if (typeLower === 'instant payment') return t('instantPayment');
+                    if (typeLower === 'top up' || typeLower === 'top_up') return t('topUpDisplay');
+                    if (typeLower === 'withdraw') return t('withdrawDisplay');
+                    if (typeLower === 'fee') return t('feeDisplay');
+                    if (typeLower === 'refund') return t('refund');
+                    if (typeLower === 'interest') return t('interest');
+                    if (typeLower === 'credit') return t('credit');
+                    if (typeLower === 'debit') return t('debit');
+                    if (typeLower === 'transfer') return t('transfer');
+                    if (typeLower === 'reversal') return t('reversal');
+                    if (typeLower === 'transaction') return t('transaction');
+                    return type;
+                  };
+                  
+                  const displayType = translateDisplayType(rawDisplayType);
                   const senderName = metadata.sender_name;
                   const reference = metadata.reference;
                   const description = metadata.description;
@@ -670,14 +698,14 @@ export function ProfessionalDashboard({ user, logout }) {
                     >
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <p className="text-sm font-medium text-gray-900 truncate">{displayType === 'SEPA Transfer' ? t('sepaTransfer') : displayType}</p>
+                          <p className="text-sm font-medium text-gray-900 truncate">{displayType}</p>
                           <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </div>
                         {senderName && (
                           <p className="text-xs text-gray-600">{t('from')}: {senderName}</p>
-                        )}
+                        )}}
                         {description && (
                           <p className="text-xs text-gray-500 truncate">{description}</p>
                         )}
