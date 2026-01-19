@@ -51,6 +51,20 @@ const translations = {
     psd2Certified: 'PSD2 Certified',
     encryption256: '256-bit Encryption',
     
+    // Phone Mockup
+    goodMorning: 'Good morning',
+    totalBalance: 'Total Balance',
+    vsLastMonth: 'vs last month',
+    send: 'Send',
+    request: 'Request',
+    more: 'More',
+    shopping: 'Shopping',
+    income: 'Income',
+    salary: 'Salary',
+    transfer: 'Transfer',
+    complete: 'Complete',
+    protected: 'Protected',
+    
     // Features
     whyChooseAtlas: 'Why choose Project Atlas',
     whyChooseDesc: 'Because we know that innovative technology is only as good as the service that accompanies it — the 24/7 Atlas service.',
