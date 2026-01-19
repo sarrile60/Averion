@@ -76,7 +76,17 @@ export function KYCReviewPage({ user, logout }) {
                   // Refresh the page to go to dashboard
                   window.location.href = '/dashboard';
                 } else {
-                  toast.info(`${t('kycStatus')}: ${status}`);
+                  // Translate the status
+                  const statusLabels = {
+                    DRAFT: t('draft'),
+                    SUBMITTED: t('submitted'),
+                    UNDER_REVIEW: t('underReview'),
+                    NEEDS_MORE_INFO: t('needsMoreInfo'),
+                    APPROVED: t('approved'),
+                    REJECTED: t('rejected')
+                  };
+                  const translatedStatus = statusLabels[status] || status;
+                  toast.info(`${t('kycStatus')}: ${translatedStatus}`);
                 }
               } catch (err) {
                 toast.error(t('kycCheckStatusFailed'));
