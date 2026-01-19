@@ -297,7 +297,7 @@ function LoginPage() {
           className={`p-2 rounded-lg transition ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
           title={language === 'en' ? 'Passa all\'Italiano' : 'Switch to English'}
         >
-          <span className="text-lg">{language === 'en' ? '🇬🇧' : '🇮🇹'}</span>
+          <span className="text-lg font-medium">{language === 'en' ? 'EN' : 'IT'}</span>
         </button>
         <button
           onClick={toggleTheme}
