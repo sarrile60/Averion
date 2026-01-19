@@ -2,7 +2,7 @@
 const translations = {
   en: {
     // Common
-    appName: 'Project Atlas',
+    appName: 'ecommbx',
     loading: 'Loading...',
     save: 'Save',
     cancel: 'Cancel',
@@ -783,7 +783,7 @@ const translations = {
   
   it: {
     // Common
-    appName: 'Project Atlas',
+    appName: 'ecommbx',
     loading: 'Caricamento...',
     save: 'Salva',
     cancel: 'Annulla',
