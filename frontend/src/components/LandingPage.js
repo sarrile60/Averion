@@ -543,23 +543,23 @@ export function LandingPage() {
       <section className="py-20 sm:py-28 bg-gradient-to-r from-red-500 to-red-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Join the future...
+            {t('joinTheFutureTitle')}
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            All your international e-money and e-account services are now at your fingertips, for easier, faster and smoother digital banking… anytime, anywhere!
+            {t('ctaDesc')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate('/signup')}
               className="px-8 py-4 bg-white text-red-600 font-semibold rounded-full text-lg hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1"
             >
-              Create Free Account
+              {t('createFreeAccount')}
             </button>
             <button
               onClick={() => navigate('/login')}
               className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-full text-lg hover:bg-white/10 transition-all duration-300"
             >
-              Sign In
+              {t('signIn')}
             </button>
           </div>
         </div>
