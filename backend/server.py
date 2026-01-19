@@ -396,6 +396,120 @@ async def change_password(
     return {"success": True, "message": "Password changed successfully. Please login again."}
 
 
+# Password Reset Request Schema
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+
+# Password Reset Schema
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str
+
+
+@app.post("/api/v1/auth/forgot-password")
+async def forgot_password(
+    data: ForgotPasswordRequest,
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Request a password reset email."""
+    from services.email_service import EmailService
+    
+    # Find user by email (case-insensitive)
+    user = await db.users.find_one({"email": {"$regex": f"^{data.email}$", "$options": "i"}})
+    
+    # Always return success to prevent email enumeration attacks
+    if not user:
+        logger.info(f"Password reset requested for non-existent email: {data.email}")
+        return {"success": True, "message": "If an account exists with this email, you will receive a password reset link."}
+    
+    # Generate reset token
+    email_service = EmailService()
+    reset_token = email_service.generate_reset_token()
+    
+    # Store reset token with expiry (1 hour)
+    await db.password_resets.delete_many({"user_id": str(user["_id"])})  # Remove old tokens
+    await db.password_resets.insert_one({
+        "_id": str(uuid.uuid4()),
+        "user_id": str(user["_id"]),
+        "email": user["email"],
+        "token": reset_token,
+        "created_at": datetime.now(timezone.utc),
+        "expires_at": datetime.now(timezone.utc) + timedelta(hours=1),
+        "used": False
+    })
+    
+    # Send email
+    try:
+        email_service.send_password_reset(user["email"], reset_token)
+        logger.info(f"Password reset email sent to {user['email']}")
+    except Exception as e:
+        logger.error(f"Failed to send password reset email: {str(e)}")
+    
+    return {"success": True, "message": "If an account exists with this email, you will receive a password reset link."}
+
+
+@app.post("/api/v1/auth/reset-password")
+async def reset_password(
+    data: ResetPasswordRequest,
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Reset password using token from email."""
+    # Find valid reset token
+    reset_record = await db.password_resets.find_one({
+        "token": data.token,
+        "used": False,
+        "expires_at": {"$gt": datetime.now(timezone.utc)}
+    })
+    
+    if not reset_record:
+        raise HTTPException(
+            status_code=400, 
+            detail="Invalid or expired reset token. Please request a new password reset."
+        )
+    
+    # Validate new password
+    if len(data.new_password) < 8:
+        raise HTTPException(status_code=400, detail="Password must be at least 8 characters")
+    
+    # Find user
+    user = await db.users.find_one({"_id": reset_record["user_id"]})
+    if not user:
+        # Try ObjectId format
+        from bson import ObjectId
+        from bson.errors import InvalidId
+        try:
+            user = await db.users.find_one({"_id": ObjectId(reset_record["user_id"])})
+        except InvalidId:
+            pass
+    
+    if not user:
+        raise HTTPException(status_code=400, detail="User not found")
+    
+    # Hash and update password
+    new_hash = hash_password(data.new_password)
+    await db.users.update_one(
+        {"_id": user["_id"]},
+        {"$set": {"password_hash": new_hash, "updated_at": datetime.now(timezone.utc)}}
+    )
+    
+    # Mark token as used
+    await db.password_resets.update_one(
+        {"_id": reset_record["_id"]},
+        {"$set": {"used": True}}
+    )
+    
+    # Revoke all sessions for security
+    await db.sessions.update_many(
+        {"user_id": str(user["_id"]), "revoked": False},
+        {"$set": {"revoked": True}}
+    )
+    
+    logger.info(f"Password reset successful for user {user['email']}")
+    
+    return {"success": True, "message": "Password reset successful. You can now login with your new password."}
+
+
 # ==================== KYC ====================
 
 @app.get("/api/v1/kyc/application")
