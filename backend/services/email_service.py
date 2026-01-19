@@ -7,22 +7,46 @@ import resend
 from datetime import datetime, timedelta
 from typing import Optional
 import logging
-from dotenv import load_dotenv
-
-# Load .env file explicitly
-load_dotenv()
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-# Initialize Resend with API key
-RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '')
+# Load from .env file
+def get_resend_api_key():
+    # First try environment
+    key = os.environ.get('RESEND_API_KEY', '')
+    if key:
+        return key
+    # Then try loading .env manually
+    env_path = Path(__file__).parent.parent / '.env'
+    if env_path.exists():
+        with open(env_path) as f:
+            for line in f:
+                if line.startswith('RESEND_API_KEY='):
+                    return line.strip().split('=', 1)[1]
+    return ''
+
+def get_sender_email():
+    email = os.environ.get('SENDER_EMAIL', '')
+    if email:
+        return email
+    env_path = Path(__file__).parent.parent / '.env'
+    if env_path.exists():
+        with open(env_path) as f:
+            for line in f:
+                if line.startswith('SENDER_EMAIL='):
+                    return line.strip().split('=', 1)[1]
+    return 'noreply@ecommbx.io'
+
+# Initialize
+RESEND_API_KEY = get_resend_api_key()
+SENDER_EMAIL = get_sender_email()
 resend.api_key = RESEND_API_KEY
-SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'noreply@ecommbx.io')
 APP_NAME = "Project Atlas"
 FRONTEND_URL = os.environ.get('FRONTEND_URL', 'https://translatlas.preview.emergentagent.com')
 
 logger.info(f"Email service initialized with sender: {SENDER_EMAIL}")
-logger.info(f"Resend API key configured: {'Yes' if RESEND_API_KEY else 'No'}")
+logger.info(f"Resend API key configured: {'Yes (' + RESEND_API_KEY[:10] + '...)' if RESEND_API_KEY else 'No'}")
 
 
 class EmailService:
