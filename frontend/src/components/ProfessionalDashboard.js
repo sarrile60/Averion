@@ -828,7 +828,7 @@ export function ProfessionalDashboard({ user, logout }) {
                       {/* Card Type Badge */}
                       <div className="absolute top-14 left-6">
                         <span className="text-white/70 text-xs font-medium uppercase tracking-wider">
-                          {card.card_type === 'VIRTUAL' ? 'Virtual Card' : 'Physical Card'}
+                          {card.card_type === 'VIRTUAL' ? t('virtualCard') : t('physicalCard')}
                         </span>
                       </div>
 
@@ -843,22 +843,22 @@ export function ProfessionalDashboard({ user, logout }) {
 
                     {/* Card Details Dropdown */}
                     {showCardDetails === card.id && (
-                      <div className="mt-2 p-4 bg-gray-50 rounded-lg border border-gray-200 animate-fadeIn">
+                      <div className={`mt-2 p-4 rounded-lg border animate-fadeIn ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'}`}>
                         <div className="grid grid-cols-2 gap-4 text-sm">
                           <div>
-                            <p className="text-gray-500 text-xs mb-1">Card Number</p>
-                            <p className="font-mono text-gray-900">{(card.pan || '').match(/.{1,4}/g)?.join(' ') || 'N/A'}</p>
+                            <p className={`text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('cardNumber')}</p>
+                            <p className={`font-mono ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>{(card.pan || '').match(/.{1,4}/g)?.join(' ') || 'N/A'}</p>
                           </div>
                           <div>
-                            <p className="text-gray-500 text-xs mb-1">CVV</p>
-                            <p className="font-mono text-gray-900">{card.cvv || '•••'}</p>
+                            <p className={`text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('cvv')}</p>
+                            <p className={`font-mono ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>{card.cvv || '•••'}</p>
                           </div>
                           <div>
-                            <p className="text-gray-500 text-xs mb-1">Expiry Date</p>
-                            <p className="font-mono text-gray-900">{String(card.exp_month).padStart(2, '0')}/{card.exp_year}</p>
+                            <p className={`text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('expiryDate')}</p>
+                            <p className={`font-mono ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>{String(card.exp_month).padStart(2, '0')}/{card.exp_year}</p>
                           </div>
                           <div>
-                            <p className="text-gray-500 text-xs mb-1">Status</p>
+                            <p className={`text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('status')}</p>
                             <span className="badge badge-success text-xs">{card.status}</span>
                           </div>
                         </div>
@@ -866,7 +866,7 @@ export function ProfessionalDashboard({ user, logout }) {
                           onClick={() => navigate('/cards')}
                           className="w-full mt-4 text-sm text-red-600 hover:text-red-700 font-medium"
                         >
-                          View all cards →
+                          {t('viewAllCards')} →
                         </button>
                       </div>
                     )}
