@@ -200,7 +200,7 @@ export function CardOrderingModal({ onClose, onSuccess }) {
                   </svg>
                   
                   <div className="relative">
-                    <p className={`text-sm mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Project Atlas</p>
+                    <p className={`text-sm mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>ecommbx</p>
                     <p className={`text-right text-xl font-bold ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>VISA</p>
                   </div>
                 </div>
