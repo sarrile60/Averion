@@ -209,33 +209,33 @@ export function CardsPage({ user, logout }) {
 
                         {/* Card Details Panel */}
                         {showCardDetails === card.id && (
-                          <div className="bg-gray-50 rounded-xl p-5 border border-gray-200 animate-fadeIn">
-                            <h4 className="text-sm font-medium text-gray-900 mb-4">Card Details</h4>
+                          <div className={`rounded-xl p-5 border animate-fadeIn ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
+                            <h4 className={`text-sm font-medium mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('cardDetails')}</h4>
                             <div className="grid grid-cols-2 gap-4">
                               <div>
-                                <p className="text-xs text-gray-500 mb-1">Card Number</p>
-                                <p className="font-mono text-sm text-gray-900 tracking-wide">
+                                <p className={`text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('cardNumber')}</p>
+                                <p className={`font-mono text-sm tracking-wide ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>
                                   {(card.pan || '').match(/.{1,4}/g)?.join(' ') || 'N/A'}
                                 </p>
                               </div>
                               <div>
-                                <p className="text-xs text-gray-500 mb-1">CVV/CVC</p>
-                                <p className="font-mono text-sm text-gray-900">{card.cvv || '•••'}</p>
+                                <p className={`text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('cvvCvc')}</p>
+                                <p className={`font-mono text-sm ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>{card.cvv || '•••'}</p>
                               </div>
                               <div>
-                                <p className="text-xs text-gray-500 mb-1">Expiry Date</p>
-                                <p className="font-mono text-sm text-gray-900">
+                                <p className={`text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('expiryDate')}</p>
+                                <p className={`font-mono text-sm ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>
                                   {String(card.exp_month).padStart(2, '0')}/{card.exp_year}
                                 </p>
                               </div>
                               <div>
-                                <p className="text-xs text-gray-500 mb-1">Card Type</p>
-                                <p className="text-sm text-gray-900 capitalize">{card.card_type?.toLowerCase()}</p>
+                                <p className={`text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('cardType')}</p>
+                                <p className={`text-sm capitalize ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>{card.card_type?.toLowerCase()}</p>
                               </div>
                             </div>
-                            <div className="mt-4 pt-4 border-t border-gray-200">
-                              <p className="text-xs text-gray-400">
-                                Card ID: <span className="font-mono">{card.id}</span>
+                            <div className={`mt-4 pt-4 border-t ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+                              <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                                {t('cardId')}: <span className="font-mono">{card.id}</span>
                               </p>
                             </div>
                           </div>
