@@ -2048,7 +2048,7 @@ function SupportPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <span className={`logo-text ${isDark ? 'text-white' : ''}`} data-testid="logo">{APP_NAME}</span>
+          <span className={`logo-text font-bold ${isDark ? 'text-white' : 'text-gray-900'}`} data-testid="logo"><StyledLogo isDark={isDark} /></span>
         </div>
         <div className="flex items-center gap-4">
           {/* Language Toggle */}
@@ -2124,7 +2124,7 @@ function InsightsPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <span className={`logo-text ${isDark ? 'text-white' : ''}`} data-testid="logo">{APP_NAME}</span>
+          <span className={`logo-text font-bold ${isDark ? 'text-white' : 'text-gray-900'}`} data-testid="logo"><StyledLogo isDark={isDark} /></span>
         </div>
         <div className="flex items-center gap-4">
           {/* Language Toggle */}
