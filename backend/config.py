@@ -41,6 +41,10 @@ class Settings(BaseSettings):
     # CORS
     FRONTEND_URL: str = Field(default="http://localhost:3000")
     
+    # Email (Resend)
+    RESEND_API_KEY: str = Field(default="")
+    SENDER_EMAIL: str = Field(default="noreply@ecommbx.io")
+    
     class Config:
         env_file = ".env"
         case_sensitive = True
