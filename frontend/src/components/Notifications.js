@@ -133,22 +133,22 @@ export function NotificationBell() {
     const title = notif.title?.toLowerCase() || '';
     
     if (entityType === 'card' || entityType === 'card_request' || title.includes('card')) {
-      return 'View your cards →';
+      return t('viewCards') || 'View your cards →';
     }
     if (entityType === 'transaction' || entityType === 'transfer') {
-      return 'View transactions →';
+      return t('viewTransactions') || 'View transactions →';
     }
     if (entityType === 'kyc' || title.includes('kyc') || title.includes('verification')) {
-      return 'Check KYC status →';
+      return t('checkKycStatus') || 'Check KYC status →';
     }
     if (entityType === 'ticket' || title.includes('support')) {
-      return 'View support tickets →';
+      return t('viewSupportTickets') || 'View support tickets →';
     }
     // Security/restriction notifications
     if (notifType === 'security' || title.includes('restriction') || title.includes('restricted') || title.includes('tax') || title.includes('blocked')) {
-      return 'Contact support →';
+      return t('contactSupport') || 'Contact support →';
     }
-    return 'View details →';
+    return t('viewDetails') || 'View details →';
   };
 
   return (
