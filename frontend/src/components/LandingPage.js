@@ -404,13 +404,13 @@ export function LandingPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 bg-gray-50 border-y border-gray-100">
+      <section className={`py-12 border-y ${isDark ? 'bg-gray-800/50 border-gray-800' : 'bg-gray-50 border-gray-100'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-gray-900">{stat.value}</p>
-                <p className="text-sm text-gray-600 mt-1">{stat.label}</p>
+                <p className={`text-3xl sm:text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{stat.value}</p>
+                <p className={`text-sm mt-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{stat.label}</p>
               </div>
             ))}
           </div>
@@ -421,11 +421,13 @@ export function LandingPage() {
       <section id="features" className="py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Why choose Project Atlas
+            <h2 className={`text-3xl sm:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              {language === 'it' ? 'Perché scegliere Project Atlas' : 'Why choose Project Atlas'}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Because we know that innovative technology is only as good as the service that accompanies it — the 24/7 Atlas service.
+            <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              {language === 'it' 
+                ? 'Perché sappiamo che la tecnologia innovativa è valida solo quanto il servizio che la accompagna — il servizio Atlas 24/7.'
+                : 'Because we know that innovative technology is only as good as the service that accompanies it — the 24/7 Atlas service.'}
             </p>
           </div>
 
@@ -433,9 +435,9 @@ export function LandingPage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="group p-8 bg-white border border-gray-200 rounded-2xl hover:border-red-200 hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300"
+                className={`group p-8 border rounded-2xl hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300 ${isDark ? 'bg-gray-800 border-gray-700 hover:border-red-500/30' : 'bg-white border-gray-200 hover:border-red-200'}`}
               >
-                <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300">
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300 ${isDark ? 'bg-red-900/30' : 'bg-red-50'}`}>
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
