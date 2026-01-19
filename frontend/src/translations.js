@@ -1316,6 +1316,23 @@ const translations = {
     sepaTransfer: 'Trasferimento SEPA',
     transaction: 'Transazione',
     
+    // Transaction Types (display names)
+    bankTransfer: 'Bonifico Bancario',
+    wireTransfer: 'Bonifico',
+    internalTransfer: 'Trasferimento Interno',
+    cardPayment: 'Pagamento Carta',
+    atmWithdrawal: 'Prelievo ATM',
+    directDebit: 'Addebito Diretto',
+    standingOrder: 'Ordine Permanente',
+    instantPayment: 'Pagamento Istantaneo',
+    refund: 'Rimborso',
+    topUpDisplay: 'Ricarica',
+    withdrawDisplay: 'Prelievo',
+    feeDisplay: 'Commissione',
+    interest: 'Interessi',
+    credit: 'Accredito',
+    debit: 'Addebito',
+    
     // Time formatting
     justNow: 'Adesso',
     minutesAgo: 'm fa',
