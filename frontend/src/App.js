@@ -2273,6 +2273,16 @@ function App() {
             }
           />
           <Route
+            path="/accounts"
+            element={
+              <ProtectedRoute>
+                <TaxHoldRestrictedRoute>
+                  <AccountsPage />
+                </TaxHoldRestrictedRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/accounts/:accountId/transactions"
             element={
               <ProtectedRoute>
