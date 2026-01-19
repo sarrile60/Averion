@@ -727,6 +727,179 @@ function ResetPasswordPage() {
   );
 }
 
+// Accounts Page (for mobile navigation)
+function AccountsPage() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { t, language, setLanguage } = useLanguage();
+  const { isDark, toggleTheme } = useTheme();
+  const [accounts, setAccounts] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const [accountsRes, txnRes] = await Promise.all([
+        api.get('/accounts'),
+        api.get('/transactions/recent?limit=20')
+      ]);
+      setAccounts(accountsRes.data || []);
+      setTransactions(txnRes.data || []);
+    } catch (err) {
+      console.error('Failed to fetch data:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatAmount = (cents) => {
+    return (cents / 100).toFixed(2);
+  };
+
+  const formatDate = (dateStr) => {
+    return new Date(dateStr).toLocaleDateString();
+  };
+
+  // Translation helper for transaction types
+  const translateDisplayType = (type) => {
+    if (!type) return t('transaction');
+    const typeLower = type.toLowerCase();
+    if (typeLower === 'sepa transfer') return t('sepaTransfer');
+    if (typeLower === 'bank transfer') return t('bankTransfer');
+    if (typeLower === 'wire transfer') return t('wireTransfer');
+    if (typeLower === 'internal transfer') return t('internalTransfer');
+    if (typeLower === 'top up' || typeLower === 'top_up') return t('topUpDisplay');
+    if (typeLower === 'withdraw' || typeLower === 'withdrawal') return t('withdrawDisplay');
+    if (typeLower === 'fee') return t('feeDisplay');
+    if (typeLower === 'refund') return t('refund');
+    if (typeLower === 'salary payment') return t('salaryPayment');
+    if (typeLower === 'cash deposit') return t('cashDeposit');
+    if (typeLower === 'bonus') return t('bonus');
+    return type;
+  };
+
+  return (
+    <div className={`min-h-screen ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      {/* Header */}
+      <header className={`h-16 px-4 flex items-center justify-between border-b ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
+        <div className="flex items-center gap-3">
+          <button onClick={() => navigate('/dashboard')} className={`${isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-700'}`}>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <span className={`logo-text ${isDark ? 'text-white' : ''}`}>{APP_NAME}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
+            className={`flex items-center space-x-1 px-2 py-1.5 rounded-md text-sm font-medium transition ${isDark ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-700'}`}
+          >
+            <span className="text-base">{language === 'en' ? '🇬🇧' : '🇮🇹'}</span>
+            <span className="hidden sm:inline">{language === 'en' ? 'EN' : 'IT'}</span>
+          </button>
+          <button
+            onClick={toggleTheme}
+            className={`p-2 rounded-md transition ${isDark ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-700'}`}
+          >
+            {isDark ? (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            )}
+          </button>
+          <NotificationBell userId={user?.id} />
+        </div>
+      </header>
+
+      {/* Content */}
+      <main className="p-4 pb-24">
+        {loading ? (
+          <div className="space-y-4">
+            <div className={`h-24 rounded-xl animate-pulse ${isDark ? 'bg-gray-800' : 'bg-gray-200'}`}></div>
+            <div className={`h-48 rounded-xl animate-pulse ${isDark ? 'bg-gray-800' : 'bg-gray-200'}`}></div>
+          </div>
+        ) : (
+          <>
+            {/* Accounts Summary */}
+            <div className="mb-6">
+              <h2 className={`text-xl font-semibold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('accounts')}</h2>
+              {accounts.length === 0 ? (
+                <div className={`rounded-xl p-6 text-center ${isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+                  <p className={isDark ? 'text-gray-400' : 'text-gray-500'}>{t('noAccounts')}</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {accounts.map((account) => (
+                    <div 
+                      key={account.id}
+                      onClick={() => navigate(`/accounts/${account.id}/transactions`)}
+                      className={`rounded-xl p-4 cursor-pointer transition ${isDark ? 'bg-gray-800 border border-gray-700 hover:border-gray-600' : 'bg-white border border-gray-200 hover:shadow-md'}`}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{account.currency} {t('account')}</p>
+                          <p className={`text-xs font-mono mt-1 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{account.iban}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>€{formatAmount(account.balance)}</p>
+                          <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{t('available')}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Recent Transactions */}
+            <div>
+              <h2 className={`text-xl font-semibold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('recentActivity')}</h2>
+              {transactions.length === 0 ? (
+                <div className={`rounded-xl p-6 text-center ${isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+                  <p className={isDark ? 'text-gray-400' : 'text-gray-500'}>{t('noTransactionsYet')}</p>
+                </div>
+              ) : (
+                <div className={`rounded-xl overflow-hidden ${isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+                  {transactions.map((txn, idx) => {
+                    const metadata = txn.metadata || {};
+                    const displayType = translateDisplayType(metadata.display_type || txn.transaction_type?.replace(/_/g, ' '));
+                    const isCredit = ['TOP_UP', 'CREDIT', 'REFUND', 'INTEREST'].includes(txn.transaction_type) || txn.direction === 'CREDIT';
+                    
+                    return (
+                      <div 
+                        key={txn.id}
+                        className={`p-4 flex justify-between items-center ${idx !== transactions.length - 1 ? (isDark ? 'border-b border-gray-700' : 'border-b border-gray-100') : ''}`}
+                      >
+                        <div>
+                          <p className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>{displayType}</p>
+                          <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{formatDate(txn.created_at)}</p>
+                        </div>
+                        <p className={`font-semibold ${isCredit ? 'text-green-500' : 'text-red-500'}`}>
+                          {isCredit ? '+' : '-'}€{formatAmount(txn.amount)}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </>
+        )}
+      </main>
+      <MobileBottomTabs />
+    </div>
+  );
+}
+
 // Transactions Page
 function TransactionsPage() {
   const { accountId } = useParams();
