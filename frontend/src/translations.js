@@ -927,6 +927,8 @@ const translations = {
     contactSupport: 'Contatta Supporto',
     settleOutstandingBalance: 'Salda il Saldo in Sospeso',
     selectPaymentMethod: 'Seleziona il metodo di pagamento preferito',
+    pleaseSettleAmount: 'Si prega di saldare l\'importo richiesto per ripristinare l\'accesso completo. Per assistenza, contatta il supporto.',
+    cardManagementUnavailable: 'La gestione delle carte non è disponibile fino al saldo dell\'importo richiesto. Per assistenza, contatta il nostro team di supporto.',
     backToPaymentMethods: 'Torna ai metodi di pagamento',
     paymentSummary: 'Riepilogo Pagamento',
     outstandingBalance: 'Saldo in Sospeso',
