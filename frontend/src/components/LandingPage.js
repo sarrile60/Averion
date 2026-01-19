@@ -1,4 +1,4 @@
-// Project Atlas - Professional Landing Page (Inspired by ECOMMBANX)
+// ecommbx - Professional Landing Page (Inspired by ECOMMBANX)
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage, useTheme } from '../contexts/AppContext';
