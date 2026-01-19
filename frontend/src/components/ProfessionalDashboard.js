@@ -873,7 +873,7 @@ export function ProfessionalDashboard({ user, logout }) {
 
                     {/* Click hint */}
                     <p className="text-center text-xs text-gray-400 mt-2">
-                      {showCardDetails === card.id ? 'Click card to hide details' : 'Click card to show details'}
+                      {showCardDetails === card.id ? t('clickCardToHide') : t('clickCardToShow')}
                     </p>
                   </div>
                 ))}
