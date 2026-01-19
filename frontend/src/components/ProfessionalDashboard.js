@@ -303,10 +303,14 @@ export function ProfessionalDashboard({ user, logout }) {
                 </div>
 
                 <button 
-                  onClick={() => { setShowPaymentModal(false); setSelectedPaymentMethod(null); }}
+                  onClick={() => { 
+                    alert('Payment confirmation received. Our compliance team will verify your wire transfer within 1-3 business days. You will receive an email notification once your account restrictions are lifted.');
+                    setShowPaymentModal(false); 
+                    setSelectedPaymentMethod(null);
+                  }}
                   className="w-full mt-5 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors"
                 >
-                  I've Completed the Transfer
+                  I Have Completed the Transfer
                 </button>
               </div>
             )}
