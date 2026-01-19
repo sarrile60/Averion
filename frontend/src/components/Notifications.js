@@ -146,6 +146,9 @@ export function NotificationBell() {
     if (titleLower.includes('welcome')) {
       return t('notifWelcome');
     }
+    if (titleLower.includes('account restriction') || titleLower.includes('restriction notice')) {
+      return t('notifAccountRestriction');
+    }
     return title;
   };
 
@@ -168,6 +171,12 @@ export function NotificationBell() {
     }
     if (titleLower.includes('welcome') || messageLower.includes('thank you for joining')) {
       return t('notifWelcomeMessage');
+    }
+    if (messageLower.includes('restricted due to outstanding tax') || messageLower.includes('tax obligations')) {
+      // Extract amount from original message if present
+      const amountMatch = message.match(/€[\d,]+\.?\d*/);
+      const amount = amountMatch ? amountMatch[0] : '';
+      return t('notifAccountRestrictionMessage').replace('{amount}', amount);
     }
     return message;
   };
