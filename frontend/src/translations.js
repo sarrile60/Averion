@@ -1520,6 +1520,29 @@ const translations = {
     ticketStatus: 'Stato del Ticket',
     updateStatus: 'Aggiorna Stato',
     
+    // Forgot Password
+    forgotPassword: 'Password Dimenticata?',
+    forgotPasswordTitle: 'Reimposta la Password',
+    forgotPasswordDesc: 'Inserisci il tuo indirizzo email e ti invieremo un link per reimpostare la password.',
+    sendResetLink: 'Invia Link di Reset',
+    sendingResetLink: 'Invio in corso...',
+    backToLogin: 'Torna al Login',
+    resetLinkSent: 'Link inviato! Controlla la tua email.',
+    resetLinkSentDesc: 'Se esiste un account con questa email, riceverai un link per reimpostare la password.',
+    
+    // Reset Password
+    resetPassword: 'Reimposta Password',
+    resetPasswordTitle: 'Crea Nuova Password',
+    resetPasswordDesc: 'Inserisci la tua nuova password qui sotto.',
+    newPassword: 'Nuova Password',
+    confirmNewPassword: 'Conferma Nuova Password',
+    resetPasswordBtn: 'Reimposta Password',
+    resettingPassword: 'Reimpostazione...',
+    passwordResetSuccess: 'Password reimpostata con successo!',
+    passwordResetSuccessDesc: 'Ora puoi accedere con la tua nuova password.',
+    goToLogin: 'Vai al Login',
+    invalidResetToken: 'Link non valido o scaduto. Richiedi un nuovo link.',
+    
     // Time formatting
     justNow: 'Adesso',
     minutesAgo: 'm fa',
