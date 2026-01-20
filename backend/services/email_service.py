@@ -57,6 +57,17 @@ EMAIL_TRANSLATIONS = {
         'otp_body': 'Your verification code is:',
         'otp_expiry': '⏰ This code expires in 10 minutes.',
         'otp_ignore': "If you didn't request this code, please ignore this email.",
+        
+        # Email Verification
+        'email_verify_subject': f'Verify Your Email - {APP_NAME}',
+        'email_verify_title': 'Welcome to ecommbx',
+        'email_verify_greeting': 'Hello',
+        'email_verify_body': 'Thank you for registering with ecommbx. To complete your registration and access your account, please verify your email address by clicking the button below:',
+        'email_verify_button': 'Verify Email Address',
+        'email_verify_link_instruction': 'Or copy and paste this link into your browser:',
+        'email_verify_expiry': '⏰ This verification link expires in 24 hours.',
+        'email_verify_ignore': "If you didn't create an account with us, please ignore this email.",
+        'email_verify_security_note': '🔒 For your security, you must verify your email before accessing your account.',
     },
     'it': {
         # Password Reset Email
@@ -83,6 +94,17 @@ EMAIL_TRANSLATIONS = {
         'otp_body': 'Il tuo codice di verifica è:',
         'otp_expiry': '⏰ Questo codice scade tra 10 minuti.',
         'otp_ignore': 'Se non hai richiesto questo codice, ignora questa email.',
+        
+        # Email Verification
+        'email_verify_subject': f'Verifica la Tua Email - {APP_NAME}',
+        'email_verify_title': 'Benvenuto in ecommbx',
+        'email_verify_greeting': 'Ciao',
+        'email_verify_body': 'Grazie per esserti registrato con ecommbx. Per completare la registrazione e accedere al tuo account, verifica il tuo indirizzo email cliccando il pulsante qui sotto:',
+        'email_verify_button': 'Verifica Indirizzo Email',
+        'email_verify_link_instruction': 'Oppure copia e incolla questo link nel tuo browser:',
+        'email_verify_expiry': '⏰ Questo link di verifica scade tra 24 ore.',
+        'email_verify_ignore': 'Se non hai creato un account con noi, ignora questa email.',
+        'email_verify_security_note': '🔒 Per la tua sicurezza, devi verificare la tua email prima di accedere al tuo account.',
     }
 }
 
