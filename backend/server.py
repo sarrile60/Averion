@@ -178,14 +178,61 @@ async def require_admin(current_user: dict = Depends(get_current_user)):
 
 # ==================== AUTHENTICATION ====================
 
+class SignupRequest(BaseModel):
+    """Extended signup request with language preference."""
+    email: str
+    password: str
+    first_name: str
+    last_name: str
+    phone: Optional[str] = None
+    language: Optional[str] = 'en'
+
+
 @app.post("/api/v1/auth/signup", response_model=UserResponse, status_code=201)
 async def signup(
-    user_data: UserCreate,
+    user_data: SignupRequest,
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
-    """Register a new user."""
+    """Register a new user and send verification email."""
     auth_service = AuthService(db)
-    user = await auth_service.create_user(user_data)
+    
+    # Create user data for auth service
+    user_create = UserCreate(
+        email=user_data.email,
+        password=user_data.password,
+        first_name=user_data.first_name,
+        last_name=user_data.last_name,
+        phone=user_data.phone
+    )
+    
+    user = await auth_service.create_user(user_create)
+    
+    # Generate verification token and store it
+    email_service = EmailService()
+    verification_token = email_service.generate_verification_token()
+    
+    # Store verification token in database (expires in 24 hours)
+    await db.email_verifications.insert_one({
+        "_id": str(uuid.uuid4()),
+        "user_id": user.id,
+        "email": user.email,
+        "token": verification_token,
+        "created_at": datetime.utcnow(),
+        "expires_at": datetime.utcnow() + timedelta(hours=24),
+        "used": False
+    })
+    
+    # Send verification email
+    language = user_data.language or 'en'
+    email_service.send_verification_email(
+        to_email=user.email,
+        verification_token=verification_token,
+        first_name=user.first_name,
+        language=language
+    )
+    
+    logger.info(f"User registered: {user.email}, verification email sent (lang={language})")
+    
     return UserResponse(
         id=user.id,
         email=user.email,
