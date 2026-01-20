@@ -763,6 +763,24 @@ const translations = {
     goToLogin: 'Go to Login',
     invalidResetToken: 'Invalid or expired reset link. Please request a new one.',
     
+    // Email Verification
+    emailVerificationRequired: 'Email Verification Required',
+    emailVerificationRequiredDesc: 'Please verify your email address to access your account. A verification link has been sent to your email.',
+    checkYourEmail: 'Check Your Email',
+    checkYourEmailDesc: 'We\'ve sent a verification link to your email address. Please click the link to verify your account.',
+    verifyEmailTitle: 'Verify Your Email',
+    verifyingEmail: 'Verifying your email...',
+    emailVerifiedSuccess: 'Email Verified Successfully!',
+    emailVerifiedSuccessDesc: 'Your email has been verified. You can now log in to your account.',
+    emailVerificationFailed: 'Verification Failed',
+    emailVerificationFailedDesc: 'The verification link is invalid or has expired.',
+    resendVerificationEmail: 'Resend Verification Email',
+    resendingEmail: 'Sending...',
+    verificationEmailSent: 'Verification email sent! Please check your inbox.',
+    emailNotVerifiedError: 'Please verify your email address before logging in. Check your inbox for the verification link.',
+    requestNewVerificationLink: 'Request New Verification Link',
+    dontSeeEmail: "Didn't receive the email? Check your spam folder or request a new link.",
+    
     // Time formatting
     justNow: 'Just now',
     minutesAgo: 'm ago',
