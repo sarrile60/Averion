@@ -84,10 +84,21 @@ async def create_audit_log(
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Startup and shutdown events."""
-    await connect_db()
+    """Startup and shutdown events with error handling for production resilience."""
+    try:
+        logger.info("Application starting up...")
+        await connect_db()
+        logger.info("Application startup complete")
+    except Exception as e:
+        # Log the error but don't crash - let health checks fail gracefully
+        logger.error(f"Startup error (app will continue): {e}")
+    
     yield
-    await disconnect_db()
+    
+    try:
+        await disconnect_db()
+    except Exception as e:
+        logger.error(f"Shutdown error: {e}")
 
 
 app = FastAPI(
