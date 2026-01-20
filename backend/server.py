@@ -228,6 +228,42 @@ class SignupRequest(BaseModel):
     language: Optional[str] = 'en'
 
 
+@app.get("/api/v1/debug/db-check")
+async def debug_db_check():
+    """Temporary debug endpoint to diagnose production database issues."""
+    import os
+    from database import get_database
+    from config import settings
+    
+    result = {
+        "env_database_name": os.environ.get("DATABASE_NAME", "NOT_SET"),
+        "settings_database_name": settings.DATABASE_NAME,
+        "mongo_url_prefix": settings.MONGO_URL[:40] + "..." if len(settings.MONGO_URL) > 40 else settings.MONGO_URL,
+    }
+    
+    try:
+        db = get_database()
+        result["connected_db_name"] = db.name
+        
+        # Try to count users
+        try:
+            user_count = await db.users.count_documents({})
+            result["user_count"] = user_count
+            result["db_status"] = "CONNECTED"
+            
+            # Check if admin exists
+            admin = await db.users.find_one({"email": "admin@atlas.local"})
+            result["admin_exists"] = admin is not None
+            
+        except Exception as e:
+            result["db_status"] = f"QUERY_ERROR: {str(e)}"
+            
+    except Exception as e:
+        result["db_status"] = f"CONNECTION_ERROR: {str(e)}"
+    
+    return result
+
+
 @app.post("/api/v1/auth/signup", response_model=UserResponse, status_code=201)
 async def signup(
     user_data: SignupRequest,
