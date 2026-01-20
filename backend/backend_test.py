@@ -989,6 +989,59 @@ def main():
     else:
         print("\n⚠️  Skipping tax hold tests - customer user ID not found")
     
+    print("\n" + "=" * 70)
+    print("SECTION 8: EMAIL VERIFICATION FEATURE")
+    print("=" * 70)
+    print("Testing the new feature: Email verification for user registration")
+    
+    # Test 1: Demo user can still login (existing users should have email_verified=true)
+    print("\n--- Test 1: Demo User Can Login ---")
+    if not tester.test_demo_user_can_login():
+        print("❌ Demo user login failed")
+    
+    # Test 2: Signup creates unverified user
+    print("\n--- Test 2: Signup Creates Unverified User ---")
+    signup_success, test_email, test_user_id = tester.test_signup_creates_unverified_user()
+    test_password = "TestPass123!"
+    
+    if signup_success and test_email:
+        # Test 3: Unverified user cannot login
+        print("\n--- Test 3: Unverified User Login Blocked ---")
+        if not tester.test_unverified_user_login_blocked(test_email, test_password):
+            print("❌ Unverified user login blocking test failed")
+        
+        # Test 4: Resend verification for unverified user
+        print("\n--- Test 4: Resend Verification Email ---")
+        if not tester.test_resend_verification_for_unverified_user(test_email):
+            print("❌ Resend verification test failed")
+        
+        # Test 5: Verify email with invalid token
+        print("\n--- Test 5: Verify Email with Invalid Token ---")
+        if not tester.test_verify_email_with_invalid_token():
+            print("❌ Invalid token test failed")
+        
+        # Test 6: Verify email with valid token from database
+        print("\n--- Test 6: Verify Email with Valid Token ---")
+        if tester.test_verify_email_with_valid_token_from_db(test_email):
+            # Test 7: Verified user can now login
+            print("\n--- Test 7: Verified User Can Login ---")
+            if not tester.test_verified_user_can_login(test_email, test_password):
+                print("❌ Verified user login test failed")
+            
+            # Test 8: Resend verification to already verified user (should fail)
+            print("\n--- Test 8: Resend Verification to Verified User (Should Fail) ---")
+            if not tester.test_resend_verification_for_verified_user(test_email):
+                print("❌ Resend to verified user blocking test failed")
+        else:
+            print("❌ Email verification with valid token failed - skipping subsequent tests")
+    else:
+        print("\n⚠️  Skipping email verification tests - signup failed")
+    
+    # Test 9: Italian language support
+    print("\n--- Test 9: Italian Language Support ---")
+    if not tester.test_italian_language_support():
+        print("❌ Italian language support test failed")
+    
     # Print final results
     print("\n" + "=" * 70)
     print("TEST RESULTS SUMMARY")
