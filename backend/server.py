@@ -228,42 +228,6 @@ class SignupRequest(BaseModel):
     language: Optional[str] = 'en'
 
 
-@app.get("/api/v1/debug/db-status")
-async def debug_db_status():
-    """Debug endpoint to check database connection status - REMOVE IN PRODUCTION."""
-    from database import get_database
-    from config import settings
-    
-    result = {
-        "settings_database_name": settings.DATABASE_NAME,
-        "settings_mongo_url_prefix": settings.MONGO_URL[:50] + "..." if len(settings.MONGO_URL) > 50 else settings.MONGO_URL,
-        "settings_frontend_url": settings.FRONTEND_URL,
-    }
-    
-    # Get database using the same method as API endpoints
-    try:
-        db = get_database()
-        result["connected_database"] = db.name
-        result["database_match"] = db.name == settings.DATABASE_NAME
-        
-        # Try to actually query the database
-        try:
-            collections = await db.list_collection_names()
-            result["collections_count"] = len(collections)
-            result["has_users_collection"] = "users" in collections
-            
-            user_count = await db.users.count_documents({})
-            result["user_count"] = user_count
-            result["db_query_status"] = "SUCCESS"
-        except Exception as e:
-            result["db_query_status"] = f"ERROR: {str(e)}"
-    except Exception as e:
-        result["connected_database"] = "CONNECTION_FAILED"
-        result["db_query_status"] = f"CONNECTION_ERROR: {str(e)}"
-    
-    return result
-
-
 @app.post("/api/v1/auth/signup", response_model=UserResponse, status_code=201)
 async def signup(
     user_data: SignupRequest,
