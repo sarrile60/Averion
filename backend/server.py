@@ -425,9 +425,6 @@ async def verify_email(
         {"$set": {"used": True, "verified_at": datetime.utcnow()}}
     )
     
-    # Get user for audit log
-    user = await db.users.find_one({"_id": user_id_obj}) or await db.users.find_one({"_id": user_id})
-    
     # Audit log
     await create_audit_log(
         db=db,
