@@ -9,6 +9,7 @@ from pydantic_settings import BaseSettings
 
 # Get the directory where this config file lives
 CONFIG_DIR = Path(__file__).parent.absolute()
+ENV_FILE_PATH = CONFIG_DIR / ".env"
 
 
 class Settings(BaseSettings):
@@ -51,11 +52,11 @@ class Settings(BaseSettings):
     SENDER_EMAIL: str = Field(default="noreply@ecommbx.io")
     
     class Config:
-        # Use absolute path for .env file
-        env_file = str(CONFIG_DIR / ".env")
+        # Only use .env file if it exists (production uses K8s secrets as env vars)
+        env_file = str(ENV_FILE_PATH) if ENV_FILE_PATH.exists() else None
         env_file_encoding = "utf-8"
         case_sensitive = True
-        # Also read from environment variables (higher priority than .env)
+        # Read from environment variables (higher priority than .env)
         extra = "ignore"
 
 
