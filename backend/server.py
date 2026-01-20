@@ -87,6 +87,10 @@ async def lifespan(app: FastAPI):
     """Startup and shutdown events with error handling for production resilience."""
     try:
         logger.info("Application starting up...")
+        logger.info(f"MONGO_URL configured: {settings.MONGO_URL[:30]}...")
+        logger.info(f"DATABASE_NAME: {settings.DATABASE_NAME}")
+        logger.info(f"FRONTEND_URL: {settings.FRONTEND_URL}")
+        logger.info(f"RESEND_API_KEY configured: {'Yes' if settings.RESEND_API_KEY else 'No'}")
         await connect_db()
         logger.info("Application startup complete")
     except Exception as e:
