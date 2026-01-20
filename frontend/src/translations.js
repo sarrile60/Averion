@@ -1571,6 +1571,24 @@ const translations = {
     goToLogin: 'Vai al Login',
     invalidResetToken: 'Link non valido o scaduto. Richiedi un nuovo link.',
     
+    // Email Verification
+    emailVerificationRequired: 'Verifica Email Richiesta',
+    emailVerificationRequiredDesc: 'Verifica il tuo indirizzo email per accedere al tuo account. Un link di verifica è stato inviato alla tua email.',
+    checkYourEmail: 'Controlla la Tua Email',
+    checkYourEmailDesc: 'Abbiamo inviato un link di verifica al tuo indirizzo email. Clicca sul link per verificare il tuo account.',
+    verifyEmailTitle: 'Verifica la Tua Email',
+    verifyingEmail: 'Verifica email in corso...',
+    emailVerifiedSuccess: 'Email Verificata con Successo!',
+    emailVerifiedSuccessDesc: 'La tua email è stata verificata. Ora puoi accedere al tuo account.',
+    emailVerificationFailed: 'Verifica Fallita',
+    emailVerificationFailedDesc: 'Il link di verifica non è valido o è scaduto.',
+    resendVerificationEmail: 'Reinvia Email di Verifica',
+    resendingEmail: 'Invio in corso...',
+    verificationEmailSent: 'Email di verifica inviata! Controlla la tua casella di posta.',
+    emailNotVerifiedError: 'Verifica il tuo indirizzo email prima di accedere. Controlla la tua casella di posta per il link di verifica.',
+    requestNewVerificationLink: 'Richiedi Nuovo Link di Verifica',
+    dontSeeEmail: 'Non hai ricevuto l\'email? Controlla la cartella spam o richiedi un nuovo link.',
+    
     // Time formatting
     justNow: 'Adesso',
     minutesAgo: 'm fa',
