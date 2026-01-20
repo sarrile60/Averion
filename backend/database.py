@@ -97,6 +97,10 @@ def get_database() -> AsyncIOMotorDatabase:
         # Try to create database connection on-demand if not initialized
         logger.warning("Database not initialized during startup, attempting on-demand connection...")
         try:
+            # Get database name from URL or settings
+            db_name_from_url = get_database_name_from_url(settings.MONGO_URL)
+            database_name = db_name_from_url or settings.DATABASE_NAME
+            
             _client = AsyncIOMotorClient(
                 settings.MONGO_URL,
                 serverSelectionTimeoutMS=10000,
@@ -105,8 +109,8 @@ def get_database() -> AsyncIOMotorDatabase:
                 retryWrites=True,
                 retryReads=True,
             )
-            _database = _client[settings.DATABASE_NAME]
-            logger.info(f"On-demand database connection created: {settings.DATABASE_NAME}")
+            _database = _client[database_name]
+            logger.info(f"On-demand database connection created: {database_name}")
         except Exception as e:
             logger.error(f"Failed to create on-demand database connection: {e}")
             raise RuntimeError(f"Database not available: {e}")
