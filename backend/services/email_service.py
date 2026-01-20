@@ -246,8 +246,11 @@ class EmailService:
         """Send OTP code via email using Resend with localization support."""
         # Ensure API key is set from environment
         api_key = get_resend_api_key()
-        if api_key:
-            resend.api_key = api_key
+        if not api_key:
+            logger.warning(f"RESEND_API_KEY not configured - skipping OTP email to {to_email}")
+            return False
+            
+        resend.api_key = api_key
         
         sender_email = get_sender_email()
         
