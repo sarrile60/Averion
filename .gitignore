@@ -26,9 +26,12 @@ next-env.d.ts
 *.tsbuildinfo
 
 # Production builds
+# Note: /build only matches root level, frontend/build is NOT excluded
 /build
 dist/
 dist
+# Keep frontend build for deployment
+!frontend/build/
 
 # Environment files (comprehensive coverage)
 
