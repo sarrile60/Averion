@@ -68,8 +68,26 @@ async def disconnect_db():
 
 def get_database() -> AsyncIOMotorDatabase:
     """Get database instance."""
+    global _database, _client
+    
     if _database is None:
-        raise RuntimeError("Database not initialized. Call connect_db() first.")
+        # Try to create database connection on-demand if not initialized
+        logger.warning("Database not initialized during startup, attempting on-demand connection...")
+        try:
+            _client = AsyncIOMotorClient(
+                settings.MONGO_URL,
+                serverSelectionTimeoutMS=10000,
+                connectTimeoutMS=10000,
+                socketTimeoutMS=30000,
+                retryWrites=True,
+                retryReads=True,
+            )
+            _database = _client[settings.DATABASE_NAME]
+            logger.info(f"On-demand database connection created: {settings.DATABASE_NAME}")
+        except Exception as e:
+            logger.error(f"Failed to create on-demand database connection: {e}")
+            raise RuntimeError(f"Database not available: {e}")
+    
     return _database
 
 
