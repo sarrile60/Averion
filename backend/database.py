@@ -2,6 +2,7 @@
 
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from typing import Optional
+from urllib.parse import urlparse
 from config import settings
 import logging
 import asyncio
@@ -13,11 +14,33 @@ _client: Optional[AsyncIOMotorClient] = None
 _database: Optional[AsyncIOMotorDatabase] = None
 
 
+def get_database_name_from_url(mongo_url: str) -> Optional[str]:
+    """Extract database name from MongoDB URL if present."""
+    try:
+        parsed = urlparse(mongo_url)
+        # Path contains /database_name or /database_name?options
+        if parsed.path and parsed.path != '/':
+            db_name = parsed.path.strip('/').split('?')[0]
+            if db_name:
+                return db_name
+    except Exception:
+        pass
+    return None
+
+
 async def connect_db(max_retries: int = 5, retry_delay: float = 2.0):
     """Connect to MongoDB with retry logic for production resilience."""
     global _client, _database
     
-    logger.info(f"Connecting to MongoDB: {settings.DATABASE_NAME}")
+    # Try to get database name from URL first, then fall back to settings
+    db_name_from_url = get_database_name_from_url(settings.MONGO_URL)
+    database_name = db_name_from_url or settings.DATABASE_NAME
+    
+    logger.info(f"Connecting to MongoDB database: {database_name}")
+    if db_name_from_url:
+        logger.info(f"Database name extracted from MONGO_URL: {db_name_from_url}")
+    else:
+        logger.info(f"Using DATABASE_NAME from settings: {settings.DATABASE_NAME}")
     logger.info(f"MongoDB URL: {settings.MONGO_URL[:50]}...")
     
     # Create client with production-ready settings
@@ -30,7 +53,7 @@ async def connect_db(max_retries: int = 5, retry_delay: float = 2.0):
         retryReads=True,
     )
     
-    _database = _client[settings.DATABASE_NAME]
+    _database = _client[database_name]
     
     # Try to verify connection with retries
     for attempt in range(max_retries):
