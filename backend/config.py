@@ -2,8 +2,13 @@
 
 import os
 from functools import lru_cache
+from pathlib import Path
 from pydantic import Field
 from pydantic_settings import BaseSettings
+
+
+# Get the directory where this config file lives
+CONFIG_DIR = Path(__file__).parent.absolute()
 
 
 class Settings(BaseSettings):
@@ -46,12 +51,17 @@ class Settings(BaseSettings):
     SENDER_EMAIL: str = Field(default="noreply@ecommbx.io")
     
     class Config:
-        env_file = ".env"
+        # Use absolute path for .env file
+        env_file = str(CONFIG_DIR / ".env")
+        env_file_encoding = "utf-8"
         case_sensitive = True
+        # Also read from environment variables (higher priority than .env)
+        extra = "ignore"
 
 
 @lru_cache()
 def get_settings() -> Settings:
+    """Get cached settings instance."""
     return Settings()
 
 
