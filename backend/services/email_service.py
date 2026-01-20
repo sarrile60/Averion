@@ -315,6 +315,81 @@ class EmailService:
             print(f"[EMAIL ERROR] Failed to send OTP to {to_email}: {str(e)}")
             return False
     
+    def send_verification_email(self, to_email: str, verification_token: str, first_name: str = '', language: str = 'en'):
+        """Send email verification email via Resend with localization support."""
+        # Ensure API key is set from environment
+        api_key = get_resend_api_key()
+        if api_key:
+            resend.api_key = api_key
+        
+        sender_email = get_sender_email()
+        frontend_url = get_frontend_url()
+        
+        t = lambda key: get_translation(key, language)
+        subject = t('email_verify_subject')
+        verify_link = f"{frontend_url}/verify-email?token={verification_token}"
+        
+        # Personalize greeting with first name if provided
+        greeting = f"{t('email_verify_greeting')} {first_name}," if first_name else f"{t('email_verify_greeting')},"
+        
+        html_body = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+        </head>
+        <body style="font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+                <h1 style="margin: 0;">✉️ <span style="color: white;">ecomm</span><span style="color: #dc3545;">bx</span></h1>
+                <p style="margin: 10px 0 0 0;">{t('email_verify_title')}</p>
+            </div>
+            <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px;">
+                <p style="font-size: 16px;">{greeting}</p>
+                <p>{t('email_verify_body')}</p>
+                <p style="text-align: center;">
+                    <a href="{verify_link}" style="display: inline-block; background: #dc3545; color: #ffffff; padding: 15px 40px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 20px 0;">{t('email_verify_button')}</a>
+                </p>
+                <p>{t('email_verify_link_instruction')}</p>
+                <div style="background: #e9ecef; padding: 15px; border-radius: 8px; margin: 20px 0; word-break: break-all; font-family: monospace; font-size: 12px;">
+                    <a href="{verify_link}" style="color: #333;">{verify_link}</a>
+                </div>
+                <p style="color: #666; font-size: 14px; margin-top: 20px;">{t('email_verify_expiry')}</p>
+                <p style="color: #28a745; font-size: 14px; background: #d4edda; padding: 12px; border-radius: 6px;">{t('email_verify_security_note')}</p>
+                <p style="color: #666; font-size: 14px;">{t('email_verify_ignore')}</p>
+            </div>
+            <div style="text-align: center; margin-top: 20px; font-size: 12px; color: #666;">
+                <p>{t('password_reset_footer')}</p>
+            </div>
+        </body>
+        </html>
+        """
+        
+        try:
+            params = {
+                "from": f"{APP_NAME} <{sender_email}>",
+                "to": [to_email],
+                "subject": subject,
+                "html": html_body,
+            }
+            
+            response = resend.Emails.send(params)
+            logger.info(f"Verification email sent to {to_email} (lang={language}), Resend ID: {response.get('id', 'unknown')}")
+            
+            self.sent_emails.append({
+                'to': to_email,
+                'subject': subject,
+                'sent_at': datetime.utcnow(),
+                'resend_id': response.get('id'),
+                'language': language,
+                'type': 'verification'
+            })
+            
+            return True
+        except Exception as e:
+            logger.error(f"Failed to send verification email to {to_email}: {str(e)}")
+            print(f"[EMAIL ERROR] Failed to send verification email to {to_email}: {str(e)}")
+            return False
+    
     @staticmethod
     def generate_temp_password(length: int = 12) -> str:
         """Generate a secure temporary password."""
