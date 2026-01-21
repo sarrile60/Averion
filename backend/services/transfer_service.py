@@ -132,11 +132,13 @@ class TransferService:
             transfer_record = {
                 "_id": transfer_id,
                 "user_id": str(from_user_id),
+                "from_account_id": from_account["_id"],
                 "transaction_id": txn.id,
                 "type": "SEPA_TRANSFER",
                 "beneficiary_name": final_recipient_name,
                 "beneficiary_iban": normalized_iban,
                 "amount": amount,
+                "currency": "EUR",
                 "details": reason,
                 "reference_number": f"SEPA-{transfer_id[:8].upper()}",
                 "status": "COMPLETED",  # Internal transfers complete immediately
