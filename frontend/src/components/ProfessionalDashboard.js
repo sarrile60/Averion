@@ -758,7 +758,7 @@ export function ProfessionalDashboard({ user, logout }) {
                         <p className={`text-sm font-semibold ${isCredit ? 'text-green-600' : 'text-red-600'}`}>
                           {isCredit ? '+' : '-'}€{formatAmount(amount)}
                         </p>
-                        <span className="badge badge-success text-xs">{txn.status === 'POSTED' ? t('posted') : (txn.status || t('posted'))}</span>
+                        <span className={`badge ${getStatusBadgeClass(txn.status)} text-xs`}>{translateStatus(txn.status)}</span>
                       </div>
                     </div>
                   );
