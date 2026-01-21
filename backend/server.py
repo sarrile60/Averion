@@ -2408,7 +2408,56 @@ async def root_health_check():
 @app.get("/api/health")
 async def health_check():
     """Health check endpoint."""
-    return {"status": "healthy", "app": settings.APP_NAME}
+    return {"status": "healthy", "app": "ecommbx"}
+
+
+@app.get("/api/debug/db-test")
+async def debug_db_test(db: AsyncIOMotorDatabase = Depends(get_database)):
+    """Debug endpoint to test database connectivity and write permissions."""
+    import os
+    result = {
+        "database_name": db.name,
+        "mongo_url_prefix": os.environ.get('MONGO_URL', 'NOT SET')[:30] + "...",
+        "ping": None,
+        "write_test": None,
+        "read_test": None,
+        "delete_test": None,
+        "error": None
+    }
+    
+    try:
+        # Test ping
+        ping_result = await db.command("ping")
+        result["ping"] = "OK" if ping_result.get("ok") == 1.0 else "FAILED"
+        
+        # Test write
+        test_id = f"debug_test_{uuid.uuid4()}"
+        try:
+            await db.debug_tests.insert_one({"_id": test_id, "test": True, "timestamp": datetime.now(timezone.utc)})
+            result["write_test"] = "OK"
+        except Exception as write_err:
+            result["write_test"] = f"FAILED: {str(write_err)}"
+            result["error"] = str(write_err)
+            return result
+        
+        # Test read
+        try:
+            doc = await db.debug_tests.find_one({"_id": test_id})
+            result["read_test"] = "OK" if doc else "FAILED: Document not found"
+        except Exception as read_err:
+            result["read_test"] = f"FAILED: {str(read_err)}"
+        
+        # Test delete (cleanup)
+        try:
+            await db.debug_tests.delete_one({"_id": test_id})
+            result["delete_test"] = "OK"
+        except Exception as del_err:
+            result["delete_test"] = f"FAILED: {str(del_err)}"
+            
+    except Exception as e:
+        result["error"] = str(e)
+    
+    return result
 
 
 if __name__ == "__main__":
