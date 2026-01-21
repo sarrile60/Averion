@@ -133,6 +133,7 @@ class TransferService:
                     "_id": f"external_outgoing_{uuid.uuid4()}",
                     "type": "EXTERNAL_OUTGOING",
                     "name": "External Outgoing Transfers",
+                    "currency": "EUR",
                     "created_at": datetime.now(timezone.utc)
                 }
                 await self.db.ledger_accounts.insert_one(external_account)
