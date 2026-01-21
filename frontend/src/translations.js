@@ -1220,6 +1220,7 @@ const translations = {
     ourTeamReviewing: 'Il nostro team sta esaminando la tua domanda.',
     approved: 'Approvato',
     rejected: 'Rifiutato',
+    rejectionReason: 'Motivo del Rifiuto',
     needsMoreInfo: 'Necessita Ulteriori Informazioni',
     kycPersonalInfo: 'Info Personali',
     kycDocuments: 'Documenti',
