@@ -982,7 +982,12 @@ function AccountsPage() {
 
   const formatDate = (dateStr) => {
     if (!dateStr) return '';
-    return new Date(dateStr).toLocaleDateString('en-GB', {
+    // Ensure UTC parsing by appending 'Z' if not present
+    let normalizedStr = dateStr;
+    if (!dateStr.endsWith('Z') && !dateStr.includes('+') && !dateStr.includes('-', 10)) {
+      normalizedStr = dateStr + 'Z';
+    }
+    return new Date(normalizedStr).toLocaleDateString('en-GB', {
       day: '2-digit',
       month: 'short', 
       year: 'numeric',
