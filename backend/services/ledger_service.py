@@ -237,7 +237,7 @@ class LedgerEngine:
         )
     
     async def get_transactions(self, account_id: str, limit: int = 50) -> List[dict]:
-        """Get transactions for an account with amounts and direction."""
+        """Get transactions for an account with amounts, direction, and transfer status."""
         # Get entries for this account with amounts
         entries_by_txn = {}
         entry_cursor = self.db.ledger_entries.find(
@@ -271,7 +271,80 @@ class LedgerEngine:
             
             txns.append(txn_data)
         
+        # Enrich transfer-related transactions with status from transfers collection
+        await self._enrich_transactions_with_transfer_status(txns)
+        
         return txns
+    
+    async def _enrich_transactions_with_transfer_status(self, txns: List[dict]) -> None:
+        """Enrich transactions with transfer status and rejection info from transfers collection."""
+        if not txns:
+            return
+        
+        # Collect all transaction IDs
+        txn_ids = [txn.get("id") for txn in txns if txn.get("id")]
+        
+        if not txn_ids:
+            return
+        
+        # Find all transfers that reference these transaction IDs
+        transfer_cursor = self.db.transfers.find(
+            {"transaction_id": {"$in": txn_ids}}
+        )
+        
+        # Build a map of transaction_id -> transfer data
+        transfer_map = {}
+        async for transfer in transfer_cursor:
+            txn_id = transfer.get("transaction_id")
+            if txn_id:
+                transfer_map[txn_id] = {
+                    "transfer_id": transfer.get("_id"),
+                    "status": transfer.get("status"),
+                    "rejection_reason": transfer.get("rejection_reason") or transfer.get("reject_reason"),
+                    "beneficiary_name": transfer.get("beneficiary_name"),
+                    "beneficiary_iban": transfer.get("beneficiary_iban"),
+                    "transfer_type": transfer.get("transfer_type"),
+                    "reference_number": transfer.get("reference_number")
+                }
+        
+        # Enrich transactions with transfer data
+        for txn in txns:
+            txn_id = txn.get("id")
+            if txn_id and txn_id in transfer_map:
+                transfer_data = transfer_map[txn_id]
+                
+                # Update transaction status based on transfer status
+                transfer_status = transfer_data.get("status")
+                if transfer_status:
+                    txn["status"] = transfer_status
+                
+                # Add rejection reason if available
+                rejection_reason = transfer_data.get("rejection_reason")
+                if rejection_reason:
+                    txn["rejection_reason"] = rejection_reason
+                    # Also add to metadata for frontend compatibility
+                    if "metadata" not in txn:
+                        txn["metadata"] = {}
+                    txn["metadata"]["rejection_reason"] = rejection_reason
+                
+                # Update metadata with transfer info for better display
+                if "metadata" not in txn:
+                    txn["metadata"] = {}
+                
+                if transfer_data.get("beneficiary_name"):
+                    txn["metadata"]["recipient_name"] = transfer_data["beneficiary_name"]
+                if transfer_data.get("beneficiary_iban"):
+                    txn["metadata"]["recipient_iban"] = transfer_data["beneficiary_iban"]
+                if transfer_data.get("transfer_type"):
+                    # Set proper display type based on transfer type
+                    if transfer_data["transfer_type"] == "SEPA":
+                        txn["metadata"]["display_type"] = "SEPA Transfer"
+                    elif transfer_data["transfer_type"] == "INTERNAL":
+                        txn["metadata"]["display_type"] = "SEPA Transfer"
+                if transfer_data.get("reference_number"):
+                    txn["metadata"]["reference"] = transfer_data["reference_number"]
+                if transfer_data.get("transfer_id"):
+                    txn["metadata"]["transfer_id"] = transfer_data["transfer_id"]
     
     async def reverse_transaction(
         self,
