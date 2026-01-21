@@ -7,7 +7,6 @@ from pydantic import Field
 from pydantic_settings import BaseSettings
 
 
-# Get the directory where this config file lives
 CONFIG_DIR = Path(__file__).parent.absolute()
 ENV_FILE_PATH = CONFIG_DIR / ".env"
 
@@ -20,15 +19,15 @@ class Settings(BaseSettings):
     APP_ENV: str = Field(default="production")
     DEBUG: bool = Field(default=False)
     
-    # Security - No hardcoded defaults for sensitive values
-    SECRET_KEY: str = Field(default="")
+    # Security
+    SECRET_KEY: str = Field(default="ecommbx-jwt-secret-2026-production")
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
     REFRESH_TOKEN_EXPIRE_DAYS: int = 30
     
-    # Database - Read from environment
+    # Database - Emergent's built-in MongoDB (localhost)
     MONGO_URL: str = Field(default="mongodb://localhost:27017")
-    DATABASE_NAME: str = Field(default="")
+    DATABASE_NAME: str = Field(default="ecommbx-prod-db")
     
     # Storage
     S3_PROVIDER: str = "local"
@@ -40,15 +39,15 @@ class Settings(BaseSettings):
     S3_USE_SSL: bool = False
     STORAGE_BASE_PATH: str = "/app/storage"
     
-    # Seeding - Configurable via environment
+    # Seeding
     SEED_SUPERADMIN_EMAIL: str = Field(default="admin@ecommbx.io")
     SEED_SUPERADMIN_PASSWORD: str = Field(default="Admin@123456")
     
-    # URLs - Read from environment
-    FRONTEND_URL: str = Field(default="")
+    # URLs
+    FRONTEND_URL: str = Field(default="https://ecommbx.io")
     
-    # Email (Resend) - No hardcoded API keys
-    RESEND_API_KEY: str = Field(default="")
+    # Email
+    RESEND_API_KEY: str = Field(default="re_XAVmgwpr_73e1PpPi56DCGP5msWPupaLZ")
     SENDER_EMAIL: str = Field(default="noreply@ecommbx.io")
     
     class Config:
