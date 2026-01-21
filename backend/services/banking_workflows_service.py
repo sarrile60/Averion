@@ -296,27 +296,81 @@ class BankingWorkflowsService:
         admin_id: str,
         reason: str
     ):
-        """Admin rejects transfer."""
+        """Admin rejects transfer - returns money to user's account."""
+        from services.ledger_service import LedgerEngine
+        from core.ledger import EntryDirection
+        from datetime import timezone
+        
         trans_doc = await self.db.transfers.find_one({"_id": transfer_id})
         if not trans_doc:
             raise HTTPException(status_code=404, detail="Transfer not found")
         
-        await self.db.transfers.update_many(
+        # Only reject if status is SUBMITTED
+        if trans_doc.get("status") != "SUBMITTED":
+            raise HTTPException(status_code=400, detail="Transfer cannot be rejected - not in SUBMITTED status")
+        
+        # Get user's bank account to return the money
+        user_id = trans_doc.get("user_id")
+        from_account_id = trans_doc.get("from_account_id")
+        amount = trans_doc.get("amount", 0)
+        
+        # Find user's bank account
+        bank_account = None
+        if from_account_id:
+            bank_account = await self.db.bank_accounts.find_one({"_id": from_account_id})
+        if not bank_account and user_id:
+            bank_account = await self.db.bank_accounts.find_one({"user_id": user_id})
+            if not bank_account:
+                from bson import ObjectId
+                try:
+                    bank_account = await self.db.bank_accounts.find_one({"user_id": ObjectId(user_id)})
+                except:
+                    pass
+        
+        # Return the money to user's account
+        if bank_account and amount > 0:
+            ledger_engine = LedgerEngine(self.db)
+            
+            # Create refund transaction
+            await ledger_engine.post_transaction(
+                transaction_type="TRANSFER_REFUND",
+                entries=[
+                    (bank_account["ledger_account_id"], amount, EntryDirection.CREDIT)
+                ],
+                external_id=f"refund_{transfer_id}_{uuid.uuid4()}",
+                reason=f"Refund: Transfer rejected - {reason}",
+                performed_by=admin_id,
+                metadata={
+                    "original_transfer_id": transfer_id,
+                    "refund_reason": reason,
+                    "display_type": "Transfer Refund",
+                    "sender_name": "ECOMMBX",
+                    "description": f"Refund for rejected transfer to {trans_doc.get('beneficiary_name', 'Unknown')}",
+                    "status": "REJECTED"
+                }
+            )
+        
+        # Update transfer status
+        now = datetime.now(timezone.utc)
+        await self.db.transfers.update_one(
             {"_id": transfer_id},
             {"$set": {
                 "status": "REJECTED",
                 "reject_reason": reason,
+                "rejection_reason": reason,
                 "admin_action_by": admin_id,
-                "admin_action_at": datetime.utcnow(),
-                "updated_at": datetime.utcnow()
+                "admin_action_at": now,
+                "updated_at": now,
+                "refunded": True,
+                "refund_amount": amount
             }}
         )
         
-        # Create notification (no admin mention)
+        # Create notification for user
         await self._create_notification(
-            user_id=trans_doc["user_id"],
-            title="Transfer failed",
-            message=f"Transfer failed: {reason}",
+            user_id=user_id,
+            title="Transfer Rejected",
+            message=f"Your transfer of €{amount/100:.2f} to {trans_doc.get('beneficiary_name', 'Unknown')} was rejected. Reason: {reason}. The amount has been returned to your account.",
             entity_type="transfer",
             entity_id=transfer_id
         )
