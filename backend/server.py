@@ -999,7 +999,9 @@ async def get_transactions(
     if not account_doc:
         raise HTTPException(status_code=404, detail="Account not found")
     
-    if account_doc["user_id"] != current_user["id"] and current_user["role"] not in ["ADMIN", "SUPER_ADMIN"]:
+    # Compare user_id (handle both string and ObjectId)
+    account_user_id = str(account_doc["user_id"])
+    if account_user_id != current_user["id"] and current_user["role"] not in ["ADMIN", "SUPER_ADMIN"]:
         raise HTTPException(status_code=403, detail="Access denied")
     
     ledger_engine = LedgerEngine(db)
