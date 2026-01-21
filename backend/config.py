@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     # App
     APP_NAME: str = "ecommbx"
     APP_ENV: str = Field(default="development")
-    DEBUG: bool = Field(default=True)
+    DEBUG: bool = Field(default=False)  # Default to False for production safety
     
     # Security
     SECRET_KEY: str = Field(default="dev_secret_key_replace_in_production")
