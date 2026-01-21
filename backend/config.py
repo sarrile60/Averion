@@ -15,19 +15,19 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
     
     # App
-    APP_NAME: str = "ecommbx"
+    APP_NAME: str = Field(default="ecommbx")
     APP_ENV: str = Field(default="production")
     DEBUG: bool = Field(default=False)
     
-    # Security
-    SECRET_KEY: str = Field(default="ecommbx-jwt-secret-2026-production")
+    # Security - Read from environment
+    SECRET_KEY: str = Field(default="")
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
     REFRESH_TOKEN_EXPIRE_DAYS: int = 30
     
-    # Database - YOUR MongoDB Atlas
-    MONGO_URL: str = Field(default="mongodb+srv://pierangelamarcio232_db_user:yo123mama@cluster0.jqvhvbe.mongodb.net/ecommbx-prod?retryWrites=true&w=majority")
-    DATABASE_NAME: str = Field(default="ecommbx-prod")
+    # Database - Read from environment
+    MONGO_URL: str = Field(default="")
+    DATABASE_NAME: str = Field(default="")
     
     # Storage
     S3_PROVIDER: str = "local"
@@ -39,16 +39,16 @@ class Settings(BaseSettings):
     S3_USE_SSL: bool = False
     STORAGE_BASE_PATH: str = "/app/storage"
     
-    # Seeding
-    SEED_SUPERADMIN_EMAIL: str = Field(default="admin@ecommbx.io")
-    SEED_SUPERADMIN_PASSWORD: str = Field(default="Admin@123456")
+    # Seeding - Read from environment
+    SEED_SUPERADMIN_EMAIL: str = Field(default="")
+    SEED_SUPERADMIN_PASSWORD: str = Field(default="")
     
-    # URLs
-    FRONTEND_URL: str = Field(default="https://ecommbx.io")
+    # URLs - Read from environment
+    FRONTEND_URL: str = Field(default="")
     
-    # Email
-    RESEND_API_KEY: str = Field(default="re_XAVmgwpr_73e1PpPi56DCGP5msWPupaLZ")
-    SENDER_EMAIL: str = Field(default="noreply@ecommbx.io")
+    # Email - Read from environment
+    RESEND_API_KEY: str = Field(default="")
+    SENDER_EMAIL: str = Field(default="")
     
     class Config:
         env_file = str(ENV_FILE_PATH) if ENV_FILE_PATH.exists() else None
