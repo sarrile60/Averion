@@ -130,17 +130,24 @@ async def auto_seed_if_empty():
 async def lifespan(app: FastAPI):
     """Startup and shutdown events with error handling for production resilience."""
     try:
-        logger.info("Application starting up...")
-        logger.info(f"MONGO_URL configured: {settings.MONGO_URL[:30]}...")
+        logger.info("=" * 60)
+        logger.info("APPLICATION STARTUP - ecommbx Banking Platform")
+        logger.info("=" * 60)
+        logger.info(f"MONGO_URL: {settings.MONGO_URL[:50]}...")
         logger.info(f"DATABASE_NAME: {settings.DATABASE_NAME}")
         logger.info(f"FRONTEND_URL: {settings.FRONTEND_URL}")
         logger.info(f"RESEND_API_KEY configured: {'Yes' if settings.RESEND_API_KEY else 'No'}")
+        logger.info(f"DEBUG mode: {settings.DEBUG}")
+        logger.info("=" * 60)
+        
         await connect_db()
         
         # Auto-seed if database is empty
         await auto_seed_if_empty()
         
-        logger.info("Application startup complete")
+        logger.info("=" * 60)
+        logger.info("APPLICATION STARTUP COMPLETE")
+        logger.info("=" * 60)
     except Exception as e:
         # Log the error but don't crash - let health checks fail gracefully
         logger.error(f"Startup error (app will continue): {e}")
