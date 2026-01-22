@@ -659,6 +659,7 @@ const translations = {
     transferRejected: 'Transfer Rejected',
     transferRejectedMessage: 'Your transfer was rejected',
     refundForRejectedTransfer: 'Refund for rejected transfer',
+    refundForRejectedTransferTo: 'Refund for rejected transfer to {recipient}',
     topUpDisplay: 'Top Up',
     withdrawDisplay: 'Withdraw',
     feeDisplay: 'Fee',
