@@ -30,9 +30,13 @@ export function ProfessionalDashboard({ user, logout }) {
   // Handle navigation state to auto-open specific transaction
   useEffect(() => {
     if (location.state?.showTransferId && transactions.length > 0) {
+      const transferId = location.state.showTransferId;
       const targetTxn = transactions.find(t => 
-        t._id === location.state.showTransferId || 
-        t.transaction_id === location.state.showTransferId
+        t._id === transferId || 
+        t.transaction_id === transferId ||
+        t.id === transferId ||
+        t.metadata?.transfer_id === transferId ||
+        t.metadata?.original_transfer_id === transferId
       );
       if (targetTxn) {
         setSelectedTransaction(targetTxn);
@@ -41,9 +45,11 @@ export function ProfessionalDashboard({ user, logout }) {
       window.history.replaceState({}, document.title);
     }
     if (location.state?.showTransactionId && transactions.length > 0) {
+      const txnId = location.state.showTransactionId;
       const targetTxn = transactions.find(t => 
-        t._id === location.state.showTransactionId || 
-        t.id === location.state.showTransactionId
+        t._id === txnId || 
+        t.id === txnId ||
+        t.transaction_id === txnId
       );
       if (targetTxn) {
         setSelectedTransaction(targetTxn);
