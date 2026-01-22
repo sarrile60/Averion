@@ -19,7 +19,7 @@ export function ProfessionalDashboard({ user, logout }) {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [cryptoTxHash, setCryptoTxHash] = useState('');
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { isDark } = useTheme();
 
   useEffect(() => {
