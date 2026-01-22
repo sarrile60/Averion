@@ -1007,12 +1007,26 @@ export function ProfessionalDashboard({ user, logout }) {
               </div>
               {Object.keys(monthlySpending.categories || {}).length > 0 && (
                 <div className="space-y-1 mb-3">
-                  {Object.entries(monthlySpending.categories).slice(0, 3).map(([category, amount]) => (
-                    <div key={category} className="flex justify-between text-xs">
-                      <span className="text-gray-500">{category.replace(/_/g, ' ')}</span>
-                      <span className="text-gray-700">€{formatAmount(amount)}</span>
-                    </div>
-                  ))}
+                  {Object.entries(monthlySpending.categories).slice(0, 3).map(([category, amount]) => {
+                    // Translate category names
+                    const translateCategory = (cat) => {
+                      const catLower = cat.toLowerCase();
+                      if (catLower === 'transfers') return t('transfers');
+                      if (catLower === 'withdrawals') return t('withdrawal');
+                      if (catLower === 'fees') return t('feeDisplay');
+                      if (catLower === 'payments') return t('cardPayment');
+                      if (catLower === 'card_payments') return t('cardPayment');
+                      if (catLower === 'reversals') return t('reversal');
+                      if (catLower === 'other') return t('other');
+                      return cat.replace(/_/g, ' ');
+                    };
+                    return (
+                      <div key={category} className="flex justify-between text-xs">
+                        <span className="text-gray-500">{translateCategory(category)}</span>
+                        <span className="text-gray-700">€{formatAmount(amount)}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               )}
               <button onClick={() => navigate('/insights')} className="text-xs text-red-600 hover:text-red-700 font-medium">
