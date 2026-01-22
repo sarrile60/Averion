@@ -29,6 +29,10 @@ class Notification(BaseModel):
     action_url: Optional[str] = None
     metadata: dict = Field(default_factory=dict)
     
+    # Entity tracking for navigation
+    entity_type: Optional[str] = None
+    entity_id: Optional[str] = None
+    
     created_at: datetime = Field(default_factory=datetime.utcnow)
     
     class Config:
