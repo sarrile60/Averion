@@ -262,11 +262,24 @@ class AdvancedBankingService:
         
         results = await self.db.ledger_entries.aggregate(pipeline).to_list(100)
         
+        # Get all transaction IDs to check if corresponding transfers are rejected
+        transaction_ids = [r["_id"] for r in results if r["_id"]]
+        
+        # Find rejected transfers that match these transaction types
+        rejected_transfer_txn_ids = set()
+        if transaction_ids:
+            async for transfer in self.db.transfers.find({
+                "status": "REJECTED"
+            }):
+                if transfer.get("transaction_id"):
+                    rejected_transfer_txn_ids.add(transfer["transaction_id"])
+        
         # Category mapping
         category_mapping = {
             "WITHDRAW": "WITHDRAWALS",
             "TRANSFER": "TRANSFERS",
             "P2P_TRANSFER": "TRANSFERS",
+            "SEPA_TRANSFER": "TRANSFERS",
             "FEE": "FEES",
             "INTERNAL_TRANSFER": "TRANSFERS",
             "REVERSAL": "REVERSALS",
@@ -282,6 +295,10 @@ class AdvancedBankingService:
             txn_type = result["_id"]
             amount = result["total"]
             count = result["count"]
+            
+            # Skip if it's a type that shouldn't be in spending
+            if txn_type in ["TRANSFER_REFUND", "REFUND", "TOP_UP", "CREDIT"]:
+                continue
             
             category = category_mapping.get(txn_type, "OTHER")
             
