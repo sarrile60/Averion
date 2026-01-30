@@ -164,6 +164,45 @@ export function AdminAccountsControl() {
           </div>
         </div>
       )}
+
+      {/* Edit IBAN Modal */}
+      {showIbanModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full">
+            <h3 className="text-lg font-semibold mb-4">Edit IBAN / BIC</h3>
+            <div className="mb-4">
+              <p className="text-sm text-gray-600">User: {selectedAccount.userName}</p>
+              <p className="text-sm text-gray-600">Email: {selectedAccount.userEmail}</p>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">IBAN</label>
+                <input 
+                  type="text" 
+                  value={ibanFormData.iban} 
+                  onChange={(e) => setIbanFormData({...ibanFormData, iban: e.target.value.toUpperCase()})} 
+                  className="input-field font-mono" 
+                  placeholder="IT60X0542811101000000123456" 
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">BIC / SWIFT</label>
+                <input 
+                  type="text" 
+                  value={ibanFormData.bic} 
+                  onChange={(e) => setIbanFormData({...ibanFormData, bic: e.target.value.toUpperCase()})} 
+                  className="input-field font-mono" 
+                  placeholder="ATLASLT21" 
+                />
+              </div>
+              <div className="flex space-x-3">
+                <button onClick={() => setShowIbanModal(false)} className="flex-1 btn-secondary">Cancel</button>
+                <button onClick={handleIbanSubmit} className="flex-1 btn-primary">Save Changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
