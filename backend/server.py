@@ -1429,6 +1429,72 @@ async def check_tax_hold(user_id: str, db: AsyncIOMotorDatabase) -> Optional[dic
     return hold
 
 
+class UpdateAccountIBAN(BaseModel):
+    iban: str
+    bic: str
+
+
+@app.patch("/api/v1/admin/users/{user_id}/account-iban")
+async def update_user_account_iban(
+    user_id: str,
+    data: UpdateAccountIBAN,
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Update IBAN and BIC for a user's bank account (admin only)."""
+    import re
+    from bson import ObjectId
+    from bson.errors import InvalidId
+    
+    # Validate IBAN format
+    iban_clean = data.iban.replace(" ", "").upper()
+    if not re.match(r'^[A-Z]{2}[A-Z0-9]{13,32}$', iban_clean):
+        raise HTTPException(status_code=400, detail="Invalid IBAN format")
+    
+    # Validate BIC format
+    bic_clean = data.bic.replace(" ", "").upper()
+    if not re.match(r'^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$', bic_clean):
+        raise HTTPException(status_code=400, detail="Invalid BIC/SWIFT format")
+    
+    # Find user's bank account (try both string and ObjectId)
+    account = await db.bank_accounts.find_one({"user_id": user_id})
+    if not account:
+        try:
+            account = await db.bank_accounts.find_one({"user_id": ObjectId(user_id)})
+        except InvalidId:
+            pass
+    
+    if not account:
+        raise HTTPException(status_code=404, detail="No bank account found for this user")
+    
+    old_iban = account.get("iban", "None")
+    old_bic = account.get("bic", "None")
+    
+    # Update IBAN and BIC
+    await db.bank_accounts.update_one(
+        {"_id": account["_id"]},
+        {"$set": {
+            "iban": iban_clean,
+            "bic": bic_clean,
+            "updated_at": datetime.now(timezone.utc)
+        }}
+    )
+    
+    # Audit log
+    await create_audit_log(
+        db=db,
+        action="ACCOUNT_IBAN_UPDATED",
+        entity_type="bank_account",
+        entity_id=str(account["_id"]),
+        performed_by=current_user["id"],
+        old_value={"iban": old_iban, "bic": old_bic},
+        new_value={"iban": iban_clean, "bic": bic_clean},
+        ip_address=None
+    )
+    
+    return {"ok": True, "message": "IBAN and BIC updated successfully", "iban": iban_clean, "bic": bic_clean}
+
+
 @app.post("/api/v1/admin/users/{user_id}/tax-hold")
 async def set_tax_hold(
     user_id: str,
