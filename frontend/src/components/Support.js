@@ -354,10 +354,10 @@ function TicketDetails({ ticket, onUpdate, isAdmin = false }) {
           >
             <div className="flex items-center justify-between mb-2">
               <span className={`text-sm font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                {msg.sender_name}
+                {msg.is_staff ? 'ECOMMBX' : msg.sender_name}
                 {msg.is_staff && (
                   <span className="ml-2 text-xs bg-blue-600 text-white px-2 py-1 rounded">
-                    Staff
+                    Support
                   </span>
                 )}
               </span>
