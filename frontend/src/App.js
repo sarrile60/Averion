@@ -1685,12 +1685,19 @@ function AdminDashboard() {
     setFilteredUsers(filtered);
   };
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (retryCount = 0) => {
     try {
+      setLoading(true);
       const response = await api.get('/admin/users');
       setUsers(response.data);
     } catch (err) {
       console.error('Failed to fetch users:', err);
+      // Retry up to 2 times on failure
+      if (retryCount < 2) {
+        console.log(`Retrying fetchUsers... attempt ${retryCount + 2}`);
+        setTimeout(() => fetchUsers(retryCount + 1), 1000);
+        return;
+      }
       toast.error('Failed to fetch users');
     } finally {
       setLoading(false);
