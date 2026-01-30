@@ -1989,9 +1989,21 @@ function AdminDashboard() {
                     <h3 className="font-semibold mb-4">Accounts</h3>
                     {selectedUser.accounts.map(acc => (
                       <div key={acc.id} className="border rounded p-4 mb-4">
-                        <div className="flex justify-between">
-                          <div><p className="font-mono text-sm">{acc.iban}</p></div>
-                          <div><p className="text-xl font-bold">€{(acc.balance / 100).toFixed(2)}</p></div>
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <p className="font-mono text-sm">{acc.iban || 'Not set'}</p>
+                            {acc.bic && <p className="font-mono text-xs text-gray-500">BIC: {acc.bic}</p>}
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <button
+                              onClick={() => handleOpenEditIban(acc)}
+                              className="text-xs text-blue-600 hover:text-blue-800 font-medium transition"
+                              data-testid={`edit-iban-btn-${acc.id}`}
+                            >
+                              Edit IBAN
+                            </button>
+                            <p className="text-xl font-bold">€{(acc.balance / 100).toFixed(2)}</p>
+                          </div>
                         </div>
                         <EnhancedLedgerTools account={acc} onSuccess={() => viewUserDetails(selectedUser.user.id)} />
                       </div>
