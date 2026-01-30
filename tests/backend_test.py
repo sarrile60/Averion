@@ -222,7 +222,7 @@ class DuplicateIBANTester:
         
         # Use the same IBAN for both
         test_iban = "IT60X0542811101000000123456"
-        test_bic = "ATLASLT21"
+        test_bic = "BCITITMM"  # Valid 8-character BIC
         
         print(f"\n📋 Approving first KYC with IBAN: {test_iban}")
         result1 = self.approve_kyc_with_iban(app1_id, test_iban, test_bic)
