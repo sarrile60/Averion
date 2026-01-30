@@ -61,7 +61,7 @@ export function AdminSidebar({ activeSection, onSectionChange, user, logout }) {
       <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-gray-50">
         <div className="text-xs text-gray-600 mb-2">
           <p className="font-medium text-gray-900">{user?.email}</p>
-          <p className="text-gray-500">{user?.role}</p>
+          <p className="text-gray-500 mt-1">ECOMMBX</p>
         </div>
         <button
           onClick={logout}
