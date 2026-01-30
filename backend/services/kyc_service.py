@@ -140,7 +140,90 @@ class KYCService:
             if not re.match(r'^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$', bic_clean):
                 raise HTTPException(status_code=400, detail="Invalid BIC/SWIFT format. Must be 8 or 11 characters (e.g., ATLASLT21 or ATLASLT21XXX)")
         
-        # Update application
+        # For APPROVED status, create/update account FIRST before updating KYC status
+        if review.status == KYCStatus.APPROVED:
+            from bson import ObjectId
+            from bson.errors import InvalidId
+            from utils.common import generate_account_number
+            
+            user_id = app_doc["user_id"]
+            iban_clean = review.assigned_iban.replace(" ", "").upper()
+            bic_clean = review.assigned_bic.replace(" ", "").upper()
+            
+            # Check if user has any accounts (try both string and ObjectId)
+            account = await self.db.bank_accounts.find_one({"user_id": user_id})
+            if not account:
+                try:
+                    account = await self.db.bank_accounts.find_one({"user_id": ObjectId(user_id)})
+                except InvalidId:
+                    pass
+            
+            try:
+                if not account:
+                    # No account exists - create ledger account and bank account
+                    ledger_acc_id = f"ledger_acc_{user_id}"
+                    bank_acc_id = f"bank_acc_{user_id}"
+                    
+                    # Check if ledger account already exists (avoid duplicate key error)
+                    existing_ledger = await self.db.ledger_accounts.find_one({"_id": ledger_acc_id})
+                    if not existing_ledger:
+                        await self.db.ledger_accounts.insert_one({
+                            "_id": ledger_acc_id,
+                            "account_type": "WALLET",
+                            "user_id": user_id,
+                            "currency": "EUR",
+                            "status": "ACTIVE",
+                            "created_at": datetime.utcnow()
+                        })
+                    
+                    # Check if bank account already exists (avoid duplicate key error)
+                    existing_bank = await self.db.bank_accounts.find_one({"_id": bank_acc_id})
+                    if not existing_bank:
+                        await self.db.bank_accounts.insert_one({
+                            "_id": bank_acc_id,
+                            "user_id": user_id,
+                            "account_number": generate_account_number(),
+                            "iban": iban_clean,
+                            "bic": bic_clean,
+                            "currency": "EUR",
+                            "status": "ACTIVE",
+                            "ledger_account_id": ledger_acc_id,
+                            "opened_at": datetime.utcnow()
+                        })
+                    else:
+                        # Bank account exists but may not have IBAN - update it
+                        await self.db.bank_accounts.update_one(
+                            {"_id": bank_acc_id},
+                            {"$set": {"iban": iban_clean, "bic": bic_clean}}
+                        )
+                else:
+                    # Account exists - update IBAN and BIC
+                    await self.db.bank_accounts.update_one(
+                        {"_id": account["_id"]},
+                        {"$set": {"iban": iban_clean, "bic": bic_clean}}
+                    )
+            except Exception as e:
+                # If account creation fails, don't approve the KYC
+                raise HTTPException(
+                    status_code=500, 
+                    detail=f"Failed to create/update bank account: {str(e)}. Please try again."
+                )
+            
+            # Update user status to ACTIVE
+            result = await self.db.users.update_one(
+                {"_id": user_id},
+                {"$set": {"status": "ACTIVE"}}
+            )
+            if result.modified_count == 0:
+                try:
+                    await self.db.users.update_one(
+                        {"_id": ObjectId(user_id)},
+                        {"$set": {"status": "ACTIVE"}}
+                    )
+                except InvalidId:
+                    pass
+        
+        # NOW update the KYC application status (after account is created/updated)
         update_data = {
             "status": review.status,
             "reviewed_at": datetime.utcnow(),
@@ -154,86 +237,6 @@ class KYCService:
             {"_id": application_id},
             {"$set": update_data}
         )
-        
-        # Update user status if approved (handle both ObjectId and string)
-        if review.status == KYCStatus.APPROVED:
-            from bson import ObjectId
-            from bson.errors import InvalidId
-            
-            user_id = app_doc["user_id"]
-            
-            # Normalize IBAN and BIC
-            iban_clean = review.assigned_iban.replace(" ", "").upper()
-            bic_clean = review.assigned_bic.replace(" ", "").upper()
-            
-            # Try string first
-            result = await self.db.users.update_one(
-                {"_id": user_id},
-                {"$set": {"status": "ACTIVE"}}
-            )
-            
-            # If no document was modified, try as ObjectId
-            if result.modified_count == 0:
-                try:
-                    await self.db.users.update_one(
-                        {"_id": ObjectId(user_id)},
-                        {"$set": {"status": "ACTIVE"}}
-                    )
-                except InvalidId:
-                    pass
-            
-            # CRITICAL: Create account with IBAN or assign IBAN to existing accounts
-            from utils.common import generate_sandbox_iban, generate_bic, generate_account_number
-            from core.ledger import AccountType
-            
-            # Check if user has any accounts
-            account = await self.db.bank_accounts.find_one({"user_id": user_id})
-            
-            # Also try ObjectId
-            if not account:
-                try:
-                    account = await self.db.bank_accounts.find_one({"user_id": ObjectId(user_id)})
-                except InvalidId:
-                    pass
-            
-            if not account:
-                # No account exists - create one with IBAN and BIC
-                from services.ledger_service import LedgerEngine
-                from schemas.banking import BankAccount
-                
-                # Create ledger account
-                ledger_acc_id = f"ledger_acc_{user_id}"
-                await self.db.ledger_accounts.insert_one({
-                    "_id": ledger_acc_id,
-                    "account_type": "WALLET",
-                    "user_id": user_id,
-                    "currency": "EUR",
-                    "status": "ACTIVE",
-                    "created_at": datetime.utcnow()
-                })
-                
-                # Create bank account WITH both IBAN and BIC
-                bank_acc_id = f"bank_acc_{user_id}"
-                await self.db.bank_accounts.insert_one({
-                    "_id": bank_acc_id,
-                    "user_id": user_id,
-                    "account_number": generate_account_number(),
-                    "iban": iban_clean,
-                    "bic": bic_clean,
-                    "currency": "EUR",
-                    "status": "ACTIVE",
-                    "ledger_account_id": ledger_acc_id,
-                    "opened_at": datetime.utcnow()
-                })
-            else:
-                # Account exists - always update IBAN and BIC to ensure they are set
-                await self.db.bank_accounts.update_one(
-                    {"_id": account["_id"]},
-                    {"$set": {
-                        "iban": iban_clean,
-                        "bic": bic_clean
-                    }}
-                )
         
         app_doc = await self.db.kyc_applications.find_one({"_id": application_id})
         return KYCApplication(**serialize_doc(app_doc))
