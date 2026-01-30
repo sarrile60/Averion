@@ -15,7 +15,7 @@ ADMIN_PASSWORD = "Admin@123456"
 
 # Test IBAN and BIC
 TEST_IBAN = "IT60X0542811101000000123456"
-TEST_BIC = "ATLASLT21"
+TEST_BIC = "ATLSLT21"  # 8 characters (valid BIC format)
 
 
 class KYCApprovalTester:
