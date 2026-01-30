@@ -40,6 +40,7 @@ from pydantic import BaseModel, Field
 from core.ledger import EntryDirection
 from core.auth import hash_password, verify_password
 from bson import ObjectId
+from utils.common import serialize_doc
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
