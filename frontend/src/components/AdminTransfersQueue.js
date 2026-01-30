@@ -83,7 +83,19 @@ export function AdminTransfersQueue() {
             <div className="flex justify-between"><dt className="text-gray-600">Amount:</dt><dd className="font-bold">€{(selectedTransfer.amount/100).toFixed(2)}</dd></div>
             <div className="flex justify-between"><dt className="text-gray-600">Details:</dt><dd>{selectedTransfer.details}</dd></div>
             {selectedTransfer.reference_number && <div className="flex justify-between"><dt className="text-gray-600">Reference:</dt><dd>{selectedTransfer.reference_number}</dd></div>}
-            <div className="flex justify-between"><dt className="text-gray-600">Status:</dt><dd><span className="badge badge-warning">{selectedTransfer.status}</span></dd></div>
+            <div className="flex justify-between"><dt className="text-gray-600">Status:</dt><dd><span className={`badge ${selectedTransfer.status === 'REJECTED' ? 'badge-error' : selectedTransfer.status === 'COMPLETED' ? 'badge-success' : 'badge-warning'}`}>{selectedTransfer.status}</span></dd></div>
+            {selectedTransfer.reject_reason && (
+              <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <dt className="text-red-700 font-medium text-sm mb-1">Rejection Reason:</dt>
+                <dd className="text-red-600 text-sm">{selectedTransfer.reject_reason}</dd>
+              </div>
+            )}
+            {selectedTransfer.admin_action_by && (
+              <div className="flex justify-between mt-2"><dt className="text-gray-600">Processed by:</dt><dd className="text-xs text-gray-500">{selectedTransfer.admin_action_by}</dd></div>
+            )}
+            {selectedTransfer.admin_action_at && (
+              <div className="flex justify-between"><dt className="text-gray-600">Processed at:</dt><dd className="text-xs text-gray-500">{new Date(selectedTransfer.admin_action_at).toLocaleString()}</dd></div>
+            )}
           </dl>
           
           {selectedTransfer.status === 'SUBMITTED' && (
