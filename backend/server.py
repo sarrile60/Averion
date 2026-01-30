@@ -1299,6 +1299,7 @@ async def get_user_details(
             "id": str(acc["_id"]),
             "account_number": acc["account_number"],
             "iban": acc.get("iban"),
+            "bic": acc.get("bic"),
             "balance": balance,
             "currency": acc["currency"],
             "status": acc["status"]
