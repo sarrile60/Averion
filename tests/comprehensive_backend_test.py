@@ -51,7 +51,7 @@ class ComprehensiveBackendTester:
                 self.log_result(
                     "Health Check Endpoint",
                     True,
-                    f"Health check passed at /health",
+                    f"Health check passed at /api/health",
                     {"status_code": response.status_code, "response": data}
                 )
                 return True
