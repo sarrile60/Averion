@@ -1630,6 +1630,8 @@ function AdminDashboard() {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [roleFilter, setRoleFilter] = useState('all');
+  const [taxHoldFilter, setTaxHoldFilter] = useState('all'); // 'all', 'with_tax_hold', 'no_tax_hold'
+  const [notesFilter, setNotesFilter] = useState('all'); // 'all', 'with_notes', 'no_notes'
   
   // Tax Hold Modal State
   const [showTaxHoldModal, setShowTaxHoldModal] = useState(false);
