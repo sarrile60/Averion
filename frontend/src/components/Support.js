@@ -234,11 +234,13 @@ function CreateTicketForm({ onClose, onSuccess }) {
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             required
-            rows={4}
-            className={`input-enhanced w-full ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : ''}`}
+            rows={5}
+            className={`input-enhanced w-full resize-y min-h-[120px] max-h-[400px] ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : ''}`}
+            style={{ resize: 'vertical' }}
             placeholder={t('provideDetails')}
             data-testid="ticket-description"
           />
+          <p className="text-xs text-gray-500 mt-1">Drag the bottom edge to resize</p>
         </div>
         <div className="flex justify-end space-x-3">
           <button
