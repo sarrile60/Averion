@@ -566,6 +566,41 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false }) {
           </div>
         </div>
       )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" data-testid="delete-ticket-modal">
+          <div className={`p-6 rounded-xl shadow-xl max-w-md w-full mx-4 ${isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white'}`}>
+            <h3 className={`text-lg font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              Delete Ticket
+            </h3>
+            <p className={`mb-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              Are you sure you want to permanently delete this ticket? This action cannot be undone.
+            </p>
+            <p className={`text-sm mb-6 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+              <strong>Subject:</strong> {ticket.subject}
+            </p>
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={() => setShowDeleteConfirm(false)}
+                className={`px-4 py-2 rounded-lg border transition ${isDark ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 hover:bg-gray-50'}`}
+                disabled={deleting}
+                data-testid="cancel-delete-ticket"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteTicket}
+                disabled={deleting}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50"
+                data-testid="confirm-delete-ticket"
+              >
+                {deleting ? 'Deleting...' : 'Delete Ticket'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
