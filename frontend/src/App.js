@@ -552,7 +552,7 @@ function LoginPage() {
                 className="w-full py-3 px-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-red-500/30 transition-all duration-300 disabled:opacity-50"
                 data-testid="login-button"
               >
-                {loading ? t('signingIn') : t('signIn')}
+                {loading ? (t('signingIn') || 'Signing in...') : (t('signIn') || 'Sign In')}
               </button>
           </form>
 
