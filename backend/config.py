@@ -40,6 +40,11 @@ class Settings(BaseSettings):
     S3_USE_SSL: bool = False
     STORAGE_BASE_PATH: str = "/app/storage"
     
+    # Cloudinary Configuration
+    CLOUDINARY_CLOUD_NAME: str = Field(default="")
+    CLOUDINARY_API_KEY: str = Field(default="")
+    CLOUDINARY_API_SECRET: str = Field(default="")
+    
     # Seeding - Read from environment
     SEED_SUPERADMIN_EMAIL: str = Field(default="")
     SEED_SUPERADMIN_PASSWORD: str = Field(default="")
