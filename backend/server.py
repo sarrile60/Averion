@@ -1256,18 +1256,28 @@ async def get_all_users(
     current_user: dict = Depends(require_admin),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
-    """Get all users (admin)."""
+    """Get all users (admin) with tax hold status and notes."""
     cursor = db.users.find({}).sort("created_at", -1).limit(100)
     users = []
+    
+    # Get all active tax holds for quick lookup
+    tax_holds_cursor = db.tax_holds.find({"is_active": True})
+    tax_hold_user_ids = set()
+    async for hold in tax_holds_cursor:
+        tax_hold_user_ids.add(hold["user_id"])
+    
     async for doc in cursor:
+        user_id = str(doc["_id"])
         users.append({
-            "id": str(doc["_id"]),
+            "id": user_id,
             "email": doc["email"],
             "first_name": doc["first_name"],
             "last_name": doc["last_name"],
             "role": doc["role"],
             "status": doc["status"],
-            "created_at": doc["created_at"].isoformat()
+            "created_at": doc["created_at"].isoformat(),
+            "has_tax_hold": user_id in tax_hold_user_ids,
+            "admin_notes": doc.get("admin_notes", "")
         })
     return users
 
