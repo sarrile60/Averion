@@ -2356,6 +2356,64 @@ async def update_ticket_message(
     return serialize_doc(ticket_doc)
 
 
+@app.delete("/api/v1/admin/tickets/{ticket_id}/messages/{message_index}")
+async def delete_ticket_message(
+    ticket_id: str,
+    message_index: int,
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Delete a specific message from a ticket (admin only)."""
+    from datetime import datetime, timezone
+    
+    # Find the ticket
+    ticket_doc = await db.tickets.find_one({"_id": ticket_id})
+    if not ticket_doc:
+        raise HTTPException(status_code=404, detail="Ticket not found")
+    
+    messages = ticket_doc.get("messages", [])
+    if message_index < 0 or message_index >= len(messages):
+        raise HTTPException(status_code=404, detail="Message not found")
+    
+    # Store the message content for audit log
+    deleted_message = messages[message_index]
+    deleted_content = deleted_message.get("content", "")
+    deleted_sender = deleted_message.get("sender_name", "Unknown")
+    
+    # Remove the message from the array
+    messages.pop(message_index)
+    
+    # Update the ticket with the modified messages array
+    await db.tickets.update_one(
+        {"_id": ticket_id},
+        {"$set": {
+            "messages": messages,
+            "updated_at": datetime.now(timezone.utc)
+        }}
+    )
+    
+    # Audit log
+    await create_audit_log(
+        db=db,
+        action="TICKET_MESSAGE_DELETED",
+        entity_type="ticket",
+        entity_id=ticket_id,
+        description=f"Message from '{deleted_sender}' was deleted from ticket",
+        performed_by=current_user["id"],
+        performed_by_role=current_user["role"],
+        performed_by_email=current_user["email"],
+        metadata={
+            "message_index": message_index,
+            "deleted_sender": deleted_sender,
+            "deleted_content_preview": deleted_content[:100] if len(deleted_content) > 100 else deleted_content
+        }
+    )
+    
+    # Return updated ticket
+    ticket_doc = await db.tickets.find_one({"_id": ticket_id})
+    return serialize_doc(ticket_doc)
+
+
 @app.delete("/api/v1/admin/tickets/{ticket_id}")
 async def delete_ticket(
     ticket_id: str,
