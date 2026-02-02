@@ -364,7 +364,7 @@ function SignupPage() {
                 className="font-medium text-red-500 hover:text-red-600"
                 data-testid="goto-login"
               >
-                {t('signIn')}
+                {t('signIn') || 'Sign In'}
               </button>
             </p>
           </div>
