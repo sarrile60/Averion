@@ -35,14 +35,14 @@ class ComprehensiveBackendTester:
         print()
 
     def test_health_check(self) -> bool:
-        """Test health check endpoint at /health (NOT /api/v1/health)."""
+        """Test health check endpoint at /api/health."""
         print("=" * 60)
         print("TEST 1: HEALTH CHECK ENDPOINT")
         print("=" * 60)
         
         try:
             response = requests.get(
-                f"{self.base_url}/health",
+                f"{self.base_url}/api/health",
                 timeout=10
             )
             
