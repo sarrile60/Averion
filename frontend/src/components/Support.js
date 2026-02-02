@@ -482,8 +482,9 @@ function TicketDetails({ ticket, onUpdate, isAdmin = false }) {
                 <textarea
                   value={editedMessageContent}
                   onChange={(e) => setEditedMessageContent(e.target.value)}
-                  rows={3}
-                  className={`input-enhanced w-full text-sm ${isDark ? 'bg-gray-600 border-gray-500 text-white' : ''}`}
+                  rows={4}
+                  className={`input-enhanced w-full text-sm resize-y min-h-[80px] max-h-[300px] ${isDark ? 'bg-gray-600 border-gray-500 text-white' : ''}`}
+                  style={{ resize: 'vertical' }}
                   autoFocus
                   data-testid={`edit-message-textarea-${idx}`}
                 />
