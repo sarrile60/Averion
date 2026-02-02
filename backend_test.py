@@ -272,6 +272,82 @@ class APITester:
             self.log_test("Admin Support Tickets", False, str(e))
             return False
 
+    def test_admin_analytics_overview(self):
+        """Test admin analytics overview endpoint"""
+        if not self.admin_token:
+            self.log_test("Admin Analytics Overview", False, "No admin token")
+            return False
+        
+        try:
+            response = requests.get(
+                f"{BASE_URL}/admin/analytics/overview",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                timeout=10
+            )
+            if response.status_code == 200:
+                data = response.json()
+                # Verify expected structure
+                required_keys = ["users", "kyc", "accounts", "transfers", "tickets", "cards"]
+                missing_keys = [key for key in required_keys if key not in data]
+                if missing_keys:
+                    self.log_test("Admin Analytics Overview", False, f"Missing keys: {missing_keys}")
+                    return False
+                
+                # Verify nested structure
+                if "total" not in data["users"] or "active" not in data["users"]:
+                    self.log_test("Admin Analytics Overview", False, "Invalid users structure")
+                    return False
+                
+                self.log_test("Admin Analytics Overview", True)
+                return True
+            else:
+                self.log_test("Admin Analytics Overview", False, f"Status {response.status_code}")
+                return False
+        except Exception as e:
+            self.log_test("Admin Analytics Overview", False, str(e))
+            return False
+
+    def test_admin_rejected_transfers(self):
+        """Test admin rejected transfers endpoint (verify rejection reason is returned)"""
+        if not self.admin_token:
+            self.log_test("Admin Rejected Transfers", False, "No admin token")
+            return False
+        
+        try:
+            response = requests.get(
+                f"{BASE_URL}/admin/transfers?status=REJECTED",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                timeout=10
+            )
+            if response.status_code == 200:
+                data = response.json()
+                if "data" in data and isinstance(data["data"], list):
+                    rejected_count = len(data["data"])
+                    # Check if any rejected transfer has reject_reason field
+                    has_reason_field = False
+                    if rejected_count > 0:
+                        for transfer in data["data"]:
+                            if "reject_reason" in transfer:
+                                has_reason_field = True
+                                break
+                    
+                    if rejected_count > 0 and not has_reason_field:
+                        self.log_test(f"Admin Rejected Transfers ({rejected_count} rejected)", False, 
+                                    "reject_reason field missing in rejected transfers")
+                        return False
+                    
+                    self.log_test(f"Admin Rejected Transfers ({rejected_count} rejected)", True)
+                    return True
+                else:
+                    self.log_test("Admin Rejected Transfers", False, "Invalid response format")
+                    return False
+            else:
+                self.log_test("Admin Rejected Transfers", False, f"Status {response.status_code}")
+                return False
+        except Exception as e:
+            self.log_test("Admin Rejected Transfers", False, str(e))
+            return False
+
     def print_summary(self):
         """Print test summary"""
         print("\n" + "=" * 60)
