@@ -518,19 +518,23 @@ function TicketDetails({ ticket, onUpdate, isAdmin = false }) {
             <textarea
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              rows={3}
+              rows={4}
               placeholder={t('typeYourMessage')}
-              className={`input-enhanced w-full ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : ''}`}
+              className={`input-enhanced w-full resize-y min-h-[100px] max-h-[400px] ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : ''}`}
+              style={{ resize: 'vertical' }}
               data-testid="ticket-reply"
             />
-            <button
-              onClick={handleSendMessage}
-              disabled={sending || !newMessage.trim()}
-              className="btn-primary btn-glow"
-              data-testid="send-message"
-            >
-              {sending ? t('sending') : t('sendMessage')}
-            </button>
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-gray-500">Drag the bottom edge to resize</span>
+              <button
+                onClick={handleSendMessage}
+                disabled={sending || !newMessage.trim()}
+                className="btn-primary btn-glow"
+                data-testid="send-message"
+              >
+                {sending ? t('sending') : t('sendMessage')}
+              </button>
+            </div>
           </div>
         </div>
       )}
