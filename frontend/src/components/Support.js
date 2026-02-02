@@ -153,6 +153,10 @@ export function SupportTickets({ isAdmin = false }) {
               <TicketDetails
                 ticket={selectedTicket}
                 onUpdate={fetchTickets}
+                onDelete={(ticketId) => {
+                  setSelectedTicket(null);
+                  fetchTickets();
+                }}
                 isAdmin={isAdmin}
               />
             ) : (
