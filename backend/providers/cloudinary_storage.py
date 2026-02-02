@@ -1,26 +1,26 @@
 """Cloudinary storage provider implementation."""
 
-import os
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 from typing import BinaryIO, Optional
 from datetime import datetime
 from .storage_provider import StorageProvider, FileMetadata
+from config import settings
 
 
 class CloudinaryStorage(StorageProvider):
     """Cloudinary-based storage provider for permanent file storage."""
     
     def __init__(self):
-        """Initialize Cloudinary with environment variables."""
+        """Initialize Cloudinary with settings."""
         cloudinary.config(
-            cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
-            api_key=os.getenv("CLOUDINARY_API_KEY"),
-            api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+            cloud_name=settings.CLOUDINARY_CLOUD_NAME,
+            api_key=settings.CLOUDINARY_API_KEY,
+            api_secret=settings.CLOUDINARY_API_SECRET,
             secure=True
         )
-        self.cloud_name = os.getenv("CLOUDINARY_CLOUD_NAME")
+        self.cloud_name = settings.CLOUDINARY_CLOUD_NAME
     
     def upload_fileobj(
         self,
