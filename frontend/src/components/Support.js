@@ -278,6 +278,8 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false }) {
   const [savingEdit, setSavingEdit] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [deletingMessageIndex, setDeletingMessageIndex] = useState(null);
+  const [confirmDeleteMessage, setConfirmDeleteMessage] = useState(false);
   const { t } = useLanguage();
   const { isDark } = useTheme();
 
@@ -287,6 +289,8 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false }) {
     setEditedSubject(ticket.subject);
     setEditingMessageIndex(null);
     setEditedMessageContent('');
+    setDeletingMessageIndex(null);
+    setConfirmDeleteMessage(false);
   }, [ticket.id, ticket.subject]);
 
   const handleSendMessage = async () => {
