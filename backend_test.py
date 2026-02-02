@@ -719,6 +719,48 @@ class APITester:
             self.log_test("Admin Tax Hold Management", False, str(e))
             return False
 
+    def test_kyc_document_placeholder(self):
+        """Test KYC document endpoint returns placeholder SVG for missing files"""
+        try:
+            # Test with a non-existent document path
+            fake_document_key = "kyc/nonexistent/fake_document.jpg"
+            response = requests.get(
+                f"{BASE_URL}/kyc/documents/{fake_document_key}",
+                timeout=10
+            )
+            
+            # Should return 200 with SVG placeholder instead of 404
+            if response.status_code != 200:
+                self.log_test("KYC Document Placeholder", False, 
+                            f"Expected 200, got {response.status_code}")
+                return False
+            
+            # Check content type is SVG
+            content_type = response.headers.get('Content-Type', '')
+            if 'image/svg+xml' not in content_type:
+                self.log_test("KYC Document Placeholder", False, 
+                            f"Expected SVG content type, got {content_type}")
+                return False
+            
+            # Check response contains placeholder text
+            content = response.text
+            if 'Document Unavailable' not in content:
+                self.log_test("KYC Document Placeholder", False, 
+                            "Placeholder SVG missing 'Document Unavailable' text")
+                return False
+            
+            if 'no longer on the server' not in content:
+                self.log_test("KYC Document Placeholder", False, 
+                            "Placeholder SVG missing explanation text")
+                return False
+            
+            self.log_test("KYC Document Placeholder (Returns SVG for missing files)", True)
+            return True
+            
+        except Exception as e:
+            self.log_test("KYC Document Placeholder", False, str(e))
+            return False
+
     def print_summary(self):
         """Print test summary"""
         print("\n" + "=" * 60)
