@@ -264,7 +264,7 @@ function CreateTicketForm({ onClose, onSuccess }) {
   );
 }
 
-function TicketDetails({ ticket, onUpdate, isAdmin = false }) {
+function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false }) {
   const [newMessage, setNewMessage] = useState('');
   const [sending, setSending] = useState(false);
   const [editingSubject, setEditingSubject] = useState(false);
@@ -272,6 +272,8 @@ function TicketDetails({ ticket, onUpdate, isAdmin = false }) {
   const [editingMessageIndex, setEditingMessageIndex] = useState(null);
   const [editedMessageContent, setEditedMessageContent] = useState('');
   const [savingEdit, setSavingEdit] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const { t } = useLanguage();
   const { isDark } = useTheme();
 
