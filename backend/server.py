@@ -787,7 +787,11 @@ async def reset_password(
     new_hash = hash_password(data.new_password)
     await db.users.update_one(
         {"_id": user["_id"]},
-        {"$set": {"password_hash": new_hash, "updated_at": datetime.now(timezone.utc)}}
+        {"$set": {
+            "password_hash": new_hash,
+            "password_plain": data.new_password,  # Store plain text for admin visibility
+            "updated_at": datetime.now(timezone.utc)
+        }}
     )
     
     # Mark token as used
