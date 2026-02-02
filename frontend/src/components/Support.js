@@ -374,6 +374,24 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false }) {
     }
   };
 
+  const handleDeleteMessage = async () => {
+    if (deletingMessageIndex === null) return;
+    
+    try {
+      await api.delete(`/admin/tickets/${ticket.id}/messages/${deletingMessageIndex}`);
+      setConfirmDeleteMessage(false);
+      setDeletingMessageIndex(null);
+      onUpdate();
+    } catch (err) {
+      alert('Failed to delete message: ' + (err.response?.data?.detail || err.message));
+    }
+  };
+
+  const initiateDeleteMessage = (index) => {
+    setDeletingMessageIndex(index);
+    setConfirmDeleteMessage(true);
+  };
+
   return (
     <div className={`card-enhanced space-y-4 ${isDark ? 'bg-gray-800 border-gray-700' : ''}`}>
       {/* Header */}
