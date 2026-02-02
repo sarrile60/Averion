@@ -180,8 +180,9 @@ app.add_middleware(
 
 
 # Dependencies
-def get_storage() -> LocalS3Storage:
-    return LocalS3Storage(base_path=settings.STORAGE_BASE_PATH)
+def get_storage() -> CloudinaryStorage:
+    """Get Cloudinary storage provider for permanent file storage."""
+    return CloudinaryStorage()
 
 
 async def get_current_user(
