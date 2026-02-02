@@ -1658,6 +1658,11 @@ function AdminDashboard() {
   
   // Delete user state
   const [deleteUserLoading, setDeleteUserLoading] = useState(false);
+  
+  // User notes state
+  const [userNotes, setUserNotes] = useState('');
+  const [editingNotes, setEditingNotes] = useState(false);
+  const [savingNotes, setSavingNotes] = useState(false);
 
   useEffect(() => {
     fetchUsers();
