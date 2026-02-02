@@ -10,6 +10,7 @@ export function AdminKYCReview() {
   const [selectedApp, setSelectedApp] = useState(null);
   const [loading, setLoading] = useState(true);
   const [viewingDocument, setViewingDocument] = useState(null);
+  const [downloadingDocument, setDownloadingDocument] = useState(false);
   const [reviewData, setReviewData] = useState({
     status: '',
     review_notes: '',
@@ -33,6 +34,47 @@ export function AdminKYCReview() {
       toast.error('Failed to load applications');
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Function to download document properly
+  const handleDownloadDocument = async (doc) => {
+    if (downloadingDocument) return;
+    
+    setDownloadingDocument(true);
+    try {
+      const documentUrl = `${process.env.REACT_APP_BACKEND_URL}/api/v1/kyc/documents/${doc.file_key}`;
+      
+      // Fetch the document
+      const response = await fetch(documentUrl, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch document');
+      }
+      
+      // Get the blob
+      const blob = await response.blob();
+      
+      // Create a download link
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = doc.file_name || `document_${doc.file_key}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      toast.success('Document downloaded successfully');
+    } catch (err) {
+      console.error('Download error:', err);
+      toast.error('Failed to download document. Please try again.');
+    } finally {
+      setDownloadingDocument(false);
     }
   };
 
