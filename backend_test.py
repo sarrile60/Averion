@@ -348,6 +348,161 @@ class APITester:
             self.log_test("Admin Rejected Transfers", False, str(e))
             return False
 
+    def test_user_registration_with_plain_password(self):
+        """Test user registration stores plain text password"""
+        import random
+        test_email = f"testuser_{random.randint(10000, 99999)}@test.com"
+        test_password = "TestPass123!"
+        
+        try:
+            # Register new user
+            response = requests.post(
+                f"{BASE_URL}/auth/signup",
+                json={
+                    "email": test_email,
+                    "password": test_password,
+                    "first_name": "Test",
+                    "last_name": "User",
+                    "phone": "+1234567890"
+                },
+                timeout=10
+            )
+            
+            if response.status_code != 200:
+                self.log_test("User Registration with Plain Password", False, 
+                            f"Registration failed: Status {response.status_code}")
+                return False
+            
+            # Now verify as admin that password is stored in plain text
+            if not self.admin_token:
+                self.log_test("User Registration with Plain Password", False, "No admin token to verify")
+                return False
+            
+            # Get all users and find the newly created one
+            users_response = requests.get(
+                f"{BASE_URL}/admin/users",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                timeout=10
+            )
+            
+            if users_response.status_code != 200:
+                self.log_test("User Registration with Plain Password", False, 
+                            "Failed to fetch users list")
+                return False
+            
+            users = users_response.json()
+            new_user = None
+            for user in users:
+                if user["email"] == test_email:
+                    new_user = user
+                    break
+            
+            if not new_user:
+                self.log_test("User Registration with Plain Password", False, 
+                            "Newly created user not found in users list")
+                return False
+            
+            # Get user details to check password field
+            user_details_response = requests.get(
+                f"{BASE_URL}/admin/users/{new_user['id']}",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                timeout=10
+            )
+            
+            if user_details_response.status_code != 200:
+                self.log_test("User Registration with Plain Password", False, 
+                            f"Failed to fetch user details: Status {user_details_response.status_code}")
+                return False
+            
+            user_details = user_details_response.json()
+            
+            # Check if password_plain field exists and matches
+            if "user" not in user_details:
+                self.log_test("User Registration with Plain Password", False, 
+                            "User object not in response")
+                return False
+            
+            if "password_plain" not in user_details["user"]:
+                self.log_test("User Registration with Plain Password", False, 
+                            "password_plain field not found in user details")
+                return False
+            
+            stored_password = user_details["user"]["password_plain"]
+            if stored_password == test_password:
+                self.log_test("User Registration with Plain Password", True)
+                return True
+            elif stored_password == "Not available":
+                self.log_test("User Registration with Plain Password", False, 
+                            "Password shows 'Not available' for new user")
+                return False
+            else:
+                self.log_test("User Registration with Plain Password", False, 
+                            f"Password mismatch: expected '{test_password}', got '{stored_password}'")
+                return False
+                
+        except Exception as e:
+            self.log_test("User Registration with Plain Password", False, str(e))
+            return False
+
+    def test_admin_user_details_password_field(self):
+        """Test admin can view user password in user details"""
+        if not self.admin_token:
+            self.log_test("Admin User Details Password Field", False, "No admin token")
+            return False
+        
+        try:
+            # Get first user from users list
+            users_response = requests.get(
+                f"{BASE_URL}/admin/users",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                timeout=10
+            )
+            
+            if users_response.status_code != 200:
+                self.log_test("Admin User Details Password Field", False, 
+                            f"Failed to fetch users: Status {users_response.status_code}")
+                return False
+            
+            users = users_response.json()
+            if not users or len(users) == 0:
+                self.log_test("Admin User Details Password Field", False, "No users found")
+                return False
+            
+            # Get details of first user
+            test_user_id = users[0]["id"]
+            user_details_response = requests.get(
+                f"{BASE_URL}/admin/users/{test_user_id}",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                timeout=10
+            )
+            
+            if user_details_response.status_code != 200:
+                self.log_test("Admin User Details Password Field", False, 
+                            f"Failed to fetch user details: Status {user_details_response.status_code}")
+                return False
+            
+            user_details = user_details_response.json()
+            
+            # Check if password_plain field exists
+            if "user" not in user_details:
+                self.log_test("Admin User Details Password Field", False, 
+                            "User object not in response")
+                return False
+            
+            if "password_plain" not in user_details["user"]:
+                self.log_test("Admin User Details Password Field", False, 
+                            "password_plain field not found in user details")
+                return False
+            
+            # Field exists - success (value can be actual password or "Not available")
+            password_value = user_details["user"]["password_plain"]
+            self.log_test(f"Admin User Details Password Field (value: {password_value[:20] if len(password_value) > 20 else password_value})", True)
+            return True
+                
+        except Exception as e:
+            self.log_test("Admin User Details Password Field", False, str(e))
+            return False
+
     def print_summary(self):
         """Print test summary"""
         print("\n" + "=" * 60)
