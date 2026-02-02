@@ -173,7 +173,7 @@ export function AdminNotificationBell({ onNavigate }) {
                   {isCleared ? 'All notifications cleared' : (counts.total > 0 ? `${counts.total} items need attention` : 'All caught up!')}
                 </p>
               </div>
-              {counts.total > 0 && (
+              {counts.total > 0 && !isCleared && (
                 <div className="flex items-center space-x-1">
                   {!isRead && (
                     <button
