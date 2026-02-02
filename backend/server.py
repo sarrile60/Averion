@@ -2321,6 +2321,45 @@ async def update_ticket_message(
     return serialize_doc(ticket_doc)
 
 
+@app.delete("/api/v1/admin/tickets/{ticket_id}")
+async def delete_ticket(
+    ticket_id: str,
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Permanently delete a support ticket (admin only)."""
+    # Find the ticket first
+    ticket_doc = await db.tickets.find_one({"_id": ticket_id})
+    if not ticket_doc:
+        raise HTTPException(status_code=404, detail="Ticket not found")
+    
+    # Delete the ticket
+    result = await db.tickets.delete_one({"_id": ticket_id})
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=500, detail="Failed to delete ticket")
+    
+    # Audit log
+    await create_audit_log(
+        db=db,
+        action="TICKET_DELETED",
+        entity_type="ticket",
+        entity_id=ticket_id,
+        description=f"Support ticket '{ticket_doc.get('subject', 'Unknown')}' was permanently deleted",
+        performed_by=current_user["id"],
+        performed_by_role=current_user["role"],
+        performed_by_email=current_user["email"],
+        metadata={
+            "ticket_subject": ticket_doc.get("subject"),
+            "ticket_status": ticket_doc.get("status"),
+            "user_id": ticket_doc.get("user_id"),
+            "messages_count": len(ticket_doc.get("messages", []))
+        }
+    )
+    
+    return {"message": "Ticket deleted successfully", "ticket_id": ticket_id}
+
+
 # ==================== ADMIN ANALYTICS ====================
 
 @app.get("/api/v1/admin/analytics/overview")
