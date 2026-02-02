@@ -351,6 +351,21 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false }) {
     setEditedMessageContent('');
   };
 
+  const handleDeleteTicket = async () => {
+    setDeleting(true);
+    try {
+      await api.delete(`/admin/tickets/${ticket.id}`);
+      setShowDeleteConfirm(false);
+      if (onDelete) {
+        onDelete(ticket.id);
+      }
+    } catch (err) {
+      alert('Failed to delete ticket: ' + (err.response?.data?.detail || err.message));
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   return (
     <div className={`card-enhanced space-y-4 ${isDark ? 'bg-gray-800 border-gray-700' : ''}`}>
       {/* Header */}
