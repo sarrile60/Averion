@@ -196,15 +196,23 @@ export function KYCApplication() {
             {application.submitted_at && (
               <div>
                 <span className="text-sm text-gray-600">{t('submitted')}:</span>
-                <p className="text-sm">{new Date(application.submitted_at + (application.submitted_at.endsWith('Z') ? '' : 'Z')).toLocaleString(undefined, { 
-                  year: 'numeric',
-                  month: '2-digit', 
-                  day: '2-digit',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  second: '2-digit',
-                  hour12: true
-                })}</p>
+                <p className="text-sm">{(() => {
+                  try {
+                    const date = new Date(application.submitted_at);
+                    if (isNaN(date.getTime())) return 'Date unavailable';
+                    return date.toLocaleString(undefined, { 
+                      year: 'numeric',
+                      month: '2-digit', 
+                      day: '2-digit',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      second: '2-digit',
+                      hour12: true
+                    });
+                  } catch (e) {
+                    return 'Date unavailable';
+                  }
+                })()}</p>
               </div>
             )}
           </div>
