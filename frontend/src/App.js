@@ -2201,18 +2201,28 @@ function AdminDashboard() {
         <div className="p-8">
           {activeSection === 'users' && (
             <div className="mb-6 card p-4">
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-5 gap-4">
                 <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search..." className="input-field" data-testid="user-search" />
-                <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="input-field">
+                <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="input-field" data-testid="status-filter">
                   <option value="all">All Status</option>
                   <option value="ACTIVE">Active</option>
                   <option value="PENDING">Pending</option>
                   <option value="DISABLED">Disabled</option>
                 </select>
-                <select value={roleFilter} onChange={(e) => setRoleFilter(e.target.value)} className="input-field">
+                <select value={roleFilter} onChange={(e) => setRoleFilter(e.target.value)} className="input-field" data-testid="role-filter">
                   <option value="all">All Roles</option>
                   <option value="CUSTOMER">Customer</option>
                   <option value="ADMIN">Admin</option>
+                </select>
+                <select value={taxHoldFilter} onChange={(e) => setTaxHoldFilter(e.target.value)} className="input-field" data-testid="tax-hold-filter">
+                  <option value="all">All Tax Status</option>
+                  <option value="with_tax_hold">🔴 With Tax Hold</option>
+                  <option value="no_tax_hold">✅ No Tax Hold</option>
+                </select>
+                <select value={notesFilter} onChange={(e) => setNotesFilter(e.target.value)} className="input-field" data-testid="notes-filter">
+                  <option value="all">All Notes</option>
+                  <option value="with_notes">📝 Has Notes</option>
+                  <option value="no_notes">No Notes</option>
                 </select>
               </div>
             </div>
