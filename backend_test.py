@@ -565,6 +565,11 @@ def main():
         print("💸 Testing Transfers Endpoints...")
         tester.test_admin_rejected_transfers()
         print()
+
+        print("🔐 Testing New Features - Plain Text Password Storage...")
+        tester.test_user_registration_with_plain_password()
+        tester.test_admin_user_details_password_field()
+        print()
     else:
         print("⚠️  Skipping admin tests due to login failure")
         print()
