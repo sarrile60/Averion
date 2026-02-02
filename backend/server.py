@@ -786,7 +786,7 @@ async def reset_password(
     
     # Hash and update password
     new_hash = hash_password(data.new_password)
-    await db.users.update_one(
+    update_result = await db.users.update_one(
         {"_id": user["_id"]},
         {"$set": {
             "password_hash": new_hash,
@@ -794,6 +794,12 @@ async def reset_password(
             "updated_at": datetime.now(timezone.utc)
         }}
     )
+    
+    # Log the update result for debugging
+    logger.info(f"Password update for user {user['email']}: matched={update_result.matched_count}, modified={update_result.modified_count}")
+    
+    if update_result.modified_count == 0:
+        logger.warning(f"Password update did not modify any documents for user {user['email']}")
     
     # Mark token as used
     await db.password_resets.update_one(
