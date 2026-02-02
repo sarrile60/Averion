@@ -10,6 +10,10 @@ export function AdminTransfersQueue() {
   const [selectedTransfer, setSelectedTransfer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [rejectReason, setRejectReason] = useState('');
+  const [editingRejectReason, setEditingRejectReason] = useState(false);
+  const [editedRejectReason, setEditedRejectReason] = useState('');
+  const [savingRejectReason, setSavingRejectReason] = useState(false);
+  const [deletingTransfer, setDeletingTransfer] = useState(false);
 
   useEffect(() => {
     fetchTransfers();
@@ -52,6 +56,68 @@ export function AdminTransfersQueue() {
     } catch (err) {
       toast.error('Failed to reject');
     }
+  };
+
+  const handleDeleteTransfer = async (id) => {
+    const transfer = selectedTransfer || transfers.find(t => t.id === id);
+    const confirmMessage = `⚠️ DELETE TRANSFER ⚠️\n\nYou are about to permanently delete this transfer:\n\n• Beneficiary: ${transfer?.beneficiary_name}\n• Amount: €${(transfer?.amount/100).toFixed(2)}\n• Status: ${transfer?.status}\n\nThis action CANNOT be undone!\n\nType "DELETE" to confirm:`;
+    
+    const confirmInput = prompt(confirmMessage);
+    
+    if (confirmInput !== "DELETE") {
+      if (confirmInput !== null) {
+        toast.error('Confirmation failed. Transfer not deleted.');
+      }
+      return;
+    }
+    
+    setDeletingTransfer(true);
+    try {
+      await api.delete(`/admin/transfers/${id}`);
+      toast.success('Transfer permanently deleted');
+      setSelectedTransfer(null);
+      fetchTransfers();
+    } catch (err) {
+      toast.error('Failed to delete transfer: ' + (err.response?.data?.detail || err.message));
+    } finally {
+      setDeletingTransfer(false);
+    }
+  };
+
+  const handleEditRejectReason = () => {
+    setEditedRejectReason(selectedTransfer?.reject_reason || '');
+    setEditingRejectReason(true);
+  };
+
+  const handleSaveRejectReason = async () => {
+    if (!editedRejectReason.trim()) {
+      toast.error('Rejection reason cannot be empty');
+      return;
+    }
+    
+    setSavingRejectReason(true);
+    try {
+      await api.patch(`/admin/transfers/${selectedTransfer.id}/reject-reason`, {
+        reason: editedRejectReason
+      });
+      toast.success('Rejection reason updated');
+      setEditingRejectReason(false);
+      // Update local state
+      setSelectedTransfer(prev => ({
+        ...prev,
+        reject_reason: editedRejectReason
+      }));
+      fetchTransfers();
+    } catch (err) {
+      toast.error('Failed to update rejection reason: ' + (err.response?.data?.detail || err.message));
+    } finally {
+      setSavingRejectReason(false);
+    }
+  };
+
+  const handleCancelEditRejectReason = () => {
+    setEditingRejectReason(false);
+    setEditedRejectReason('');
   };
 
   return (
