@@ -2069,6 +2069,93 @@ function AdminDashboard() {
                   </dl>
                 </div>
 
+                {/* Admin Notes Card */}
+                <div className="card p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="font-semibold text-lg flex items-center space-x-2">
+                        <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                        <span>Admin Notes</span>
+                      </h3>
+                      <p className="text-sm text-gray-500 mt-1">Private notes about this user (only visible to admins)</p>
+                    </div>
+                    {!editingNotes && (
+                      <button
+                        onClick={() => setEditingNotes(true)}
+                        className="px-3 py-1 text-sm border border-blue-600 text-blue-600 rounded hover:bg-blue-50 flex items-center space-x-1"
+                        data-testid="edit-notes-btn"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                        <span>Edit</span>
+                      </button>
+                    )}
+                  </div>
+                  
+                  {editingNotes ? (
+                    <div className="space-y-3">
+                      <textarea
+                        value={userNotes}
+                        onChange={(e) => setUserNotes(e.target.value)}
+                        rows={4}
+                        placeholder="Add notes about this user..."
+                        className="input-field w-full resize-y min-h-[100px] max-h-[300px]"
+                        style={{ resize: 'vertical' }}
+                        data-testid="user-notes-textarea"
+                      />
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-gray-500">
+                          {userNotes.length} characters
+                        </span>
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => {
+                              setUserNotes(selectedUser.user.admin_notes || '');
+                              setEditingNotes(false);
+                            }}
+                            className="px-3 py-1.5 text-sm border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            onClick={handleSaveNotes}
+                            disabled={savingNotes}
+                            className="px-4 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center space-x-1"
+                            data-testid="save-notes-btn"
+                          >
+                            {savingNotes ? (
+                              <>
+                                <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                <span>Saving...</span>
+                              </>
+                            ) : (
+                              <>
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Save Notes</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 min-h-[80px]">
+                      {selectedUser.user.admin_notes && selectedUser.user.admin_notes.trim() !== '' ? (
+                        <p className="text-sm text-gray-700 whitespace-pre-wrap">{selectedUser.user.admin_notes}</p>
+                      ) : (
+                        <p className="text-sm text-gray-400 italic">No notes added for this user</p>
+                      )}
+                    </div>
+                  )}
+                </div>
+
                 {/* Tax Hold Management Card */}
                 <div className="card p-6">
                   <div className="flex justify-between items-start mb-4">
