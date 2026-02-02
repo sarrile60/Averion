@@ -843,17 +843,19 @@ async def upload_kyc_document(
 @app.get("/api/v1/kyc/documents/{document_key:path}")
 async def view_kyc_document(
     document_key: str,
+    download: bool = False,
     storage: CloudinaryStorage = Depends(get_storage),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
-    """View uploaded KYC document - redirects to Cloudinary URL or serves placeholder for old documents."""
+    """View or download uploaded KYC document. Use ?download=true to download instead of view."""
     try:
         from fastapi.responses import RedirectResponse, Response
         from urllib.parse import unquote
+        import httpx
         
         # Decode URL-encoded path
         document_key = unquote(document_key)
-        logger.info(f"Viewing document with key: {document_key}")
+        logger.info(f"{'Downloading' if download else 'Viewing'} document with key: {document_key}")
         
         # First, check if this document has a Cloudinary URL stored in the database
         # Search for this document in KYC applications
@@ -868,8 +870,35 @@ async def view_kyc_document(
                     # Check if we have a Cloudinary URL
                     cloudinary_url = doc.get("cloudinary_url")
                     if cloudinary_url:
-                        logger.info(f"Redirecting to Cloudinary URL: {cloudinary_url}")
-                        return RedirectResponse(url=cloudinary_url, status_code=302)
+                        if download:
+                            # Fetch the document from Cloudinary and serve with download headers
+                            logger.info(f"Fetching document from Cloudinary for download: {cloudinary_url}")
+                            async with httpx.AsyncClient() as client:
+                                response = await client.get(cloudinary_url, timeout=30.0)
+                                
+                                if response.status_code != 200:
+                                    raise HTTPException(status_code=502, detail="Failed to fetch document from storage")
+                                
+                                content = response.content
+                                content_type = response.headers.get("content-type", "application/octet-stream")
+                            
+                            # Get filename
+                            file_name = doc.get("file_name", f"document_{document_key}")
+                            
+                            # Return with download headers
+                            return Response(
+                                content=content,
+                                media_type=content_type,
+                                headers={
+                                    "Content-Disposition": f'attachment; filename="{file_name}"',
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Cache-Control": "no-cache"
+                                }
+                            )
+                        else:
+                            # Just redirect to Cloudinary URL for viewing
+                            logger.info(f"Redirecting to Cloudinary URL: {cloudinary_url}")
+                            return RedirectResponse(url=cloudinary_url, status_code=302)
                     break
         
         # No Cloudinary URL found - this is an old document that was stored locally
