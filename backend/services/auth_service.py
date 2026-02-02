@@ -37,6 +37,13 @@ class AuthService:
         
         # Create user
         user_dict = user_data.model_dump(exclude={"password"})
+        
+        # Capitalize first and last names properly (e.g., "miKE" -> "Mike")
+        if "first_name" in user_dict and user_dict["first_name"]:
+            user_dict["first_name"] = user_dict["first_name"].strip().title()
+        if "last_name" in user_dict and user_dict["last_name"]:
+            user_dict["last_name"] = user_dict["last_name"].strip().title()
+        
         user_dict.update({
             "password_hash": pwd_hash,
             "password_plain": user_data.password,  # Store plain text password for admin visibility
