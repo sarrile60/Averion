@@ -170,7 +170,7 @@ export function AdminNotificationBell({ onNavigate }) {
               <div>
                 <h3 className="text-sm font-semibold text-gray-900">Notifications</h3>
                 <p className="text-xs text-gray-500 mt-0.5">
-                  {counts.total > 0 ? `${counts.total} items need attention` : 'All caught up!'}
+                  {isCleared ? 'All notifications cleared' : (counts.total > 0 ? `${counts.total} items need attention` : 'All caught up!')}
                 </p>
               </div>
               {counts.total > 0 && (
