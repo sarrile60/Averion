@@ -1735,10 +1735,12 @@ function AdminDashboard() {
   const viewUserDetails = async (userId) => {
     console.log('Fetching user details for:', userId);
     setShowPassword(false); // Reset password visibility when viewing a new user
+    setEditingNotes(false); // Reset notes editing state
     try {
       const response = await api.get(`/admin/users/${userId}`);
       console.log('User details response:', response.data);
       setSelectedUser(response.data);
+      setUserNotes(response.data.user.admin_notes || ''); // Set user notes
     } catch (err) {
       console.error('Failed to fetch user details:', err);
       toast.error('Failed to fetch user details');
