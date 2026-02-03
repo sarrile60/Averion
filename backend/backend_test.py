@@ -475,14 +475,15 @@ class EcommbxAPITester:
             return False
         
         # Test with Michele Marcheggiani (the user mentioned in the bug report)
+        # Correct email: michelemarcheggiani@libero.it
         success, response = self.run_test(
             "Admin Manual KYC Queue - Michele Marcheggiani",
             "POST",
             "/api/v1/admin/kyc/queue-user",
             200,
             data={
-                "user_email": "michele.marcheggiani@gmail.com",
-                "reason": "Testing manual queue functionality"
+                "user_email": "michelemarcheggiani@libero.it",
+                "reason": "Testing manual queue functionality - Bug fix verification"
             },
             headers={'Authorization': f'Bearer {self.admin_token}'},
             description="Manually queue Michele Marcheggiani for KYC review"
