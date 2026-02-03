@@ -970,6 +970,111 @@ async def get_pending_kyc(
     return [app.model_dump() for app in apps]
 
 
+class ManualKYCQueueRequest(BaseModel):
+    """Request model for manually queueing a user's KYC for review."""
+    user_email: str
+    reason: Optional[str] = None
+
+
+@app.post("/api/v1/admin/kyc/queue-user")
+async def admin_queue_user_kyc(
+    data: ManualKYCQueueRequest,
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """
+    Admin endpoint to manually queue a user's KYC application for review.
+    This is useful when a user's KYC submission failed silently or needs to be re-queued.
+    """
+    from bson import ObjectId
+    from bson.errors import InvalidId
+    
+    logger.info(f"Admin {current_user['email']} manually queueing KYC for user: {data.user_email}")
+    
+    # Find the user by email
+    user_doc = await db.users.find_one({"email": data.user_email})
+    if not user_doc:
+        raise HTTPException(status_code=404, detail=f"User with email {data.user_email} not found")
+    
+    user_id = str(user_doc["_id"])
+    
+    # Find or create KYC application
+    kyc_app = await db.kyc_applications.find_one({"user_id": user_id})
+    
+    if not kyc_app:
+        # Create a minimal KYC application with SUBMITTED status
+        from datetime import datetime
+        kyc_app = {
+            "_id": str(ObjectId()),
+            "user_id": user_id,
+            "full_name": f"{user_doc.get('first_name', '')} {user_doc.get('last_name', '')}".strip() or "Unknown",
+            "status": "SUBMITTED",
+            "submitted_at": datetime.utcnow(),
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow(),
+            "documents": [],
+            "terms_accepted": True,
+            "privacy_accepted": True,
+            "terms_accepted_at": datetime.utcnow(),
+            "privacy_accepted_at": datetime.utcnow()
+        }
+        await db.kyc_applications.insert_one(kyc_app)
+        logger.info(f"Created new KYC application for user {user_id} with SUBMITTED status")
+    else:
+        # Update existing KYC to SUBMITTED if it's in DRAFT state
+        from datetime import datetime
+        old_status = kyc_app.get("status")
+        
+        if old_status in ["DRAFT", "NEEDS_MORE_INFO", "REJECTED"]:
+            await db.kyc_applications.update_one(
+                {"_id": kyc_app["_id"]},
+                {
+                    "$set": {
+                        "status": "SUBMITTED",
+                        "submitted_at": datetime.utcnow(),
+                        "updated_at": datetime.utcnow(),
+                        # Clear any rejection data
+                        "rejection_reason": None,
+                        "reviewed_at": None,
+                        "reviewed_by": None
+                    }
+                }
+            )
+            logger.info(f"Updated KYC application for user {user_id} from {old_status} to SUBMITTED")
+        elif old_status == "SUBMITTED":
+            logger.info(f"KYC application for user {user_id} is already SUBMITTED")
+            return {
+                "success": True,
+                "message": "KYC application is already in SUBMITTED status",
+                "user_id": user_id,
+                "kyc_status": "SUBMITTED"
+            }
+        elif old_status == "APPROVED":
+            raise HTTPException(status_code=400, detail="KYC is already APPROVED - cannot re-queue")
+        else:
+            raise HTTPException(status_code=400, detail=f"Cannot queue KYC with status: {old_status}")
+    
+    # Audit log
+    await create_audit_log(
+        db=db,
+        action="KYC_MANUAL_QUEUE",
+        entity_type="kyc",
+        entity_id=kyc_app.get("_id") or kyc_app["_id"],
+        description=f"Admin manually queued KYC for user {data.user_email}",
+        performed_by=current_user["id"],
+        performed_by_role=current_user["role"],
+        performed_by_email=current_user["email"],
+        metadata={"user_email": data.user_email, "reason": data.reason, "user_id": user_id}
+    )
+    
+    return {
+        "success": True,
+        "message": f"KYC application for {data.user_email} has been queued for review",
+        "user_id": user_id,
+        "kyc_status": "SUBMITTED"
+    }
+
+
 @app.post("/api/v1/admin/kyc/{application_id}/review")
 async def review_kyc(
     application_id: str,
