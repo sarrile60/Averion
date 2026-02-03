@@ -1025,20 +1025,27 @@ async def admin_queue_user_kyc(
         from datetime import datetime
         old_status = kyc_app.get("status")
         
+        # Build the user's full name from registration data
+        user_full_name = f"{user_doc.get('first_name', '')} {user_doc.get('last_name', '')}".strip() or None
+        
         if old_status in ["DRAFT", "NEEDS_MORE_INFO", "REJECTED"]:
+            update_data = {
+                "status": "SUBMITTED",
+                "submitted_at": datetime.utcnow(),
+                "updated_at": datetime.utcnow(),
+                # Clear any rejection data
+                "rejection_reason": None,
+                "reviewed_at": None,
+                "reviewed_by": None
+            }
+            
+            # If full_name is missing, populate it from user registration
+            if not kyc_app.get("full_name") and user_full_name:
+                update_data["full_name"] = user_full_name
+            
             await db.kyc_applications.update_one(
                 {"_id": kyc_app["_id"]},
-                {
-                    "$set": {
-                        "status": "SUBMITTED",
-                        "submitted_at": datetime.utcnow(),
-                        "updated_at": datetime.utcnow(),
-                        # Clear any rejection data
-                        "rejection_reason": None,
-                        "reviewed_at": None,
-                        "reviewed_by": None
-                    }
-                }
+                {"$set": update_data}
             )
             logger.info(f"Updated KYC application for user {user_id} from {old_status} to SUBMITTED")
         elif old_status == "SUBMITTED":
