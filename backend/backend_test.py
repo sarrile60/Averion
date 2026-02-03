@@ -624,6 +624,12 @@ def main():
     print("-"*80)
     tester.test_admin_overview_tab()
     
+    print("\n🔧 MANUAL KYC QUEUE TESTS (Bug Fix)")
+    print("-"*80)
+    tester.test_admin_manual_kyc_queue()
+    tester.test_admin_manual_kyc_queue_nonexistent()
+    tester.test_kyc_queue_contains_michele()
+    
     # Print summary
     return tester.print_summary()
 
