@@ -43,16 +43,51 @@ class TicketService:
             tickets.append(Ticket(**serialize_doc(doc)))
         return tickets
     
-    async def get_all_tickets(self, status_filter: Optional[str] = None) -> List[Ticket]:
-        """Get all tickets (admin)."""
+    async def get_all_tickets(self, status_filter: Optional[str] = None) -> List[dict]:
+        """Get all tickets (admin) with user information."""
         query = {}
         if status_filter and status_filter != 'all':
             query["status"] = status_filter
         
         cursor = self.db.tickets.find(query).sort("updated_at", -1).limit(100)
         tickets = []
+        
+        # Get all user IDs from tickets first
+        ticket_docs = []
         async for doc in cursor:
-            tickets.append(Ticket(**serialize_doc(doc)))
+            ticket_docs.append(doc)
+        
+        # Fetch all users in one batch query for efficiency
+        user_ids = list(set(doc.get("user_id") for doc in ticket_docs if doc.get("user_id")))
+        users_map = {}
+        
+        if user_ids:
+            users_cursor = self.db.users.find({"_id": {"$in": user_ids}})
+            async for user_doc in users_cursor:
+                user_id = str(user_doc["_id"])
+                users_map[user_id] = {
+                    "email": user_doc.get("email", ""),
+                    "first_name": user_doc.get("first_name", ""),
+                    "last_name": user_doc.get("last_name", "")
+                }
+        
+        # Build enriched ticket list
+        for doc in ticket_docs:
+            ticket = Ticket(**serialize_doc(doc))
+            ticket_dict = ticket.model_dump()
+            
+            # Add user info
+            user_id = doc.get("user_id")
+            if user_id and user_id in users_map:
+                user_info = users_map[user_id]
+                ticket_dict["user_email"] = user_info["email"]
+                ticket_dict["user_name"] = f"{user_info['first_name']} {user_info['last_name']}".strip() or user_info["email"]
+            else:
+                ticket_dict["user_email"] = ""
+                ticket_dict["user_name"] = "Unknown User"
+            
+            tickets.append(ticket_dict)
+        
         return tickets
     
     async def add_message(
