@@ -174,6 +174,8 @@ const translations = {
     amountDue: 'Amount Due',
     settleBalanceNow: 'Settle Balance Now',
     contactSupport: 'Contact Support',
+    needHelp: 'Need Help?',
+    needHelpDesc: 'Our support team is here to assist you',
     settleOutstandingBalance: 'Settle Outstanding Balance',
     selectPaymentMethod: 'Select your preferred payment method',
     pleaseSettleAmount: 'Please settle the required amount to restore full access. For assistance, contact support.',
