@@ -441,14 +441,14 @@ class ComprehensiveAPITester:
             return False
 
     def test_health_check(self) -> bool:
-        """Test GET /api/v1/health - Health check endpoint."""
+        """Test GET /api/health - Health check endpoint."""
         print("=" * 60)
         print("TEST 10: HEALTH CHECK")
         print("=" * 60)
         
         try:
             response = requests.get(
-                f"{self.base_url}/api/v1/health",
+                f"{self.base_url}/api/health",
                 timeout=10
             )
             
