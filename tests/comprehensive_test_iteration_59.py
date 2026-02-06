@@ -262,14 +262,14 @@ class ComprehensiveAPITester:
             return False
 
     def test_get_transfers_queue(self) -> bool:
-        """Test GET /api/v1/admin/transfers/pending - Get transfers queue."""
+        """Test GET /api/v1/admin/transfers - Get transfers queue."""
         print("=" * 60)
         print("TEST 6: GET TRANSFERS QUEUE (ADMIN)")
         print("=" * 60)
         
         try:
             response = requests.get(
-                f"{self.base_url}/api/v1/admin/transfers/pending",
+                f"{self.base_url}/api/v1/admin/transfers",
                 headers={"Authorization": f"Bearer {self.admin_token}"},
                 timeout=10
             )
