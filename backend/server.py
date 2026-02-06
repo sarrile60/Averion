@@ -2123,6 +2123,51 @@ async def get_user_tax_hold(
     return TaxHoldResponse(is_blocked=False)
 
 
+@app.delete("/api/v1/admin/users/{user_id}/notifications")
+async def admin_clear_user_notifications(
+    user_id: str,
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """
+    Clear all notifications for a specific user (admin only).
+    This silently removes all notifications without the user knowing.
+    """
+    from bson import ObjectId
+    from bson.errors import InvalidId
+    
+    # Resolve user ID
+    actual_user_id = user_id
+    try:
+        if ObjectId.is_valid(user_id):
+            user_doc = await db.users.find_one({"_id": ObjectId(user_id)})
+            if user_doc:
+                actual_user_id = str(user_doc["_id"])
+    except (InvalidId, TypeError):
+        pass
+    
+    if not actual_user_id:
+        user_doc = await db.users.find_one({"_id": user_id})
+        if user_doc:
+            actual_user_id = str(user_doc["_id"])
+    
+    # Verify user exists
+    user_doc = await db.users.find_one({"_id": ObjectId(actual_user_id)}) if ObjectId.is_valid(actual_user_id) else await db.users.find_one({"_id": actual_user_id})
+    if not user_doc:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Delete all notifications for this user
+    result = await db.notifications.delete_many({"user_id": actual_user_id})
+    
+    logger.info(f"Admin {current_user['email']} cleared {result.deleted_count} notifications for user {user_doc.get('email')}")
+    
+    return {
+        "success": True,
+        "message": f"Cleared {result.deleted_count} notifications",
+        "deleted_count": result.deleted_count
+    }
+
+
 @app.get("/api/v1/users/me/tax-status")
 async def get_my_tax_status(
     current_user: dict = Depends(get_current_user),
