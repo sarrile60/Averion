@@ -174,7 +174,7 @@ class PasswordVerificationTester:
             "Verify Password Without Token",
             "POST",
             "/api/v1/auth/verify-password",
-            401,  # Expect 401 for missing token
+            403,  # Expect 403 for missing token (FastAPI HTTPBearer returns 403)
             data={"password": "SomePassword"},
             description="Test that endpoint requires authentication"
         )
