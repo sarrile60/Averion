@@ -709,9 +709,19 @@ async def verify_user_password(
     Used to confirm identity before processing sensitive transactions.
     """
     from bson import ObjectId
+    from bson.errors import InvalidId
     
-    # Get user from database
-    user_doc = await db.users.find_one({"_id": ObjectId(current_user["id"])})
+    # Get user from database - handle both ObjectId and string IDs
+    user_id = current_user["id"]
+    user_doc = None
+    
+    try:
+        # First try as ObjectId
+        user_doc = await db.users.find_one({"_id": ObjectId(user_id)})
+    except (InvalidId, TypeError):
+        # If not a valid ObjectId, try as string
+        user_doc = await db.users.find_one({"_id": user_id})
+    
     if not user_doc:
         raise HTTPException(status_code=404, detail="User not found")
     
