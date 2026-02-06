@@ -554,6 +554,113 @@ class EcommbxAPITester:
         
         return success
 
+    def test_admin_clear_notifications_create_test_user(self):
+        """Create a test user for notification clearing tests"""
+        if not self.admin_token:
+            print("⚠️  Skipping - No admin token")
+            return False, None
+        
+        # Create a test user via signup
+        test_email = f"test_notif_{datetime.now().strftime('%Y%m%d_%H%M%S')}@test.com"
+        test_password = "TestPass123!"
+        
+        success, response = self.run_test(
+            "Create Test User for Notification Tests",
+            "POST",
+            "/api/v1/auth/signup",
+            201,
+            data={
+                "email": test_email,
+                "password": test_password,
+                "first_name": "Test",
+                "last_name": "NotifUser",
+                "phone": "+1234567890"
+            },
+            description="Create a new test user for notification clearing tests"
+        )
+        
+        if success and 'id' in response:
+            user_id = response['id']
+            print(f"   ✓ Test user created: {test_email} (ID: {user_id})")
+            return True, user_id
+        return False, None
+
+    def test_admin_clear_notifications_endpoint(self):
+        """Test admin can clear all notifications for a user"""
+        if not self.admin_token:
+            print("⚠️  Skipping - No admin token")
+            return False
+        
+        # First create a test user
+        user_created, user_id = self.test_admin_clear_notifications_create_test_user()
+        if not user_created or not user_id:
+            print("⚠️  Could not create test user, skipping notification clear test")
+            return False
+        
+        # Now test clearing notifications for this user
+        success, response = self.run_test(
+            "Admin Clear User Notifications",
+            "DELETE",
+            f"/api/v1/admin/users/{user_id}/notifications",
+            200,
+            headers={'Authorization': f'Bearer {self.admin_token}'},
+            description=f"Clear all notifications for test user {user_id}"
+        )
+        
+        if success:
+            deleted_count = response.get('deleted_count', 0)
+            print(f"   ✓ Cleared {deleted_count} notifications")
+            print(f"   ✓ Response message: {response.get('message', 'N/A')}")
+            
+            # Verify response structure
+            if 'success' in response and 'deleted_count' in response:
+                print(f"   ✓ Response has correct structure")
+            else:
+                print(f"   ⚠️  Response missing expected fields")
+        
+        return success
+
+    def test_admin_clear_notifications_non_admin_access(self):
+        """Test that non-admin users cannot clear notifications"""
+        if not self.user_token:
+            print("⚠️  Skipping - No user token")
+            return False
+        
+        # Try to clear notifications as a regular user (should fail with 403)
+        success, response = self.run_test(
+            "Non-Admin Clear Notifications (Should Fail)",
+            "DELETE",
+            "/api/v1/admin/users/some_user_id/notifications",
+            403,
+            headers={'Authorization': f'Bearer {self.user_token}'},
+            description="Verify non-admin users cannot clear notifications"
+        )
+        
+        if success:
+            print(f"   ✓ Non-admin access correctly blocked")
+        
+        return success
+
+    def test_admin_clear_notifications_invalid_user(self):
+        """Test clearing notifications for non-existent user"""
+        if not self.admin_token:
+            print("⚠️  Skipping - No admin token")
+            return False
+        
+        success, response = self.run_test(
+            "Clear Notifications - Invalid User (Should Fail)",
+            "DELETE",
+            "/api/v1/admin/users/nonexistent_user_12345/notifications",
+            404,
+            headers={'Authorization': f'Bearer {self.admin_token}'},
+            description="Try to clear notifications for non-existent user"
+        )
+        
+        if success:
+            print(f"   ✓ Invalid user correctly returns 404")
+        
+        return success
+
     def print_summary(self):
         """Print test summary"""
         print("\n" + "="*80)
