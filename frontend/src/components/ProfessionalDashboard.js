@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import api from '../api';
 import { useLanguage, useTheme } from '../contexts/AppContext';
+import { useBalanceVisibility, formatBalance, formatAmount as formatAmountMasked } from '../hooks/useBalanceVisibility';
+import BalanceToggle from './BalanceToggle';
 
 export function ProfessionalDashboard({ user, logout }) {
   const navigate = useNavigate();
