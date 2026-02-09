@@ -1,7 +1,7 @@
 [
   {
     "content": "Investigate AdminNotificationBell.js to understand current clear logic",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Design backend solution (add last_cleared_at field to admin user or separate collection)",
