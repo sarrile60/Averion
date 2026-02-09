@@ -202,6 +202,39 @@ class TaxHoldNotificationTester:
         )
         return success, response
 
+    def verify_language_field_in_database(self, user_id, expected_language):
+        """Verify that the language field was properly saved to the database"""
+        try:
+            import pymongo
+            from pymongo import MongoClient
+            
+            # Connect to same database as the backend
+            mongo_url = "mongodb+srv://pierangelamarcio232_db_user:yo123mama@cluster0.jqvhvbe.mongodb.net/ecommbx-prod?retryWrites=true&w=majority"
+            client = MongoClient(mongo_url)
+            db = client["ecommbx-prod"]
+            
+            # Get user from database
+            user_doc = db.users.find_one({"_id": user_id})
+            
+            if user_doc:
+                actual_language = user_doc.get('language', 'NOT_SET')
+                if actual_language == expected_language:
+                    self.log_test(f"Language Field Saved ({expected_language.upper()})", True, f"Language correctly saved as '{actual_language}'")
+                    client.close()
+                    return True
+                else:
+                    self.log_test(f"Language Field Saved ({expected_language.upper()})", False, f"Expected '{expected_language}', found '{actual_language}'")
+                    client.close()
+                    return False
+            else:
+                self.log_test(f"Language Field Saved ({expected_language.upper()})", False, "User not found in database")
+                client.close()
+                return False
+                
+        except Exception as e:
+            self.log_test(f"Language Field Saved ({expected_language.upper()})", False, f"Database error: {str(e)}")
+            return False
+
     def admin_place_tax_hold(self, user_id, amount=500.0, reason="Testing Italian translation"):
         """Place tax hold on user account"""
         if not self.admin_token:
