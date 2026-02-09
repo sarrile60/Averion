@@ -5,11 +5,11 @@
   },
   {
     "content": "Create backend endpoint to demote admin to user (if needed)",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Add 'Demote to User' button in admin panel User Details section",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Add confirmation modal for demotion (security)",
