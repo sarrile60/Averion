@@ -2066,8 +2066,10 @@ function AdminDashboard() {
                         >Enable</button>
                       )}
                       
-                      {/* Demote Admin Button - Only show for admin/super_admin users */}
-                      {selectedUser && selectedUser.user && (selectedUser.user.role === 'ADMIN' || selectedUser.user.role === 'SUPER_ADMIN') && (
+                      {/* Demote Admin Button - Only show for admin/super_admin users (but not yourself) */}
+                      {selectedUser && selectedUser.user && 
+                       (selectedUser.user.role === 'ADMIN' || selectedUser.user.role === 'SUPER_ADMIN') &&
+                       selectedUser.user.id !== user.id && (
                         <button
                           onClick={() => {
                             if (window.confirm(
