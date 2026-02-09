@@ -266,40 +266,161 @@ export function AdminKYCReview() {
             {/* Personal Information */}
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold mb-4">Personal Information</h3>
-              <dl className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <dt className="text-gray-600">Full Name</dt>
-                  <dd className="font-medium mt-1">{selectedApp.full_name}</dd>
-                </div>
-                <div>
-                  <dt className="text-gray-600">Date of Birth</dt>
-                  <dd className="font-medium mt-1">{selectedApp.date_of_birth}</dd>
-                </div>
-                <div>
-                  <dt className="text-gray-600">Nationality</dt>
-                  <dd className="font-medium mt-1">{selectedApp.nationality}</dd>
-                </div>
-                <div>
-                  <dt className="text-gray-600">Country</dt>
-                  <dd className="font-medium mt-1">{selectedApp.country}</dd>
-                </div>
-                <div className="col-span-2">
-                  <dt className="text-gray-600">Address</dt>
-                  <dd className="font-medium mt-1">
-                    {selectedApp.street_address}, {selectedApp.city}, {selectedApp.postal_code}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-gray-600">Tax Residency</dt>
-                  <dd className="font-medium mt-1">{selectedApp.tax_residency}</dd>
-                </div>
-                {selectedApp.tax_id && (
-                  <div>
-                    <dt className="text-gray-600">Tax ID</dt>
-                    <dd className="font-medium mt-1">{selectedApp.tax_id}</dd>
+              {isEditMode ? (
+                <div className="space-y-4">
+                  {/* Editable Form */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm text-gray-700 font-medium">Full Name *</label>
+                      <input
+                        type="text"
+                        defaultValue={selectedApp.full_name}
+                        onChange={(e) => setEditedData({...editedData, full_name: e.target.value})}
+                        className="w-full mt-1 px-3 py-2 border rounded-md"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm text-gray-700 font-medium">Date of Birth *</label>
+                      <input
+                        type="date"
+                        defaultValue={selectedApp.date_of_birth}
+                        onChange={(e) => setEditedData({...editedData, date_of_birth: e.target.value})}
+                        className="w-full mt-1 px-3 py-2 border rounded-md"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm text-gray-700 font-medium">Nationality *</label>
+                      <input
+                        type="text"
+                        defaultValue={selectedApp.nationality}
+                        onChange={(e) => setEditedData({...editedData, nationality: e.target.value})}
+                        className="w-full mt-1 px-3 py-2 border rounded-md"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm text-gray-700 font-medium">Country of Residence *</label>
+                      <input
+                        type="text"
+                        defaultValue={selectedApp.country}
+                        onChange={(e) => setEditedData({...editedData, country_of_residence: e.target.value})}
+                        className="w-full mt-1 px-3 py-2 border rounded-md"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm text-gray-700 font-medium">City *</label>
+                      <input
+                        type="text"
+                        defaultValue={selectedApp.city}
+                        onChange={(e) => setEditedData({...editedData, city: e.target.value})}
+                        className="w-full mt-1 px-3 py-2 border rounded-md"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm text-gray-700 font-medium">Postal Code *</label>
+                      <input
+                        type="text"
+                        defaultValue={selectedApp.postal_code}
+                        onChange={(e) => setEditedData({...editedData, postal_code: e.target.value})}
+                        className="w-full mt-1 px-3 py-2 border rounded-md"
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <label className="text-sm text-gray-700 font-medium">Street Address *</label>
+                      <input
+                        type="text"
+                        defaultValue={selectedApp.street_address}
+                        onChange={(e) => setEditedData({...editedData, address: e.target.value})}
+                        className="w-full mt-1 px-3 py-2 border rounded-md"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm text-gray-700 font-medium">Tax Residency *</label>
+                      <input
+                        type="text"
+                        defaultValue={selectedApp.tax_residency}
+                        onChange={(e) => setEditedData({...editedData, tax_residency: e.target.value})}
+                        className="w-full mt-1 px-3 py-2 border rounded-md"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm text-gray-700 font-medium">Tax ID</label>
+                      <input
+                        type="text"
+                        defaultValue={selectedApp.tax_id || ''}
+                        onChange={(e) => setEditedData({...editedData, tax_id: e.target.value})}
+                        className="w-full mt-1 px-3 py-2 border rounded-md"
+                      />
+                    </div>
                   </div>
-                )}
-              </dl>
+                  {/* Save Changes Button */}
+                  <div className="flex gap-2 pt-4 border-t">
+                    <button
+                      onClick={async () => {
+                        try {
+                          const response = await api.patch(`/admin/kyc/${selectedApp.id}`, editedData);
+                          toast.success(response.data.message || 'KYC application updated successfully');
+                          setIsEditMode(false);
+                          setEditedData({});
+                          fetchApplications(); // Refresh list
+                          // Update selectedApp with new data
+                          setSelectedApp({...selectedApp, ...editedData});
+                        } catch (err) {
+                          console.error('Update error:', err);
+                          toast.error(err.response?.data?.detail || 'Failed to update KYC application');
+                        }
+                      }}
+                      className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm font-medium"
+                      data-testid="save-kyc-changes-btn"
+                    >
+                      💾 Save Changes
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsEditMode(false);
+                        setEditedData({});
+                      }}
+                      className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 text-sm font-medium"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <dl className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <dt className="text-gray-600">Full Name</dt>
+                    <dd className="font-medium mt-1">{selectedApp.full_name}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-gray-600">Date of Birth</dt>
+                    <dd className="font-medium mt-1">{selectedApp.date_of_birth}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-gray-600">Nationality</dt>
+                    <dd className="font-medium mt-1">{selectedApp.nationality}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-gray-600">Country</dt>
+                    <dd className="font-medium mt-1">{selectedApp.country}</dd>
+                  </div>
+                  <div className="col-span-2">
+                    <dt className="text-gray-600">Address</dt>
+                    <dd className="font-medium mt-1">
+                      {selectedApp.street_address}, {selectedApp.city}, {selectedApp.postal_code}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-gray-600">Tax Residency</dt>
+                    <dd className="font-medium mt-1">{selectedApp.tax_residency}</dd>
+                  </div>
+                  {selectedApp.tax_id && (
+                    <div>
+                      <dt className="text-gray-600">Tax ID</dt>
+                      <dd className="font-medium mt-1">{selectedApp.tax_id}</dd>
+                    </div>
+                  )}
+                </dl>
+              )}
             </div>
 
             {/* Documents */}
