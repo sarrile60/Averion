@@ -9,14 +9,14 @@
   },
   {
     "content": "Add 'Demote to User' button in admin panel User Details section",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Add confirmation modal for demotion (security)",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test with NEW test admin user (never real admin)",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
