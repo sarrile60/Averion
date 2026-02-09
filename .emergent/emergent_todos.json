@@ -1,7 +1,7 @@
 [
   {
     "content": "Check if backend has endpoint to change user roles",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Create backend endpoint to demote admin to user (if needed)",
