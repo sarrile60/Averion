@@ -3574,9 +3574,9 @@ async def debug_test_transfer(
     normalized_iban = to_iban.replace(" ", "").upper()
     to_acc = await db.bank_accounts.find_one({"iban": normalized_iban})
     if to_acc:
-        result["steps"].append(f"5. Recipient IBAN found - INTERNAL transfer")
+        result["steps"].append("5. Recipient IBAN found - INTERNAL transfer")
     else:
-        result["steps"].append(f"5. Recipient IBAN not found - EXTERNAL transfer")
+        result["steps"].append("5. Recipient IBAN not found - EXTERNAL transfer")
     
     result["ready"] = True
     result["transfer_type"] = "INTERNAL" if to_acc else "EXTERNAL"
