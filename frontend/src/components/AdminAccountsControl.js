@@ -17,11 +17,7 @@ export function AdminAccountsControl() {
   const [formData, setFormData] = useState({ amount: '', reason: '' });
   const [ibanFormData, setIbanFormData] = useState({ iban: '', bic: '' });
 
-  useEffect(() => {
-    fetchAccounts();
-  }, []);
-
-  const fetchAccounts = async () => {
+  const fetchAccounts = useCallback(async () => {
     try {
       // Use the optimized endpoint that returns all accounts with user info in one request
       const response = await api.get('/admin/accounts-with-users');
@@ -32,7 +28,11 @@ export function AdminAccountsControl() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [toast]);
+
+  useEffect(() => {
+    fetchAccounts();
+  }, [fetchAccounts]);
 
   const handleSubmit = async () => {
     if (!formData.amount || !formData.reason) {
