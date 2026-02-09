@@ -366,7 +366,9 @@ class BalanceToggleFixTester:
             
         accounts = response if isinstance(response, list) else response.get('accounts', [])
         if not accounts:
-            self.log_test("User Has Account", False, "No accounts found for test user")
+            # Debug the response structure
+            print(f"   Debug: Response structure: {response}")
+            self.log_test("User Has Account", False, f"No accounts found. Response: {response}")
             return False
         
         account = accounts[0]
