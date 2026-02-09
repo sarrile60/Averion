@@ -2104,13 +2104,21 @@ function AdminDashboard() {
                         </button>
                       )}
                       
-                      {/* Delete User Button */}
+                      {/* Delete User Button - Disabled for admin users */}
                       <button
                         onClick={handleDeleteUser}
-                        disabled={deleteUserLoading}
-                        className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 flex items-center space-x-1"
+                        disabled={deleteUserLoading || selectedUser.user.role === 'ADMIN' || selectedUser.user.role === 'SUPER_ADMIN'}
+                        className={`px-3 py-1 text-sm rounded flex items-center space-x-1 ${
+                          selectedUser.user.role === 'ADMIN' || selectedUser.user.role === 'SUPER_ADMIN'
+                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                            : 'bg-red-600 text-white hover:bg-red-700 disabled:opacity-50'
+                        }`}
                         data-testid="delete-user-btn"
-                        title="Permanently delete this user"
+                        title={
+                          selectedUser.user.role === 'ADMIN' || selectedUser.user.role === 'SUPER_ADMIN'
+                            ? 'Cannot delete admin users - demote first'
+                            : 'Permanently delete this user'
+                        }
                       >
                         {deleteUserLoading ? (
                           <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
