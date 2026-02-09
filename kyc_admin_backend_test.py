@@ -272,13 +272,13 @@ class KYCAdminTester:
         
         headers = {'Authorization': f'Bearer {self.admin_token}'}
         
-        # Test data to update
+        # Test data to update (use fields that exist in the admin edit endpoint)
         edit_data = {
             "full_name": "KYC TestUser EDITED",
             "nationality": "Latvian",
             "city": "Riga EDITED",
             "tax_id": "99999999999",
-            "street_address": "Edited Street 999"
+            "address": "Edited Street 999"  # Backend expects 'address', not 'street_address' for updates
         }
         
         success, response = self.run_test(
