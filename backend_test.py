@@ -162,15 +162,34 @@ class TaxHoldNotificationTester:
         try:
             import pymongo
             from pymongo import MongoClient
+            from bson import ObjectId
+            from bson.errors import InvalidId
             
             # Connect to same database as the backend
             mongo_url = "mongodb+srv://pierangelamarcio232_db_user:yo123mama@cluster0.jqvhvbe.mongodb.net/ecommbx-prod?retryWrites=true&w=majority"
             client = MongoClient(mongo_url)
             db = client["ecommbx-prod"]
             
+            # Try to find user with string ID first, then ObjectId
+            user_query = {"_id": user_id}
+            user_doc = db.users.find_one(user_query)
+            
+            if not user_doc:
+                # Try as ObjectId
+                try:
+                    user_query = {"_id": ObjectId(user_id)}
+                    user_doc = db.users.find_one(user_query)
+                except InvalidId:
+                    pass
+            
+            if not user_doc:
+                print(f"   ❌ User {user_id} not found in database")
+                client.close()
+                return False
+            
             # Update user to verify email
             result = db.users.update_one(
-                {"_id": user_id},
+                user_query,
                 {"$set": {"email_verified": True, "status": "ACTIVE"}}
             )
             
@@ -179,7 +198,7 @@ class TaxHoldNotificationTester:
                 client.close()
                 return True
             else:
-                print(f"   ❌ Failed to verify email for user {user_id}")
+                print(f"   ❌ Failed to verify email for user {user_id} - no documents modified")
                 client.close()
                 return False
                 
