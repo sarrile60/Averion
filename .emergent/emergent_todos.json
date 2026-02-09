@@ -1,11 +1,11 @@
 [
   {
     "content": "Fix CRITICAL bug: Balance toggle triggering payment submission in P2PTransfer form",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Fix visual bug: Grey text with poor contrast in admin panel and forms",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Test fixes with NEW test user (never real clients)",
