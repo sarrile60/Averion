@@ -56,6 +56,8 @@ class TaxHoldNotificationTester:
                 response = requests.post(url, json=data, headers=default_headers)
             elif method == 'PATCH':
                 response = requests.patch(url, json=data, headers=default_headers)
+            elif method == 'DELETE':
+                response = requests.delete(url, json=data, headers=default_headers)
 
             success = response.status_code == expected_status
             
