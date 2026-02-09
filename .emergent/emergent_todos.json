@@ -13,10 +13,10 @@
   },
   {
     "content": "Test with NEW test user only (create Italian-speaking test user)",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Verify translation works correctly",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
