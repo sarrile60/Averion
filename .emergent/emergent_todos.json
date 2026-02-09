@@ -29,10 +29,10 @@
   },
   {
     "content": "Test with NEW test users only (never real clients)",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Verify all KYC workflows still work correctly",
-    "status": "pending"
+    "status": "completed"
   }
 ]
