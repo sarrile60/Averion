@@ -5,11 +5,11 @@
   },
   {
     "content": "Run integrity check script and save report to /app/test_reports/",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Audit transfer service for destructive operations and ensure reversals are used instead of deletions",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Fix backend linting warnings in server.py (flake8 issues)",
