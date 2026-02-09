@@ -5,19 +5,19 @@
   },
   {
     "content": "Create useBalanceVisibility hook with sessionStorage for state management",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Add balance toggle component with Eye/EyeOff icons from lucide-react",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Implement balance masking function (format: € •••.••)",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Update ProfessionalDashboard.js to add toggle to Overview card",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Update all other balance display locations with toggle",
