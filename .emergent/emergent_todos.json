@@ -1,14 +1,14 @@
 [
   {
-    "content": "Check current JWT token expiration settings",
-    "status": "completed"
+    "content": "Fix CRITICAL bug: Balance toggle triggering payment submission in P2PTransfer form",
+    "status": "pending"
   },
   {
-    "content": "Increase JWT expiration time for admin users (optional enhancement)",
-    "status": "completed"
+    "content": "Fix visual bug: Grey text with poor contrast in admin panel and forms",
+    "status": "pending"
   },
   {
-    "content": "Re-run comprehensive tests to verify 100% success rate",
-    "status": "completed"
+    "content": "Test fixes with NEW test user (never real clients)",
+    "status": "pending"
   }
 ]
