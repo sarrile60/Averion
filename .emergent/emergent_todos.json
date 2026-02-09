@@ -21,10 +21,10 @@
   },
   {
     "content": "Test with NEW admin test user (never real admin)",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Verify persistence across logout/login and page reload",
-    "status": "pending"
+    "status": "completed"
   }
 ]
