@@ -3408,10 +3408,27 @@ async def clear_admin_notifications(
     cleared_at = datetime.now(timezone.utc)
     
     # Update the admin user's document with the cleared timestamp
+    # Handle both string and ObjectId formats like auth code does
+    from bson import ObjectId
+    from bson.errors import InvalidId
+    
+    user_id = current_user["id"]
+    
+    # First try as string
     result = await db.users.update_one(
-        {"_id": current_user["id"]},
+        {"_id": user_id},
         {"$set": {"admin_notifications_cleared_at": cleared_at}}
     )
+    
+    # If no match and it looks like an ObjectId, try as ObjectId
+    if result.matched_count == 0:
+        try:
+            result = await db.users.update_one(
+                {"_id": ObjectId(user_id)},
+                {"$set": {"admin_notifications_cleared_at": cleared_at}}
+            )
+        except InvalidId:
+            pass
     
     if result.modified_count == 0:
         # Also handle if document doesn't exist (shouldn't happen but be safe)
