@@ -1660,6 +1660,88 @@ async def permanent_delete_user(
     current_user: dict = Depends(require_admin),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
+
+
+@app.post("/api/v1/admin/users/{user_id}/demote")
+async def demote_admin_to_user(
+    user_id: str,
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """
+    Demote an admin user to a regular USER role.
+    Only SUPER_ADMIN can demote other admins.
+    Cannot demote yourself.
+    """
+    from bson import ObjectId
+    from bson.errors import InvalidId
+    
+    # Only SUPER_ADMIN can demote admins
+    if current_user.get("role") != "SUPER_ADMIN":
+        raise HTTPException(
+            status_code=403, 
+            detail="Only SUPER_ADMIN can demote other administrators"
+        )
+    
+    # Try to find user by string ID first, then ObjectId
+    user_doc = await db.users.find_one({"_id": user_id})
+    if not user_doc:
+        try:
+            user_doc = await db.users.find_one({"_id": ObjectId(user_id)})
+        except InvalidId:
+            pass
+    
+    if not user_doc:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    actual_user_id = str(user_doc["_id"])
+    user_email = user_doc["email"]
+    current_role = user_doc.get("role", "USER")
+    
+    # Prevent demoting yourself
+    if actual_user_id == current_user["id"]:
+        raise HTTPException(
+            status_code=400, 
+            detail="You cannot demote yourself. Another SUPER_ADMIN must do this."
+        )
+    
+    # Check if user is actually an admin
+    if current_role not in ["SUPER_ADMIN", "ADMIN"]:
+        raise HTTPException(
+            status_code=400, 
+            detail=f"User {user_email} is already a regular user (role: {current_role})"
+        )
+    
+    # Perform the demotion
+    result = await db.users.update_one(
+        {"_id": user_doc["_id"]},
+        {
+            "$set": {
+                "role": "USER",
+                "demoted_at": datetime.now(timezone.utc),
+                "demoted_by": current_user["id"]
+            }
+        }
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=500, detail="Failed to demote user")
+    
+    # Log the demotion for audit trail
+    logger.warning(
+        f"ROLE CHANGE: User {user_email} (ID: {actual_user_id}) "
+        f"demoted from {current_role} to USER by admin {current_user['email']} "
+        f"(ID: {current_user['id']})"
+    )
+    
+    return {
+        "success": True,
+        "message": f"User {user_email} has been demoted from {current_role} to USER",
+        "user_id": actual_user_id,
+        "old_role": current_role,
+        "new_role": "USER"
+    }
+
     """Permanently delete a user and all associated data (HARD DELETE)."""
     from bson import ObjectId
     from bson.errors import InvalidId
