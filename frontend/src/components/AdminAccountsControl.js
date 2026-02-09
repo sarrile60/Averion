@@ -7,6 +7,7 @@ import BalanceToggle from './BalanceToggle';
 
 export function AdminAccountsControl() {
   const toast = useToast();
+  const { isBalanceVisible, toggleBalanceVisibility } = useBalanceVisibility();
   const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedAccount, setSelectedAccount] = useState(null);
