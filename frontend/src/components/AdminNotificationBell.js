@@ -45,27 +45,12 @@ export function AdminNotificationBell({ onNavigate }) {
   }, []);
 
   // Fetch counts on mount and every 30 seconds
+  // The counts endpoint also returns cleared_at, so we get both in one call
   useEffect(() => {
     fetchCounts();
     const interval = setInterval(fetchCounts, 30000);
     return () => clearInterval(interval);
   }, [fetchCounts]);
-
-  // Fetch the last cleared timestamp on mount
-  useEffect(() => {
-    const fetchClearedTimestamp = async () => {
-      try {
-        const response = await api.get('/admin/notifications/cleared-at');
-        if (response.data.cleared_at) {
-          setClearedAt(new Date(response.data.cleared_at));
-        }
-      } catch (err) {
-        console.error('Failed to fetch cleared timestamp:', err);
-      }
-    };
-    
-    fetchClearedTimestamp();
-  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
