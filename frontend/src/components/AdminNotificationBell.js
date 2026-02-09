@@ -54,6 +54,22 @@ export function AdminNotificationBell({ onNavigate }) {
     return () => clearInterval(interval);
   }, [fetchCounts]);
 
+  // Fetch the last cleared timestamp on mount
+  useEffect(() => {
+    const fetchClearedTimestamp = async () => {
+      try {
+        const response = await api.get('/admin/notifications/cleared-at');
+        if (response.data.cleared_at) {
+          setClearedAt(new Date(response.data.cleared_at));
+        }
+      } catch (err) {
+        console.error('Failed to fetch cleared timestamp:', err);
+      }
+    };
+    
+    fetchClearedTimestamp();
+  }, []);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
