@@ -9,15 +9,15 @@
   },
   {
     "content": "Update AdminNotificationBell.js to use new smart counting endpoint",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Update badge calculation to show count of NEW items only",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test with NEW admin user - clear → create new items → verify badge reappears",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Verify old items stay cleared while new items appear",
