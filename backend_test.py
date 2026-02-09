@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 import uuid
 import time
 
-class AdminNotificationPersistenceTester:
+class SmartNotificationCountingTester:
     def __init__(self, base_url="https://banking-kyc-fixes.preview.emergentagent.com"):
         self.base_url = base_url
         self.admin_token = None
