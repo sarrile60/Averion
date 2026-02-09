@@ -7,7 +7,7 @@ import requests
 import sys
 
 # Backend URL
-BASE_URL = "https://bankapp-bugfixes.preview.emergentagent.com/api/v1"
+BASE_URL = "https://banking-kyc-fixes.preview.emergentagent.com/api/v1"
 
 # Admin credentials
 ADMIN_EMAIL = "admin@ecommbx.io"
