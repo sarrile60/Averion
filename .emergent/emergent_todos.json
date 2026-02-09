@@ -13,15 +13,15 @@
   },
   {
     "content": "Update AdminNotificationBell.js to call backend API when clearing",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Update frontend to compare current counts with last cleared timestamp",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test with NEW admin test user (never real admin)",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Verify persistence across logout/login and page reload",
