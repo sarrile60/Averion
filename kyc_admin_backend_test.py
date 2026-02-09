@@ -273,7 +273,8 @@ class KYCAdminTester:
             "full_name": "KYC TestUser EDITED",
             "nationality": "Latvian",
             "city": "Riga EDITED",
-            "tax_id": "99999999999"
+            "tax_id": "99999999999",
+            "street_address": "Edited Street 999"
         }
         
         success, response = self.run_test(
