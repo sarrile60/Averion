@@ -1,11 +1,11 @@
 [
   {
     "content": "Check and update remaining balance locations (admin components, Statement.js)",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Fix React Hook ESLint warnings (exhaustive-deps) - 9 warnings total",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Test frontend compilation with yarn build",
