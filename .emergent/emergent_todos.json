@@ -1,11 +1,11 @@
 [
   {
     "content": "Check if backend has endpoint to change user roles",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Create backend endpoint to demote admin to user (if needed)",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Add 'Demote to User' button in admin panel User Details section",
