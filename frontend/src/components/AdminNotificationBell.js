@@ -109,7 +109,9 @@ export function AdminNotificationBell({ onNavigate }) {
     }
   };
 
-  // Calculate badge count - show 0 if cleared or read
+  // Calculate badge count based on cleared timestamp
+  // If notifications were cleared and no new items appeared, show 0
+  const isCleared = clearedAt !== null && counts.total === 0;
   const badgeCount = isCleared ? 0 : counts.total;
   const showBadge = badgeCount > 0 && !isRead;
 
