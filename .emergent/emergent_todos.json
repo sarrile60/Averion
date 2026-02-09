@@ -9,11 +9,11 @@
   },
   {
     "content": "Audit transfer service for destructive operations and ensure reversals are used instead of deletions",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Fix backend linting warnings in server.py (flake8 issues)",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Call testing agent for comprehensive testing with NEW test users only",
