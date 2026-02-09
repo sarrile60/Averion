@@ -18,28 +18,25 @@ export function AdminNotificationBell({ onNavigate }) {
 
   const fetchCounts = useCallback(async () => {
     try {
-      // Fetch all counts in parallel
-      const [kycRes, cardsRes, transfersRes, ticketsRes] = await Promise.all([
-        api.get('/admin/kyc/pending').catch(() => ({ data: [] })),
-        api.get('/admin/card-requests').catch(() => ({ data: { data: [] } })),
-        api.get('/admin/transfers?status=SUBMITTED').catch(() => ({ data: { data: [] } })),
-        api.get('/admin/tickets?status=OPEN').catch(() => ({ data: [] }))
-      ]);
-
-      const kycCount = Array.isArray(kycRes.data) ? kycRes.data.length : 0;
-      const cardsCount = Array.isArray(cardsRes.data?.data) ? cardsRes.data.data.filter(c => c.status === 'PENDING').length : 0;
-      const transfersCount = Array.isArray(transfersRes.data?.data) ? transfersRes.data.data.length : 0;
-      const ticketsCount = Array.isArray(ticketsRes.data) ? ticketsRes.data.filter(t => t.status === 'OPEN' || t.status === 'IN_PROGRESS').length : 0;
-
-      const newTotal = kycCount + cardsCount + transfersCount + ticketsCount;
-
-      setCounts({
-        kyc: kycCount,
-        cards: cardsCount,
-        transfers: transfersCount,
-        tickets: ticketsCount,
-        total: newTotal
-      });
+      // Use the new smart endpoint that counts only items created after last clear
+      const response = await api.get('/admin/notifications/counts-since-clear');
+      
+      if (response.data) {
+        const { kyc, cards, transfers, tickets, total, cleared_at } = response.data;
+        
+        setCounts({
+          kyc,
+          cards,
+          transfers,
+          tickets,
+          total
+        });
+        
+        // Update cleared_at from server if present
+        if (cleared_at) {
+          setClearedAt(new Date(cleared_at));
+        }
+      }
     } catch (err) {
       console.error('Failed to fetch notification counts:', err);
     } finally {
