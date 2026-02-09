@@ -21,11 +21,11 @@
   },
   {
     "content": "Update all other balance display locations with toggle",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Fix React Hook ESLint warnings (exhaustive-deps) - 9 total warnings",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Test frontend compilation (yarn build) for errors",
