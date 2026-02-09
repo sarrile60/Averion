@@ -13,8 +13,7 @@ export function AdminNotificationBell({ onNavigate }) {
   });
   const [loading, setLoading] = useState(true);
   const [isRead, setIsRead] = useState(false);
-  const [isCleared, setIsCleared] = useState(false);
-  const [lastClearedTotal, setLastClearedTotal] = useState(0);
+  const [clearedAt, setClearedAt] = useState(null); // Store the cleared timestamp from backend
   const dropdownRef = useRef(null);
 
   const fetchCounts = useCallback(async () => {
