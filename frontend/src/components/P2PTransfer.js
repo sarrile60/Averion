@@ -10,6 +10,7 @@ export function P2PTransferForm({ onSuccess }) {
   const toast = useToast();
   const { t } = useLanguage();
   const { isDark } = useTheme();
+  const { isBalanceVisible, toggleBalanceVisibility } = useBalanceVisibility();
   const [beneficiaries, setBeneficiaries] = useState([]);
   const [accounts, setAccounts] = useState([]);
   const [formData, setFormData] = useState({
