@@ -327,6 +327,64 @@ export function AdminKYCReview() {
               )}
             </div>
 
+
+            {/* Edit & Delete Actions */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold">Application Actions</h3>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setIsEditMode(!isEditMode)}
+                    className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center gap-2"
+                    data-testid="edit-kyc-btn"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    {isEditMode ? 'Cancel Edit' : 'Edit Application'}
+                  </button>
+                  <button
+                    onClick={async () => {
+                      if (window.confirm(
+                        `⚠️ DELETE KYC APPLICATION\n\n` +
+                        `User: ${selectedApp.full_name}\n` +
+                        `Status: ${selectedApp.status}\n\n` +
+                        `This will PERMANENTLY DELETE this KYC application.\n` +
+                        `The user account will remain active and they can resubmit KYC.\n\n` +
+                        `Are you absolutely sure you want to proceed?`
+                      )) {
+                        try {
+                          await api.delete(`/admin/kyc/${selectedApp.id}`);
+                          toast.success('KYC application deleted successfully');
+                          setSelectedApp(null);
+                          fetchApplications(); // Refresh list
+                        } catch (err) {
+                          console.error('Delete error:', err);
+                          toast.error(err.response?.data?.detail || 'Failed to delete KYC application');
+                        }
+                      }
+                    }}
+                    className="px-4 py-2 text-sm bg-red-600 text-white rounded-md hover:bg-red-700 flex items-center gap-2"
+                    data-testid="delete-kyc-btn"
+                    disabled={selectedApp.status === 'APPROVED'}
+                    title={selectedApp.status === 'APPROVED' ? 'Cannot delete approved applications' : 'Delete this KYC application'}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Delete Application
+                  </button>
+                </div>
+              </div>
+              {isEditMode && (
+                <div className="bg-blue-50 border border-blue-200 rounded p-3 mb-4">
+                  <p className="text-sm text-blue-800">
+                    📝 Edit mode enabled. Modify the fields below and click "Save Changes" to update this KYC application.
+                  </p>
+                </div>
+              )}
+            </div>
+
             {/* Review Actions */}
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold mb-4">Review Application</h3>
