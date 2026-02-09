@@ -1742,10 +1742,6 @@ async def demote_admin_to_user(
         "new_role": "USER"
     }
 
-    """Permanently delete a user and all associated data (HARD DELETE)."""
-    from bson import ObjectId
-    from bson.errors import InvalidId
-    
     # Only SUPER_ADMIN can permanently delete users
     if current_user["role"] != "SUPER_ADMIN":
         raise HTTPException(status_code=403, detail="Only Super Admin can permanently delete users")
