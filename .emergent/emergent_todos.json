@@ -17,11 +17,11 @@
   },
   {
     "content": "Update ProfessionalDashboard.js to add toggle to Overview card",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Update all other balance display locations with toggle",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Fix React Hook ESLint warnings (exhaustive-deps) - 9 total warnings",
