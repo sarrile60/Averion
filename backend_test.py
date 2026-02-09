@@ -1,410 +1,410 @@
+#!/usr/bin/env python3
 """
-Comprehensive Backend API Testing for Live Banking Application
-CRITICAL: This is a REAL BANK with REAL CLIENTS - Only create NEW test users!
+Backend testing for Italian tax hold notification translation fix.
+Tests critical bug fix for Italian notification translations.
 """
-
 import requests
+import sys
 import json
-import time
+from datetime import datetime
 import uuid
-from datetime import datetime, timezone
 
-class BankingAPITester:
-    def __init__(self):
-        self.base_url = "https://banking-kyc-fixes.preview.emergentagent.com/api/v1"
+class TaxHoldNotificationTester:
+    def __init__(self, base_url="https://banking-kyc-fixes.preview.emergentagent.com"):
+        self.base_url = base_url
         self.admin_token = None
-        self.test_user_token = None
-        self.test_user_id = None
-        self.test_user_email = None
-        self.test_account_id = None
+        self.italian_user_token = None
+        self.english_user_token = None
+        self.italian_user_id = None
+        self.english_user_id = None
         self.tests_run = 0
         self.tests_passed = 0
-        self.admin_credentials = {
-            "email": "admin@ecommbx.io",
-            "password": "Admin@123456"
-        }
-    
-    def log(self, message):
-        timestamp = datetime.now(timezone.utc).strftime("%H:%M:%S")
-        print(f"[{timestamp}] {message}")
-    
-    def run_test(self, name, test_func):
-        """Run a single test with error handling"""
+        self.test_results = []
+
+    def log_test(self, name, passed, details=""):
+        """Log test results"""
         self.tests_run += 1
-        self.log(f"🔍 Testing: {name}")
-        try:
-            result = test_func()
-            if result:
-                self.tests_passed += 1
-                self.log(f"✅ PASS: {name}")
-            else:
-                self.log(f"❌ FAIL: {name}")
-            return result
-        except Exception as e:
-            self.log(f"❌ ERROR in {name}: {str(e)}")
-            return False
-    
-    def test_admin_login(self):
-        """Test admin authentication"""
-        try:
-            response = requests.post(
-                f"{self.base_url}/auth/login",
-                json=self.admin_credentials,
-                timeout=10
-            )
-            
-            if response.status_code == 200:
-                data = response.json()
-                self.admin_token = data.get('access_token')
-                self.log(f"Admin login successful, role: {data.get('user', {}).get('role')}")
-                return True
-            else:
-                self.log(f"Admin login failed: {response.status_code} - {response.text}")
-                return False
-        except Exception as e:
-            self.log(f"Admin login error: {str(e)}")
-            return False
-    
-    def create_test_user(self):
-        """Create a new test user - CRITICAL: Only create NEW users"""
-        test_email = f"testuser_{uuid.uuid4().hex[:8]}@testbank.demo"
-        test_password = "TestPass123!"
+        if passed:
+            self.tests_passed += 1
+        
+        result = {
+            "test": name,
+            "passed": passed,
+            "details": details,
+            "timestamp": datetime.now().isoformat()
+        }
+        self.test_results.append(result)
+        
+        status = "✅ PASS" if passed else "❌ FAIL"
+        print(f"{status}: {name}")
+        if details:
+            print(f"    Details: {details}")
+
+    def run_test(self, name, method, endpoint, expected_status, data=None, headers=None):
+        """Run a single API test"""
+        url = f"{self.base_url}/api/{endpoint}"
+        default_headers = {'Content-Type': 'application/json'}
+        if headers:
+            default_headers.update(headers)
+
+        print(f"\n🔍 Testing {name}...")
         
         try:
-            response = requests.post(
-                f"{self.base_url}/auth/signup",
-                json={
-                    "email": test_email,
-                    "password": test_password,
-                    "first_name": "Test",
-                    "last_name": "User",
-                    "phone": "+1234567890"
-                },
-                timeout=10
-            )
+            if method == 'GET':
+                response = requests.get(url, headers=default_headers)
+            elif method == 'POST':
+                response = requests.post(url, json=data, headers=default_headers)
+            elif method == 'PATCH':
+                response = requests.patch(url, json=data, headers=default_headers)
+
+            success = response.status_code == expected_status
             
-            if response.status_code == 201:
-                # Manually verify email for testing (simulate email verification)
-                # In real scenario, user would click email link
-                self.test_user_email = test_email
-                self.test_user_password = test_password
-                self.log(f"Test user created: {test_email}")
-                return True
+            if success:
+                try:
+                    response_data = response.json()
+                    self.log_test(name, True, f"Status: {response.status_code}")
+                    return True, response_data
+                except:
+                    self.log_test(name, True, f"Status: {response.status_code}")
+                    return True, {}
             else:
-                self.log(f"Test user creation failed: {response.status_code} - {response.text}")
-                return False
+                try:
+                    error_data = response.json()
+                    self.log_test(name, False, f"Expected {expected_status}, got {response.status_code}: {error_data}")
+                except:
+                    self.log_test(name, False, f"Expected {expected_status}, got {response.status_code}")
+                return False, {}
+
         except Exception as e:
-            self.log(f"Test user creation error: {str(e)}")
-            return False
-    
-    def test_user_login(self):
-        """Test user authentication after creating test user"""
-        if not hasattr(self, 'test_user_email'):
-            return False
-            
-        try:
-            response = requests.post(
-                f"{self.base_url}/auth/login",
-                json={
-                    "email": self.test_user_email,
-                    "password": self.test_user_password
-                },
-                timeout=10
-            )
-            
-            if response.status_code == 200:
-                data = response.json()
-                self.test_user_token = data.get('access_token')
-                self.test_user_id = data.get('user', {}).get('id')
-                self.log(f"Test user login successful, ID: {self.test_user_id}")
-                return True
-            elif response.status_code == 403:
-                # Email not verified - this is expected for new users
-                self.log("Test user needs email verification (expected for new users)")
-                return True  # This is actually correct behavior
-            else:
-                self.log(f"Test user login failed: {response.status_code} - {response.text}")
-                return False
-        except Exception as e:
-            self.log(f"Test user login error: {str(e)}")
-            return False
-    
-    def test_password_verification(self):
-        """Test password verification endpoint for transfer authorization"""
-        if not self.admin_token:
-            return False
-            
-        headers = {'Authorization': f'Bearer {self.admin_token}'}
+            self.log_test(name, False, f"Error: {str(e)}")
+            return False, {}
+
+    def admin_login(self):
+        """Login as admin"""
+        print("\n🔐 Admin login...")
+        success, response = self.run_test(
+            "Admin Login",
+            "POST",
+            "v1/auth/login",
+            200,
+            data={
+                "email": "admin@ecommbx.io",
+                "password": "Admin@123456"
+            }
+        )
+        if success and 'access_token' in response:
+            self.admin_token = response['access_token']
+            print(f"   Admin token obtained: {self.admin_token[:20]}...")
+            return True
+        return False
+
+    def create_test_user(self, email, language, first_name, last_name):
+        """Create a new test user with specified language"""
+        print(f"\n👤 Creating {language.upper()} test user: {email}")
         
-        # Test with correct password
-        try:
-            response = requests.post(
-                f"{self.base_url}/auth/verify-password",
-                json={"password": self.admin_credentials["password"]},
-                headers=headers,
-                timeout=10
+        # Generate unique email to avoid conflicts
+        timestamp = datetime.now().strftime("%m%d%H%M%S")
+        unique_email = f"test_{language}_{timestamp}@example.com"
+        
+        success, response = self.run_test(
+            f"Create {language.upper()} Test User",
+            "POST",
+            "v1/auth/signup",
+            201,
+            data={
+                "email": unique_email,
+                "password": "TestPassword123!",
+                "first_name": first_name,
+                "last_name": last_name,
+                "language": language
+            }
+        )
+        
+        if success and 'id' in response:
+            user_id = response['id']
+            print(f"   Created user ID: {user_id}")
+            
+            # Login to get token
+            login_success, login_response = self.run_test(
+                f"Login {language.upper()} Test User",
+                "POST", 
+                "v1/auth/login",
+                200,
+                data={
+                    "email": unique_email,
+                    "password": "TestPassword123!"
+                }
             )
             
-            if response.status_code == 200:
-                self.log("✓ Password verification with correct password: SUCCESS")
+            if login_success and 'access_token' in login_response:
+                token = login_response['access_token']
+                print(f"   User token obtained: {token[:20]}...")
+                return user_id, token, unique_email
                 
-                # Test with wrong password
-                response = requests.post(
-                    f"{self.base_url}/auth/verify-password",
-                    json={"password": "wrongpassword"},
-                    headers=headers,
-                    timeout=10
-                )
-                
-                if response.status_code == 401:
-                    self.log("✓ Password verification with wrong password: CORRECTLY REJECTED")
-                    
-                    # Verify user is still authenticated after wrong password attempt
-                    me_response = requests.get(
-                        f"{self.base_url}/auth/me",
-                        headers=headers,
-                        timeout=10
-                    )
-                    
-                    if me_response.status_code == 200:
-                        self.log("✓ User remains authenticated after wrong password (no logout)")
-                        return True
-                    else:
-                        self.log("❌ User was logged out after wrong password (SECURITY ISSUE)")
-                        return False
-                else:
-                    self.log(f"❌ Wrong password should return 401, got: {response.status_code}")
-                    return False
-            else:
-                self.log(f"❌ Correct password verification failed: {response.status_code}")
-                return False
-        except Exception as e:
-            self.log(f"Password verification error: {str(e)}")
-            return False
-    
-    def test_admin_users_list(self):
-        """Test admin can view users list"""
+        return None, None, None
+
+    def admin_get_user_details(self, user_id):
+        """Get user details as admin to verify language field"""
         if not self.admin_token:
-            return False
+            return None, None
             
         headers = {'Authorization': f'Bearer {self.admin_token}'}
-        
-        try:
-            response = requests.get(
-                f"{self.base_url}/admin/users",
-                headers=headers,
-                timeout=10
-            )
-            
-            if response.status_code == 200:
-                users = response.json()
-                self.log(f"✓ Admin users list retrieved: {len(users)} users")
-                
-                # Verify structure
-                if users and isinstance(users, list):
-                    first_user = users[0]
-                    required_fields = ['id', 'email', 'first_name', 'last_name', 'role', 'status']
-                    if all(field in first_user for field in required_fields):
-                        self.log("✓ Users list has correct structure")
-                        return True
-                    else:
-                        self.log(f"❌ Users list missing fields: {required_fields}")
-                        return False
-                else:
-                    self.log("✓ Empty users list (acceptable)")
-                    return True
-            else:
-                self.log(f"❌ Admin users list failed: {response.status_code}")
-                return False
-        except Exception as e:
-            self.log(f"Admin users list error: {str(e)}")
-            return False
-    
-    def test_kyc_queue(self):
-        """Test admin KYC review queue"""
+        success, response = self.run_test(
+            "Admin Get User Details",
+            "GET",
+            f"v1/admin/users/{user_id}",
+            200,
+            headers=headers
+        )
+        return success, response
+
+    def admin_place_tax_hold(self, user_id, amount=500.0, reason="Testing Italian translation"):
+        """Place tax hold on user account"""
         if not self.admin_token:
-            return False
+            return False, None
             
         headers = {'Authorization': f'Bearer {self.admin_token}'}
-        
-        try:
-            response = requests.get(
-                f"{self.base_url}/admin/kyc/pending",
-                headers=headers,
-                timeout=10
-            )
-            
-            if response.status_code == 200:
-                kyc_apps = response.json()
-                self.log(f"✓ KYC queue retrieved: {len(kyc_apps)} pending applications")
-                return True
-            else:
-                self.log(f"❌ KYC queue failed: {response.status_code}")
-                return False
-        except Exception as e:
-            self.log(f"KYC queue error: {str(e)}")
-            return False
-    
-    def test_transfers_queue(self):
-        """Test admin transfers queue"""
+        success, response = self.run_test(
+            f"Place Tax Hold on User {user_id}",
+            "POST",
+            f"v1/admin/tax-holds/{user_id}",
+            200,
+            data={
+                "tax_amount": amount,
+                "reason": reason,
+                "notes": f"Test for Italian notification - {datetime.now().isoformat()}"
+            },
+            headers=headers
+        )
+        return success, response
+
+    def admin_remove_tax_hold(self, user_id, reason="Testing Italian removal notification"):
+        """Remove tax hold from user account"""
         if not self.admin_token:
-            return False
+            return False, None
             
         headers = {'Authorization': f'Bearer {self.admin_token}'}
+        success, response = self.run_test(
+            f"Remove Tax Hold from User {user_id}",
+            "PATCH",
+            f"v1/admin/tax-holds/{user_id}/remove",
+            200,
+            data={"reason": reason},
+            headers=headers
+        )
+        return success, response
+
+    def get_user_notifications(self, user_token):
+        """Get notifications for a user"""
+        if not user_token:
+            return False, []
+            
+        headers = {'Authorization': f'Bearer {user_token}'}
+        success, response = self.run_test(
+            "Get User Notifications",
+            "GET",
+            "v1/notifications",
+            200,
+            headers=headers
+        )
         
-        try:
-            response = requests.get(
-                f"{self.base_url}/admin/transfers",
-                headers=headers,
-                timeout=10
-            )
+        if success and isinstance(response, list):
+            return True, response
+        elif success and 'notifications' in response:
+            return True, response['notifications']
+        return False, []
+
+    def verify_italian_tax_hold_notification(self, notifications):
+        """Verify that tax hold creation notification is in Italian"""
+        for notif in notifications:
+            title = notif.get('title', '')
+            message = notif.get('message', '')
             
-            if response.status_code == 200:
-                transfers = response.json()
-                self.log(f"✓ Transfers queue retrieved: {len(transfers)} transfers")
-                return True
-            else:
-                self.log(f"❌ Transfers queue failed: {response.status_code}")
-                return False
-        except Exception as e:
-            self.log(f"Transfers queue error: {str(e)}")
-            return False
-    
-    def test_support_tickets(self):
-        """Test admin support tickets with client names"""
-        if not self.admin_token:
-            return False
-            
-        headers = {'Authorization': f'Bearer {self.admin_token}'}
-        
-        try:
-            response = requests.get(
-                f"{self.base_url}/admin/tickets",
-                headers=headers,
-                timeout=10
-            )
-            
-            if response.status_code == 200:
-                tickets = response.json()
-                self.log(f"✓ Support tickets retrieved: {len(tickets)} tickets")
-                
-                # Check if tickets have client name information
-                if tickets:
-                    first_ticket = tickets[0]
-                    has_user_info = 'user_name' in first_ticket or 'user_email' in first_ticket
-                    if has_user_info:
-                        self.log("✓ Support tickets include client name information")
-                    else:
-                        self.log("⚠️  Support tickets missing client name fields")
-                
-                return True
-            else:
-                self.log(f"❌ Support tickets failed: {response.status_code}")
-                return False
-        except Exception as e:
-            self.log(f"Support tickets error: {str(e)}")
-            return False
-    
-    def test_notification_clearing(self):
-        """Test admin notification clearing feature"""
-        if not self.admin_token:
-            return False
-            
-        headers = {'Authorization': f'Bearer {self.admin_token}'}
-        
-        try:
-            # First get a user to test with
-            users_response = requests.get(
-                f"{self.base_url}/admin/users",
-                headers=headers,
-                timeout=10
-            )
-            
-            if users_response.status_code != 200 or not users_response.json():
-                self.log("⚠️  No users available for notification clearing test")
-                return True  # Not a failure, just no data
-            
-            user_id = users_response.json()[0]['id']
-            
-            # Test clearing notifications for this user
-            response = requests.delete(
-                f"{self.base_url}/admin/users/{user_id}/notifications",
-                headers=headers,
-                timeout=10
-            )
-            
-            if response.status_code in [200, 204]:
-                self.log(f"✓ Notification clearing works for user {user_id}")
-                return True
-            else:
-                self.log(f"❌ Notification clearing failed: {response.status_code}")
-                return False
-        except Exception as e:
-            self.log(f"Notification clearing error: {str(e)}")
-            return False
-    
-    def test_health_check(self):
-        """Test basic health check"""
-        try:
-            response = requests.get(f"{self.base_url}/health", timeout=10)
-            if response.status_code == 200:
-                self.log("✓ Health check passed")
-                return True
-            else:
-                # Try without /v1 prefix
-                response = requests.get("https://banking-kyc-fixes.preview.emergentagent.com/health", timeout=10)
-                if response.status_code == 200:
-                    self.log("✓ Health check passed (root path)")
+            # Check for Italian tax hold creation notification
+            if 'Avviso di Restrizione Account' in title:
+                if 'Il tuo account è stato limitato a causa di obblighi fiscali' in message:
+                    self.log_test("Italian Tax Hold Creation Notification", True, f"Title: '{title}', Message: '{message[:100]}...'")
                     return True
                 else:
-                    self.log(f"❌ Health check failed: {response.status_code}")
+                    self.log_test("Italian Tax Hold Creation Notification", False, f"Title correct but message wrong: '{message}'")
                     return False
-        except Exception as e:
-            self.log(f"Health check error: {str(e)}")
-            return False
+                    
+        self.log_test("Italian Tax Hold Creation Notification", False, "Italian tax hold notification not found")
+        return False
+
+    def verify_italian_tax_removal_notification(self, notifications):
+        """Verify that tax hold removal notification is in Italian"""
+        for notif in notifications:
+            title = notif.get('title', '')
+            message = notif.get('message', '')
+            
+            # Check for Italian tax hold removal notification  
+            if 'Restrizioni Account Rimosse' in title:
+                if 'Le restrizioni del tuo account sono state rimosse' in message:
+                    self.log_test("Italian Tax Hold Removal Notification", True, f"Title: '{title}', Message: '{message}'")
+                    return True
+                else:
+                    self.log_test("Italian Tax Hold Removal Notification", False, f"Title correct but message wrong: '{message}'")
+                    return False
+                    
+        self.log_test("Italian Tax Hold Removal Notification", False, "Italian tax removal notification not found")
+        return False
+
+    def verify_english_notifications(self, notifications, notification_type):
+        """Verify English notifications are correct"""
+        for notif in notifications:
+            title = notif.get('title', '')
+            message = notif.get('message', '')
+            
+            if notification_type == "creation":
+                if 'Account Restriction Notice' in title:
+                    if 'Your account has been restricted due to outstanding tax obligations' in message:
+                        self.log_test("English Tax Hold Creation Notification", True, f"Title: '{title}', Message: '{message[:100]}...'")
+                        return True
+            elif notification_type == "removal":
+                if 'Account Restriction Lifted' in title:
+                    if 'Your account restrictions have been removed' in message:
+                        self.log_test("English Tax Hold Removal Notification", True, f"Title: '{title}', Message: '{message}'")
+                        return True
+                        
+        self.log_test(f"English Tax Hold {notification_type.title()} Notification", False, f"English {notification_type} notification not found")
+        return False
+
+def main():
+    print("=" * 80)
+    print("🇮🇹 CRITICAL: Italian Tax Hold Notification Translation Testing")
+    print("=" * 80)
+    print("Testing fix for Italian users receiving English notifications")
+    print("when admin removes tax holds from their accounts.")
+    print()
+
+    tester = TaxHoldNotificationTester()
+
+    # Step 1: Admin Login
+    if not tester.admin_login():
+        print("❌ CRITICAL: Admin login failed - cannot proceed with testing")
+        return 1
+
+    # Step 2: Create Italian test user
+    italian_user_id, italian_token, italian_email = tester.create_test_user(
+        "italian_test", "it", "Marco", "Rossi"
+    )
+    if not italian_user_id:
+        print("❌ CRITICAL: Failed to create Italian test user")
+        return 1
+
+    tester.italian_user_id = italian_user_id
+    tester.italian_user_token = italian_token
+
+    # Step 3: Create English test user for comparison
+    english_user_id, english_token, english_email = tester.create_test_user(
+        "english_test", "en", "John", "Smith"
+    )
+    if not english_user_id:
+        print("❌ CRITICAL: Failed to create English test user")
+        return 1
+
+    tester.english_user_id = english_user_id
+    tester.english_user_token = english_token
+
+    # Step 4: Verify user language settings
+    print("\n🔍 Verifying user language settings...")
+    italian_details_success, italian_details = tester.admin_get_user_details(italian_user_id)
+    english_details_success, english_details = tester.admin_get_user_details(english_user_id)
     
-    def run_all_tests(self):
-        """Run comprehensive backend API tests"""
-        self.log("=" * 80)
-        self.log("🏦 LIVE BANKING APPLICATION - BACKEND API TESTING")
-        self.log("⚠️  CRITICAL: Testing REAL BANK with REAL CLIENTS - Using only NEW test users")
-        self.log("=" * 80)
-        
-        # Basic connectivity
-        self.run_test("Health Check", self.test_health_check)
-        
-        # Admin authentication and features
-        self.run_test("Admin Login", self.test_admin_login)
-        self.run_test("Admin Users List", self.test_admin_users_list)
-        self.run_test("Admin KYC Queue", self.test_kyc_queue)
-        self.run_test("Admin Transfers Queue", self.test_transfers_queue)
-        self.run_test("Admin Support Tickets with Client Names", self.test_support_tickets)
-        self.run_test("Admin Notification Clearing", self.test_notification_clearing)
-        
-        # Critical security feature - Password verification for transfers
-        self.run_test("Password Verification for Transfer Authorization", self.test_password_verification)
-        
-        # User creation and authentication (NEW users only)
-        self.run_test("Create NEW Test User (Safe for Live System)", self.create_test_user)
-        self.run_test("Test User Authentication", self.test_user_login)
-        
-        # Results
-        self.log("=" * 80)
-        self.log(f"📊 TEST RESULTS: {self.tests_passed}/{self.tests_run} tests passed")
-        self.log(f"🎯 Success Rate: {(self.tests_passed/self.tests_run*100):.1f}%")
-        
-        if self.tests_passed == self.tests_run:
-            self.log("🎉 ALL BACKEND TESTS PASSED!")
-        else:
-            self.log(f"⚠️  {self.tests_run - self.tests_passed} tests failed - See details above")
-        
-        self.log("=" * 80)
-        
-        return self.tests_passed, self.tests_run
+    if italian_details_success and english_details_success:
+        print(f"   Italian user email: {italian_email}")
+        print(f"   English user email: {english_email}")
+
+    # Step 5: Test Italian user tax hold flow
+    print("\n🇮🇹 TESTING ITALIAN USER TAX HOLD FLOW")
+    print("-" * 50)
+    
+    # Place tax hold on Italian user
+    hold_success, hold_response = tester.admin_place_tax_hold(italian_user_id, 250.0, "Test Italian notification")
+    if not hold_success:
+        print("❌ CRITICAL: Failed to place tax hold on Italian user")
+        return 1
+
+    # Get Italian user notifications after tax hold placement
+    notif_success, italian_notifications = tester.get_user_notifications(italian_token)
+    if notif_success:
+        print(f"   📱 Italian user has {len(italian_notifications)} notifications")
+        # Verify Italian tax hold creation notification
+        tester.verify_italian_tax_hold_notification(italian_notifications)
+    else:
+        print("❌ Failed to get Italian user notifications")
+
+    # Remove tax hold from Italian user
+    removal_success, removal_response = tester.admin_remove_tax_hold(italian_user_id, "Test Italian removal notification")
+    if not removal_success:
+        print("❌ CRITICAL: Failed to remove tax hold from Italian user")
+        return 1
+
+    # Get Italian user notifications after tax hold removal
+    notif_success, italian_notifications_after = tester.get_user_notifications(italian_token)
+    if notif_success:
+        print(f"   📱 Italian user has {len(italian_notifications_after)} notifications after removal")
+        # Verify Italian tax hold removal notification
+        tester.verify_italian_tax_removal_notification(italian_notifications_after)
+    else:
+        print("❌ Failed to get Italian user notifications after removal")
+
+    # Step 6: Test English user for comparison
+    print("\n🇺🇸 TESTING ENGLISH USER TAX HOLD FLOW (Comparison)")
+    print("-" * 50)
+    
+    # Place tax hold on English user
+    hold_success, hold_response = tester.admin_place_tax_hold(english_user_id, 300.0, "Test English notification")
+    if hold_success:
+        # Get English user notifications
+        notif_success, english_notifications = tester.get_user_notifications(english_token)
+        if notif_success:
+            print(f"   📱 English user has {len(english_notifications)} notifications")
+            tester.verify_english_notifications(english_notifications, "creation")
+
+        # Remove tax hold from English user
+        removal_success, removal_response = tester.admin_remove_tax_hold(english_user_id, "Test English removal notification")
+        if removal_success:
+            notif_success, english_notifications_after = tester.get_user_notifications(english_token)
+            if notif_success:
+                print(f"   📱 English user has {len(english_notifications_after)} notifications after removal")
+                tester.verify_english_notifications(english_notifications_after, "removal")
+
+    # Final Results
+    print("\n" + "=" * 80)
+    print(f"📊 FINAL TEST RESULTS: {tester.tests_passed}/{tester.tests_run} PASSED")
+    print("=" * 80)
+
+    # Critical tests that must pass
+    critical_tests = [
+        "Italian Tax Hold Creation Notification",
+        "Italian Tax Hold Removal Notification"
+    ]
+    
+    critical_passed = 0
+    for result in tester.test_results:
+        if result["test"] in critical_tests and result["passed"]:
+            critical_passed += 1
+
+    print(f"\n🎯 CRITICAL TRANSLATION TESTS: {critical_passed}/{len(critical_tests)} PASSED")
+    
+    if critical_passed == len(critical_tests):
+        print("✅ SUCCESS: Italian translation fix is working correctly!")
+        print("   Italian users will now receive notifications in Italian")
+    else:
+        print("❌ FAILURE: Italian translation fix has issues")
+        print("   Italian users may still receive English notifications")
+
+    # Test details for debugging
+    print("\n📋 DETAILED RESULTS:")
+    for result in tester.test_results:
+        status = "✅" if result["passed"] else "❌"
+        print(f"{status} {result['test']}")
+        if result["details"]:
+            print(f"      {result['details']}")
+
+    return 0 if critical_passed == len(critical_tests) else 1
 
 if __name__ == "__main__":
-    tester = BankingAPITester()
-    passed, total = tester.run_all_tests()
-    
-    # Exit with appropriate code
-    exit(0 if passed == total else 1)
+    sys.exit(main())
