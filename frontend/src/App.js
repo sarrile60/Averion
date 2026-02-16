@@ -2486,8 +2486,15 @@ function AdminDashboard() {
         <div className="p-8">
           {activeSection === 'users' && (
             <div className="mb-6 card p-4">
-              <div className="grid grid-cols-5 gap-4">
-                <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search..." className="input-field" data-testid="user-search" />
+              <div className="grid grid-cols-5 gap-4 mb-4">
+                <input 
+                  type="text" 
+                  value={searchQuery} 
+                  onChange={(e) => handleSearch(e.target.value)} 
+                  placeholder="Search all users..." 
+                  className="input-field" 
+                  data-testid="user-search" 
+                />
                 <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="input-field" data-testid="status-filter">
                   <option value="all">All Status</option>
                   <option value="ACTIVE">Active</option>
@@ -2509,6 +2516,74 @@ function AdminDashboard() {
                   <option value="with_notes">📝 Has Notes</option>
                   <option value="no_notes">No Notes</option>
                 </select>
+              </div>
+              
+              {/* Pagination Controls */}
+              <div className="flex items-center justify-between border-t pt-4">
+                <div className="flex items-center gap-4">
+                  <span className="text-sm text-gray-600">
+                    {searchQuery ? (
+                      `Found ${pagination.total_users} users matching "${searchQuery}"`
+                    ) : (
+                      `Showing ${filteredUsers.length} of ${pagination.total_users} users`
+                    )}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-600">Show:</span>
+                    <select 
+                      value={usersPerPage} 
+                      onChange={(e) => handleUsersPerPageChange(parseInt(e.target.value))}
+                      className="input-field py-1 px-2 w-20"
+                      data-testid="users-per-page"
+                    >
+                      <option value={20}>20</option>
+                      <option value={50}>50</option>
+                      <option value={100}>100</option>
+                    </select>
+                    <span className="text-sm text-gray-600">per page</span>
+                  </div>
+                </div>
+                
+                {/* Page Navigation - Only show when not searching */}
+                {!searchQuery && pagination.total_pages > 1 && (
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handlePageChange(1)}
+                      disabled={!pagination.has_prev}
+                      className={`px-3 py-1 rounded text-sm ${pagination.has_prev ? 'bg-gray-200 hover:bg-gray-300 text-gray-700' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
+                      data-testid="first-page-btn"
+                    >
+                      First
+                    </button>
+                    <button
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={!pagination.has_prev}
+                      className={`px-3 py-1 rounded text-sm ${pagination.has_prev ? 'bg-gray-200 hover:bg-gray-300 text-gray-700' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
+                      data-testid="prev-page-btn"
+                    >
+                      Previous
+                    </button>
+                    <span className="px-3 py-1 text-sm text-gray-700">
+                      Page {currentPage} of {pagination.total_pages}
+                    </span>
+                    <button
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={!pagination.has_next}
+                      className={`px-3 py-1 rounded text-sm ${pagination.has_next ? 'bg-gray-200 hover:bg-gray-300 text-gray-700' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
+                      data-testid="next-page-btn"
+                    >
+                      Next
+                    </button>
+                    <button
+                      onClick={() => handlePageChange(pagination.total_pages)}
+                      disabled={!pagination.has_next}
+                      className={`px-3 py-1 rounded text-sm ${pagination.has_next ? 'bg-gray-200 hover:bg-gray-300 text-gray-700' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
+                      data-testid="last-page-btn"
+                    >
+                      Last
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           )}
