@@ -139,9 +139,10 @@ class TicketService:
         sender_id: str,
         sender_name: str,
         is_staff: bool,
-        data: MessageCreate
+        data: MessageCreate,
+        attachments: List[MessageAttachment] = None
     ) -> Ticket:
-        """Add a message to a ticket."""
+        """Add a message to a ticket with optional attachments."""
         ticket_doc = await self.db.tickets.find_one({"_id": ticket_id})
         if not ticket_doc:
             raise HTTPException(status_code=404, detail="Ticket not found")
@@ -150,7 +151,8 @@ class TicketService:
             sender_id=sender_id,
             sender_name=sender_name,
             is_staff=is_staff,
-            content=data.content
+            content=data.content,
+            attachments=attachments or []
         )
         
         await self.db.tickets.update_one(
@@ -163,6 +165,56 @@ class TicketService:
         
         ticket_doc = await self.db.tickets.find_one({"_id": ticket_id})
         return Ticket(**serialize_doc(ticket_doc))
+    
+    async def upload_attachment(
+        self,
+        ticket_id: str,
+        user_id: str,
+        file: UploadFile
+    ) -> MessageAttachment:
+        """Upload a file attachment for a ticket message."""
+        if not self.storage:
+            raise HTTPException(status_code=500, detail="Storage not configured")
+        
+        # Validate file
+        is_valid, error = validate_file(file)
+        if not is_valid:
+            raise HTTPException(status_code=400, detail=error)
+        
+        # Read file to check size
+        content = await file.read()
+        file_size = len(content)
+        
+        if file_size > MAX_FILE_SIZE:
+            raise HTTPException(
+                status_code=400, 
+                detail=f"File size ({file_size / 1024 / 1024:.1f} MB) exceeds limit of {MAX_FILE_SIZE / 1024 / 1024:.0f} MB"
+            )
+        
+        # Reset file pointer
+        await file.seek(0)
+        
+        # Generate unique key for storage
+        file_id = str(uuid.uuid4())
+        ext = file.filename.rsplit('.', 1)[-1].lower() if file.filename and '.' in file.filename else 'bin'
+        key = f"tickets/{ticket_id}/{file_id}_{file.filename}"
+        
+        # Upload to Cloudinary
+        metadata = self.storage.upload_fileobj(
+            file.file,
+            key,
+            content_type=file.content_type
+        )
+        
+        # Create attachment record
+        attachment = MessageAttachment(
+            file_name=file.filename or "attachment",
+            file_size=file_size,
+            content_type=file.content_type or "application/octet-stream",
+            url=metadata.url
+        )
+        
+        return attachment
     
     async def update_ticket_status(
         self,
