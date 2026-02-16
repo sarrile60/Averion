@@ -1790,28 +1790,69 @@ function AdminDashboard() {
     setFilteredUsers(filtered);
   }, [users, searchQuery, statusFilter, roleFilter, taxHoldFilter, notesFilter]);
 
-  const fetchUsers = useCallback(async (retryCount = 0) => {
+  const fetchUsers = useCallback(async (retryCount = 0, page = currentPage, limit = usersPerPage, search = '') => {
     try {
       setLoading(true);
-      const response = await api.get('/admin/users');
-      setUsers(response.data);
+      // Build query params
+      const params = new URLSearchParams();
+      params.append('page', page.toString());
+      params.append('limit', limit.toString());
+      if (search && search.trim()) {
+        params.append('search', search.trim());
+      }
+      
+      const response = await api.get(`/admin/users?${params.toString()}`);
+      
+      // Handle new paginated response format
+      if (response.data.users && response.data.pagination) {
+        setUsers(response.data.users);
+        setPagination(response.data.pagination);
+      } else {
+        // Fallback for old format (array of users)
+        setUsers(Array.isArray(response.data) ? response.data : []);
+      }
     } catch (err) {
       console.error('Failed to fetch users:', err);
       // Retry up to 2 times on failure
       if (retryCount < 2) {
         console.log(`Retrying fetchUsers... attempt ${retryCount + 2}`);
-        setTimeout(() => fetchUsers(retryCount + 1), 1000);
+        setTimeout(() => fetchUsers(retryCount + 1, page, limit, search), 1000);
         return;
       }
       toast.error('Failed to fetch users');
     } finally {
       setLoading(false);
     }
-  }, [toast]);
+  }, [currentPage, usersPerPage, toast]);
+
+  // Handle page change
+  const handlePageChange = useCallback((newPage) => {
+    setCurrentPage(newPage);
+    fetchUsers(0, newPage, usersPerPage, '');
+  }, [fetchUsers, usersPerPage]);
+
+  // Handle users per page change
+  const handleUsersPerPageChange = useCallback((newLimit) => {
+    setUsersPerPage(newLimit);
+    setCurrentPage(1); // Reset to first page when changing limit
+    fetchUsers(0, 1, newLimit, '');
+  }, [fetchUsers]);
+
+  // Handle search - search across ALL users
+  const handleSearch = useCallback((query) => {
+    setSearchQuery(query);
+    if (query && query.trim()) {
+      // When searching, fetch all matching users
+      fetchUsers(0, 1, usersPerPage, query);
+    } else {
+      // When clearing search, go back to paginated view
+      fetchUsers(0, currentPage, usersPerPage, '');
+    }
+  }, [fetchUsers, currentPage, usersPerPage]);
 
   useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
+    fetchUsers(0, 1, usersPerPage, '');
+  }, []);
 
   useEffect(() => {
     applyFilters();
