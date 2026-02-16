@@ -682,7 +682,64 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false }) {
                 </div>
               </div>
             ) : (
-              <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{msg.content}</p>
+              <>
+                <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{msg.content}</p>
+                
+                {/* Display attachments */}
+                {msg.attachments && msg.attachments.length > 0 && (
+                  <div className="mt-3 space-y-2">
+                    <p className={`text-xs font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                      Attachments ({msg.attachments.length})
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {msg.attachments.map((att, attIdx) => {
+                        const isImage = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp'].includes(
+                          att.file_name.split('.').pop()?.toLowerCase() || ''
+                        );
+                        
+                        return (
+                          <a
+                            key={attIdx}
+                            href={att.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`flex items-center gap-2 px-3 py-2 rounded-lg border transition ${
+                              isDark 
+                                ? 'bg-gray-600 border-gray-500 hover:bg-gray-500 text-gray-200' 
+                                : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'
+                            }`}
+                            data-testid={`attachment-${idx}-${attIdx}`}
+                          >
+                            {isImage ? (
+                              <img 
+                                src={att.url} 
+                                alt={att.file_name}
+                                className="w-8 h-8 object-cover rounded"
+                              />
+                            ) : (
+                              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                              </svg>
+                            )}
+                            <div className="min-w-0">
+                              <p className="text-xs font-medium truncate max-w-[120px]">{att.file_name}</p>
+                              <p className="text-xs opacity-60">
+                                {att.file_size < 1024 * 1024 
+                                  ? (att.file_size / 1024).toFixed(1) + ' KB'
+                                  : (att.file_size / (1024 * 1024)).toFixed(1) + ' MB'
+                                }
+                              </p>
+                            </div>
+                            <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
         ))}
@@ -701,15 +758,86 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false }) {
               style={{ resize: 'vertical' }}
               data-testid="ticket-reply"
             />
+            
+            {/* File attachments section */}
+            <div className="space-y-2">
+              {/* Selected files preview */}
+              {selectedFiles.length > 0 && (
+                <div className={`p-3 rounded-lg ${isDark ? 'bg-gray-600' : 'bg-gray-100'}`}>
+                  <p className={`text-xs font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                    Attached files ({selectedFiles.length}/{MAX_FILES})
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedFiles.map((file, idx) => (
+                      <div 
+                        key={idx}
+                        className={`flex items-center gap-2 px-2 py-1.5 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-white'} border ${isDark ? 'border-gray-600' : 'border-gray-200'}`}
+                      >
+                        {getFileIcon(file.name)}
+                        <div className="min-w-0">
+                          <p className={`text-xs font-medium truncate max-w-[100px] ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
+                            {file.name}
+                          </p>
+                          <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                            {formatFileSize(file.size)}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => removeFile(idx)}
+                          className={`p-1 rounded-full hover:bg-red-100 ${isDark ? 'text-gray-400 hover:text-red-400 hover:bg-red-900/30' : 'text-gray-400 hover:text-red-500'}`}
+                          title="Remove file"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {/* File input */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                onChange={handleFileSelect}
+                className="hidden"
+                accept=".png,.jpg,.jpeg,.gif,.webp,.bmp,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.rtf,.odt,.ods,.odp,.csv,.zip"
+                data-testid="file-input"
+              />
+            </div>
+            
             <div className="flex items-center justify-between">
-              <span className="text-xs text-gray-500">Drag the bottom edge to resize</span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={selectedFiles.length >= MAX_FILES || sending}
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border transition text-sm ${
+                    isDark 
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700 disabled:opacity-50' 
+                      : 'border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50'
+                  }`}
+                  title={`Attach files (max ${MAX_FILES}, 25 MB each)`}
+                  data-testid="attach-file-btn"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                  </svg>
+                  <span>Attach</span>
+                </button>
+                <span className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                  Max {MAX_FILES} files, 25 MB each
+                </span>
+              </div>
               <button
                 onClick={handleSendMessage}
-                disabled={sending || !newMessage.trim()}
+                disabled={sending || (!newMessage.trim() && selectedFiles.length === 0)}
                 className="btn-primary btn-glow"
                 data-testid="send-message"
               >
-                {sending ? t('sending') : t('sendMessage')}
+                {uploadingFiles ? 'Uploading...' : sending ? t('sending') : t('sendMessage')}
               </button>
             </div>
           </div>
