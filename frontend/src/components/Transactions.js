@@ -407,7 +407,6 @@ function TransactionDetailsModal({ transaction, onClose }) {
                   }`}>
                     {isCredit ? t('credit') : t('debit')}
                   </span>
-                  </span>
                 </dd>
               </div>
               <div>
