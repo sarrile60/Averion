@@ -148,7 +148,7 @@ export function AdminTransfersQueue() {
           <dl className="space-y-2 text-sm">
             <div className="flex justify-between"><dt className="text-gray-600">To:</dt><dd className="font-medium">{selectedTransfer.beneficiary_name}</dd></div>
             <div className="flex justify-between"><dt className="text-gray-600">IBAN:</dt><dd className="font-mono text-xs">{selectedTransfer.beneficiary_iban}</dd></div>
-            <div className="flex justify-between"><dt className="text-gray-600">Amount:</dt><dd className="font-bold">€{(selectedTransfer.amount/100).toFixed(2)}</dd></div>
+            <div className="flex justify-between"><dt className="text-gray-600">Amount:</dt><dd className="font-bold">{formatCurrency(selectedTransfer.amount)}</dd></div>
             <div className="flex justify-between"><dt className="text-gray-600">Details:</dt><dd>{selectedTransfer.details}</dd></div>
             {selectedTransfer.reference_number && <div className="flex justify-between"><dt className="text-gray-600">Reference:</dt><dd>{selectedTransfer.reference_number}</dd></div>}
             <div className="flex justify-between"><dt className="text-gray-600">Status:</dt><dd><span className={`badge ${selectedTransfer.status === 'REJECTED' ? 'badge-error' : selectedTransfer.status === 'COMPLETED' ? 'badge-success' : 'badge-warning'}`}>{selectedTransfer.status}</span></dd></div>
