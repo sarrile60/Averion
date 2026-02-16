@@ -782,16 +782,9 @@ export function ProfessionalDashboard({ user, logout }) {
                     if (statusLower === 'failed') return t('failed');
                     if (statusLower === 'cancelled') return t('cancelled');
                     if (statusLower === 'submitted') return t('submitted');
+                    if (statusLower === 'processing') return t('processing');
+                    if (statusLower === 'reversed') return t('reversed');
                     return status;
-                  };
-                  
-                  // Get status badge color
-                  const getStatusBadgeClass = (status) => {
-                    if (!status) return 'badge-success';
-                    const statusLower = status.toLowerCase();
-                    if (statusLower === 'rejected' || statusLower === 'failed') return 'badge-error';
-                    if (statusLower === 'pending' || statusLower === 'submitted') return 'badge-warning';
-                    return 'badge-success';
                   };
                   
                   const displayType = translateDisplayType(rawDisplayType);
@@ -812,14 +805,14 @@ export function ProfessionalDashboard({ user, logout }) {
                   };
                   const description = translateDescription(rawDescription);
                   
-                  // Determine if credit or debit
-                  const isCredit = ['TOP_UP', 'CREDIT', 'REFUND', 'INTEREST'].includes(txn.transaction_type) || txn.direction === 'CREDIT';
+                  // Determine if credit or debit using utility
+                  const isCredit = isTransactionCredit(txn);
                   const amount = txn.amount || 0;
                   
                   return (
                     <div 
                       key={txn.id} 
-                      className="transaction-item cursor-pointer hover:bg-gray-50 rounded-lg transition-colors -mx-2 px-2"
+                      className={`transaction-item cursor-pointer rounded-lg transition-colors -mx-2 px-3 py-3 ${isDark ? 'hover:bg-gray-700/50' : 'hover:bg-gray-50'}`}
                       onClick={() => {
                         if (taxHoldStatus?.is_blocked) {
                           alert(`${t('accountRestricted')}\n\n${t('accountRestrictedDesc')}\n\n${t('amountDue')}: €${taxHoldStatus.tax_amount_due?.toLocaleString('de-DE', { minimumFractionDigits: 2 })}\n\n${t('pleaseSettleAmount')}`);
@@ -829,31 +822,37 @@ export function ProfessionalDashboard({ user, logout }) {
                       }}
                       data-testid="transaction-item"
                     >
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <p className="text-sm font-medium text-gray-900 truncate">{displayType}</p>
-                          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <p className={`text-sm font-medium truncate ${isDark ? 'text-white' : 'text-gray-900'}`}>{displayType}</p>
+                            <svg className={`w-4 h-4 flex-shrink-0 ${isDark ? 'text-gray-500' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </div>
+                          {senderName && (
+                            <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t('from')}: {senderName}</p>
+                          )}
+                          {description && (
+                            <p className={`text-xs truncate ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>{description}</p>
+                          )}
+                          {reference && (
+                            <p className={`text-xs font-mono ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{t('ref')}: {reference}</p>
+                          )}
+                          {!senderName && !description && (
+                            <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>{formatDate(txn.created_at)}</p>
+                          )}
                         </div>
-                        {senderName && (
-                          <p className="text-xs text-gray-600">{t('from')}: {senderName}</p>
-                        )}
-                        {description && (
-                          <p className="text-xs text-gray-500 truncate">{description}</p>
-                        )}
-                        {reference && (
-                          <p className="text-xs text-gray-400 font-mono">{t('ref')}: {reference}</p>
-                        )}
-                        {!senderName && !description && (
-                          <p className="text-xs text-gray-500">{formatDate(txn.created_at)}</p>
-                        )}
-                      </div>
-                      <div className="text-right flex-shrink-0 ml-4">
-                        <p className={`text-sm font-semibold ${isCredit ? 'text-green-600' : 'text-red-600'}`}>
-                          {isCredit ? '+' : '-'}€{formatAmount(amount)}
-                        </p>
-                        <span className={`badge ${getStatusBadgeClass(txn.status)} text-xs`}>{translateStatus(txn.status)}</span>
+                        <div className="text-right flex-shrink-0 ml-4">
+                          {/* Professional banking amount display: +/- with color */}
+                          <p className={`text-base font-bold ${isCredit ? 'text-green-600' : 'text-red-600'}`}>
+                            {formatTransactionAmount(amount, isCredit)}
+                          </p>
+                          {/* Professional status badge */}
+                          <span className={getStatusBadgeClasses(txn.status, isDark)}>
+                            {translateStatus(txn.status)}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   );
