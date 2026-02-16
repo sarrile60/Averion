@@ -303,6 +303,7 @@ const translations = {
     transactionDetails: 'Transaction Details',
     transactionInformation: 'Transaction Information',
     transactionIdLabel: 'Transaction ID',
+    transactionType: 'Transaction Type',
     created: 'Created',
     externalId: 'External ID',
     performedBy: 'Performed By',
