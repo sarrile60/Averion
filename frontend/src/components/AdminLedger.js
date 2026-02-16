@@ -121,7 +121,7 @@ export function EnhancedLedgerTools({ account, onSuccess }) {
         admin_note: debitForm.admin_note || null
       });
       
-      toast.success(`€${parseFloat(debitForm.amount).toFixed(2)} debited from account`);
+      toast.success(`${formatEuroAmount(parseFloat(debitForm.amount))} debited from account`);
       setDebitForm({
         amount: '',
         display_type: 'Withdrawal',
