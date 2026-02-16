@@ -385,7 +385,7 @@ export function P2PTransferForm({ onSuccess }) {
                   )}
                 </span>
                 <span className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                  {t('remaining')}: €{((availableBalance - transferAmountCents) / 100).toFixed(2)}
+                  {t('remaining')}: {formatCurrency(availableBalance - transferAmountCents)}
                 </span>
               </div>
             )}
