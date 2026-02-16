@@ -127,7 +127,7 @@ export function NewTransferModal({ onClose, onSuccess }) {
             >
               {accounts.map(acc => (
                 <option key={acc.id} value={acc.id}>
-                  {acc.account_number} - €{(acc.balance/100).toFixed(2)}
+                  {acc.account_number} - {formatCurrency(acc.balance)}
                 </option>
               ))}
             </select>
@@ -153,7 +153,7 @@ export function NewTransferModal({ onClose, onSuccess }) {
               />
             </div>
             {formData.amount && (
-              <p className="text-xs text-gray-500 mt-1">= €{(parseInt(formData.amount)/100).toFixed(2)}</p>
+              <p className="text-xs text-gray-500 mt-1">= {formatCurrency(parseInt(formData.amount))}</p>
             )}
           </div>
 
