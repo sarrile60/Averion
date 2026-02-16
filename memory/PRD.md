@@ -24,6 +24,21 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 
 ## Recent Changes (February 2025)
 
+### Recent Activity Layout Fix (Feb 16, 2025)
+**Problem:** Large empty space on the right side of transaction rows in Recent Activity section.
+
+**Solution:**
+- Fixed transaction row layout to use full card width
+- Applied proper Flexbox styling with `flex justify-between w-full gap-4`
+- Transaction details (type, ref, date) aligned LEFT
+- Amount and Credit/Debit badge aligned to FAR RIGHT
+- Removed unnecessary CSS class overrides causing layout issues
+
+**Files Changed:**
+- `/app/frontend/src/components/ProfessionalDashboard.js` - Transaction row styling (lines 812-862)
+
+**Verification:** Visual verification via screenshot - layout now uses full width with no empty space
+
 ### Professional Banking Transaction Display (Feb 16, 2025)
 **Problem:** Transaction display showed processing status (Posted/Submitted) instead of transaction type.
 
