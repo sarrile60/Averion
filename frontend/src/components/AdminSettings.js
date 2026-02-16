@@ -115,7 +115,7 @@ export function AdminSettings() {
               onChange={(e) => setSettings({...settings, maxDailyTopUp: parseInt(e.target.value)})}
               className={`input-field ${isDark ? 'bg-gray-700 border-gray-600 text-white' : ''}`}
             />
-            <p className={`text-xs mt-1 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>= €{(settings.maxDailyTopUp / 100).toFixed(2)}</p>
+            <p className={`text-xs mt-1 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>= {formatCurrency(settings.maxDailyTopUp)}</p>
           </div>
           <div>
             <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
@@ -127,7 +127,7 @@ export function AdminSettings() {
               onChange={(e) => setSettings({...settings, maxTransferAmount: parseInt(e.target.value)})}
               className={`input-field ${isDark ? 'bg-gray-700 border-gray-600 text-white' : ''}`}
             />
-            <p className={`text-xs mt-1 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>= €{(settings.maxTransferAmount / 100).toFixed(2)}</p>
+            <p className={`text-xs mt-1 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>= {formatCurrency(settings.maxTransferAmount)}</p>
           </div>
         </div>
       </div>
