@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
 import { useLanguage, useTheme } from '../contexts/AppContext';
+import { getStatusBadgeClasses, isTransactionCredit, formatTransactionAmount } from '../utils/transactions';
+import { formatCurrency } from '../utils/currency';
 
 export function TransactionsList({ accountId, isAdmin = false }) {
   const { t } = useLanguage();
