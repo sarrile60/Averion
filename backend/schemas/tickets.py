@@ -22,12 +22,23 @@ class TicketPriority(str, Enum):
     URGENT = "URGENT"
 
 
+class MessageAttachment(BaseModel):
+    """Attachment for ticket messages."""
+    id: str = Field(default_factory=lambda: str(ObjectId()))
+    file_name: str
+    file_size: int  # in bytes
+    content_type: str
+    url: str  # Cloudinary URL
+    uploaded_at: datetime = Field(default_factory=datetime.utcnow)
+
+
 class TicketMessage(BaseModel):
     id: str = Field(default_factory=lambda: str(ObjectId()))
     sender_id: str
     sender_name: str
     is_staff: bool = False
     content: str
+    attachments: List[MessageAttachment] = Field(default_factory=list)
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 
