@@ -704,7 +704,9 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false }) {
                             // URL format: https://res.cloudinary.com/cloud/type/upload/v123/path
                             const parts = url.split('/upload/');
                             if (parts.length === 2) {
-                              return `${parts[0]}/upload/fl_attachment:${encodeURIComponent(filename)}/${parts[1]}`;
+                              // Remove extension from filename for fl_attachment parameter
+                              const nameWithoutExt = filename.replace(/\.[^/.]+$/, '');
+                              return `${parts[0]}/upload/fl_attachment:${nameWithoutExt}/${parts[1]}`;
                             }
                           }
                           return url;
