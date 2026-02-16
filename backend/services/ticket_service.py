@@ -3,15 +3,43 @@
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from datetime import datetime
 from typing import List, Optional
-from fastapi import HTTPException
+from fastapi import HTTPException, UploadFile
+import uuid
 
-from schemas.tickets import Ticket, TicketCreate, MessageCreate, TicketMessage, TicketStatus
+from schemas.tickets import Ticket, TicketCreate, MessageCreate, TicketMessage, TicketStatus, MessageAttachment
 from utils.common import serialize_doc
+from providers import StorageProvider
+
+
+# Allowed file types and size limit
+ALLOWED_EXTENSIONS = {
+    # Images
+    'png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp',
+    # Documents
+    'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
+    'txt', 'rtf', 'odt', 'ods', 'odp',
+    # Other
+    'csv', 'zip'
+}
+MAX_FILE_SIZE = 25 * 1024 * 1024  # 25 MB
+MAX_FILES_PER_MESSAGE = 5
+
+
+def validate_file(file: UploadFile) -> tuple[bool, str]:
+    """Validate file type and size."""
+    # Check file extension
+    if file.filename:
+        ext = file.filename.rsplit('.', 1)[-1].lower() if '.' in file.filename else ''
+        if ext not in ALLOWED_EXTENSIONS:
+            return False, f"File type '.{ext}' is not allowed. Allowed types: {', '.join(sorted(ALLOWED_EXTENSIONS))}"
+    
+    return True, ""
 
 
 class TicketService:
-    def __init__(self, db: AsyncIOMotorDatabase):
+    def __init__(self, db: AsyncIOMotorDatabase, storage: Optional[StorageProvider] = None):
         self.db = db
+        self.storage = storage
     
     async def create_ticket(self, user_id: str, user_name: str, data: TicketCreate) -> Ticket:
         """Create a new support ticket."""
