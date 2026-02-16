@@ -267,7 +267,7 @@ export function AdminTransfersQueue() {
                 <tr key={t.id} className="cursor-pointer hover:bg-gray-50" onClick={() => setSelectedTransfer(t)}>
                   <td className="text-xs">{new Date(t.created_at).toLocaleDateString()}</td>
                   <td>{t.beneficiary_name}</td>
-                  <td className="font-semibold">€{(t.amount/100).toFixed(2)}</td>
+                  <td className="font-semibold">{formatCurrency(t.amount)}</td>
                   <td><span className={`badge ${t.status === 'REJECTED' ? 'badge-error' : t.status === 'COMPLETED' ? 'badge-success' : 'badge-warning'}`}>{t.status}</span></td>
                   {activeTab === 'REJECTED' && (
                     <td className="max-w-xs">
