@@ -1018,7 +1018,8 @@ function AccountsPage() {
   };
 
   const formatAmount = (cents) => {
-    return (cents / 100).toFixed(2);
+    // EU format: dot for thousands, comma for decimals
+    return formatCentsToNumber(cents);
   };
 
   const formatDate = (dateStr) => {
