@@ -452,6 +452,10 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshT
     try {
       await api.patch(`/admin/tickets/${ticket.id}/status`, { status: newStatus });
       alert('Status updated successfully');
+      // Refresh the ticket to show updated status
+      if (onRefreshTicket) {
+        await onRefreshTicket(ticket.id);
+      }
       onUpdate();
     } catch (err) {
       alert('Failed to update status');
@@ -464,6 +468,10 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshT
     try {
       await api.patch(`/admin/tickets/${ticket.id}/subject`, { subject: editedSubject.trim() });
       setEditingSubject(false);
+      // Refresh the ticket to show updated subject
+      if (onRefreshTicket) {
+        await onRefreshTicket(ticket.id);
+      }
       onUpdate();
     } catch (err) {
       alert('Failed to update subject');
