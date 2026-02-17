@@ -44,6 +44,36 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 
 **Verification:** 100% test pass rate (iteration_75.json) - All 5 stat tiles display correct values, all 4 charts render correctly
 
+### Admin Dashboard Charts - Real Data (Feb 17, 2025)
+**Problem:** Charts were showing hardcoded fake data (Jan, Feb, Mar, Apr with fictional numbers) instead of real data from the database.
+
+**Solution:**
+- Created new backend endpoint `GET /api/v1/admin/analytics/monthly` that queries real data from MongoDB
+- Returns last 6 months of actual user registrations and transactions grouped by month
+- Includes cumulative user count for growth visualization
+
+**Data Structure:**
+```json
+{
+  "monthly_data": [
+    {"month": "Sep", "year": 2025, "users": 0, "transactions": 0, "cumulative_users": 0},
+    {"month": "Jan", "year": 2026, "users": 28, "transactions": 22, "cumulative_users": 28},
+    {"month": "Feb", "year": 2026, "users": 83, "transactions": 57, "cumulative_users": 111}
+  ]
+}
+```
+
+**Files Changed:**
+- `/app/backend/server.py` - Added `get_admin_analytics_monthly()` endpoint
+- `/app/frontend/src/components/Analytics.js` - Updated to fetch and display real monthly data
+
+**Verification:** Screenshots and API tests confirm real data is displayed
+
+### Admin Default Page Fix (Feb 17, 2025)
+**Problem:** Admin dashboard defaulted to "Users" page instead of "Overview" after login.
+
+**Fix:** Changed `useState('users')` to `useState('overview')` in App.js line 1700.
+
 ### Support Ticket File Attachments (Feb 16, 2025)
 **Feature:** Clients and admins can now attach files to support ticket messages.
 
