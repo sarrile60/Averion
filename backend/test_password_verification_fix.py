@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 
 class PasswordVerificationTester:
-    def __init__(self, base_url="https://elated-vaughan-1.preview.emergentagent.com"):
+    def __init__(self, base_url="https://admin-metrics-debug.preview.emergentagent.com"):
         self.base_url = base_url
         self.admin_token = None
         self.test_user_token = None
