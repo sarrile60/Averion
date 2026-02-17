@@ -185,6 +185,7 @@ export function SupportTickets({ isAdmin = false }) {
               <TicketDetails
                 ticket={selectedTicket}
                 onUpdate={fetchTickets}
+                onRefreshTicket={refreshSelectedTicket}
                 onDelete={(ticketId) => {
                   setSelectedTicket(null);
                   fetchTickets();
