@@ -80,22 +80,26 @@ export function AnalyticsDashboard() {
   return (
     <div className="space-y-6">
       {/* KPI Cards */}
-      <div className="grid grid-cols-4 gap-4">
-        <div className="stat-tile">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="stat-tile" data-testid="stat-total-users">
           <div className="stat-tile-number">{stats.totalUsers}</div>
           <div className="stat-tile-label">Total Users</div>
         </div>
-        <div className="stat-tile">
+        <div className="stat-tile" data-testid="stat-active-users">
           <div className="stat-tile-number">{stats.activeUsers}</div>
           <div className="stat-tile-label">Active Users</div>
         </div>
-        <div className="stat-tile">
+        <div className="stat-tile" data-testid="stat-pending-kyc">
           <div className="stat-tile-number">{stats.pendingKYC}</div>
           <div className="stat-tile-label">Pending KYC</div>
         </div>
-        <div className="stat-tile">
+        <div className="stat-tile" data-testid="stat-transactions">
           <div className="stat-tile-number">{stats.totalTransactions}</div>
           <div className="stat-tile-label">Transactions</div>
+        </div>
+        <div className="stat-tile" data-testid="stat-volume">
+          <div className="stat-tile-number text-lg">{formatEuroCurrency(stats.totalVolume)}</div>
+          <div className="stat-tile-label">Total Volume</div>
         </div>
       </div>
 
