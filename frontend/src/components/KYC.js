@@ -520,10 +520,10 @@ function DocumentUpload({ docType, uploaded, onUpload, uploading, t }) {
   };
 
   return (
-    <div className="border rounded-lg p-4" data-testid={`upload-${docType}`}>
+    <div className="border rounded-lg p-4 bg-white" data-testid={`upload-${docType}`}>
       <div className="flex justify-between items-center">
         <div>
-          <p className="font-medium">{labels[docType]}</p>
+          <p className="font-medium text-gray-900">{labels[docType]}</p>
           {uploaded && (
             <p className="text-sm text-green-600 mt-1">✓ {uploaded}</p>
           )}
