@@ -24,13 +24,16 @@ export function AnalyticsDashboard() {
       const analyticsRes = await api.get('/admin/analytics/overview');
       const analytics = analyticsRes.data;
       
+      // Volume is in cents, convert to euros
+      const volumeInEuros = (analytics.transfers?.volume_cents || 0) / 100;
+      
       setStats({
         totalUsers: analytics.users?.total || 0,
         activeUsers: analytics.users?.active || 0,
         pendingKYC: analytics.kyc?.pending || 0,
-        approvedKYC: 0, // Not tracked in overview endpoint
+        approvedKYC: analytics.kyc?.approved || 0,
         totalTransactions: analytics.transfers?.total || 0,
-        totalVolume: 0 // Volume calculation would need ledger data
+        totalVolume: volumeInEuros
       });
     } catch (err) {
       console.error('Failed to fetch analytics:', err);
