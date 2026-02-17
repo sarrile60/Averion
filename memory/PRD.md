@@ -53,6 +53,31 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 - Light mode: No regressions - white backgrounds maintained
 - Transaction labels (Card Payment, SEPA Transfer, Top Up) now clearly visible in dark mode
 
+### Overview Card Balance Dark Mode Fix (Feb 17, 2025)
+**Problem:** In dark mode, the big balance amount (e.g., €30.216,00) in the Overview card was becoming extremely light/grey and looked almost hidden, while the card background stayed white, making the balance nearly invisible.
+
+**Root Cause:** Conflicting CSS rules:
+1. `.overview-card { background: white }` kept card white
+2. Inline Tailwind classes `isDark ? 'bg-gray-800 border-gray-700'` tried to override but were losing
+3. `.dark .balance-large { color: #F5F5F5 }` made text light gray
+4. Result: Light gray text on white-ish background = invisible
+
+**Solution:** The overview card should remain white in dark mode (as a "hero" contrast element) with dark text:
+1. Removed conflicting inline `isDark` classes from ProfessionalDashboard.js overview-card
+2. Updated App.css to explicitly keep overview card white in dark mode
+3. Changed `.dark .balance-large` and `.dark .balance-small` to use dark colors (#212121, #757575)
+4. Updated `.dark .overview-label` to use readable gray (#757575)
+
+**Files Changed:**
+- `/app/frontend/src/App.css` - Added `.dark .overview-card` with white background, updated dark mode text colors
+- `/app/frontend/src/components/ProfessionalDashboard.js` - Removed inline isDark classes from overview-card section
+
+**Verification:** 100% test pass rate (iteration_77.json):
+- Overview card maintains WHITE background (rgb(255,255,255)) in dark mode
+- Balance large text uses DARK color (#212121) in dark mode  
+- "Available balance" label uses readable gray (#757575) in dark mode
+- Light mode unchanged (no regression)
+
 ### Admin Dashboard Analytics Fix (Feb 17, 2025)
 **Problem:** Admin Dashboard Overview page was showing all zeros for statistics (Total Users, Active Users, Pending KYC, Transactions).
 
