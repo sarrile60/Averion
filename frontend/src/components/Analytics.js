@@ -73,13 +73,6 @@ export function AnalyticsDashboard() {
     { name: 'Pending', value: stats.pendingKYC, color: '#F57C00' }
   ];
 
-  const monthlyData = [
-    { month: 'Jan', users: 5, transactions: 12 },
-    { month: 'Feb', users: 8, transactions: 25 },
-    { month: 'Mar', users: 12, transactions: 38 },
-    { month: 'Apr', users: stats.totalUsers, transactions: 45 }
-  ];
-
   if (loading) {
     return (
       <div className="space-y-4">
