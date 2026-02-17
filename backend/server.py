@@ -3237,6 +3237,75 @@ async def get_admin_analytics_overview(
     }
 
 
+@app.get("/api/v1/admin/analytics/monthly")
+async def get_admin_analytics_monthly(
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Get real monthly statistics for admin dashboard charts.
+    
+    Returns actual data from the database grouped by month for the last 6 months.
+    """
+    from datetime import datetime, timezone, timedelta
+    from calendar import month_abbr
+    
+    # Calculate date range - last 6 months including current
+    now = datetime.now(timezone.utc)
+    
+    # Generate list of last 6 months
+    months_data = []
+    for i in range(5, -1, -1):  # 5 months ago to current month
+        # Calculate the first day of the target month
+        target_date = now - timedelta(days=i*30)  # Approximate, we'll use the actual month
+        year = target_date.year
+        month = target_date.month
+        
+        # Get month boundaries
+        month_start = datetime(year, month, 1, tzinfo=timezone.utc)
+        if month == 12:
+            month_end = datetime(year + 1, 1, 1, tzinfo=timezone.utc)
+        else:
+            month_end = datetime(year, month + 1, 1, tzinfo=timezone.utc)
+        
+        # Count users created in this month
+        users_count = await db.users.count_documents({
+            "created_at": {"$gte": month_start, "$lt": month_end}
+        })
+        
+        # Count transfers created in this month
+        transfers_count = await db.transfers.count_documents({
+            "created_at": {"$gte": month_start, "$lt": month_end}
+        })
+        
+        # Get month abbreviation (Jan, Feb, etc.)
+        month_name = month_abbr[month]
+        
+        months_data.append({
+            "month": month_name,
+            "year": year,
+            "users": users_count,
+            "transactions": transfers_count
+        })
+    
+    # Calculate cumulative user growth (running total)
+    # First get total users before the 6-month period
+    six_months_ago = now - timedelta(days=180)
+    users_before_period = await db.users.count_documents({
+        "created_at": {"$lt": six_months_ago}
+    })
+    
+    # Add cumulative totals
+    running_total = users_before_period
+    for month_entry in months_data:
+        running_total += month_entry["users"]
+        month_entry["cumulative_users"] = running_total
+    
+    return {
+        "monthly_data": months_data,
+        "period": "last_6_months"
+    }
+
+
 # ==================== NOTIFICATIONS ====================
 
 @app.get("/api/v1/notifications")
