@@ -277,7 +277,7 @@ function CreateTicketForm({ onClose, onSuccess }) {
   );
 }
 
-function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false }) {
+function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshTicket }) {
   const [newMessage, setNewMessage] = useState('');
   const [sending, setSending] = useState(false);
   const [editingSubject, setEditingSubject] = useState(false);
