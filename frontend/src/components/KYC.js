@@ -379,7 +379,7 @@ export function KYCApplication() {
                 value={formData.tax_residency}
                 onChange={handleInputChange}
                 placeholder="e.g., DE"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 bg-white placeholder-gray-400"
                 data-testid="kyc-tax-residency"
               />
             </div>
@@ -390,7 +390,7 @@ export function KYCApplication() {
                 name="tax_id"
                 value={formData.tax_id}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 bg-white"
                 data-testid="kyc-tax-id"
               />
             </div>
@@ -411,7 +411,7 @@ export function KYCApplication() {
       {/* Step 2: Document Upload */}
       {step === 2 && (
         <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold mb-4">{t('kycUploadDocuments')}</h3>
+          <h3 className="text-lg font-semibold mb-4 text-gray-900">{t('kycUploadDocuments')}</h3>
           <div className="space-y-4">
             {['PASSPORT', 'PROOF_OF_ADDRESS', 'SELFIE'].map((docType) => (
               <DocumentUpload
