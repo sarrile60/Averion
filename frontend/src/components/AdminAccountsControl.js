@@ -17,23 +17,56 @@ export function AdminAccountsControl() {
   const [operation, setOperation] = useState('topup');
   const [formData, setFormData] = useState({ amount: '', reason: '' });
   const [ibanFormData, setIbanFormData] = useState({ iban: '', bic: '' });
+  
+  // Search and pagination state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(50);
+  const [pagination, setPagination] = useState({
+    total_accounts: 0,
+    total_pages: 1,
+    has_next: false,
+    has_prev: false
+  });
 
   const fetchAccounts = useCallback(async () => {
+    setLoading(true);
     try {
-      // Use the optimized endpoint that returns all accounts with user info in one request
-      const response = await api.get('/admin/accounts-with-users');
-      setAccounts(response.data);
+      // Build query params for search and pagination
+      const params = new URLSearchParams();
+      if (searchQuery.trim()) {
+        params.append('search', searchQuery.trim());
+      }
+      params.append('page', page.toString());
+      params.append('limit', limit.toString());
+      
+      const response = await api.get(`/admin/accounts-with-users?${params.toString()}`);
+      
+      // Handle new paginated response format
+      if (response.data.accounts) {
+        setAccounts(response.data.accounts);
+        setPagination(response.data.pagination);
+      } else {
+        // Fallback for old format (array)
+        setAccounts(response.data);
+        setPagination({ total_accounts: response.data.length, total_pages: 1, has_next: false, has_prev: false });
+      }
     } catch (err) {
       console.error('Failed to load accounts:', err);
       toast.error('Failed to load accounts');
     } finally {
       setLoading(false);
     }
-  }, [toast]);
+  }, [toast, searchQuery, page, limit]);
 
   useEffect(() => {
     fetchAccounts();
   }, [fetchAccounts]);
+
+  // Reset to page 1 when search changes
+  useEffect(() => {
+    setPage(1);
+  }, [searchQuery, limit]);
 
   const handleSubmit = async () => {
     if (!formData.amount || !formData.reason) {
@@ -83,6 +116,80 @@ export function AdminAccountsControl() {
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-6">Account Control</h2>
+      
+      {/* Search Bar and Controls */}
+      <div className="mb-6 flex flex-wrap items-center gap-4">
+        {/* Search Input */}
+        <div className="flex-1 min-w-[300px]">
+          <input
+            type="text"
+            placeholder="Search by name, email, IBAN, or account number..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="input-field w-full"
+            data-testid="accounts-search-input"
+          />
+        </div>
+        
+        {/* Results Count */}
+        <div className="text-sm text-gray-600">
+          Showing {accounts.length} of {pagination.total_accounts} accounts
+        </div>
+        
+        {/* Per Page Selector */}
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-600">Show:</span>
+          <select
+            value={limit}
+            onChange={(e) => setLimit(Number(e.target.value))}
+            className="input-field py-1 px-2 w-20"
+            data-testid="accounts-limit-select"
+          >
+            <option value={20}>20</option>
+            <option value={50}>50</option>
+            <option value={100}>100</option>
+          </select>
+          <span className="text-sm text-gray-600">per page</span>
+        </div>
+      </div>
+      
+      {/* Pagination Controls - Top */}
+      {!searchQuery.trim() && pagination.total_pages > 1 && (
+        <div className="mb-4 flex items-center justify-end gap-2">
+          <button
+            onClick={() => setPage(1)}
+            disabled={page === 1}
+            className="px-3 py-1 text-sm border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+          >
+            First
+          </button>
+          <button
+            onClick={() => setPage(p => Math.max(1, p - 1))}
+            disabled={!pagination.has_prev}
+            className="px-3 py-1 text-sm border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+          >
+            Previous
+          </button>
+          <span className="px-3 py-1 text-sm">
+            Page {page} of {pagination.total_pages}
+          </span>
+          <button
+            onClick={() => setPage(p => p + 1)}
+            disabled={!pagination.has_next}
+            className="px-3 py-1 text-sm border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+          >
+            Next
+          </button>
+          <button
+            onClick={() => setPage(pagination.total_pages)}
+            disabled={page === pagination.total_pages}
+            className="px-3 py-1 text-sm border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+          >
+            Last
+          </button>
+        </div>
+      )}
+      
       {loading ? (
         <div className="skeleton-card h-64"></div>
       ) : (
@@ -107,27 +214,72 @@ export function AdminAccountsControl() {
               </tr>
             </thead>
             <tbody>
-              {accounts.map(acc => (
-                <tr key={acc.id}>
-                  <td>
-                    <div className="font-medium">{acc.userName}</div>
-                    <div className="text-xs text-gray-600">{acc.userEmail}</div>
-                  </td>
-                  <td>{acc.account_number}</td>
-                  <td className="font-semibold">{formatBalance(acc.balance, isBalanceVisible)}</td>
-                  <td>
-                    <div className="font-mono text-xs">{acc.iban || 'Not set'}</div>
-                    <div className="font-mono text-xs text-gray-500">{acc.bic || ''}</div>
-                  </td>
-                  <td>
-                    <button onClick={() => { setSelectedAccount(acc); setOperation('topup'); setShowModal(true); }} className="btn-text text-xs mr-2">Top Up</button>
-                    <button onClick={() => { setSelectedAccount(acc); setOperation('withdraw'); setShowModal(true); }} className="btn-text text-xs mr-2">Withdraw</button>
-                    <button onClick={() => handleEditIban(acc)} className="btn-text text-xs text-blue-600">Edit IBAN</button>
+              {accounts.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-8 text-gray-500">
+                    {searchQuery ? 'No accounts found matching your search' : 'No accounts found'}
                   </td>
                 </tr>
-              ))}
+              ) : (
+                accounts.map(acc => (
+                  <tr key={acc.id} data-testid={`account-row-${acc.id}`}>
+                    <td>
+                      <div className="font-medium">{acc.userName}</div>
+                      <div className="text-xs text-gray-600">{acc.userEmail}</div>
+                    </td>
+                    <td>{acc.account_number}</td>
+                    <td className="font-semibold">{formatBalance(acc.balance, isBalanceVisible)}</td>
+                    <td>
+                      <div className="font-mono text-xs">{acc.iban || 'Not set'}</div>
+                      <div className="font-mono text-xs text-gray-500">{acc.bic || ''}</div>
+                    </td>
+                    <td>
+                      <button onClick={() => { setSelectedAccount(acc); setOperation('topup'); setShowModal(true); }} className="btn-text text-xs mr-2">Top Up</button>
+                      <button onClick={() => { setSelectedAccount(acc); setOperation('withdraw'); setShowModal(true); }} className="btn-text text-xs mr-2">Withdraw</button>
+                      <button onClick={() => handleEditIban(acc)} className="btn-text text-xs text-blue-600">Edit IBAN</button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
+        </div>
+      )}
+      
+      {/* Pagination Controls - Bottom */}
+      {!searchQuery.trim() && pagination.total_pages > 1 && (
+        <div className="mt-4 flex items-center justify-end gap-2">
+          <button
+            onClick={() => setPage(1)}
+            disabled={page === 1}
+            className="px-3 py-1 text-sm border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+          >
+            First
+          </button>
+          <button
+            onClick={() => setPage(p => Math.max(1, p - 1))}
+            disabled={!pagination.has_prev}
+            className="px-3 py-1 text-sm border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+          >
+            Previous
+          </button>
+          <span className="px-3 py-1 text-sm">
+            Page {page} of {pagination.total_pages}
+          </span>
+          <button
+            onClick={() => setPage(p => p + 1)}
+            disabled={!pagination.has_next}
+            className="px-3 py-1 text-sm border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+          >
+            Next
+          </button>
+          <button
+            onClick={() => setPage(pagination.total_pages)}
+            disabled={page === pagination.total_pages}
+            className="px-3 py-1 text-sm border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+          >
+            Last
+          </button>
         </div>
       )}
 
