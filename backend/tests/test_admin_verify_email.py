@@ -141,11 +141,12 @@ class TestAdminVerifyEmail:
         assert audit_response.status_code == 200, f"Audit log fetch failed: {audit_response.text}"
         
         audit_data = audit_response.json()
-        assert "logs" in audit_data, "Audit response should contain 'logs' field"
-        print(f"✓ Audit log endpoint working - found {len(audit_data['logs'])} recent logs")
+        # Audit logs are returned as a list directly
+        assert isinstance(audit_data, list), "Audit response should be a list"
+        print(f"✓ Audit log endpoint working - found {len(audit_data)} recent logs")
         
         # Check if there are any ADMIN_EMAIL_VERIFIED actions in history
-        email_verify_logs = [log for log in audit_data['logs'] if log.get('action') == 'ADMIN_EMAIL_VERIFIED']
+        email_verify_logs = [log for log in audit_data if log.get('action') == 'ADMIN_EMAIL_VERIFIED']
         print(f"✓ Found {len(email_verify_logs)} historical ADMIN_EMAIL_VERIFIED logs")
 
 
