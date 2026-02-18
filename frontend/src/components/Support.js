@@ -267,8 +267,8 @@ export function SupportTickets({ isAdmin = false }) {
                           </span>
                         )}
                       </p>
-                      {/* Unread badge for admin */}
-                      {isAdmin && ticket.unread_count > 0 && (
+                      {/* Unread badge - shows for both admin and client */}
+                      {ticket.unread_count > 0 && (
                         <span 
                           className="flex-shrink-0 bg-red-500 text-white text-xs font-bold rounded-full h-5 min-w-[20px] px-1.5 flex items-center justify-center"
                           data-testid={`unread-badge-${ticket.id}`}
