@@ -1944,10 +1944,23 @@ function AdminDashboard() {
     
     setDeleteUserLoading(true);
     try {
-      await api.delete(`/admin/users/${selectedUser.user.id}/permanent`);
-      toast.success(`User ${userEmail} has been permanently deleted`);
-      setSelectedUser(null);
-      fetchUsers(); // Refresh user list
+      const response = await api.delete(`/admin/users/${selectedUser.user.id}/permanent`);
+      
+      // Verify the delete was successful
+      if (response.data?.success && response.data?.deleted) {
+        toast.success(`User ${userEmail} has been permanently deleted`);
+        setSelectedUser(null);
+        
+        // Remove user from local state immediately (SPA behavior)
+        setUsers(prevUsers => prevUsers.filter(u => u.id !== selectedUser.user.id));
+        
+        // Also refresh the list in background to ensure sync
+        fetchUsers();
+      } else {
+        // Delete didn't actually happen
+        toast.error('Delete failed - user may still exist. Please try again.');
+        console.error('Delete response did not confirm deletion:', response.data);
+      }
     } catch (err) {
       console.error('Failed to delete user:', err);
       toast.error('Failed to delete user: ' + (err.response?.data?.detail || err.message));
