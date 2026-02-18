@@ -418,6 +418,239 @@ function CreateTicketForm({ onClose, onSuccess }) {
   );
 }
 
+// Admin: Create ticket on behalf of a client
+function AdminCreateTicketForm({ onClose, onSuccess }) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [searching, setSearching] = useState(false);
+  const [formData, setFormData] = useState({
+    subject: '',
+    description: ''
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const { isDark } = useTheme();
+
+  // Search users as they type
+  useEffect(() => {
+    const searchUsers = async () => {
+      if (searchQuery.length < 2) {
+        setSearchResults([]);
+        return;
+      }
+      setSearching(true);
+      try {
+        const response = await api.get(`/admin/users/search-for-ticket?q=${encodeURIComponent(searchQuery)}`);
+        setSearchResults(response.data);
+      } catch (err) {
+        console.error('Search failed:', err);
+        setSearchResults([]);
+      } finally {
+        setSearching(false);
+      }
+    };
+
+    const timer = setTimeout(searchUsers, 300);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  const handleSelectUser = (user) => {
+    setSelectedUser(user);
+    setSearchQuery('');
+    setSearchResults([]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!selectedUser) {
+      setError('Please select a client');
+      return;
+    }
+    setSubmitting(true);
+    setError('');
+
+    try {
+      await api.post('/admin/tickets/create-for-user', {
+        user_id: selectedUser.id,
+        subject: formData.subject,
+        description: formData.description
+      });
+      onSuccess();
+    } catch (err) {
+      const errorMsg = err.response?.data?.detail 
+        ? (typeof err.response.data.detail === 'string' 
+            ? err.response.data.detail 
+            : JSON.stringify(err.response.data.detail))
+        : err.message || 'Failed to create ticket';
+      setError(errorMsg);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div className={`card-enhanced p-6 animate-card ${isDark ? 'bg-gray-800 border-gray-700' : ''}`}>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          Create Ticket for Client
+        </h3>
+        <button
+          onClick={onClose}
+          className={`${isDark ? 'text-gray-500 hover:text-gray-300' : 'text-gray-400 hover:text-gray-600'}`}
+        >
+          ✕
+        </button>
+      </div>
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-800 rounded p-3 text-sm mb-4">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Client Search */}
+        <div>
+          <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+            Select Client *
+          </label>
+          
+          {selectedUser ? (
+            <div className={`flex items-center justify-between p-3 rounded-lg border ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-blue-50 border-blue-200'}`}>
+              <div>
+                <p className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  {selectedUser.full_name || selectedUser.email}
+                </p>
+                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {selectedUser.email}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedUser(null)}
+                className={`text-sm ${isDark ? 'text-red-400 hover:text-red-300' : 'text-red-600 hover:text-red-700'}`}
+              >
+                Change
+              </button>
+            </div>
+          ) : (
+            <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by email, name, or ID..."
+                className={`input-enhanced w-full ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : ''}`}
+                data-testid="admin-client-search"
+              />
+              {searching && (
+                <div className={`absolute right-3 top-1/2 transform -translate-y-1/2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                  <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </div>
+              )}
+              
+              {/* Search Results Dropdown */}
+              {searchResults.length > 0 && (
+                <div className={`absolute z-10 w-full mt-1 rounded-lg shadow-lg border overflow-hidden ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                  {searchResults.map((user) => (
+                    <div
+                      key={user.id}
+                      onClick={() => handleSelectUser(user)}
+                      className={`p-3 cursor-pointer transition-colors ${isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-50'}`}
+                      data-testid={`search-result-${user.id}`}
+                    >
+                      <p className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        {user.full_name || user.email}
+                      </p>
+                      <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                        {user.email}
+                        <span className={`ml-2 text-xs px-1.5 py-0.5 rounded ${
+                          user.status === 'ACTIVE' 
+                            ? (isDark ? 'bg-green-900/50 text-green-300' : 'bg-green-100 text-green-700')
+                            : (isDark ? 'bg-gray-700 text-gray-400' : 'bg-gray-100 text-gray-600')
+                        }`}>
+                          {user.status}
+                        </span>
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {searchQuery.length >= 2 && !searching && searchResults.length === 0 && (
+                <div className={`absolute z-10 w-full mt-1 p-3 rounded-lg shadow-lg border ${isDark ? 'bg-gray-800 border-gray-700 text-gray-400' : 'bg-white border-gray-200 text-gray-500'}`}>
+                  No clients found
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Subject */}
+        <div>
+          <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+            Subject *
+          </label>
+          <input
+            type="text"
+            value={formData.subject}
+            onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+            required
+            className={`input-enhanced w-full ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : ''}`}
+            placeholder="Brief description of the issue"
+            data-testid="admin-ticket-subject"
+          />
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+            Message *
+          </label>
+          <textarea
+            value={formData.description}
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            required
+            rows={5}
+            className={`input-enhanced w-full resize-y min-h-[120px] max-h-[400px] ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : ''}`}
+            style={{ resize: 'vertical' }}
+            placeholder="Detailed message for the client..."
+            data-testid="admin-ticket-description"
+          />
+        </div>
+
+        <div className={`p-3 rounded-lg ${isDark ? 'bg-purple-900/20 border border-purple-800' : 'bg-purple-50 border border-purple-200'}`}>
+          <p className={`text-sm ${isDark ? 'text-purple-300' : 'text-purple-700'}`}>
+            <strong>Note:</strong> This ticket will be marked as "Created by Support" and the client will receive a notification.
+          </p>
+        </div>
+
+        <div className="flex justify-end space-x-3">
+          <button
+            type="button"
+            onClick={onClose}
+            className={`px-4 py-2 border rounded-lg ${isDark ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 hover:bg-gray-50'}`}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={submitting || !selectedUser}
+            className="btn-primary btn-glow disabled:opacity-50"
+            data-testid="admin-submit-ticket"
+          >
+            {submitting ? 'Creating...' : 'Create Ticket'}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshTicket }) {
   const [newMessage, setNewMessage] = useState('');
   const [sending, setSending] = useState(false);
