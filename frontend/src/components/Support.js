@@ -90,12 +90,19 @@ export function SupportTickets({ isAdmin = false }) {
     fetchTickets();
   };
 
-  // Mark ticket as read when admin selects it
+  // Mark ticket as read when user/admin selects it
   const handleSelectTicket = async (ticket) => {
     setSelectedTicket(ticket);
-    if (isAdmin && ticket.unread_count > 0) {
+    
+    // Mark as read if there are unread messages
+    if (ticket.unread_count > 0) {
       try {
-        await api.post(`/admin/tickets/${ticket.id}/mark-read`);
+        if (isAdmin) {
+          await api.post(`/admin/tickets/${ticket.id}/mark-read`);
+        } else {
+          // Client marks ticket as read
+          await api.post(`/tickets/${ticket.id}/mark-read`);
+        }
         // Update local state to reflect read status
         setTickets(prev => prev.map(t => 
           t.id === ticket.id ? { ...t, unread_count: 0 } : t
