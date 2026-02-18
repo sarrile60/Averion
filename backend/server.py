@@ -3164,6 +3164,156 @@ async def delete_ticket(
     return {"message": "Ticket deleted successfully", "ticket_id": ticket_id}
 
 
+# Admin: Search users for ticket creation
+@app.get("/api/v1/admin/users/search-for-ticket")
+async def search_users_for_ticket(
+    q: str,
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Search users by email/name/ID for admin ticket creation."""
+    if not q or len(q) < 2:
+        return []
+    
+    from bson import ObjectId
+    from bson.errors import InvalidId
+    
+    search_query = q.strip().lower()
+    
+    # Build search criteria - case insensitive partial match
+    search_criteria = {
+        "$or": [
+            {"email": {"$regex": search_query, "$options": "i"}},
+            {"first_name": {"$regex": search_query, "$options": "i"}},
+            {"last_name": {"$regex": search_query, "$options": "i"}}
+        ]
+    }
+    
+    # Also try to match by ID if it looks like one
+    try:
+        if len(search_query) == 24:
+            search_criteria["$or"].append({"_id": ObjectId(search_query)})
+    except (InvalidId, TypeError):
+        pass
+    
+    # Search users
+    cursor = db.users.find(
+        search_criteria,
+        {"_id": 1, "email": 1, "first_name": 1, "last_name": 1, "status": 1}
+    ).limit(10)
+    
+    results = []
+    async for user in cursor:
+        results.append({
+            "id": str(user["_id"]),
+            "email": user.get("email", ""),
+            "first_name": user.get("first_name", ""),
+            "last_name": user.get("last_name", ""),
+            "full_name": f"{user.get('first_name', '')} {user.get('last_name', '')}".strip(),
+            "status": user.get("status", "UNKNOWN")
+        })
+    
+    return results
+
+
+# Admin: Create ticket on behalf of user
+class AdminTicketCreate(BaseModel):
+    user_id: str
+    subject: str
+    description: str
+
+
+@app.post("/api/v1/admin/tickets/create-for-user")
+async def admin_create_ticket_for_user(
+    data: AdminTicketCreate,
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Admin creates a support ticket on behalf of a user."""
+    from bson import ObjectId
+    from bson.errors import InvalidId
+    from datetime import datetime, timezone
+    
+    # Find the target user
+    user_query = {"_id": data.user_id}
+    try:
+        user_query = {"$or": [{"_id": data.user_id}, {"_id": ObjectId(data.user_id)}]}
+    except (InvalidId, TypeError):
+        pass
+    
+    user = await db.users.find_one(user_query)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    user_id = str(user["_id"])
+    user_name = f"{user.get('first_name', '')} {user.get('last_name', '')}".strip() or user.get("email", "Customer")
+    
+    # Create ticket with admin flag
+    ticket_service = TicketService(db)
+    ticket = await ticket_service.create_ticket_by_admin(
+        user_id=user_id,
+        user_name=user_name,
+        subject=data.subject,
+        description=data.description,
+        admin_id=current_user["id"],
+        admin_name=f"{current_user.get('first_name', '')} {current_user.get('last_name', '')}".strip() or "Support"
+    )
+    
+    # Create notification for the user
+    notification_service = NotificationService(db)
+    await notification_service.create_notification(
+        user_id=user_id,
+        notification_type="SUPPORT",
+        title="New Support Ticket",
+        message=f"A support ticket has been created for you: {data.subject}",
+        action_url="/support",
+        metadata={
+            "ticket_id": ticket.id,
+            "created_by_support": True
+        }
+    )
+    
+    # Audit log
+    await create_audit_log(
+        db=db,
+        action="TICKET_CREATED_BY_ADMIN",
+        entity_type="ticket",
+        entity_id=ticket.id,
+        description=f"Admin created support ticket for user {user.get('email', user_id)}",
+        performed_by=current_user["id"],
+        performed_by_role=current_user["role"],
+        performed_by_email=current_user["email"],
+        metadata={
+            "target_user_id": user_id,
+            "target_user_email": user.get("email"),
+            "ticket_subject": data.subject
+        }
+    )
+    
+    return ticket.model_dump()
+
+
+# Admin: Mark ticket as read (resets unread counter)
+@app.post("/api/v1/admin/tickets/{ticket_id}/mark-read")
+async def admin_mark_ticket_read(
+    ticket_id: str,
+    current_user: dict = Depends(require_admin),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Mark a ticket as read by admin (resets unread message count)."""
+    from datetime import datetime, timezone
+    
+    result = await db.tickets.update_one(
+        {"_id": ticket_id},
+        {"$set": {"admin_last_read_at": datetime.now(timezone.utc)}}
+    )
+    
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Ticket not found")
+    
+    return {"success": True, "ticket_id": ticket_id}
+
+
 # ==================== ADMIN ANALYTICS ====================
 
 @app.get("/api/v1/admin/analytics/overview")
