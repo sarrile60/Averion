@@ -249,6 +249,8 @@ class BankingWorkflowsService:
     
     async def get_admin_transfers(self, status: Optional[str] = None) -> List[dict]:
         """Admin: Get transfers filtered by status with sender information."""
+        from bson import ObjectId
+        
         query = {}
         if status:
             query["status"] = status
@@ -262,7 +264,12 @@ class BankingWorkflowsService:
             # Get sender (user) information
             user_id = doc.get("user_id")
             if user_id:
-                user = await self.db.users.find_one({"_id": user_id})
+                # Try to find user - user_id is stored as string, but users collection uses ObjectId
+                try:
+                    user = await self.db.users.find_one({"_id": ObjectId(user_id)})
+                except:
+                    user = await self.db.users.find_one({"_id": user_id})
+                
                 if user:
                     transfer_dict["sender_name"] = f"{user.get('first_name', '')} {user.get('last_name', '')}".strip()
                     transfer_dict["sender_email"] = user.get("email", "")
