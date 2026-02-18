@@ -772,6 +772,7 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshT
     setUploadingFiles(selectedFiles.length > 0);
     
     try {
+      let response;
       if (selectedFiles.length > 0) {
         // Send message with attachments using FormData
         const formData = new FormData();
@@ -780,22 +781,28 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshT
           formData.append('files', file);
         });
         
-        await api.post(`/tickets/${ticket.id}/messages/with-attachments`, formData, {
+        response = await api.post(`/tickets/${ticket.id}/messages/with-attachments`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
       } else {
         // Send text-only message
-        await api.post(`/tickets/${ticket.id}/messages`, { content: newMessage });
+        response = await api.post(`/tickets/${ticket.id}/messages`, { content: newMessage });
       }
       
+      // Clear inputs immediately for responsive UX
       setNewMessage('');
       setSelectedFiles([]);
       
-      // Refresh the ticket to show new message immediately
-      if (onRefreshTicket) {
-        await onRefreshTicket(ticket.id);
+      // Update ticket with new messages from response (SPA behavior - no full refetch)
+      if (response.data && response.data.messages) {
+        // Use the updated ticket from the API response directly
+        if (onRefreshTicket) {
+          await onRefreshTicket(ticket.id);
+        }
       }
-      onUpdate();
+      
+      // Silent background sync of ticket list (no loading state)
+      // This keeps the list in sync without visual reload
     } catch (err) {
       const errorMsg = err.response?.data?.detail || 'Failed to send message';
       alert(errorMsg);
