@@ -166,7 +166,28 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
   - Added "Email Verified" status field with visual badges
   - Confirmation dialog before verification
 
-**Verification:** 100% test pass rate (iteration_85.json) - 8/8 backend tests, all frontend tests passed - All frontend tests passed
+**Verification:** 100% test pass rate (iteration_85.json) - 8/8 backend tests, all frontend tests passed
+
+### Admin Delete User Bug Fix (Feb 18, 2025)
+**Bug Fix:** Fixed Admin Delete User not actually deleting users despite showing success toast.
+
+**Root Cause:** The `permanent_delete_user` function in server.py was **empty** - only contained imports. The actual delete logic was orphaned code between two functions.
+
+**Fix Applied:**
+1. **Backend:** Restored complete `permanent_delete_user` function with:
+   - User lookup (handles both string and ObjectId)
+   - Role check (SUPER_ADMIN only)
+   - Cascade delete of all user data (accounts, KYC, tickets, transfers, etc.)
+   - Audit logging
+   - Returns `{success: true, deleted: true}` on success
+
+2. **Frontend:** Enhanced `handleDeleteUser` to:
+   - Verify `response.data?.success && response.data?.deleted` before showing success
+   - Remove user from local state immediately (SPA behavior)
+   - Background refresh list for consistency
+   - Show error if delete response doesn't confirm deletion
+
+**Verification:** 100% test pass rate (iteration_86.json) - 11/11 backend tests, all frontend tests passed
 
 ### Admin Transfers Queue - Sender Information (Feb 18, 2025)
 **Enhancement:** Added sender information to the Admin Transfers Queue so admins can clearly see who initiated each transfer.
