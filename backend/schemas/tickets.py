@@ -55,6 +55,13 @@ class Ticket(BaseModel):
     
     assigned_to: Optional[str] = None  # Staff user ID
     
+    # Track if ticket was created by admin/support
+    created_by_admin: bool = False
+    created_by_admin_id: Optional[str] = None
+    
+    # Track when admin last read the ticket (for unread message counting)
+    admin_last_read_at: Optional[datetime] = None
+    
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     resolved_at: Optional[datetime] = None
