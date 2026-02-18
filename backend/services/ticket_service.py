@@ -63,6 +63,38 @@ class TicketService:
         
         return ticket
     
+    async def create_ticket_by_admin(
+        self,
+        user_id: str,
+        user_name: str,
+        subject: str,
+        description: str,
+        admin_id: str,
+        admin_name: str
+    ) -> Ticket:
+        """Create a support ticket on behalf of a user (admin action)."""
+        ticket = Ticket(
+            user_id=user_id,
+            subject=subject,
+            description=description,
+            created_by_admin=True,
+            created_by_admin_id=admin_id
+        )
+        
+        # Add initial message from support
+        initial_message = TicketMessage(
+            sender_id=admin_id,
+            sender_name=admin_name,
+            is_staff=True,
+            content=description
+        )
+        ticket.messages.append(initial_message)
+        
+        ticket_dict = ticket.model_dump(by_alias=True)
+        await self.db.tickets.insert_one(ticket_dict)
+        
+        return ticket
+    
     async def get_user_tickets(self, user_id: str) -> List[Ticket]:
         """Get all tickets for a user."""
         cursor = self.db.tickets.find({"user_id": user_id}).sort("created_at", -1)
