@@ -2805,6 +2805,22 @@ async def add_ticket_message(
         is_staff=is_staff,
         data=data
     )
+    
+    # Create notification for the user when staff replies
+    if is_staff and ticket_doc["user_id"] != current_user["id"]:
+        notification_service = NotificationService(db)
+        await notification_service.create_notification(
+            user_id=ticket_doc["user_id"],
+            notification_type="SUPPORT",
+            title="New Reply on Your Ticket",
+            message=f"Support has replied to your ticket: {ticket_doc.get('subject', 'Support Ticket')}",
+            action_url="/support",
+            metadata={
+                "ticket_id": ticket_id,
+                "is_reply": True
+            }
+        )
+    
     return ticket.model_dump()
 
 
