@@ -15,6 +15,7 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 - **EU Currency Formatting (dot for thousands, comma for decimals)**
 - **Professional Banking Transaction Display (colored status badges)**
 - **Support Ticket File Attachments (clients and admins)**
+- **Support Ticket System Upgrade - Admin search, create for client, notifications, unread badges**
 
 ## Technical Stack
 - **Frontend:** React.js with TailwindCSS
@@ -25,6 +26,53 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 - **File Storage:** Cloudinary (for KYC docs and ticket attachments)
 
 ## Recent Changes (February 2025)
+
+### Support Ticket System Upgrade (Feb 18, 2025)
+**Enhancement:** Major upgrade to the support ticket system with admin-focused features.
+
+**New Features:**
+1. **Admin Ticket Search**
+   - Search bar to filter tickets by client email or name (case-insensitive, partial match)
+   - Works in conjunction with existing status filter
+   
+2. **Admin Create Ticket for Client**
+   - "Create Ticket for Client" button in admin panel
+   - User search dropdown (searches by email/name/ID)
+   - Tickets marked with "Created by Support" tag
+   - Notification sent to client when ticket is created
+   
+3. **Bell Notifications**
+   - Notification when admin creates ticket for user
+   - Notification when admin replies to user's ticket
+   - Click-through to relevant ticket in support page
+   
+4. **Unread Message Counter**
+   - Red badge showing count of new messages from client
+   - Badge displays "9+" for counts > 9
+   - Counter resets to 0 when admin opens the ticket
+   - Auto-refresh every 30 seconds
+
+**Backend Changes:**
+- `/app/backend/server.py`:
+  - `GET /api/v1/admin/users/search-for-ticket?q=query` - Search users for ticket creation
+  - `POST /api/v1/admin/tickets/create-for-user` - Create ticket for client
+  - `POST /api/v1/admin/tickets/{id}/mark-read` - Reset unread counter
+  - `GET /api/v1/admin/tickets` - Now accepts `search` param and returns `unread_count`
+- `/app/backend/services/ticket_service.py`:
+  - `get_all_tickets()` - Added search and unread_count calculation
+  - `create_ticket_by_admin()` - New method for admin-created tickets
+- `/app/backend/schemas/tickets.py` - Already had `created_by_admin`, `created_by_admin_id`, `admin_last_read_at`
+
+**Frontend Changes:**
+- `/app/frontend/src/components/Support.js`:
+  - Added search bar with debounce
+  - Added "Create Ticket for Client" button and `AdminCreateTicketForm` component
+  - Added unread message badges (red with count)
+  - Added "Created by Support" purple tag
+  - Added 30-second auto-refresh for admin view
+  - `handleSelectTicket()` marks ticket as read
+
+**Verification:** 100% test pass rate (iteration_80.json) - 19/19 backend tests, all frontend verification passed
 
 ### Admin Transfers Queue - Sender Information (Feb 18, 2025)
 **Enhancement:** Added sender information to the Admin Transfers Queue so admins can clearly see who initiated each transfer.
