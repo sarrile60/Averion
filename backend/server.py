@@ -2823,6 +2823,32 @@ async def get_my_tickets(
     return tickets
 
 
+# Client: Mark ticket as read (resets unread counter for this user)
+@app.post("/api/v1/tickets/{ticket_id}/mark-read")
+async def user_mark_ticket_read(
+    ticket_id: str,
+    current_user: dict = Depends(get_current_user),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Mark a ticket as read by the user (resets unread message count)."""
+    from datetime import datetime, timezone
+    
+    # Verify ticket belongs to this user
+    ticket_doc = await db.tickets.find_one({"_id": ticket_id})
+    if not ticket_doc:
+        raise HTTPException(status_code=404, detail="Ticket not found")
+    
+    if ticket_doc["user_id"] != current_user["id"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    result = await db.tickets.update_one(
+        {"_id": ticket_id},
+        {"$set": {"user_last_read_at": datetime.now(timezone.utc)}}
+    )
+    
+    return {"success": True, "ticket_id": ticket_id}
+
+
 @app.post("/api/v1/tickets/{ticket_id}/messages")
 async def add_ticket_message(
     ticket_id: str,
