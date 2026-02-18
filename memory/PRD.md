@@ -74,6 +74,28 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 
 **Verification:** 100% test pass rate (iteration_80.json) - 19/19 backend tests, all frontend verification passed
 
+### Client Unread Message Counter (Feb 18, 2025)
+**Enhancement:** Added unread message counter for clients in their Support Tickets list (similar to admin view).
+
+**Features:**
+- Badge shows count of NEW/UNREAD messages from Support/Admin (only staff messages)
+- Badge resets to 0 when client opens/reads the ticket
+- Uses `user_last_read_at` tracking for persistence across sessions
+- Works for all tickets (open/closed)
+- Shows "9+" for counts > 9
+
+**Backend Changes:**
+- `/app/backend/schemas/tickets.py` - Added `user_last_read_at` field
+- `/app/backend/server.py` - Added `POST /api/v1/tickets/{id}/mark-read` endpoint for clients
+- `/app/backend/services/ticket_service.py` - Updated `get_user_tickets()` to return `unread_count`
+
+**Frontend Changes:**
+- `/app/frontend/src/components/Support.js`:
+  - Unread badge now shows for both admin and client views
+  - `handleSelectTicket()` calls client mark-read endpoint when not admin
+
+**Verification:** 100% test pass rate (iteration_81.json) - 12/12 backend tests, all frontend verification passed
+
 ### Admin Transfers Queue - Sender Information (Feb 18, 2025)
 **Enhancement:** Added sender information to the Admin Transfers Queue so admins can clearly see who initiated each transfer.
 
