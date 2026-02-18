@@ -37,8 +37,17 @@ export function AdminTransfersQueue() {
     try {
       await api.post(`/admin/transfers/${id}/approve`);
       toast.success('Transfer approved');
+      
+      // Remove from current view (since it moved to APPROVED status)
+      setTransfers(prev => prev.filter(t => t.id !== id));
       setSelectedTransfer(null);
-      fetchTransfers();
+      
+      // Background refresh for data consistency
+      setTimeout(() => {
+        api.get(`/admin/transfers?status=${activeTab}`)
+          .then(res => setTransfers(res.data.data))
+          .catch(() => {});
+      }, 500);
     } catch (err) {
       toast.error('Failed to approve');
     }
@@ -52,9 +61,18 @@ export function AdminTransfersQueue() {
     try {
       await api.post(`/admin/transfers/${id}/reject`, { reason: rejectReason });
       toast.success('Transfer rejected');
+      
+      // Remove from current view (since it moved to REJECTED status)
+      setTransfers(prev => prev.filter(t => t.id !== id));
       setSelectedTransfer(null);
       setRejectReason('');
-      fetchTransfers();
+      
+      // Background refresh for data consistency
+      setTimeout(() => {
+        api.get(`/admin/transfers?status=${activeTab}`)
+          .then(res => setTransfers(res.data.data))
+          .catch(() => {});
+      }, 500);
     } catch (err) {
       toast.error('Failed to reject');
     }
