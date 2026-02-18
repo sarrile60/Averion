@@ -26,6 +26,27 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 
 ## Recent Changes (February 2025)
 
+### Admin Transfers Queue - Sender Information (Feb 18, 2025)
+**Enhancement:** Added sender information to the Admin Transfers Queue so admins can clearly see who initiated each transfer.
+
+**Changes Made:**
+1. **Backend:** Modified `get_admin_transfers()` in `banking_workflows_service.py` to join with users and bank_accounts collections, returning:
+   - `sender_name` - Full name of the user who created the transfer
+   - `sender_email` - Email of the sender
+   - `sender_iban` - IBAN of the sending account
+
+2. **Frontend:** Updated `AdminTransfersQueue.js`:
+   - Added "Sender" column to table showing name and email
+   - Updated Transfer Details panel with "Sender (From)" section showing name, email, and IBAN
+   - Restructured details panel with clear "Sender (From)" and "Beneficiary (To)" sections
+
+**Files Changed:**
+- `/app/backend/services/banking_workflows_service.py` - Added user/account joins with ObjectId conversion
+- `/app/backend/server.py` - Updated endpoint to return enriched dict data
+- `/app/frontend/src/components/AdminTransfersQueue.js` - Added Sender column and details section
+
+**Verification:** 100% test pass rate (iteration_79.json)
+
 ### Dark Mode Recent Activity Fix (Feb 17, 2025)
 **Problem:** In dark mode, the "Recent Activity" list on the customer dashboard showed transaction type labels (Card Payment, SEPA Transfer, Top Up) as invisible - white text on white-ish card background, making the transactions unreadable.
 
