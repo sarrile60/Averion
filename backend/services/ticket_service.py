@@ -71,8 +71,8 @@ class TicketService:
             tickets.append(Ticket(**serialize_doc(doc)))
         return tickets
     
-    async def get_all_tickets(self, status_filter: Optional[str] = None) -> List[dict]:
-        """Get all tickets (admin) with user information."""
+    async def get_all_tickets(self, status_filter: Optional[str] = None, search_query: Optional[str] = None) -> List[dict]:
+        """Get all tickets (admin) with user information and unread counts."""
         from bson import ObjectId
         from bson.errors import InvalidId
         
@@ -121,13 +121,37 @@ class TicketService:
             
             # Add user info
             user_id = doc.get("user_id")
+            user_email = ""
+            user_name = "Unknown User"
+            
             if user_id and user_id in users_map:
                 user_info = users_map[user_id]
-                ticket_dict["user_email"] = user_info["email"]
-                ticket_dict["user_name"] = f"{user_info['first_name']} {user_info['last_name']}".strip() or user_info["email"]
-            else:
-                ticket_dict["user_email"] = ""
-                ticket_dict["user_name"] = "Unknown User"
+                user_email = user_info["email"]
+                user_name = f"{user_info['first_name']} {user_info['last_name']}".strip() or user_info["email"]
+            
+            ticket_dict["user_email"] = user_email
+            ticket_dict["user_name"] = user_name
+            
+            # Calculate unread messages from client (messages after admin_last_read_at that are not from staff)
+            admin_last_read = doc.get("admin_last_read_at")
+            unread_count = 0
+            messages = doc.get("messages", [])
+            
+            for msg in messages:
+                # Count messages from clients (not staff) that were created after admin last read
+                if not msg.get("is_staff", False):
+                    msg_created = msg.get("created_at")
+                    if msg_created:
+                        if admin_last_read is None or msg_created > admin_last_read:
+                            unread_count += 1
+            
+            ticket_dict["unread_count"] = unread_count
+            
+            # Apply search filter if provided (filter by user email - case insensitive partial match)
+            if search_query:
+                search_lower = search_query.lower()
+                if search_lower not in user_email.lower() and search_lower not in user_name.lower():
+                    continue  # Skip this ticket if doesn't match search
             
             tickets.append(ticket_dict)
         
