@@ -3548,7 +3548,8 @@ async def create_p2p_transfer(
         to_iban=data.to_iban,
         amount=data.amount,
         reason=data.reason,
-        recipient_name=data.recipient_name
+        recipient_name=data.recipient_name,
+        instant_requested=data.instant_requested  # Store for future instant transfer support
     )
     
     return result
