@@ -533,8 +533,8 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 - `/app/backend/server.py` - Added `POST /api/v1/admin/transfers/{id}/resend-email`
 
 **Verification:** 100% test pass rate (iteration_88.json) - 19/19 backend tests passed. Confirmed via:
-- Ashley's transfer email resent: provider_id=9822ff27-0695-490c-9ec7-7571326fd10f
-- New P2P transfer auto-sent: provider_id=c4719e34-7660-4cb8-94e3-11618c2e33f8
+- Ashley's transfer email resent: provider_id=bank-ui-polish
+- New P2P transfer auto-sent: provider_id=bank-ui-polish
 
 ## Known Issues / Backlog
 
