@@ -256,6 +256,7 @@ class TransferService:
             
             # Store in transfers collection for admin visibility
             transfer_id = str(uuid.uuid4())
+            reference_number = f"SEPA-{transfer_id[:8].upper()}"
             transfer_record = {
                 "_id": transfer_id,
                 "user_id": str(from_user_id),
@@ -267,18 +268,34 @@ class TransferService:
                 "amount": amount,
                 "currency": "EUR",
                 "details": reason,
-                "reference_number": f"SEPA-{transfer_id[:8].upper()}",
+                "reference_number": reference_number,
                 "status": "COMPLETED",  # Internal transfers complete immediately
                 "transfer_type": "INTERNAL",
                 "sender_name": sender_name,
                 "sender_iban": from_account.get("iban"),
                 "created_at": now,
                 "updated_at": now,
-                "completed_at": now
+                "completed_at": now,
+                # Email status fields - initialized as pending
+                "confirmation_email_sent": False,
+                "confirmation_email_status": "pending"
             }
             await self.db.transfers.insert_one(transfer_record)
             
-            return {
+            # Send confirmation email (async, non-blocking)
+            email_result = await self._send_transfer_confirmation_email(
+                transfer_id=transfer_id,
+                user_id=str(from_user_id),
+                reference_number=reference_number,
+                amount=amount,
+                beneficiary_name=final_recipient_name,
+                beneficiary_iban=normalized_iban,
+                sender_iban=from_account.get("iban"),
+                transfer_type="Internal Transfer",
+                transfer_date=now
+            )
+            
+            result = {
                 "transaction_id": txn.id,
                 "transfer_id": transfer_id,
                 "amount": amount,
@@ -287,6 +304,12 @@ class TransferService:
                 "status": "COMPLETED",
                 "transfer_type": "SEPA_TRANSFER"
             }
+            
+            # Add email warning if failed (non-blocking)
+            if email_result.get('email_warning'):
+                result["email_warning"] = email_result['email_warning']
+            
+            return result
         
         else:
             # SEPA TRANSFER - recipient IBAN not in our system
@@ -324,34 +347,58 @@ class TransferService:
             
             # Store in transfers collection for admin panel
             transfer_id = str(uuid.uuid4())
+            reference_number = f"SEPA-{transfer_id[:8].upper()}"
+            final_beneficiary_name = recipient_name or "SEPA Recipient"
             transfer_record = {
                 "_id": transfer_id,
                 "user_id": str(from_user_id),
                 "from_account_id": from_account["_id"],
                 "transaction_id": txn.id,
                 "type": "SEPA_TRANSFER",
-                "beneficiary_name": recipient_name or "SEPA Recipient",
+                "beneficiary_name": final_beneficiary_name,
                 "beneficiary_iban": normalized_iban,
                 "amount": amount,
                 "currency": "EUR",
                 "details": reason,
-                "reference_number": f"SEPA-{transfer_id[:8].upper()}",
+                "reference_number": reference_number,
                 "status": "SUBMITTED",  # Pending admin review
                 "transfer_type": "SEPA",
                 "sender_name": sender_name,
                 "sender_iban": from_account.get("iban"),
                 "created_at": now,
-                "updated_at": now
+                "updated_at": now,
+                # Email status fields - initialized as pending
+                "confirmation_email_sent": False,
+                "confirmation_email_status": "pending"
             }
             await self.db.transfers.insert_one(transfer_record)
             
-            return {
+            # Send confirmation email (async, non-blocking)
+            email_result = await self._send_transfer_confirmation_email(
+                transfer_id=transfer_id,
+                user_id=str(from_user_id),
+                reference_number=reference_number,
+                amount=amount,
+                beneficiary_name=final_beneficiary_name,
+                beneficiary_iban=normalized_iban,
+                sender_iban=from_account.get("iban"),
+                transfer_type="SEPA Transfer",
+                transfer_date=now
+            )
+            
+            result = {
                 "transaction_id": txn.id,
                 "transfer_id": transfer_id,
                 "amount": amount,
-                "recipient": recipient_name or "SEPA Recipient",
+                "recipient": final_beneficiary_name,
                 "recipient_iban": normalized_iban,
                 "status": "COMPLETED",  # User sees it as completed (money deducted)
                 "transfer_type": "SEPA_TRANSFER",
                 "admin_status": "SUBMITTED"  # But admin will see it as submitted
             }
+            
+            # Add email warning if failed (non-blocking)
+            if email_result.get('email_warning'):
+                result["email_warning"] = email_result['email_warning']
+            
+            return result
