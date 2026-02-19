@@ -636,75 +636,72 @@ export function ProfessionalDashboard({ user, logout }) {
               <div className="space-y-3">
                 {accounts.slice(0, 2).map((account) => (
                   <div key={account.id} className="account-item">
-                    {/* Left side: Account info */}
-                    <div className="flex-1 min-w-0">
-                      <p className={`text-sm font-medium mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('eurEAccount')}</p>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className={`text-xs font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>IBAN:</span>
-                        <span className={`text-xs sm:text-xs font-mono break-all ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{account.iban ? account.iban.match(/.{1,4}/g)?.join(' ') : 'N/A'}</span>
-                        {account.iban && (
-                          <button
-                            onClick={async (e) => {
-                              e.stopPropagation();
-                              const btn = e.currentTarget;
-                              const originalHTML = btn.innerHTML;
-                              
-                              try {
-                                await navigator.clipboard.writeText(account.iban);
-                                // Show success feedback
-                                btn.innerHTML = '<span class="text-green-600 text-xs font-medium">Copied!</span>';
-                                setTimeout(() => { btn.innerHTML = originalHTML; }, 1500);
-                              } catch (err) {
-                                console.log('Clipboard API failed, trying fallback:', err);
-                                // Fallback: Create a temporary input and copy from it
+                    {/* 2-column grid layout that maintains structure on mobile */}
+                    <div className="grid grid-cols-[1fr_auto] gap-2 w-full items-start">
+                      {/* Left column: Account info */}
+                      <div className="min-w-0">
+                        <p className={`text-sm font-medium mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('eurEAccount')}</p>
+                        <div className="flex items-center gap-1 sm:gap-2">
+                          <span className={`text-xs font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>IBAN:</span>
+                          <span className={`text-xs font-mono truncate ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{account.iban ? account.iban.match(/.{1,4}/g)?.join(' ') : 'N/A'}</span>
+                          {account.iban && (
+                            <button
+                              onClick={async (e) => {
+                                e.stopPropagation();
+                                const btn = e.currentTarget;
+                                const originalHTML = btn.innerHTML;
+                                
                                 try {
-                                  const tempInput = document.createElement('input');
-                                  tempInput.value = account.iban;
-                                  tempInput.style.position = 'fixed';
-                                  tempInput.style.left = '-9999px';
-                                  document.body.appendChild(tempInput);
-                                  tempInput.select();
-                                  tempInput.setSelectionRange(0, 99999);
-                                  document.execCommand('copy');
-                                  document.body.removeChild(tempInput);
-                                  btn.innerHTML = '<span class="text-green-600 text-xs font-medium">Copied!</span>';
+                                  await navigator.clipboard.writeText(account.iban);
+                                  btn.innerHTML = '<span class="text-green-600 text-xs font-medium">✓</span>';
                                   setTimeout(() => { btn.innerHTML = originalHTML; }, 1500);
-                                } catch (fallbackErr) {
-                                  // Final fallback: show IBAN in prompt so user can copy manually
-                                  window.prompt('Copy your IBAN:', account.iban);
+                                } catch (err) {
+                                  try {
+                                    const tempInput = document.createElement('input');
+                                    tempInput.value = account.iban;
+                                    tempInput.style.position = 'fixed';
+                                    tempInput.style.left = '-9999px';
+                                    document.body.appendChild(tempInput);
+                                    tempInput.select();
+                                    tempInput.setSelectionRange(0, 99999);
+                                    document.execCommand('copy');
+                                    document.body.removeChild(tempInput);
+                                    btn.innerHTML = '<span class="text-green-600 text-xs font-medium">✓</span>';
+                                    setTimeout(() => { btn.innerHTML = originalHTML; }, 1500);
+                                  } catch (fallbackErr) {
+                                    window.prompt('Copy your IBAN:', account.iban);
+                                  }
                                 }
-                              }
-                            }}
-                            className="p-1.5 sm:p-1 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition touch-manipulation"
-                            title="Copy IBAN"
-                            data-testid="copy-iban-btn"
-                          >
-                            <svg className="w-5 h-5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                            </svg>
-                          </button>
-                        )}
+                              }}
+                              className="p-1 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition touch-manipulation flex-shrink-0"
+                              title="Copy IBAN"
+                              data-testid="copy-iban-btn"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                              </svg>
+                            </button>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    {/* Right side: Balance and actions - fixed right alignment */}
-                    <div className="text-right flex-shrink-0 ml-4">
-                      <div className="flex items-center justify-end gap-2">
-                        <p className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                      {/* Right column: Balance and actions - always right-aligned */}
+                      <div className="text-right flex-shrink-0 pl-2">
+                        <p className={`text-lg font-semibold whitespace-nowrap ${isDark ? 'text-white' : 'text-gray-900'}`}>
                           {formatBalance(account.balance, isBalanceVisible)}
                         </p>
+                        <button 
+                          onClick={() => {
+                            if (taxHoldStatus?.is_blocked) {
+                              alert(`${t('accountRestricted')}\n\n${t('accountRestrictedDesc')}\n\n${t('amountDue')}: €${taxHoldStatus.tax_amount_due?.toLocaleString('de-DE', { minimumFractionDigits: 2 })}\n\n${t('pleaseSettleAmount')}`);
+                            } else {
+                              navigate(`/accounts/${account.id}/transactions`);
+                            }
+                          }} 
+                          className="text-xs text-red-600 hover:text-red-700 font-medium mt-1 whitespace-nowrap"
+                        >
+                          {t('viewTransactions')}
+                        </button>
                       </div>
-                      <button 
-                        onClick={() => {
-                          if (taxHoldStatus?.is_blocked) {
-                            alert(`${t('accountRestricted')}\n\n${t('accountRestrictedDesc')}\n\n${t('amountDue')}: €${taxHoldStatus.tax_amount_due?.toLocaleString('de-DE', { minimumFractionDigits: 2 })}\n\n${t('pleaseSettleAmount')}`);
-                          } else {
-                            navigate(`/accounts/${account.id}/transactions`);
-                          }
-                        }} 
-                        className="text-xs text-red-600 hover:text-red-700 font-medium mt-1"
-                      >
-                        {t('viewTransactions')}
-                      </button>
                     </div>
                   </div>
                 ))}
