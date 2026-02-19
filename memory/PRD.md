@@ -458,6 +458,34 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 - Removed 100 user limit, added pagination (20/50/100 per page)
 - Search queries ALL users in database
 
+### Transfer Confirmation Email (Feb 19, 2025)
+**Feature:** Professional confirmation email sent to customers immediately after submitting a bank transfer.
+
+**Specifications:**
+- **Subject Line:** "We received your transfer request – Ref #[REFERENCE_NUMBER]"
+- **Content:**
+  - Personalized greeting with customer's first name
+  - Transfer summary table with: Reference, Amount (EU format), Recipient Name, Masked IBANs, Date/Time, Transfer Type, Status (Processing badge)
+  - Processing notes about cut-off times and tracking
+  - "View Transfer Details" button linking to /transactions
+  - Security warning (contact support if unauthorized)
+  - Professional branded template with ecommbx logo
+
+**Technical Implementation:**
+- **Email Service:** Added `send_transfer_confirmation_email()` method to `email_service.py`
+- **IBAN Masking:** Shows first 4 and last 4 characters only (e.g., DE89****3000)
+- **Amount Formatting:** EU style with dots for thousands, comma for decimals (€1.234,56)
+- **Multi-Language:** Full support for English and Italian translations
+- **Duplicate Prevention:** `confirmation_email_sent` boolean field added to Transfer schema
+- **Graceful Failure:** Email errors don't break transfer creation
+
+**Backend Changes:**
+- `/app/backend/services/email_service.py` - Added `send_transfer_confirmation_email()` method
+- `/app/backend/services/banking_workflows_service.py` - Integrated email sending in `create_transfer()`
+- `/app/backend/schemas/banking_workflows.py` - Added `confirmation_email_sent: bool = False` to Transfer schema
+
+**Verification:** 100% test pass rate (iteration_87.json) - 15/15 backend tests passed. Real emails sent via Resend API during testing.
+
 ## Known Issues / Backlog
 
 ### P0 - Critical
@@ -474,7 +502,7 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 - `users` - User accounts
 - `bank_accounts` - Bank accounts
 - `ledger_transactions` - Financial transactions
-- `transfers` - Transfer records
+- `transfers` - Transfer records (now includes `confirmation_email_sent` boolean)
 - `tax_holds` - Tax hold information
 
 ## Test Files
