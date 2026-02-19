@@ -415,7 +415,8 @@ class TestTransferEmailErrorHandling:
         # Verify error handling with try/except
         assert "except Exception" in source, "Email errors should be caught"
         assert "email_warning" in source, "Should set warning on failure"
-        assert "confirmation_email_status" in source, "Should track status even on failure"
+        # Status is updated via _update_transfer_email_status call
+        assert "_update_transfer_email_status" in source, "Should call status update method even on failure"
         
         print("PASSED: Email errors are handled gracefully (don't break transfers)")
     
