@@ -159,7 +159,8 @@ export function P2PTransferForm({ onSuccess }) {
         to_iban: cleanIban,
         amount: amountInCents,
         reason: formData.reason || 'P2P Transfer',
-        recipient_name: formData.to_name || null
+        recipient_name: formData.to_name || null,
+        instant_requested: instantTransferEnabled  // Store for future use (processed as standard SEPA for now)
       });
       setTransactionResult({...result.data, amount: amountInCents});
       setShowConfirmation(true);
@@ -168,6 +169,7 @@ export function P2PTransferForm({ onSuccess }) {
         setFormData({ to_iban: '', to_name: '', amount: '', reason: '', reference: '' });
         setShowConfirmation(false);
         setRecipientValid(null);
+        setInstantTransferEnabled(false);  // Reset toggle
         onSuccess && onSuccess();
       }, 3000);
     } catch (err) {
