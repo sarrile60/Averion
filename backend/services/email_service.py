@@ -479,17 +479,28 @@ class EmailService:
         transfer_type: str = "SEPA Transfer",
         transfer_date: datetime = None,
         language: str = 'en'
-    ) -> bool:
-        """Send transfer confirmation email via Resend with localization support."""
+    ) -> dict:
+        """
+        Send transfer confirmation email via Resend with localization support.
+        
+        Returns:
+            dict with keys: success (bool), provider_id (str or None), error (str or None)
+        """
         # Ensure API key is set from environment
         api_key = get_resend_api_key()
         if not api_key:
-            logger.warning(f"RESEND_API_KEY not configured - skipping transfer confirmation email to {to_email}")
-            return False
+            error_msg = "RESEND_API_KEY not configured"
+            logger.warning(f"[TRANSFER EMAIL] {error_msg} - skipping email to {to_email}")
+            return {'success': False, 'provider_id': None, 'error': error_msg}
             
         resend.api_key = api_key
         
         sender_email = get_sender_email()
+        if not sender_email:
+            error_msg = "SENDER_EMAIL not configured"
+            logger.warning(f"[TRANSFER EMAIL] {error_msg} - skipping email to {to_email}")
+            return {'success': False, 'provider_id': None, 'error': error_msg}
+        
         frontend_url = get_frontend_url()
         
         t = lambda key: get_translation(key, language)
