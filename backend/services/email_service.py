@@ -68,6 +68,27 @@ EMAIL_TRANSLATIONS = {
         'email_verify_expiry': '⏰ This verification link expires in 24 hours.',
         'email_verify_ignore': "If you didn't create an account with us, please ignore this email.",
         'email_verify_security_note': '🔒 For your security, you must verify your email before accessing your account.',
+        
+        # Transfer Confirmation Email
+        'transfer_subject': 'We received your transfer request – Ref',
+        'transfer_title': 'Transfer Submitted',
+        'transfer_greeting': 'Dear',
+        'transfer_body': 'Your transfer request has been submitted and is being processed.',
+        'transfer_summary': 'Transfer Summary',
+        'transfer_amount': 'Amount',
+        'transfer_recipient': 'Recipient',
+        'transfer_recipient_iban': 'Recipient IBAN',
+        'transfer_from_account': 'From Account',
+        'transfer_date': 'Date & Time',
+        'transfer_type': 'Transfer Type',
+        'transfer_reference': 'Reference',
+        'transfer_status': 'Status',
+        'transfer_status_processing': 'Processing',
+        'transfer_note_1': 'Processing times may vary depending on cut-off times and verification checks.',
+        'transfer_note_2': 'You can track the status in your Transaction History.',
+        'transfer_button': 'View Transfer Details',
+        'transfer_security_warning': 'If you did not authorize this transfer, please contact our support team immediately.',
+        'transfer_disclaimer': 'Please do not reply to this email. For assistance, contact support@ecommbx.io',
     },
     'it': {
         # Password Reset Email
@@ -105,6 +126,27 @@ EMAIL_TRANSLATIONS = {
         'email_verify_expiry': '⏰ Questo link di verifica scade tra 24 ore.',
         'email_verify_ignore': 'Se non hai creato un account con noi, ignora questa email.',
         'email_verify_security_note': '🔒 Per la tua sicurezza, devi verificare la tua email prima di accedere al tuo account.',
+        
+        # Transfer Confirmation Email
+        'transfer_subject': 'Abbiamo ricevuto la tua richiesta di bonifico – Rif',
+        'transfer_title': 'Bonifico Inviato',
+        'transfer_greeting': 'Gentile',
+        'transfer_body': 'La tua richiesta di bonifico è stata inviata ed è in elaborazione.',
+        'transfer_summary': 'Riepilogo Bonifico',
+        'transfer_amount': 'Importo',
+        'transfer_recipient': 'Beneficiario',
+        'transfer_recipient_iban': 'IBAN Beneficiario',
+        'transfer_from_account': 'Dal Conto',
+        'transfer_date': 'Data e Ora',
+        'transfer_type': 'Tipo Bonifico',
+        'transfer_reference': 'Riferimento',
+        'transfer_status': 'Stato',
+        'transfer_status_processing': 'In Elaborazione',
+        'transfer_note_1': 'I tempi di elaborazione possono variare a seconda degli orari limite e dei controlli di verifica.',
+        'transfer_note_2': 'Puoi monitorare lo stato nella tua Cronologia Transazioni.',
+        'transfer_button': 'Visualizza Dettagli Bonifico',
+        'transfer_security_warning': 'Se non hai autorizzato questo bonifico, contatta immediatamente il nostro servizio clienti.',
+        'transfer_disclaimer': 'Si prega di non rispondere a questa email. Per assistenza, contattare support@ecommbx.io',
     }
 }
 
