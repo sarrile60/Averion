@@ -195,10 +195,11 @@ class EmailService:
                 <meta charset="utf-8">
                 <style>
                     body {{ font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }}
-                    .header {{ background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }}
-                    .header h1 {{ margin: 0; }}
-                    .header .brand {{ color: #FFFFFF !important; }}
+                    .header {{ background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #FFFFFF; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }}
+                    .header h1 {{ margin: 0; color: #FFFFFF; }}
+                    .header .brand {{ color: #FFFFFF; background-color: transparent; }}
                     .header .brand-accent {{ color: #dc3545; }}
+                    .header p {{ color: #FFFFFF; }}
                     .content {{ background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px; }}
                     .password-box {{ background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; }}
                     .password {{ font-family: monospace; font-size: 24px; color: #856404; font-weight: bold; }}
@@ -208,8 +209,8 @@ class EmailService:
             </head>
             <body>
                 <div class="header">
-                    <h1>🔐 <span class="brand">ecomm</span><span class="brand-accent">bx</span></h1>
-                    <p>{t('admin_reset_title')}</p>
+                    <h1 style="color: #FFFFFF;">🔐 <span class="brand" style="color: #FFFFFF;">ecomm</span><span class="brand-accent">bx</span></h1>
+                    <p style="color: #FFFFFF;">{t('admin_reset_title')}</p>
                 </div>
                 <div class="content">
                     <p>{t('password_reset_greeting')}</p>
