@@ -206,6 +206,7 @@ class BankingWorkflowsService:
     ) -> Transfer:
         """User submits transfer - instant success, no waiting."""
         from bson import ObjectId
+        from datetime import timezone
         from services.email_service import EmailService
         
         # Validate account
@@ -233,7 +234,8 @@ class BankingWorkflowsService:
         trans_dict = transfer.model_dump(by_alias=True)
         await self.db.transfers.insert_one(trans_dict)
         
-        # Send transfer confirmation email (only once per transfer)
+        # Send transfer confirmation email with comprehensive status tracking
+        email_warning = None
         try:
             # Get user details for email
             user = None
@@ -249,10 +251,10 @@ class BankingWorkflowsService:
                 language = user.get("language", "en") or "en"
                 
                 # Get sender account IBAN
-                sender_iban = account.get("iban", "N/A")
+                sender_iban = account.get("iban") or "N/A"
                 
-                # Send the confirmation email
-                email_sent = email_service.send_transfer_confirmation_email(
+                # Send the confirmation email - returns dict with success, provider_id, error
+                email_result = email_service.send_transfer_confirmation_email(
                     to_email=user["email"],
                     first_name=user.get("first_name", ""),
                     reference_number=transfer.reference_number or transfer.id[:8].upper(),
@@ -265,18 +267,77 @@ class BankingWorkflowsService:
                     language=language
                 )
                 
-                # Update transfer to mark email as sent
-                if email_sent:
+                now = datetime.now(timezone.utc)
+                
+                if email_result.get('success'):
+                    # SUCCESS - Update transfer with sent status
                     await self.db.transfers.update_one(
                         {"_id": transfer.id},
-                        {"$set": {"confirmation_email_sent": True}}
+                        {"$set": {
+                            "confirmation_email_sent": True,
+                            "confirmation_email_status": "sent",
+                            "confirmation_email_sent_at": now,
+                            "confirmation_email_provider_id": email_result.get('provider_id'),
+                            "confirmation_email_error": None
+                        }}
                     )
                     transfer.confirmation_email_sent = True
+                    transfer.confirmation_email_status = "sent"
+                    transfer.confirmation_email_sent_at = now
+                    transfer.confirmation_email_provider_id = email_result.get('provider_id')
+                else:
+                    # FAILED - Update transfer with failure status
+                    error_msg = email_result.get('error', 'Unknown error')
+                    await self.db.transfers.update_one(
+                        {"_id": transfer.id},
+                        {"$set": {
+                            "confirmation_email_sent": False,
+                            "confirmation_email_status": "failed",
+                            "confirmation_email_error": error_msg
+                        }}
+                    )
+                    transfer.confirmation_email_status = "failed"
+                    transfer.confirmation_email_error = error_msg
+                    email_warning = f"Transfer submitted, but confirmation email could not be delivered: {error_msg}"
+            else:
+                # No user email found
+                error_msg = "User email not found"
+                await self.db.transfers.update_one(
+                    {"_id": transfer.id},
+                    {"$set": {
+                        "confirmation_email_status": "failed",
+                        "confirmation_email_error": error_msg
+                    }}
+                )
+                transfer.confirmation_email_status = "failed"
+                transfer.confirmation_email_error = error_msg
+                
         except Exception as e:
             # Log error but don't fail the transfer
             import logging
             logger = logging.getLogger(__name__)
-            logger.error(f"Failed to send transfer confirmation email for transfer {transfer.id}: {str(e)}")
+            error_msg = str(e)[:200]
+            logger.error(f"[TRANSFER EMAIL] Exception for transfer {transfer.id}: {error_msg}")
+            
+            # Update transfer with failure status
+            try:
+                await self.db.transfers.update_one(
+                    {"_id": transfer.id},
+                    {"$set": {
+                        "confirmation_email_status": "failed",
+                        "confirmation_email_error": error_msg
+                    }}
+                )
+                transfer.confirmation_email_status = "failed"
+                transfer.confirmation_email_error = error_msg
+            except:
+                pass
+            
+            email_warning = f"Transfer submitted, but confirmation email could not be delivered: {error_msg}"
+        
+        # Store warning for potential UI display (not breaking the transfer)
+        if email_warning:
+            transfer._email_warning = email_warning
         
         return transfer
     
