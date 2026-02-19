@@ -48,6 +48,29 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 - Desktop: Icon properly positioned after full IBAN on single line
 - Copy functionality works correctly (shows checkmark feedback)
 
+### Dark Mode "This Month" Card Text Contrast Fix (Feb 19, 2025)
+**Fix:** Fixed unreadable text in the "This Month" (QUESTO MESE) spending summary card in dark mode.
+
+**Problem:** The "Trasferimenti" (Transfers) label and its amount value were using low-contrast grey colors (`text-gray-500` and `text-gray-700`) that appeared nearly invisible against the dark card background.
+
+**Solution:** Added `isDark` conditional styling to use appropriate dark mode text colors:
+1. Main total label: `text-gray-400` in dark mode (was `text-gray-600`)
+2. Main total amount: `text-white` in dark mode (explicit white)
+3. Category labels (Trasferimenti): `text-gray-300` in dark mode (was `text-gray-500`)
+4. Category amounts: `text-gray-100` in dark mode (was `text-gray-700`)
+
+**Design Tokens Applied:**
+- Primary text (amounts): white
+- Secondary text (labels): light grey (gray-300/gray-400), still clearly readable
+- Maintains visual hierarchy: main total is brightest/boldest, categories slightly subdued but readable
+
+**Files Changed:**
+- `/app/frontend/src/components/ProfessionalDashboard.js` - Updated "This Month" card section (lines 1043-1077)
+
+**Verification:** Tested in both dark and light modes:
+- Dark mode: All text clearly readable with proper contrast
+- Light mode: No regression, original colors preserved
+
 ### Domain Update & Email Styling Fix (Feb 19, 2025)
 **Fix:** Updated production domain from `ecommbx.io` to `ecommbx.group` and fixed email header text visibility.
 
