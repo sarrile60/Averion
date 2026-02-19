@@ -9,3 +9,4 @@ class P2PTransferRequest(BaseModel):
     amount: int  # In cents
     reason: Optional[str] = "P2P Transfer"
     recipient_name: Optional[str] = None  # Optional - for external transfers
+    instant_requested: Optional[bool] = False  # Future use - instant transfer request flag
