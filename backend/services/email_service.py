@@ -88,7 +88,7 @@ EMAIL_TRANSLATIONS = {
         'transfer_note_2': 'You can track the status in your Transaction History.',
         'transfer_button': 'View Transfer Details',
         'transfer_security_warning': 'If you did not authorize this transfer, please contact our support team immediately.',
-        'transfer_disclaimer': 'Please do not reply to this email. For assistance, contact support@ecommbx.group',
+        'transfer_disclaimer': 'Please do not reply to this email. For assistance, contact support@ecommbx.io',
     },
     'it': {
         # Password Reset Email
