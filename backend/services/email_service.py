@@ -538,7 +538,7 @@ class EmailService:
         </head>
         <body style="font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f4f4f4;">
             <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-                <h1 style="margin: 0;">💸 <span style="color: white;">ecomm</span><span style="color: #dc3545;">bx</span></h1>
+                <h1 style="margin: 0;">💸 <span style="color: #FFFFFF !important;">ecomm</span><span style="color: #dc3545;">bx</span></h1>
                 <p style="margin: 10px 0 0 0; font-size: 18px;">{t('transfer_title')}</p>
             </div>
             <div style="background: #ffffff; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
