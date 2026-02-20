@@ -2517,6 +2517,82 @@ function AdminDashboard() {
                   )}
                 </div>
 
+                {/* Login Activity Card */}
+                {showAuthHistory && (
+                  <div className="card p-6" data-testid="auth-history-card">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="font-semibold text-lg flex items-center space-x-2">
+                          <svg className="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span>Login Activity</span>
+                        </h3>
+                        <p className="text-sm text-gray-500 mt-1">Authentication history for this user</p>
+                      </div>
+                      <button
+                        onClick={() => setShowAuthHistory(false)}
+                        className="text-gray-400 hover:text-gray-600"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                    
+                    {authHistory.length === 0 ? (
+                      <div className="text-center py-8 text-gray-500">
+                        No authentication events found
+                      </div>
+                    ) : (
+                      <div className="space-y-3 max-h-[400px] overflow-y-auto">
+                        {authHistory.map((event) => (
+                          <div key={event.id} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                            <div className="flex justify-between items-start">
+                              <div className="flex items-center space-x-2">
+                                <span className={`px-2 py-0.5 rounded text-xs font-medium ${
+                                  event.action.includes('SUCCESS') 
+                                    ? 'bg-green-100 text-green-800' 
+                                    : event.action.includes('FAILED') || event.action.includes('BLOCKED')
+                                      ? 'bg-red-100 text-red-800'
+                                      : event.action.includes('LOGOUT')
+                                        ? 'bg-blue-100 text-blue-800'
+                                        : event.action.includes('CHANGED')
+                                          ? 'bg-amber-100 text-amber-800'
+                                          : 'bg-gray-100 text-gray-800'
+                                }`}>
+                                  {event.action.replace(/_/g, ' ')}
+                                </span>
+                              </div>
+                              <span className="text-xs text-gray-500">
+                                {new Date(event.created_at).toLocaleString()}
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-600 mt-1">{event.description}</p>
+                            <div className="flex flex-wrap gap-2 mt-2 text-xs text-gray-500">
+                              {event.ip_address && event.ip_address !== 'N/A' && (
+                                <span className="bg-gray-100 px-2 py-0.5 rounded">
+                                  IP: {event.ip_address}
+                                </span>
+                              )}
+                              {event.source && (
+                                <span className="bg-gray-100 px-2 py-0.5 rounded">
+                                  Source: {event.source}
+                                </span>
+                              )}
+                              {event.actor_email && event.actor_email !== selectedUser.user.email && (
+                                <span className="bg-amber-100 text-amber-700 px-2 py-0.5 rounded">
+                                  By: {event.actor_email}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {/* Tax Hold Management Card */}
                 <div className="card p-6">
                   <div className="flex justify-between items-start mb-4">
