@@ -24,7 +24,7 @@ export function AdminCardRequestsQueue() {
   
   // Search state
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchScope, setSearchScope] = useState('tab'); // 'tab' or 'all'
+  const [searchScope, setSearchScope] = useState('all'); // 'tab' or 'all' - default to 'all' for broader search
   const [debouncedSearch, setDebouncedSearch] = useState('');
   
   // Delete modal state
