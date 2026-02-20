@@ -76,6 +76,64 @@ class LedgerEngine:
         
         return result[0]["credits"] - result[0]["debits"]
     
+    async def get_bulk_balances(self, account_ids: List[str]) -> dict:
+        """Calculate derived balances for multiple accounts in a single query.
+        
+        This is a performance-optimized method that replaces N individual 
+        get_balance() calls with a single aggregation pipeline.
+        
+        Args:
+            account_ids: List of ledger account IDs to get balances for
+            
+        Returns:
+            Dictionary mapping account_id -> balance (in cents)
+        """
+        if not account_ids:
+            return {}
+        
+        pipeline = [
+            {"$match": {"account_id": {"$in": account_ids}}},
+            {
+                "$group": {
+                    "_id": "$account_id",
+                    "credits": {
+                        "$sum": {
+                            "$cond": [
+                                {"$eq": ["$direction", "CREDIT"]},
+                                "$amount",
+                                0
+                            ]
+                        }
+                    },
+                    "debits": {
+                        "$sum": {
+                            "$cond": [
+                                {"$eq": ["$direction", "DEBIT"]},
+                                "$amount",
+                                0
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
+        
+        results = await self.db.ledger_entries.aggregate(pipeline).to_list(None)
+        
+        # Build the balance map
+        balance_map = {}
+        for result in results:
+            account_id = result["_id"]
+            balance = result["credits"] - result["debits"]
+            balance_map[account_id] = balance
+        
+        # For accounts with no entries, set balance to 0
+        for account_id in account_ids:
+            if account_id not in balance_map:
+                balance_map[account_id] = 0
+        
+        return balance_map
+    
     async def post_transaction(
         self,
         transaction_type: str,
