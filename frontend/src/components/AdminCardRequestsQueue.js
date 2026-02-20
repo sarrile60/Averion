@@ -1,11 +1,33 @@
 // Admin Card Requests Queue with Pagination, Search, and Delete
 import React, { useState, useEffect, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import api from '../api';
 import { useToast } from './Toast';
 
 export function AdminCardRequestsQueue() {
   const toast = useToast();
-  const [activeTab, setActiveTab] = useState('PENDING');
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  // Initialize state from URL params
+  const getInitialTab = () => {
+    const urlTab = searchParams.get('tab');
+    return ['PENDING', 'FULFILLED', 'REJECTED'].includes(urlTab) ? urlTab : 'PENDING';
+  };
+  const getInitialPage = () => {
+    const urlPage = parseInt(searchParams.get('page'));
+    return !isNaN(urlPage) && urlPage > 0 ? urlPage : 1;
+  };
+  const getInitialPageSize = () => {
+    const urlSize = parseInt(searchParams.get('pageSize'));
+    return [20, 50, 100].includes(urlSize) ? urlSize : 50;
+  };
+  const getInitialSearch = () => searchParams.get('search') || '';
+  const getInitialScope = () => {
+    const urlScope = searchParams.get('scope');
+    return ['tab', 'all'].includes(urlScope) ? urlScope : 'all';
+  };
+  
+  const [activeTab, setActiveTabInternal] = useState(getInitialTab);
   const [requests, setRequests] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,13 +41,13 @@ export function AdminCardRequestsQueue() {
     has_prev: false,
     has_next: false
   });
-  const [pageSize, setPageSize] = useState(50);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSizeInternal] = useState(getInitialPageSize);
+  const [currentPage, setCurrentPageInternal] = useState(getInitialPage);
   
   // Search state
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchScope, setSearchScope] = useState('all'); // 'tab' or 'all' - default to 'all' for broader search
-  const [debouncedSearch, setDebouncedSearch] = useState('');
+  const [searchTerm, setSearchTerm] = useState(getInitialSearch);
+  const [searchScope, setSearchScopeInternal] = useState(getInitialScope);
+  const [debouncedSearch, setDebouncedSearch] = useState(getInitialSearch);
   
   // Delete modal state
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -45,17 +67,69 @@ export function AdminCardRequestsQueue() {
     country: 'Germany'
   });
 
+  // Update URL when state changes
+  const updateUrlParams = useCallback((updates) => {
+    const newParams = new URLSearchParams(searchParams);
+    // Keep the section param
+    if (!newParams.has('section')) {
+      newParams.set('section', 'card-requests');
+    }
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value === null || value === undefined || value === '' || 
+          (key === 'page' && value === 1) || 
+          (key === 'pageSize' && value === 50) || 
+          (key === 'tab' && value === 'PENDING') ||
+          (key === 'scope' && value === 'all')) {
+        newParams.delete(key);
+      } else {
+        newParams.set(key, value);
+      }
+    });
+    setSearchParams(newParams, { replace: true });
+  }, [searchParams, setSearchParams]);
+
+  // Wrapper functions to update state and URL
+  const setActiveTab = useCallback((tab) => {
+    setActiveTabInternal(tab);
+    setCurrentPageInternal(1);
+    updateUrlParams({ tab, page: null });
+  }, [updateUrlParams]);
+
+  const setCurrentPage = useCallback((page) => {
+    setCurrentPageInternal(page);
+    updateUrlParams({ page });
+  }, [updateUrlParams]);
+
+  const setPageSize = useCallback((size) => {
+    setPageSizeInternal(size);
+    setCurrentPageInternal(1);
+    updateUrlParams({ pageSize: size, page: null });
+  }, [updateUrlParams]);
+
+  const setSearchScope = useCallback((scope) => {
+    setSearchScopeInternal(scope);
+    setCurrentPageInternal(1);
+    updateUrlParams({ scope, page: null });
+  }, [updateUrlParams]);
+
   // Debounce search input
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(searchTerm);
+      if (searchTerm) {
+        updateUrlParams({ search: searchTerm, page: null });
+      } else {
+        updateUrlParams({ search: null });
+      }
     }, 300);
     return () => clearTimeout(timer);
-  }, [searchTerm]);
+  }, [searchTerm, updateUrlParams]);
 
   // Reset page when search or tab changes
   useEffect(() => {
-    setCurrentPage(1);
+    if (currentPage !== 1) {
+      setCurrentPageInternal(1);
+    }
   }, [debouncedSearch, activeTab, searchScope]);
 
   const fetchRequests = useCallback(async () => {
