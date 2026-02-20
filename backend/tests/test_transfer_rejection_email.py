@@ -22,6 +22,7 @@ import sys
 import time
 import re
 from datetime import datetime
+import uuid
 
 # Add backend to path for imports
 sys.path.insert(0, '/app/backend')
@@ -98,14 +99,15 @@ class TestTransferRejectionEmail:
         """Test that creating a transfer does NOT trigger rejection email"""
         headers = {"Authorization": f"Bearer {user_auth['token']}"}
         
-        # Create a new transfer
+        # Create a new transfer with unique IBAN
+        unique_suffix = str(uuid.uuid4())[:8]
         transfer_data = {
             "from_account_id": user_account["id"],
-            "beneficiary_name": "Test Rejection Recipient",
-            "beneficiary_iban": "DE89370400440532013000",
+            "beneficiary_name": f"Test Reject Recipient {unique_suffix}",
+            "beneficiary_iban": "DE89370400440532013002",
             "amount": 100,  # 1 EUR in cents
             "currency": "EUR",
-            "details": "Test transfer for rejection email testing"
+            "details": f"Test transfer for rejection email testing {unique_suffix}"
         }
         
         response = requests.post(
@@ -115,13 +117,17 @@ class TestTransferRejectionEmail:
         )
         
         assert response.status_code == 200 or response.status_code == 201, f"Transfer creation failed: {response.text}"
-        transfer = response.json()
+        resp_data = response.json()
+        
+        # API returns {ok: true, data: {...}}
+        transfer = resp_data.get('data', resp_data)
         
         # Verify no rejection email was sent on creation
-        assert transfer.get("rejection_email_sent") is False or transfer.get("rejection_email_sent") is None, \
+        assert transfer.get("rejection_email_sent") == False, \
             "Rejection email should NOT be sent on transfer creation"
         
         print(f"Transfer created: {transfer.get('id')} with status: {transfer.get('status')}")
+        print(f"Rejection email sent (should be False): {transfer.get('rejection_email_sent')}")
         
         # Store for later tests
         self.__class__.created_transfer_id = transfer.get("id")
@@ -135,6 +141,8 @@ class TestTransferRejectionEmail:
         if not transfer_id:
             pytest.skip("No transfer created in previous test")
         
+        print(f"Rejecting transfer: {transfer_id}")
+        
         # Reject the transfer
         response = requests.post(
             f"{BASE_URL}/api/v1/admin/transfers/{transfer_id}/reject",
@@ -145,7 +153,7 @@ class TestTransferRejectionEmail:
         assert response.status_code == 200, f"Rejection failed: {response.text}"
         
         # Wait for email to be processed
-        time.sleep(2)
+        time.sleep(3)
         
         # Check the transfer status - API returns 'data' not 'transfers'
         response = requests.get(
@@ -168,6 +176,11 @@ class TestTransferRejectionEmail:
         assert rejected_transfer.get("status") == "REJECTED", "Transfer should be REJECTED"
         
         # Check if rejection email was sent - the flag should be set
+        assert rejected_transfer.get("rejection_email_sent") == True, \
+            f"Rejection email should be sent. Got: {rejected_transfer.get('rejection_email_sent')}"
+        assert rejected_transfer.get("rejection_email_provider_id") is not None, \
+            "Should have a provider ID from Resend"
+        
         print(f"Rejected transfer status: {rejected_transfer.get('status')}")
         print(f"Rejection email sent: {rejected_transfer.get('rejection_email_sent')}")
         print(f"Rejection email provider ID: {rejected_transfer.get('rejection_email_provider_id')}")
@@ -198,14 +211,15 @@ class TestTransferRejectionEmail:
         user_headers = {"Authorization": f"Bearer {user_auth['token']}"}
         admin_headers = {"Authorization": f"Bearer {admin_auth['token']}"}
         
-        # Create a new transfer for approval
+        # Create a new transfer for approval with unique IBAN
+        unique_suffix = str(uuid.uuid4())[:8]
         transfer_data = {
             "from_account_id": user_account["id"],
-            "beneficiary_name": "Test Approval Recipient",
+            "beneficiary_name": f"Test Approval Recipient {unique_suffix}",
             "beneficiary_iban": "IT60X0542811101000000123456",
             "amount": 50,  # 0.50 EUR in cents
             "currency": "EUR",
-            "details": "Test transfer for approval testing"
+            "details": f"Test transfer for approval testing {unique_suffix}"
         }
         
         response = requests.post(
@@ -215,11 +229,11 @@ class TestTransferRejectionEmail:
         )
         
         assert response.status_code == 200 or response.status_code == 201, f"Transfer creation failed: {response.text}"
-        transfer = response.json()
+        resp_data = response.json()
+        transfer = resp_data.get('data', resp_data)
         transfer_id = transfer.get("id")
         
-        # Store for approval
-        self.__class__.transfer_for_approval_id = transfer_id
+        print(f"Created transfer for approval: {transfer_id}")
         
         # Approve the transfer
         response = requests.post(
@@ -246,7 +260,7 @@ class TestTransferRejectionEmail:
                 break
         
         if approved_transfer:
-            assert approved_transfer.get("rejection_email_sent") is not True, \
+            assert approved_transfer.get("rejection_email_sent") != True, \
                 "Rejection email should NOT be sent on approval"
             print(f"Approved transfer status: {approved_transfer.get('status')}")
             print(f"Rejection email sent (should be False/None): {approved_transfer.get('rejection_email_sent')}")
@@ -533,7 +547,7 @@ class TestEmailServiceDirectly:
         # Test cases - expecting (len - 8) asterisks between first 4 and last 4
         test_cases = [
             ("DE89370400440532013000", f"DE89{'*' * (22-8)}3000"),  # 22 chars, 14 asterisks
-            ("IT60X054", "IT60X054"),  # Less than 8 chars - return as is
+            ("IT60X054", "IT60X054"),  # Exactly 8 chars - return as is (less than or equal to 8)
             ("WO885458787887787878", f"WO88{'*' * (20-8)}7878"),  # 20 chars, 12 asterisks
             ("", "N/A"),  # Empty string
             (None, "N/A"),  # None
