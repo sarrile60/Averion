@@ -2159,9 +2159,10 @@ async def get_user_auth_history(
     
     # Query auth events for this user
     # Look for both entity_id match and email match (for failed logins before auth)
+    # Include all auth-related actions with the new naming convention
     auth_actions = [
-        "USER_LOGIN_SUCCESS", "USER_LOGIN_FAILED", "USER_LOGOUT",
-        "LOGIN_SUCCESS", "LOGIN_FAILED", "LOGIN_BLOCKED", "MFA_FAILED",
+        "USER_LOGIN_SUCCESS", "USER_LOGIN_FAILED", "USER_LOGOUT", "USER_LOGIN_BLOCKED", "USER_MFA_FAILED",
+        "LOGIN_SUCCESS", "LOGIN_FAILED", "LOGIN_BLOCKED", "MFA_FAILED",  # Legacy names for backwards compatibility
         "PASSWORD_CHANGED", "EMAIL_VERIFIED"
     ]
     
