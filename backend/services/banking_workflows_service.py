@@ -417,7 +417,7 @@ class BankingWorkflowsService:
             return None
         return Transfer(**serialize_doc(doc))
     
-    async def get_admin_transfers(self, status: Optional[str] = None, page: int = 1, limit: int = 50, search: Optional[str] = None) -> dict:
+    async def get_admin_transfers(self, status: Optional[str] = None, page: int = 1, limit: int = 20, search: Optional[str] = None) -> dict:
         """Admin: Get transfers filtered by status with sender information.
         
         PERFORMANCE OPTIMIZED: Uses bulk lookups instead of N+1 queries.
@@ -426,7 +426,7 @@ class BankingWorkflowsService:
         Args:
             status: Optional status filter (e.g., 'SUBMITTED', 'COMPLETED', 'REJECTED')
             page: Page number (1-indexed)
-            limit: Items per page (default 50, max 100)
+            limit: Items per page (default 20, valid: 20, 50, 100)
             search: Optional search term (searches beneficiary name, sender name, email, IBAN, reference)
             
         Returns:
@@ -435,16 +435,14 @@ class BankingWorkflowsService:
         from bson import ObjectId
         import re
         
-        # Validate and cap limit
-        if limit > 100:
-            limit = 100
-        if limit < 1:
-            limit = 50
+        # Validate limit
+        valid_limits = [20, 50, 100]
+        if limit not in valid_limits:
+            limit = 20
         
-        # If search is provided, we need to search across ALL transfers (ignore status filter)
-        # and return ALL matching results (no pagination for search)
+        # If search is provided, search across ALL transfers with pagination
         if search and search.strip():
-            return await self._search_transfers(search.strip())
+            return await self._search_transfers(search.strip(), page, limit)
         
         query = {}
         if status:
@@ -454,8 +452,12 @@ class BankingWorkflowsService:
         total_count = await self.db.transfers.count_documents(query)
         
         # Calculate pagination
+        total_pages = max(1, (total_count + limit - 1) // limit)
+        if page > total_pages:
+            page = total_pages
+        if page < 1:
+            page = 1
         skip = (page - 1) * limit
-        total_pages = (total_count + limit - 1) // limit if total_count > 0 else 1
         
         # Fetch transfers with pagination
         cursor = self.db.transfers.find(query).sort("created_at", -1).skip(skip).limit(limit)
@@ -466,7 +468,7 @@ class BankingWorkflowsService:
                 "transfers": [],
                 "pagination": {
                     "page": page,
-                    "limit": limit,
+                    "page_size": limit,
                     "total": total_count,
                     "total_pages": total_pages,
                     "has_next": False,
