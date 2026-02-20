@@ -271,55 +271,6 @@ class TicketService:
             tickets.append(ticket_dict)
         
         return tickets
-            user_email = ""
-            user_name = "Unknown User"
-            
-            if user_id and user_id in users_map:
-                user_info = users_map[user_id]
-                user_email = user_info["email"]
-                user_name = f"{user_info['first_name']} {user_info['last_name']}".strip() or user_info["email"]
-            
-            # Calculate unread (from client, not staff)
-            admin_last_read = doc.get("admin_last_read_at")
-            unread_count = 0
-            for msg in messages:
-                if not msg.get("is_staff", False):
-                    msg_created = msg.get("created_at")
-                    if msg_created:
-                        if admin_last_read is None or msg_created > admin_last_read:
-                            unread_count += 1
-            
-            # Apply search filter
-            if search_query:
-                search_lower = search_query.lower()
-                if search_lower not in user_email.lower() and search_lower not in user_name.lower():
-                    continue
-            
-            ticket_dict = {
-                "id": doc["_id"],
-                "user_id": user_id,
-                "subject": doc.get("subject", ""),
-                "description": doc.get("description", "")[:200],  # Truncate for list view
-                "status": doc.get("status", "open"),
-                "priority": doc.get("priority", "medium"),
-                "assigned_to": doc.get("assigned_to"),
-                "created_at": doc.get("created_at"),
-                "updated_at": doc.get("updated_at"),
-                "created_by_admin": doc.get("created_by_admin", False),
-                "created_by_admin_id": doc.get("created_by_admin_id"),
-                "user_email": user_email,
-                "user_name": user_name,
-                "unread_count": unread_count,
-                "message_count": len(messages),
-                "last_message_preview": last_message.get("content", "")[:100] if last_message else "",
-                "last_message_at": last_message.get("created_at") if last_message else None,
-                "last_message_is_staff": last_message.get("is_staff", False) if last_message else False,
-                # Empty messages array for list view - full messages loaded on select
-                "messages": []
-            }
-            tickets.append(ticket_dict)
-        
-        return tickets
     
     async def add_message(
         self,
