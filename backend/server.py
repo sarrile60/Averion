@@ -3392,43 +3392,111 @@ async def get_admin_analytics_overview(
     current_user: dict = Depends(require_admin),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
-    """Get admin dashboard analytics overview."""
+    """Get admin dashboard analytics overview.
+    
+    PERFORMANCE OPTIMIZED: Uses parallel queries and aggregation pipelines
+    instead of sequential count_documents() calls.
+    """
+    import asyncio
     from datetime import datetime, timezone, timedelta
     
-    # Get counts
-    total_users = await db.users.count_documents({})
-    active_users = await db.users.count_documents({"status": "ACTIVE"})
-    pending_kyc = await db.kyc_applications.count_documents({"status": "SUBMITTED"})
-    approved_kyc = await db.kyc_applications.count_documents({"status": "APPROVED"})
-    total_accounts = await db.bank_accounts.count_documents({})
+    # Run all count queries in parallel using asyncio.gather
+    async def get_users_count():
+        return await db.users.count_documents({})
     
-    # Get transfer stats
-    total_transfers = await db.transfers.count_documents({})
-    pending_transfers = await db.transfers.count_documents({"status": "SUBMITTED"})
-    completed_transfers = await db.transfers.count_documents({"status": "COMPLETED"})
-    rejected_transfers = await db.transfers.count_documents({"status": "REJECTED"})
+    async def get_active_users_count():
+        return await db.users.count_documents({"status": "ACTIVE"})
     
-    # Get ticket stats
-    total_tickets = await db.tickets.count_documents({})
-    open_tickets = await db.tickets.count_documents({"status": {"$in": ["OPEN", "IN_PROGRESS"]}})
+    async def get_pending_kyc_count():
+        return await db.kyc_applications.count_documents({"status": "SUBMITTED"})
     
-    # Get card request stats
-    pending_cards = await db.card_requests.count_documents({"status": "PENDING"})
+    async def get_approved_kyc_count():
+        return await db.kyc_applications.count_documents({"status": "APPROVED"})
     
-    # Calculate total transaction volume from ledger entries (only credits/debits to customer accounts)
-    total_volume_cents = 0
-    try:
-        # Sum all credit amounts from ledger_entries (represents money flowing through platform)
-        volume_pipeline = [
-            {"$match": {"direction": "CREDIT"}},
-            {"$group": {"_id": None, "total": {"$sum": "$amount"}}}
+    async def get_accounts_count():
+        return await db.bank_accounts.count_documents({})
+    
+    async def get_transfer_stats():
+        # Use aggregation to get all transfer counts in ONE query
+        pipeline = [
+            {
+                "$group": {
+                    "_id": "$status",
+                    "count": {"$sum": 1}
+                }
+            }
         ]
-        volume_result = await db.ledger_entries.aggregate(volume_pipeline).to_list(1)
-        if volume_result:
-            total_volume_cents = volume_result[0].get("total", 0)
-    except Exception as e:
-        logger.error(f"Failed to calculate transaction volume: {e}")
-        total_volume_cents = 0
+        results = await db.transfers.aggregate(pipeline).to_list(10)
+        stats = {"total": 0, "pending": 0, "completed": 0, "rejected": 0}
+        for r in results:
+            status = r["_id"]
+            count = r["count"]
+            stats["total"] += count
+            if status == "SUBMITTED":
+                stats["pending"] = count
+            elif status == "COMPLETED":
+                stats["completed"] = count
+            elif status == "REJECTED":
+                stats["rejected"] = count
+        return stats
+    
+    async def get_ticket_stats():
+        # Use aggregation to get ticket counts in ONE query
+        pipeline = [
+            {
+                "$group": {
+                    "_id": "$status",
+                    "count": {"$sum": 1}
+                }
+            }
+        ]
+        results = await db.tickets.aggregate(pipeline).to_list(10)
+        total = 0
+        open_count = 0
+        for r in results:
+            status = r["_id"]
+            count = r["count"]
+            total += count
+            if status in ["OPEN", "IN_PROGRESS", "open", "in_progress"]:
+                open_count += count
+        return {"total": total, "open": open_count}
+    
+    async def get_pending_cards_count():
+        return await db.card_requests.count_documents({"status": "PENDING"})
+    
+    async def get_volume():
+        try:
+            pipeline = [
+                {"$match": {"direction": "CREDIT"}},
+                {"$group": {"_id": None, "total": {"$sum": "$amount"}}}
+            ]
+            result = await db.ledger_entries.aggregate(pipeline).to_list(1)
+            return result[0].get("total", 0) if result else 0
+        except Exception:
+            return 0
+    
+    # Execute ALL queries in parallel
+    results = await asyncio.gather(
+        get_users_count(),
+        get_active_users_count(),
+        get_pending_kyc_count(),
+        get_approved_kyc_count(),
+        get_accounts_count(),
+        get_transfer_stats(),
+        get_ticket_stats(),
+        get_pending_cards_count(),
+        get_volume()
+    )
+    
+    total_users = results[0]
+    active_users = results[1]
+    pending_kyc = results[2]
+    approved_kyc = results[3]
+    total_accounts = results[4]
+    transfer_stats = results[5]
+    ticket_stats = results[6]
+    pending_cards = results[7]
+    total_volume_cents = results[8]
     
     return {
         "users": {
@@ -3443,15 +3511,15 @@ async def get_admin_analytics_overview(
             "total": total_accounts
         },
         "transfers": {
-            "total": total_transfers,
-            "pending": pending_transfers,
-            "completed": completed_transfers,
-            "rejected": rejected_transfers,
+            "total": transfer_stats["total"],
+            "pending": transfer_stats["pending"],
+            "completed": transfer_stats["completed"],
+            "rejected": transfer_stats["rejected"],
             "volume_cents": total_volume_cents
         },
         "tickets": {
-            "total": total_tickets,
-            "open": open_tickets
+            "total": ticket_stats["total"],
+            "open": ticket_stats["open"]
         },
         "cards": {
             "pending": pending_cards
