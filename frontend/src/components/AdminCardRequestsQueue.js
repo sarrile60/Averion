@@ -263,7 +263,7 @@ export function AdminCardRequestsQueue() {
 
   const handlePageSizeChange = (newSize) => {
     setPageSize(newSize);
-    setCurrentPage(1);
+    // setCurrentPage(1) is already handled by the wrapped setPageSize
   };
 
   // Calculate showing range
