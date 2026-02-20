@@ -2353,11 +2353,29 @@ function AdminDashboard() {
                     </div>
                     <div><dt className="text-sm text-gray-700 font-medium">KYC</dt><dd className="font-semibold mt-1">{selectedUser.kyc_status || 'Not submitted'}</dd></div>
                     <div className="col-span-2 border-t pt-4 mt-2">
-                      <dt className="text-sm text-gray-700 font-medium flex items-center space-x-2">
-                        <svg className="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                        </svg>
-                        <span>Password (Admin Only)</span>
+                      <dt className="text-sm text-gray-700 font-medium flex items-center justify-between">
+                        <span className="flex items-center space-x-2">
+                          <svg className="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                          </svg>
+                          <span>Password (Admin Only)</span>
+                        </span>
+                        <button
+                          onClick={() => {
+                            setNewPassword('');
+                            setConfirmPassword('');
+                            setPasswordChangeError('');
+                            setShowPasswordModal(true);
+                          }}
+                          className="text-xs px-2 py-1 bg-amber-100 text-amber-700 hover:bg-amber-200 rounded flex items-center space-x-1"
+                          title="Change customer password"
+                          data-testid="change-password-btn"
+                        >
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                          </svg>
+                          <span>Change</span>
+                        </button>
                       </dt>
                       <dd className="mt-1 flex items-center space-x-2">
                         <code className="px-3 py-2 bg-gray-100 border border-gray-300 rounded font-mono text-sm inline-block min-w-[150px]" data-testid="user-password-display">
@@ -2384,6 +2402,30 @@ function AdminDashboard() {
                           )}
                         </button>
                       </dd>
+                    </div>
+                    
+                    {/* Login Activity Button */}
+                    <div className="col-span-2 border-t pt-4 mt-2">
+                      <button
+                        onClick={fetchAuthHistory}
+                        disabled={authHistoryLoading}
+                        className="w-full py-2 px-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg flex items-center justify-center space-x-2 transition-colors"
+                        data-testid="view-login-activity-btn"
+                      >
+                        {authHistoryLoading ? (
+                          <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" className="opacity-25" />
+                            <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" fill="currentColor" className="opacity-75" />
+                          </svg>
+                        ) : (
+                          <>
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{showAuthHistory ? 'Refresh Login Activity' : 'View Login Activity'}</span>
+                          </>
+                        )}
+                      </button>
                     </div>
                   </dl>
                 </div>
