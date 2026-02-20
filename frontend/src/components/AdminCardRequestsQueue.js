@@ -70,9 +70,9 @@ export function AdminCardRequestsQueue() {
   // Update URL when state changes
   const updateUrlParams = useCallback((updates) => {
     const newParams = new URLSearchParams(searchParams);
-    // Keep the section param
+    // Keep the section param (sidebar uses 'card_requests' for Card Requests)
     if (!newParams.has('section')) {
-      newParams.set('section', 'card-requests');
+      newParams.set('section', 'card_requests');
     }
     Object.entries(updates).forEach(([key, value]) => {
       if (value === null || value === undefined || value === '' || 
