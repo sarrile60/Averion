@@ -4130,6 +4130,8 @@ async def get_all_accounts_with_users(
 ):
     """Get all bank accounts with their user information, real ledger balances, search and pagination.
     
+    PERFORMANCE OPTIMIZED: Uses bulk balance calculation instead of N+1 queries.
+    
     Supports:
     - search: Filter by user name, email, IBAN, or account number (searches ALL accounts in DB)
     - page: Page number (1-indexed)
@@ -4143,13 +4145,14 @@ async def get_all_accounts_with_users(
     if limit not in [20, 50, 100]:
         limit = 50
     
-    # Get ledger engine for balance calculation
+    # Get ledger engine for bulk balance calculation
     ledger_engine = LedgerEngine(db)
     
     # Get all bank accounts first (we need to join with users for search)
     accounts_cursor = db.bank_accounts.find({})
     all_accounts = []
     user_ids = set()
+    ledger_account_ids = []
     
     async for acc in accounts_cursor:
         user_id = acc.get("user_id")
@@ -4160,6 +4163,12 @@ async def get_all_accounts_with_users(
                     user_ids.add(uid)
             except:
                 pass
+        
+        # Collect ledger account IDs for bulk balance query
+        ledger_account_id = acc.get("ledger_account_id")
+        if ledger_account_id:
+            ledger_account_ids.append(ledger_account_id)
+        
         all_accounts.append(acc)
     
     # Fetch all users in one query
@@ -4169,22 +4178,25 @@ async def get_all_accounts_with_users(
         async for user in users_cursor:
             users_map[str(user["_id"])] = user
     
-    # Combine accounts with user info and calculate real ledger balance
+    # PERFORMANCE FIX: Get ALL balances in a single bulk query instead of N queries
+    balance_map = {}
+    if ledger_account_ids:
+        try:
+            balance_map = await ledger_engine.get_bulk_balances(ledger_account_ids)
+        except Exception as e:
+            logger.error(f"Failed to get bulk balances: {e}")
+            balance_map = {}
+    
+    # Combine accounts with user info and balances (no more N+1 queries!)
     enriched_accounts = []
     for acc in all_accounts:
         user_id = acc.get("user_id")
         user_id_str = str(user_id) if user_id else None
         user = users_map.get(user_id_str, {})
         
-        # Calculate REAL balance from ledger
+        # Get balance from the pre-fetched map (O(1) lookup)
         ledger_account_id = acc.get("ledger_account_id")
-        balance = 0
-        if ledger_account_id:
-            try:
-                balance = await ledger_engine.get_balance(ledger_account_id)
-            except Exception as e:
-                logger.error(f"Failed to get balance for ledger account {ledger_account_id}: {e}")
-                balance = 0
+        balance = balance_map.get(ledger_account_id, 0) if ledger_account_id else 0
         
         user_name = f"{user.get('first_name', '')} {user.get('last_name', '')}".strip() or "Unknown"
         user_email = user.get("email", "Unknown")
