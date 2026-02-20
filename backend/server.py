@@ -29,7 +29,7 @@ from services.banking_workflows_service import BankingWorkflowsService
 from schemas.users import UserCreate, UserLogin, TokenResponse, UserResponse, MFASetupResponse, MFAVerifyRequest, ResendVerificationRequest, VerifyEmailRequest
 from schemas.kyc import KYCSubmitRequest, KYCReviewRequest, DocumentType
 from schemas.banking import AccountResponse, AdminCreditRequest, AdminDebitRequest, TransactionDisplayType
-from schemas.tickets import TicketCreate, MessageCreate, TicketStatus
+from schemas.tickets import TicketCreate, MessageCreate, TicketStatus, Ticket
 from schemas.transfers import P2PTransferRequest
 from schemas.advanced import CreateBeneficiary, CreateScheduledPayment
 from schemas.banking_workflows import (
