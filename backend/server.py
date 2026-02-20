@@ -3848,6 +3848,7 @@ async def admin_get_transfers(
     status: str = None,
     page: int = 1,
     limit: int = 50,
+    search: str = None,
     current_user: dict = Depends(require_admin),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
@@ -3859,9 +3860,10 @@ async def admin_get_transfers(
     - status: Filter by status (SUBMITTED, COMPLETED, REJECTED)
     - page: Page number (1-indexed, default 1)
     - limit: Items per page (default 50, max 100)
+    - search: Search term (searches beneficiary name, sender name/email, IBAN, reference across ALL statuses)
     """
     workflows = BankingWorkflowsService(db)
-    result = await workflows.get_admin_transfers(status, page, limit)
+    result = await workflows.get_admin_transfers(status, page, limit, search)
     # Result now includes 'transfers' list and 'pagination' info
     return {"ok": True, "data": result["transfers"], "pagination": result["pagination"]}
 
