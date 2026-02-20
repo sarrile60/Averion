@@ -72,6 +72,11 @@ function useBadgeManager(apiUrl, token) {
     // Check if we already have baselines for this session
     if (storedBaselines && storedBaselines._sessionId === sessionId) {
       setBaselines(storedBaselines);
+      // IMPORTANT: Also fetch current counts to calculate badges
+      const currentCounts = await fetchCounts();
+      if (currentCounts) {
+        setCounts(currentCounts);
+      }
       setIsInitialized(true);
       return;
     }
