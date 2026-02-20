@@ -1,4 +1,4 @@
-// Admin Card Requests Queue
+// Admin Card Requests Queue with Pagination, Search, and Delete
 import React, { useState, useEffect, useCallback } from 'react';
 import api from '../api';
 import { useToast } from './Toast';
@@ -9,6 +9,30 @@ export function AdminCardRequestsQueue() {
   const [requests, setRequests] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [loading, setLoading] = useState(true);
+  
+  // Pagination state
+  const [pagination, setPagination] = useState({
+    total: 0,
+    page: 1,
+    page_size: 50,
+    total_pages: 1,
+    has_prev: false,
+    has_next: false
+  });
+  const [pageSize, setPageSize] = useState(50);
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  // Search state
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchScope, setSearchScope] = useState('tab'); // 'tab' or 'all'
+  const [debouncedSearch, setDebouncedSearch] = useState('');
+  
+  // Delete modal state
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [requestToDelete, setRequestToDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+  
+  // Fulfill form state
   const [fulfillData, setFulfillData] = useState({
     cardholder_name: '',
     pan: '',
@@ -21,37 +45,67 @@ export function AdminCardRequestsQueue() {
     country: 'Germany'
   });
 
+  // Debounce search input
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  // Reset page when search or tab changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [debouncedSearch, activeTab, searchScope]);
+
   const fetchRequests = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await api.get(`/admin/card-requests?status=${activeTab}`);
-      console.log('Card requests response:', response.data);
-      const reqs = response.data.data || [];
-      console.log(`${activeTab} requests:`, reqs);
-      // User info (user_name, user_email) is now included in the response - no more N+1 queries!
-      setRequests(reqs);
+      const params = new URLSearchParams({
+        status: activeTab,
+        page: currentPage.toString(),
+        page_size: pageSize.toString()
+      });
+      
+      if (debouncedSearch) {
+        params.append('search', debouncedSearch);
+        params.append('scope', searchScope);
+      }
+      
+      const response = await api.get(`/admin/card-requests?${params.toString()}`);
+      const data = response.data;
+      
+      setRequests(data.data || []);
+      setPagination(data.pagination || {
+        total: 0,
+        page: 1,
+        page_size: pageSize,
+        total_pages: 1,
+        has_prev: false,
+        has_next: false
+      });
     } catch (err) {
+      console.error('Failed to load requests:', err);
       toast.error('Failed to load requests');
     } finally {
       setLoading(false);
     }
-  }, [activeTab, toast]);
+  }, [activeTab, currentPage, pageSize, debouncedSearch, searchScope, toast]);
 
   useEffect(() => {
-    setSelectedRequest(null); // Clear selection when tab changes
+    setSelectedRequest(null);
     fetchRequests();
   }, [fetchRequests]);
 
   const handleFulfill = async () => {
     try {
-      // Convert exp_month and exp_year to integers
       const payload = {
         ...fulfillData,
         exp_month: parseInt(fulfillData.exp_month, 10),
         exp_year: parseInt(fulfillData.exp_year, 10)
       };
       await api.post(`/admin/card-requests/${selectedRequest.id}/fulfill`, payload);
-      toast.success('Card fulfilled!');
+      toast.success('Card fulfilled successfully!');
       setSelectedRequest(null);
       setFulfillData({
         cardholder_name: '',
@@ -84,17 +138,246 @@ export function AdminCardRequestsQueue() {
     }
   };
 
-  // Helper function to get user display name
+  const openDeleteModal = (request, e) => {
+    e.stopPropagation();
+    setRequestToDelete(request);
+    setDeleteModalOpen(true);
+  };
+
+  const handleDelete = async () => {
+    if (!requestToDelete) return;
+    
+    setDeleting(true);
+    try {
+      const response = await api.delete(`/admin/card-requests/${requestToDelete.id}`);
+      
+      // Show appropriate message
+      if (response.data.card_also_deleted) {
+        toast.success('Card request and associated card deleted successfully');
+      } else {
+        toast.success('Card request deleted successfully');
+      }
+      
+      // Close modal and refresh
+      setDeleteModalOpen(false);
+      setRequestToDelete(null);
+      
+      // Update state without full reload
+      setRequests(prev => prev.filter(r => r.id !== requestToDelete.id));
+      setPagination(prev => ({
+        ...prev,
+        total: Math.max(0, prev.total - 1)
+      }));
+      
+    } catch (err) {
+      console.error('Delete error:', err);
+      toast.error('Failed to delete: ' + (err.response?.data?.detail || err.message));
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   const getUserName = (request) => {
     return request.user_name || request.user_id?.substring(0, 8) || 'Unknown';
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= pagination.total_pages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  const handlePageSizeChange = (newSize) => {
+    setPageSize(newSize);
+    setCurrentPage(1);
+  };
+
+  // Pagination component
+  const PaginationControls = () => (
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4 pt-4 border-t border-gray-200">
+      <div className="flex items-center gap-4">
+        <span className="text-sm text-gray-600">
+          Showing {requests.length} of {pagination.total} results
+        </span>
+        <div className="flex items-center gap-2">
+          <label className="text-sm text-gray-600">Per page:</label>
+          <select
+            value={pageSize}
+            onChange={(e) => handlePageSizeChange(Number(e.target.value))}
+            className="border border-gray-300 rounded px-2 py-1 text-sm"
+            data-testid="page-size-select"
+          >
+            <option value={20}>20</option>
+            <option value={50}>50</option>
+            <option value={100}>100</option>
+          </select>
+        </div>
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => handlePageChange(1)}
+          disabled={!pagination.has_prev}
+          className={`px-3 py-1 text-sm rounded ${
+            pagination.has_prev 
+              ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' 
+              : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+          }`}
+          data-testid="pagination-first"
+        >
+          First
+        </button>
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={!pagination.has_prev}
+          className={`px-3 py-1 text-sm rounded ${
+            pagination.has_prev 
+              ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' 
+              : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+          }`}
+          data-testid="pagination-prev"
+        >
+          Prev
+        </button>
+        
+        <span className="px-3 py-1 text-sm text-gray-700">
+          Page {pagination.page} of {pagination.total_pages}
+        </span>
+        
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={!pagination.has_next}
+          className={`px-3 py-1 text-sm rounded ${
+            pagination.has_next 
+              ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' 
+              : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+          }`}
+          data-testid="pagination-next"
+        >
+          Next
+        </button>
+        <button
+          onClick={() => handlePageChange(pagination.total_pages)}
+          disabled={!pagination.has_next}
+          className={`px-3 py-1 text-sm rounded ${
+            pagination.has_next 
+              ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' 
+              : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+          }`}
+          data-testid="pagination-last"
+        >
+          Last
+        </button>
+      </div>
+    </div>
+  );
+
+  // Delete confirmation modal
+  const DeleteModal = () => {
+    if (!deleteModalOpen || !requestToDelete) return null;
+    
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" data-testid="delete-modal">
+        <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 shadow-xl">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Delete Card Request
+          </h3>
+          
+          <p className="text-gray-600 mb-4">
+            Are you sure you want to permanently delete this card request?
+          </p>
+          
+          <div className="bg-gray-50 rounded p-3 mb-4 text-sm">
+            <p><span className="text-gray-500">User:</span> {getUserName(requestToDelete)}</p>
+            <p><span className="text-gray-500">Type:</span> {requestToDelete.card_type}</p>
+            <p><span className="text-gray-500">Status:</span> {requestToDelete.status}</p>
+          </div>
+          
+          {requestToDelete.status === 'FULFILLED' && (
+            <div className="bg-yellow-50 border border-yellow-200 rounded p-3 mb-4 text-sm text-yellow-800">
+              <strong>Warning:</strong> This is a fulfilled request. The associated card will also be removed from the user's account.
+            </div>
+          )}
+          
+          <div className="flex gap-3">
+            <button
+              onClick={() => {
+                setDeleteModalOpen(false);
+                setRequestToDelete(null);
+              }}
+              className="flex-1 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50"
+              disabled={deleting}
+              data-testid="delete-cancel"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleDelete}
+              disabled={deleting}
+              className="flex-1 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
+              data-testid="delete-confirm"
+            >
+              {deleting ? 'Deleting...' : 'Delete'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-6">Card Requests</h2>
+      
+      {/* Search Bar */}
+      <div className="mb-6 flex flex-col sm:flex-row gap-4">
+        <div className="flex-1 relative">
+          <input
+            type="text"
+            placeholder="Search by name, email, card type, or request ID..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            data-testid="search-input"
+          />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            >
+              ×
+            </button>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          <label className="text-sm text-gray-600">Search in:</label>
+          <select
+            value={searchScope}
+            onChange={(e) => setSearchScope(e.target.value)}
+            className="border border-gray-300 rounded px-3 py-2 text-sm"
+            data-testid="search-scope"
+          >
+            <option value="tab">This tab</option>
+            <option value="all">All tabs</option>
+          </select>
+        </div>
+      </div>
+      
+      {/* Tab Navigation */}
       <div className="flex space-x-4 mb-6">
         {['PENDING', 'FULFILLED', 'REJECTED'].map(tab => (
-          <button key={tab} onClick={() => setActiveTab(tab)} className={`px-4 py-2 rounded ${activeTab === tab ? 'bg-red-600 text-white' : 'bg-gray-100'}`}>{tab}</button>
+          <button 
+            key={tab} 
+            onClick={() => setActiveTab(tab)} 
+            className={`px-4 py-2 rounded transition-colors ${
+              activeTab === tab 
+                ? 'bg-red-600 text-white' 
+                : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+            }`}
+            data-testid={`tab-${tab.toLowerCase()}`}
+          >
+            {tab}
+          </button>
         ))}
       </div>
 
@@ -158,33 +441,74 @@ export function AdminCardRequestsQueue() {
           <button onClick={() => setSelectedRequest(null)} className="w-full btn-secondary mt-4">Close</button>
         </div>
       ) : (
-        <div className="table-wrapper">
-          <table className="table-main">
-            <thead>
-              <tr><th>Date</th><th>User</th><th>Email</th><th>Type</th><th>Status</th><th>Action</th></tr>
-            </thead>
-            <tbody>
-              {requests.map(r => (
-                <tr key={r.id} className="cursor-pointer hover:bg-gray-50" onClick={() => setSelectedRequest(r)}>
-                  <td className="text-xs">{new Date(r.created_at).toLocaleString()}</td>
-                  <td>{getUserName(r)}</td>
-                  <td className="text-xs text-gray-500">{r.user_email || '-'}</td>
-                  <td>{r.card_type}</td>
-                  <td>
-                    <span className={`badge ${
-                      r.status === 'FULFILLED' ? 'bg-green-100 text-green-700 border border-green-300' :
-                      r.status === 'REJECTED' ? 'badge-error' : 'badge-warning'
-                    }`}>
-                      {r.status}
-                    </span>
-                  </td>
-                  <td><button className="btn-text text-xs">View</button></td>
+        <>
+          {/* Results Table */}
+          <div className="table-wrapper">
+            <table className="table-main">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>User</th>
+                  <th>Email</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {requests.length === 0 ? (
+                  <tr>
+                    <td colSpan="6" className="text-center text-gray-500 py-8">
+                      {searchTerm ? 'No results found for your search' : 'No card requests found'}
+                    </td>
+                  </tr>
+                ) : (
+                  requests.map(r => (
+                    <tr key={r.id} className="hover:bg-gray-50">
+                      <td className="text-xs">{new Date(r.created_at).toLocaleString()}</td>
+                      <td>{getUserName(r)}</td>
+                      <td className="text-xs text-gray-500">{r.user_email || '-'}</td>
+                      <td>{r.card_type}</td>
+                      <td>
+                        <span className={`badge ${
+                          r.status === 'FULFILLED' ? 'bg-green-100 text-green-700 border border-green-300' :
+                          r.status === 'REJECTED' ? 'badge-error' : 'badge-warning'
+                        }`}>
+                          {r.status}
+                        </span>
+                      </td>
+                      <td>
+                        <div className="flex items-center gap-2">
+                          <button 
+                            onClick={() => setSelectedRequest(r)} 
+                            className="btn-text text-xs"
+                            data-testid={`view-btn-${r.id}`}
+                          >
+                            View
+                          </button>
+                          <button 
+                            onClick={(e) => openDeleteModal(r, e)} 
+                            className="text-xs text-red-600 hover:text-red-800 hover:underline"
+                            data-testid={`delete-btn-${r.id}`}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+          
+          {/* Pagination */}
+          {pagination.total > 0 && <PaginationControls />}
+        </>
       )}
+      
+      {/* Delete Modal */}
+      <DeleteModal />
     </div>
   );
 }
