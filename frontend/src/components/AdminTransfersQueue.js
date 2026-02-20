@@ -1,4 +1,4 @@
-// Admin Transfers Queue
+// Admin Transfers Queue with Pagination
 import React, { useState, useEffect, useCallback } from 'react';
 import api from '../api';
 import { useToast } from './Toast';
@@ -19,16 +19,45 @@ export function AdminTransfersQueue() {
   
   // Search state
   const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
   const [isSearchMode, setIsSearchMode] = useState(false);
-  const [pagination, setPagination] = useState({ total: 0, page: 1, total_pages: 1 });
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
+  const [pagination, setPagination] = useState({
+    total: 0,
+    page: 1,
+    page_size: 20,
+    total_pages: 1,
+    has_next: false,
+    has_prev: false
+  });
+
+  // Debounce search input
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchQuery);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  // Reset page when search, tab, or page size changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [debouncedSearch, activeTab, pageSize]);
 
   const fetchTransfers = useCallback(async () => {
     setLoading(true);
     try {
+      const params = new URLSearchParams({
+        page: currentPage.toString(),
+        page_size: pageSize.toString()
+      });
+      
       // If searching, search across ALL statuses
-      const params = new URLSearchParams();
-      if (searchQuery.trim()) {
-        params.append('search', searchQuery.trim());
+      if (debouncedSearch.trim()) {
+        params.append('search', debouncedSearch.trim());
         setIsSearchMode(true);
       } else {
         params.append('status', activeTab);
@@ -36,348 +65,406 @@ export function AdminTransfersQueue() {
       }
       
       const response = await api.get(`/admin/transfers?${params.toString()}`);
-      setTransfers(response.data.data);
+      setTransfers(response.data.data || []);
+      
       if (response.data.pagination) {
         setPagination(response.data.pagination);
       }
     } catch (err) {
       toast.error('Failed to load transfers');
+      setTransfers([]);
     } finally {
       setLoading(false);
     }
-  }, [activeTab, searchQuery, toast]);
+  }, [activeTab, debouncedSearch, currentPage, pageSize, toast]);
 
   useEffect(() => {
+    setSelectedTransfer(null);
     fetchTransfers();
   }, [fetchTransfers]);
 
-  // Clear search when switching tabs
-  const handleTabClick = (tab) => {
-    setSearchQuery('');
-    setIsSearchMode(false);
-    setActiveTab(tab);
-  };
-
-  const handleApprove = async (id) => {
+  const handleApprove = async (transfer) => {
     try {
-      await api.post(`/admin/transfers/${id}/approve`);
-      toast.success('Transfer approved');
-      
-      // Remove from current view (since it moved to APPROVED status)
-      setTransfers(prev => prev.filter(t => t.id !== id));
+      await api.post(`/admin/transfers/${transfer.id}/approve`);
+      toast.success('Transfer approved successfully');
       setSelectedTransfer(null);
-      
-      // Background refresh for data consistency
-      setTimeout(() => {
-        fetchTransfers();
-      }, 500);
-    } catch (err) {
-      toast.error('Failed to approve');
-    }
-  };
-
-  const handleReject = async (id) => {
-    if (!rejectReason) {
-      toast.error('Reject reason required');
-      return;
-    }
-    try {
-      await api.post(`/admin/transfers/${id}/reject`, { reason: rejectReason });
-      toast.success('Transfer rejected');
-      
-      // Remove from current view (since it moved to REJECTED status)
-      setTransfers(prev => prev.filter(t => t.id !== id));
-      setSelectedTransfer(null);
-      setRejectReason('');
-      
-      // Background refresh for data consistency
-      setTimeout(() => {
-        fetchTransfers();
-      }, 500);
-    } catch (err) {
-      toast.error('Failed to reject');
-    }
-  };
-
-  const handleDeleteTransfer = async (id) => {
-    const transfer = selectedTransfer || transfers.find(t => t.id === id);
-    const formattedAmount = formatCurrency(transfer?.amount || 0);
-    const confirmMessage = `⚠️ DELETE TRANSFER ⚠️\n\nYou are about to permanently delete this transfer:\n\n• Beneficiary: ${transfer?.beneficiary_name}\n• Amount: ${formattedAmount}\n• Status: ${transfer?.status}\n\nThis action CANNOT be undone!\n\nType "DELETE" to confirm:`;
-    
-    const confirmInput = prompt(confirmMessage);
-    
-    if (confirmInput !== "DELETE") {
-      if (confirmInput !== null) {
-        toast.error('Confirmation failed. Transfer not deleted.');
-      }
-      return;
-    }
-    
-    setDeletingTransfer(true);
-    try {
-      await api.delete(`/admin/transfers/${id}`);
-      toast.success('Transfer permanently deleted');
-      
-      // Remove from local state without full refetch (SPA behavior)
-      setTransfers(prev => prev.filter(t => t.id !== id));
-      setSelectedTransfer(null);
-      
-      // Background refresh for data consistency
-      setTimeout(() => {
-        fetchTransfers();
-      }, 1000);
-    } catch (err) {
-      toast.error('Failed to delete transfer: ' + (err.response?.data?.detail || err.message));
-    } finally {
-      setDeletingTransfer(false);
-    }
-  };
-
-  const handleEditRejectReason = () => {
-    setEditedRejectReason(selectedTransfer?.reject_reason || '');
-    setEditingRejectReason(true);
-  };
-
-  const handleSaveRejectReason = async () => {
-    if (!editedRejectReason.trim()) {
-      toast.error('Rejection reason cannot be empty');
-      return;
-    }
-    
-    setSavingRejectReason(true);
-    try {
-      await api.patch(`/admin/transfers/${selectedTransfer.id}/reject-reason`, {
-        reason: editedRejectReason
-      });
-      toast.success('Rejection reason updated');
-      setEditingRejectReason(false);
-      // Update local state
-      setSelectedTransfer(prev => ({
-        ...prev,
-        reject_reason: editedRejectReason
-      }));
       fetchTransfers();
     } catch (err) {
-      toast.error('Failed to update rejection reason: ' + (err.response?.data?.detail || err.message));
+      toast.error('Failed to approve: ' + (err.response?.data?.detail || err.message));
+    }
+  };
+
+  const handleReject = async (transfer) => {
+    if (!rejectReason.trim()) {
+      toast.error('Please enter a rejection reason');
+      return;
+    }
+    try {
+      await api.post(`/admin/transfers/${transfer.id}/reject`, { reason: rejectReason });
+      toast.success('Transfer rejected');
+      setSelectedTransfer(null);
+      setRejectReason('');
+      fetchTransfers();
+    } catch (err) {
+      toast.error('Failed to reject: ' + (err.response?.data?.detail || err.message));
+    }
+  };
+
+  const handleUpdateRejectReason = async () => {
+    if (!editedRejectReason.trim()) {
+      toast.error('Please enter a rejection reason');
+      return;
+    }
+    setSavingRejectReason(true);
+    try {
+      await api.patch(`/admin/transfers/${selectedTransfer.id}/reject-reason`, { reason: editedRejectReason });
+      toast.success('Rejection reason updated');
+      setSelectedTransfer(prev => ({...prev, reject_reason: editedRejectReason}));
+      setEditingRejectReason(false);
+      fetchTransfers();
+    } catch (err) {
+      toast.error('Failed to update: ' + (err.response?.data?.detail || err.message));
     } finally {
       setSavingRejectReason(false);
     }
   };
 
-  const handleCancelEditRejectReason = () => {
-    setEditingRejectReason(false);
-    setEditedRejectReason('');
+  const handleDelete = async (transfer) => {
+    if (!window.confirm(`Are you sure you want to permanently delete this transfer?\n\nBeneficiary: ${transfer.beneficiary_name}\nAmount: €${(transfer.amount / 100).toFixed(2)}`)) {
+      return;
+    }
+    setDeletingTransfer(true);
+    try {
+      await api.delete(`/admin/transfers/${transfer.id}`);
+      toast.success('Transfer deleted');
+      setSelectedTransfer(null);
+      fetchTransfers();
+    } catch (err) {
+      toast.error('Failed to delete: ' + (err.response?.data?.detail || err.message));
+    } finally {
+      setDeletingTransfer(false);
+    }
   };
+
+  const handleTabChange = (newTab) => {
+    setActiveTab(newTab);
+    setSelectedTransfer(null);
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= pagination.total_pages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  const handlePageSizeChange = (newSize) => {
+    setPageSize(newSize);
+  };
+
+  // Calculate showing range
+  const getShowingRange = () => {
+    if (pagination.total === 0) return { start: 0, end: 0 };
+    const start = ((pagination.page || currentPage) - 1) * (pagination.page_size || pageSize) + 1;
+    const end = Math.min(start + transfers.length - 1, pagination.total);
+    return { start, end };
+  };
+
+  const showingRange = getShowingRange();
+
+  // Pagination Controls Component
+  const PaginationControls = () => (
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4 pt-4 border-t border-gray-200">
+      <div className="flex items-center gap-4">
+        <span className="text-sm text-gray-600">
+          Showing {showingRange.start}–{showingRange.end} of {pagination.total} results
+        </span>
+        <div className="flex items-center gap-2">
+          <label className="text-sm text-gray-600">Per page:</label>
+          <select
+            value={pageSize}
+            onChange={(e) => handlePageSizeChange(Number(e.target.value))}
+            className="border border-gray-300 rounded px-2 py-1 text-sm"
+            data-testid="page-size-select"
+          >
+            <option value={20}>20</option>
+            <option value={50}>50</option>
+            <option value={100}>100</option>
+          </select>
+        </div>
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => handlePageChange(1)}
+          disabled={!pagination.has_prev}
+          className={`px-3 py-1 text-sm rounded ${
+            pagination.has_prev 
+              ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' 
+              : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+          }`}
+          data-testid="pagination-first"
+        >
+          First
+        </button>
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={!pagination.has_prev}
+          className={`px-3 py-1 text-sm rounded ${
+            pagination.has_prev 
+              ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' 
+              : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+          }`}
+          data-testid="pagination-prev"
+        >
+          Prev
+        </button>
+        
+        <span className="px-3 py-1 text-sm text-gray-700">
+          Page {pagination.page || currentPage} of {pagination.total_pages}
+        </span>
+        
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={!pagination.has_next}
+          className={`px-3 py-1 text-sm rounded ${
+            pagination.has_next 
+              ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' 
+              : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+          }`}
+          data-testid="pagination-next"
+        >
+          Next
+        </button>
+        <button
+          onClick={() => handlePageChange(pagination.total_pages)}
+          disabled={!pagination.has_next}
+          className={`px-3 py-1 text-sm rounded ${
+            pagination.has_next 
+              ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' 
+              : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+          }`}
+          data-testid="pagination-last"
+        >
+          Last
+        </button>
+      </div>
+    </div>
+  );
 
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-6">Transfers Queue</h2>
       
       {/* Search Bar */}
-      <div className="mb-4">
+      <div className="mb-6">
         <div className="relative">
           <input
             type="text"
             placeholder="Search by beneficiary, sender, email, IBAN, reference... (searches ALL statuses)"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            data-testid="transfers-search-input"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            data-testid="search-input"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
             >
-              ✕
+              ×
             </button>
           )}
         </div>
         {isSearchMode && (
-          <div className="mt-2 text-sm text-gray-500">
-            Showing {transfers.length} results across all statuses
-          </div>
+          <p className="text-sm text-blue-600 mt-2">
+            Searching across ALL transfers (ignoring tab filter). Found {pagination.total} result(s).
+          </p>
         )}
       </div>
       
-      {/* Tabs - only show when not searching */}
-      {!isSearchMode && (
-        <div className="flex space-x-4 mb-6">
-          {['SUBMITTED', 'COMPLETED', 'REJECTED'].map(tab => (
-            <button
-              key={tab}
-              onClick={() => handleTabClick(tab)}
-              className={`px-4 py-2 rounded ${activeTab === tab ? 'bg-red-600 text-white' : 'bg-gray-100'}`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-      )}
-
+      {/* Tab Navigation */}
+      <div className="flex space-x-4 mb-6">
+        {['SUBMITTED', 'COMPLETED', 'REJECTED'].map(tab => (
+          <button 
+            key={tab} 
+            onClick={() => handleTabChange(tab)} 
+            className={`px-4 py-2 rounded transition-colors ${
+              activeTab === tab && !isSearchMode
+                ? 'bg-red-600 text-white' 
+                : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+            }`}
+            data-testid={`tab-${tab.toLowerCase()}`}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+      
       {loading ? (
         <div className="skeleton-card h-64"></div>
       ) : selectedTransfer ? (
         <div className="card p-6">
-          <div className="flex justify-between mb-4">
+          <div className="flex justify-between items-start mb-4">
             <h3 className="text-lg font-semibold">Transfer Details</h3>
-            <button onClick={() => setSelectedTransfer(null)} className="text-gray-600 hover:text-gray-800">×</button>
+            <button onClick={() => setSelectedTransfer(null)} className="text-gray-600 hover:text-gray-900 text-xl">×</button>
           </div>
-          <dl className="space-y-2 text-sm">
-            {/* Sender Section */}
-            <div className="pb-3 mb-3 border-b border-gray-200">
-              <dt className="text-gray-500 text-xs uppercase tracking-wider mb-1">Sender (From)</dt>
-              <dd className="font-medium">{selectedTransfer.sender_name || 'Unknown'}</dd>
-              {selectedTransfer.sender_email && <dd className="text-xs text-gray-500">{selectedTransfer.sender_email}</dd>}
-              {selectedTransfer.sender_iban && <dd className="text-xs text-gray-400 font-mono mt-1">{selectedTransfer.sender_iban}</dd>}
-            </div>
+          
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            <div><span className="text-sm text-gray-600">Reference:</span> <span className="font-mono text-sm">{selectedTransfer.reference_number || selectedTransfer.id?.substring(0, 8)}</span></div>
+            <div><span className="text-sm text-gray-600">Status:</span> <span className={`badge ${getStatusBadgeClasses(selectedTransfer.status)}`}>{selectedTransfer.status}</span></div>
+            <div><span className="text-sm text-gray-600">Amount:</span> <span className="font-semibold">{formatCurrency(selectedTransfer.amount)}</span></div>
+            <div><span className="text-sm text-gray-600">Date:</span> <span className="text-sm">{new Date(selectedTransfer.created_at).toLocaleString()}</span></div>
+            <div><span className="text-sm text-gray-600">Sender:</span> <span className="font-medium">{selectedTransfer.sender_name}</span></div>
+            <div><span className="text-sm text-gray-600">Sender Email:</span> <span className="text-sm">{selectedTransfer.sender_email}</span></div>
+            <div><span className="text-sm text-gray-600">Sender IBAN:</span> <span className="font-mono text-sm">{selectedTransfer.sender_iban}</span></div>
+            <div><span className="text-sm text-gray-600">Beneficiary:</span> <span className="font-medium">{selectedTransfer.beneficiary_name}</span></div>
+            <div className="col-span-2"><span className="text-sm text-gray-600">Beneficiary IBAN:</span> <span className="font-mono text-sm">{selectedTransfer.beneficiary_iban}</span></div>
+            <div className="col-span-2"><span className="text-sm text-gray-600">Details:</span> <span className="text-sm">{selectedTransfer.details || 'N/A'}</span></div>
             
-            {/* Beneficiary Section */}
-            <div className="pb-3 mb-3 border-b border-gray-200">
-              <dt className="text-gray-500 text-xs uppercase tracking-wider mb-1">Beneficiary (To)</dt>
-              <dd className="font-medium">{selectedTransfer.beneficiary_name}</dd>
-              <dd className="text-xs text-gray-400 font-mono mt-1">{selectedTransfer.beneficiary_iban}</dd>
-            </div>
-            
-            <div className="flex justify-between"><dt className="text-gray-600">Amount:</dt><dd className="font-bold">{formatCurrency(selectedTransfer.amount)}</dd></div>
-            <div className="flex justify-between"><dt className="text-gray-600">Details:</dt><dd>{selectedTransfer.details}</dd></div>
-            {selectedTransfer.reference_number && <div className="flex justify-between"><dt className="text-gray-600">Reference:</dt><dd>{selectedTransfer.reference_number}</dd></div>}
-            <div className="flex justify-between"><dt className="text-gray-600">Status:</dt><dd><span className={getStatusBadgeClasses(selectedTransfer.status, false)}>{selectedTransfer.status}</span></dd></div>
-            
-            {/* Rejection Reason Section - Editable */}
             {selectedTransfer.status === 'REJECTED' && (
-              <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <div className="flex justify-between items-start mb-1">
-                  <dt className="text-red-700 font-medium text-sm">Rejection Reason:</dt>
+              <div className="col-span-2 bg-red-50 p-3 rounded border border-red-200">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <span className="text-sm text-gray-600 font-medium">Rejection Reason:</span>
+                    {editingRejectReason ? (
+                      <div className="mt-2">
+                        <textarea
+                          value={editedRejectReason}
+                          onChange={(e) => setEditedRejectReason(e.target.value)}
+                          className="w-full p-2 border border-gray-300 rounded text-sm"
+                          rows={2}
+                        />
+                        <div className="flex gap-2 mt-2">
+                          <button
+                            onClick={handleUpdateRejectReason}
+                            disabled={savingRejectReason}
+                            className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 disabled:opacity-50"
+                          >
+                            {savingRejectReason ? 'Saving...' : 'Save'}
+                          </button>
+                          <button
+                            onClick={() => {
+                              setEditingRejectReason(false);
+                              setEditedRejectReason(selectedTransfer.reject_reason || '');
+                            }}
+                            className="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded hover:bg-gray-300"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-red-700 text-sm mt-1">{selectedTransfer.reject_reason || 'No reason provided'}</p>
+                    )}
+                  </div>
                   {!editingRejectReason && (
                     <button
-                      onClick={handleEditRejectReason}
-                      className="text-xs text-blue-600 hover:text-blue-800 flex items-center space-x-1"
-                      data-testid="edit-reject-reason-btn"
+                      onClick={() => {
+                        setEditedRejectReason(selectedTransfer.reject_reason || '');
+                        setEditingRejectReason(true);
+                      }}
+                      className="text-sm text-blue-600 hover:text-blue-800"
                     >
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                      </svg>
-                      <span>Edit</span>
+                      Edit
                     </button>
                   )}
                 </div>
-                {editingRejectReason ? (
-                  <div className="space-y-2">
-                    <textarea
-                      value={editedRejectReason}
-                      onChange={(e) => setEditedRejectReason(e.target.value)}
-                      rows={3}
-                      className="w-full px-3 py-2 border border-red-300 rounded-lg text-sm resize-y min-h-[60px] focus:outline-none focus:ring-2 focus:ring-red-500"
-                      placeholder="Enter rejection reason..."
-                      data-testid="edit-reject-reason-textarea"
-                    />
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={handleSaveRejectReason}
-                        disabled={savingRejectReason}
-                        className="px-3 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700 disabled:opacity-50"
-                        data-testid="save-reject-reason-btn"
-                      >
-                        {savingRejectReason ? 'Saving...' : 'Save'}
-                      </button>
-                      <button
-                        onClick={handleCancelEditRejectReason}
-                        className="px-3 py-1 bg-gray-200 text-gray-700 text-xs rounded hover:bg-gray-300"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <dd className="text-red-600 text-sm">{selectedTransfer.reject_reason || 'No reason provided'}</dd>
-                )}
               </div>
             )}
-            
-            {selectedTransfer.admin_action_by && (
-              <div className="flex justify-between mt-2"><dt className="text-gray-600">Processed by:</dt><dd className="text-xs text-gray-500">ECOMMBX Staff</dd></div>
-            )}
-            {selectedTransfer.admin_action_at && (
-              <div className="flex justify-between"><dt className="text-gray-600">Processed at:</dt><dd className="text-xs text-gray-500">{new Date(selectedTransfer.admin_action_at).toLocaleString()}</dd></div>
-            )}
-          </dl>
+          </div>
           
-          {selectedTransfer.status === 'SUBMITTED' && (
-            <div className="mt-6 space-y-3">
-              <button onClick={() => handleApprove(selectedTransfer.id)} className="w-full btn-primary">Approve Transfer</button>
-              <div>
-                <input type="text" value={rejectReason} onChange={(e) => setRejectReason(e.target.value)} placeholder="Reject reason..." className="input-field mb-2" />
-                <button onClick={() => handleReject(selectedTransfer.id)} className="w-full btn-secondary">Reject Transfer</button>
-              </div>
-            </div>
-          )}
-          
-          {/* Delete Transfer Button - Always visible */}
-          <div className="mt-6 pt-4 border-t border-gray-200">
-            <button
-              onClick={() => handleDeleteTransfer(selectedTransfer.id)}
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-200">
+            {selectedTransfer.status === 'SUBMITTED' && (
+              <>
+                <button onClick={() => handleApprove(selectedTransfer)} className="btn-primary">
+                  Approve
+                </button>
+                <div className="flex-1">
+                  <input
+                    type="text"
+                    placeholder="Rejection reason..."
+                    value={rejectReason}
+                    onChange={(e) => setRejectReason(e.target.value)}
+                    className="input-field text-sm"
+                  />
+                </div>
+                <button onClick={() => handleReject(selectedTransfer)} className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700">
+                  Reject
+                </button>
+              </>
+            )}
+            <button 
+              onClick={() => handleDelete(selectedTransfer)} 
               disabled={deletingTransfer}
-              className="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 flex items-center justify-center space-x-2"
-              data-testid="delete-transfer-btn"
+              className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 disabled:opacity-50"
             >
-              {deletingTransfer ? (
-                <>
-                  <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                  <span>Deleting...</span>
-                </>
-              ) : (
-                <>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                  <span>Delete Transfer Permanently</span>
-                </>
-              )}
+              {deletingTransfer ? 'Deleting...' : 'Delete'}
             </button>
-            <p className="text-xs text-gray-500 text-center mt-2">This action cannot be undone</p>
+            <button onClick={() => setSelectedTransfer(null)} className="btn-secondary ml-auto">
+              Close
+            </button>
           </div>
         </div>
       ) : (
-        <div className="table-wrapper">
-          <table className="table-main">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Sender</th>
-                <th>Beneficiary</th>
-                <th>Amount</th>
-                <th>Status</th>
-                {activeTab === 'REJECTED' && <th>Reason</th>}
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transfers.map(t => (
-                <tr key={t.id} className="cursor-pointer hover:bg-gray-50" onClick={() => setSelectedTransfer(t)}>
-                  <td className="text-xs">{new Date(t.created_at).toLocaleDateString()}</td>
-                  <td>
-                    <div className="text-sm font-medium">{t.sender_name || 'Unknown'}</div>
-                    {t.sender_email && <div className="text-xs text-gray-500">{t.sender_email}</div>}
-                  </td>
-                  <td>{t.beneficiary_name}</td>
-                  <td className="font-semibold">{formatCurrency(t.amount)}</td>
-                  <td><span className={getStatusBadgeClasses(t.status, false)}>{t.status}</span></td>
-                  {activeTab === 'REJECTED' && (
-                    <td className="max-w-xs">
-                      <span className="text-xs text-red-600 truncate block" title={t.reject_reason}>
-                        {t.reject_reason ? (t.reject_reason.length > 50 ? t.reject_reason.substring(0, 50) + '...' : t.reject_reason) : 'N/A'}
-                      </span>
-                    </td>
-                  )}
-                  <td><button className="btn-text text-xs">Open</button></td>
+        <>
+          {/* Table */}
+          <div className="table-wrapper">
+            <table className="table-main">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Sender</th>
+                  <th>Beneficiary</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {transfers.length === 0 ? (
+                  <tr>
+                    <td colSpan="6" className="text-center text-gray-500 py-8">
+                      {isSearchMode ? 'No results found for your search' : 'No transfers found'}
+                    </td>
+                  </tr>
+                ) : (
+                  transfers.map(t => (
+                    <tr key={t.id} className="hover:bg-gray-50">
+                      <td className="text-xs">{new Date(t.created_at).toLocaleString()}</td>
+                      <td>
+                        <div className="font-medium text-sm">{t.sender_name}</div>
+                        <div className="text-xs text-gray-500">{t.sender_email}</div>
+                      </td>
+                      <td>
+                        <div className="font-medium text-sm">{t.beneficiary_name}</div>
+                        <div className="text-xs text-gray-500 font-mono">{t.beneficiary_iban?.substring(0, 12)}...</div>
+                      </td>
+                      <td className="font-semibold">{formatCurrency(t.amount)}</td>
+                      <td>
+                        <span className={`badge ${getStatusBadgeClasses(t.status)}`}>
+                          {t.status}
+                        </span>
+                      </td>
+                      <td>
+                        <button 
+                          onClick={() => setSelectedTransfer(t)} 
+                          className="btn-text text-xs"
+                          data-testid={`view-btn-${t.id}`}
+                        >
+                          Open
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+          
+          {/* Pagination Controls */}
+          {pagination.total > 0 && <PaginationControls />}
+        </>
       )}
     </div>
   );
