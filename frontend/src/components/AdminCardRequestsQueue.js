@@ -515,9 +515,6 @@ export function AdminCardRequestsQueue() {
               </tbody>
             </table>
           </div>
-          
-          {/* Pagination */}
-          {pagination.total > 0 && <PaginationControls />}
         </>
       )}
       
