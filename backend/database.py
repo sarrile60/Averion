@@ -172,6 +172,9 @@ async def create_indexes():
         ("card_requests", "status", {}),
         ("card_requests", "user_id", {}),
         ("card_requests", "created_at", {}),
+        
+        # Admin Section Views (for persistent notification badges)
+        ("admin_section_views", "admin_id", {}),
     ]
     
     # Also create compound indexes
@@ -184,6 +187,12 @@ async def create_indexes():
         # PERFORMANCE: Compound index for ticket queries
         ("tickets", [('user_id', 1), ('created_at', -1)], {}),
         ("tickets", [('status', 1), ('updated_at', -1)], {}),
+        # PERFORMANCE: Admin section views compound index (unique per admin+section)
+        ("admin_section_views", [('admin_id', 1), ('section_key', 1)], {"unique": True}),
+        # PERFORMANCE: KYC applications by status and created_at
+        ("kyc_applications", [('status', 1), ('created_at', -1)], {}),
+        # PERFORMANCE: Users by status and created_at
+        ("users", [('status', 1), ('created_at', -1)], {}),
     ]
     
     created = 0
