@@ -93,6 +93,25 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 - Mobile (375px): Line breaks preserved ✓
 - Both client and admin/support messages display correctly
 
+### Language Selector Display Fix (Feb 20, 2025)
+**Fix:** Removed flag emojis from language selector, now shows only "EN" or "IT".
+
+**Problem:** Header showed "🇬🇧 EN" with a flag emoji prefix. User wanted clean display of just "EN" or "IT".
+
+**Solution:** Removed the flag emoji `<span>` element from the language toggle buttons in:
+- `/app/frontend/src/components/TransfersPage.js` (line 43)
+- `/app/frontend/src/components/CardsPage.js` (line 74)
+
+**Before:** `🇬🇧 EN` / `🇮🇹 IT`
+**After:** `EN` / `IT`
+
+**Verification:** Tested on:
+- Desktop (1920px): Shows just "EN" / "IT" ✓
+- Mobile (375px): Shows just "EN" / "IT" ✓
+- Transfers page ✓
+- Cards page ✓
+- Switching between EN/IT works correctly ✓
+
 ### Instant Transfer Toggle UX Refinement (Feb 20, 2025)
 **Refinement:** Made the Instant Transfer modal more bank-professional.
 
