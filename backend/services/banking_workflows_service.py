@@ -534,7 +534,7 @@ class BankingWorkflowsService:
             "transfers": transfers,
             "pagination": {
                 "page": page,
-                "limit": limit,
+                "page_size": limit,
                 "total": total_count,
                 "total_pages": total_pages,
                 "has_next": page < total_pages,
@@ -542,14 +542,15 @@ class BankingWorkflowsService:
             }
         }
     
-    async def _search_transfers(self, search_term: str) -> dict:
-        """Search transfers across the ENTIRE database (all statuses).
+    async def _search_transfers(self, search_term: str, page: int = 1, limit: int = 20) -> dict:
+        """Search transfers across the ENTIRE database (all statuses) with pagination.
         
         Searches by: beneficiary name, sender name, sender email, IBAN, reference number.
-        Returns ALL matching results without pagination.
         
         Args:
             search_term: The search string to match
+            page: Page number (1-indexed)
+            limit: Items per page
             
         Returns:
             Dictionary with 'transfers' list and 'pagination' info (search mode)
@@ -559,21 +560,7 @@ class BankingWorkflowsService:
         
         search_regex = re.compile(re.escape(search_term), re.IGNORECASE)
         
-        # First, search in transfers collection for beneficiary name/iban/reference
-        transfer_query = {
-            "$or": [
-                {"beneficiary_name": {"$regex": search_regex}},
-                {"beneficiary_iban": {"$regex": search_regex}},
-                {"reference_number": {"$regex": search_regex}},
-                {"details": {"$regex": search_regex}}
-            ]
-        }
-        
-        # Get matching transfers from direct fields
-        direct_matches = await self.db.transfers.find(transfer_query).sort("created_at", -1).to_list(500)
-        direct_match_ids = {str(doc["_id"]) for doc in direct_matches}
-        
-        # Also search by sender name/email - need to find matching users first
+        # First, find users matching the search
         user_query = {
             "$or": [
                 {"email": {"$regex": search_regex}},
@@ -581,34 +568,46 @@ class BankingWorkflowsService:
                 {"last_name": {"$regex": search_regex}}
             ]
         }
-        matching_users = await self.db.users.find(user_query).to_list(100)
+        matching_users = await self.db.users.find(user_query, {"_id": 1}).to_list(100)
         matching_user_ids = [str(u["_id"]) for u in matching_users]
         
-        # Find transfers from matching users
-        user_transfers = []
+        # Build transfer query - search in transfer fields OR by user_id
+        transfer_conditions = [
+            {"beneficiary_name": {"$regex": search_regex}},
+            {"beneficiary_iban": {"$regex": search_regex}},
+            {"reference_number": {"$regex": search_regex}},
+            {"details": {"$regex": search_regex}}
+        ]
+        
         if matching_user_ids:
-            user_transfer_cursor = self.db.transfers.find({"user_id": {"$in": matching_user_ids}}).sort("created_at", -1)
-            user_transfers = await user_transfer_cursor.to_list(500)
+            transfer_conditions.append({"user_id": {"$in": matching_user_ids}})
         
-        # Combine results, avoiding duplicates
-        all_transfer_docs = list(direct_matches)
-        for doc in user_transfers:
-            if str(doc["_id"]) not in direct_match_ids:
-                all_transfer_docs.append(doc)
+        transfer_query = {"$or": transfer_conditions}
         
-        # Sort combined results by created_at descending
-        all_transfer_docs.sort(key=lambda x: x.get("created_at", datetime.min), reverse=True)
+        # Get total count for pagination
+        total_count = await self.db.transfers.count_documents(transfer_query)
+        
+        # Calculate pagination
+        total_pages = max(1, (total_count + limit - 1) // limit)
+        if page > total_pages:
+            page = total_pages
+        if page < 1:
+            page = 1
+        skip = (page - 1) * limit
+        
+        # Fetch paginated results
+        all_transfer_docs = await self.db.transfers.find(transfer_query).sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
         
         if not all_transfer_docs:
             return {
                 "transfers": [],
                 "pagination": {
-                    "page": 1,
-                    "limit": len(all_transfer_docs),
-                    "total": 0,
-                    "total_pages": 1,
+                    "page": page,
+                    "page_size": limit,
+                    "total": total_count,
+                    "total_pages": total_pages,
                     "has_next": False,
-                    "has_prev": False,
+                    "has_prev": page > 1,
                     "search_mode": True
                 }
             }
