@@ -376,6 +376,24 @@ export function AdminCardRequestsQueue() {
           </div>
         )}
       </div>
+      
+      {/* Tab Navigation */}
+      <div className="flex space-x-4 mb-4">
+        {['PENDING', 'FULFILLED', 'REJECTED'].map(tab => (
+          <button 
+            key={tab} 
+            onClick={() => setActiveTab(tab)} 
+            className={`px-4 py-2 rounded transition-colors ${
+              activeTab === tab 
+                ? 'bg-red-600 text-white' 
+                : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+            }`}
+            data-testid={`tab-${tab.toLowerCase()}`}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
 
       {loading ? (
         <div className="skeleton-card h-64"></div>
