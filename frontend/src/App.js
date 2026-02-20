@@ -1889,6 +1889,7 @@ function AdminDashboard() {
     console.log('Fetching user details for:', userId);
     setShowPassword(false); // Reset password visibility when viewing a new user
     setEditingNotes(false); // Reset notes editing state
+    setShowAuthHistory(false); // Reset auth history view
     try {
       const response = await api.get(`/admin/users/${userId}`);
       console.log('User details response:', response.data);
@@ -1897,6 +1898,55 @@ function AdminDashboard() {
     } catch (err) {
       console.error('Failed to fetch user details:', err);
       toast.error('Failed to fetch user details');
+    }
+  };
+
+  // Handle password change for user (admin only)
+  const handlePasswordChange = async () => {
+    // Validate
+    if (!newPassword || newPassword.length < 8) {
+      setPasswordChangeError('Password must be at least 8 characters');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setPasswordChangeError('Passwords do not match');
+      return;
+    }
+    
+    setPasswordChangeLoading(true);
+    setPasswordChangeError('');
+    
+    try {
+      await api.post(`/admin/users/${selectedUser.user.id}/change-password`, {
+        new_password: newPassword
+      });
+      toast.success('Password updated successfully');
+      setShowPasswordModal(false);
+      setNewPassword('');
+      setConfirmPassword('');
+      // Refresh user details to show new password
+      viewUserDetails(selectedUser.user.id);
+    } catch (err) {
+      setPasswordChangeError(err.response?.data?.detail || 'Failed to change password');
+    } finally {
+      setPasswordChangeLoading(false);
+    }
+  };
+
+  // Fetch auth history for user
+  const fetchAuthHistory = async () => {
+    if (!selectedUser) return;
+    
+    setAuthHistoryLoading(true);
+    try {
+      const response = await api.get(`/admin/users/${selectedUser.user.id}/auth-history`);
+      setAuthHistory(response.data.events || []);
+      setShowAuthHistory(true);
+    } catch (err) {
+      console.error('Failed to fetch auth history:', err);
+      toast.error('Failed to fetch authentication history');
+    } finally {
+      setAuthHistoryLoading(false);
     }
   };
 
