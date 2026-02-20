@@ -971,6 +971,50 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 
 **Verification:** 100% test pass rate (iteration_95.json) - 19/19 tests passed. Both transfer confirmation and rejection emails verified to no longer contain disclaimer footer.
 
+### Admin Sidebar Notification Badges (Feb 20, 2025)
+
+**Feature:** Session-based notification badges on admin sidebar showing NEW pending items since session started.
+
+**Sidebar Items with Badges:**
+- Users → `users_pending` (status = PENDING)
+- KYC Queue → `kyc_pending` (KYC applications with status PENDING)
+- Card Requests → `card_requests_pending` (requests with status PENDING)
+- Transfers Queue → `transfers_pending` (transfers with status SUBMITTED)
+- Support Tickets → `tickets_unread` (tickets with last message from client, not admin)
+
+**Badge UI:**
+- Red circular badge with white text
+- Aligned right of menu item
+- Hidden when count = 0
+- Shows "99+" if count > 99
+- Works in light/dark mode
+
+**Session-Based Behavior (Key Innovation):**
+1. **On login:** Current counts become baselines (stored in sessionStorage)
+2. **During session:** Badge = max(0, current_count - baseline)
+3. **On section click:** Baseline updates to current count → Badge clears
+4. **On logout:** Session storage cleared → Badges reset on next login
+
+**Backend Endpoint:**
+- `GET /api/v1/admin/notification-counts`
+- Returns: `{ kyc_pending, transfers_pending, card_requests_pending, tickets_unread, users_pending }`
+- Requires admin authentication
+- All queries run in parallel via `asyncio.gather`
+
+**Technical Implementation:**
+- `useBadgeManager` hook in AdminLayout.js
+- Polls API every 30 seconds
+- Stores baselines in sessionStorage with keys:
+  - `admin_badge_baselines` - JSON with counts and session ID
+  - `admin_badge_session_id` - Unique session identifier
+
+**Files Changed:**
+- `/app/backend/server.py` - Added `/api/v1/admin/notification-counts` endpoint
+- `/app/frontend/src/components/AdminLayout.js` - Added `useBadgeManager` hook and `NotificationBadge` component
+- `/app/backend/tests/test_admin_notification_counts.py` - Comprehensive test suite
+
+**Verification:** 100% test pass rate (iteration_96.json) - 14/14 backend tests passed. Frontend badge manager verified working correctly.
+
 ## Known Issues / Backlog
 
 ### P0 - Critical
