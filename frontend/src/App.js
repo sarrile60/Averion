@@ -398,6 +398,7 @@ function LoginPage() {
   const [resendSuccess, setResendSuccess] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const toast = useToast();
   const { t, language, setLanguage } = useLanguage();
   const { isDark, toggleTheme } = useTheme();
@@ -410,8 +411,11 @@ function LoginPage() {
     setLoading(true);
     try {
       const user = await login(email, password);
-      // Redirect based on role
-      if (user.role === 'CUSTOMER') {
+      // Check for returnUrl from protected route redirect
+      const returnUrl = searchParams.get('returnUrl');
+      if (returnUrl && !returnUrl.includes('/login')) {
+        navigate(returnUrl);
+      } else if (user.role === 'CUSTOMER') {
         navigate('/dashboard');
       } else {
         navigate('/admin');
