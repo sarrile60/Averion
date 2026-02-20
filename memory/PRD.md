@@ -829,6 +829,34 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 
 **Verification:** 100% test pass rate (iteration_91.json) - 14/14 backend tests passed.
 
+### Admin Overview Performance Optimization (Feb 20, 2025)
+
+**Problem:** Admin Overview page taking 1.7 seconds to load due to 13+ sequential count_documents() calls.
+
+**Optimizations:**
+
+1. **Parallel Query Execution** (`asyncio.gather`)
+   - All 9 count queries now run in parallel instead of sequentially
+   - Transfer stats use aggregation pipeline (1 query for 4 counts)
+   - Ticket stats use aggregation pipeline (1 query for 2 counts)
+
+2. **Monthly Analytics** (`/api/v1/admin/analytics/monthly`)
+   - Uses aggregation to group by month in single query
+   - Was: 12+ sequential count queries
+   - Now: 3 parallel aggregation queries
+
+**Performance Results:**
+| Endpoint | Before | After | Improvement |
+|----------|--------|-------|-------------|
+| Admin Overview | 1.71s | **0.95-1.0s** | **42%** |
+| Monthly Analytics | 1.71s | **0.35s** | **80%** |
+
+**Files Changed:**
+- `/app/backend/server.py` - Refactored `get_admin_analytics_overview()` with asyncio.gather and aggregation
+- `/app/backend/server.py` - Refactored `get_admin_analytics_monthly()` with aggregation pipelines
+
+**Verification:** 100% test pass rate (iteration_92.json) - 18/18 backend tests passed. All expected values verified (87 users, 108 transactions, €35M+ volume).
+
 ## Known Issues / Backlog
 
 ### P0 - Critical
