@@ -4142,16 +4142,163 @@ async def get_transfer_detail(
 @app.get("/api/v1/admin/card-requests")
 async def admin_get_card_requests(
     status: str = None,
+    page: int = 1,
+    page_size: int = 50,
+    search: str = None,
+    scope: str = "tab",  # "tab" or "all" - search within tab or all statuses
     current_user: dict = Depends(require_admin),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
-    """Admin: Get card requests filtered by status with user information.
+    """Admin: Get card requests with pagination, search, and user information.
     
-    PERFORMANCE OPTIMIZED: Returns user info with each request to avoid N+1 frontend queries.
+    PERFORMANCE OPTIMIZED: Server-side pagination, search, and bulk user lookups.
+    
+    Query params:
+    - status: Filter by status (PENDING, FULFILLED, REJECTED). Default: PENDING
+    - page: Page number (1-indexed, default 1)
+    - page_size: Items per page (20, 50, or 100, default 50)
+    - search: Search term (matches user name, email, card type, request ID)
+    - scope: "tab" (search current status only) or "all" (search all statuses)
     """
-    workflows = BankingWorkflowsService(db)
-    result = await workflows.get_pending_card_requests(status)
-    return {"ok": True, "data": result["requests"], "pagination": result["pagination"]}
+    from bson import ObjectId
+    import re
+    
+    # Validate page_size
+    valid_page_sizes = [20, 50, 100]
+    if page_size not in valid_page_sizes:
+        page_size = 50
+    
+    # Validate page
+    if page < 1:
+        page = 1
+    
+    # Build base query
+    query = {}
+    
+    # Status filter (unless scope is "all" with search)
+    if scope == "all" and search:
+        # Search across all statuses
+        pass
+    elif status:
+        query["status"] = status
+    else:
+        query["status"] = "PENDING"  # Default to PENDING
+    
+    # If searching, we need to do a more complex query
+    search_user_ids = []
+    if search:
+        search = search.strip()
+        search_regex = {"$regex": re.escape(search), "$options": "i"}
+        
+        # First, find users matching the search (for name/email search)
+        user_query = {
+            "$or": [
+                {"first_name": search_regex},
+                {"last_name": search_regex},
+                {"email": search_regex}
+            ]
+        }
+        users_cursor = db.users.find(user_query, {"_id": 1})
+        async for user in users_cursor:
+            search_user_ids.append(str(user["_id"]))
+        
+        # Build search conditions for card_requests
+        search_conditions = [
+            {"card_type": search_regex},
+            {"_id": search_regex}
+        ]
+        
+        if search_user_ids:
+            search_conditions.append({"user_id": {"$in": search_user_ids}})
+        
+        # Combine with status filter
+        if query.get("status"):
+            query = {
+                "$and": [
+                    {"status": query["status"]},
+                    {"$or": search_conditions}
+                ]
+            }
+        else:
+            query = {"$or": search_conditions}
+    
+    # Get total count for pagination
+    total_count = await db.card_requests.count_documents(query)
+    
+    # Calculate pagination
+    total_pages = max(1, (total_count + page_size - 1) // page_size)
+    if page > total_pages:
+        page = total_pages
+    
+    skip = (page - 1) * page_size
+    
+    # Fetch paginated results
+    cursor = db.card_requests.find(query).sort("created_at", -1).skip(skip).limit(page_size)
+    request_docs = await cursor.to_list(length=page_size)
+    
+    if not request_docs:
+        return {
+            "ok": True,
+            "data": [],
+            "pagination": {
+                "total": total_count,
+                "page": page,
+                "page_size": page_size,
+                "total_pages": total_pages,
+                "status": status or "PENDING",
+                "has_prev": page > 1,
+                "has_next": page < total_pages
+            }
+        }
+    
+    # Collect all unique user_ids for bulk lookup
+    user_ids = set()
+    for doc in request_docs:
+        user_id = doc.get("user_id")
+        if user_id:
+            try:
+                user_ids.add(ObjectId(user_id))
+            except:
+                user_ids.add(user_id)
+    
+    # BULK LOOKUP: Fetch all users in ONE query
+    users_map = {}
+    if user_ids:
+        users_cursor = db.users.find({"_id": {"$in": list(user_ids)}})
+        async for user in users_cursor:
+            users_map[str(user["_id"])] = user
+    
+    # Build response with user info included
+    requests = []
+    for doc in request_docs:
+        request_dict = serialize_doc(doc)
+        
+        # Add user info from pre-fetched map (O(1) lookup)
+        user_id = doc.get("user_id")
+        user = users_map.get(str(user_id)) if user_id else None
+        
+        if user:
+            request_dict["user_name"] = f"{user.get('first_name', '')} {user.get('last_name', '')}".strip()
+            request_dict["user_email"] = user.get("email", "")
+        else:
+            request_dict["user_name"] = "Unknown User"
+            request_dict["user_email"] = ""
+        
+        requests.append(request_dict)
+    
+    return {
+        "ok": True,
+        "data": requests,
+        "pagination": {
+            "total": total_count,
+            "page": page,
+            "page_size": page_size,
+            "total_pages": total_pages,
+            "status": status or "PENDING",
+            "has_prev": page > 1,
+            "has_next": page < total_pages
+        }
+    }
 
 
 @app.post("/api/v1/admin/card-requests/{request_id}/fulfill")
