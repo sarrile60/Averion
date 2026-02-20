@@ -99,7 +99,7 @@ class TestDashboardPerformance:
         headers = {"Authorization": f"Bearer {customer_token}"}
         
         start = time.time()
-        response = requests.get(f"{BASE_URL}/api/v1/spending/monthly", headers=headers)
+        response = requests.get(f"{BASE_URL}/api/v1/insights/monthly-spending", headers=headers)
         elapsed = time.time() - start
         
         assert response.status_code == 200, f"Monthly spending failed: {response.text}"
@@ -119,7 +119,7 @@ class TestDashboardPerformance:
         """Verify monthly spending total is approximately correct"""
         headers = {"Authorization": f"Bearer {customer_token}"}
         
-        response = requests.get(f"{BASE_URL}/api/v1/spending/monthly", headers=headers)
+        response = requests.get(f"{BASE_URL}/api/v1/insights/monthly-spending", headers=headers)
         assert response.status_code == 200
         data = response.json()
         
@@ -358,7 +358,7 @@ class TestPreviousFixes:
         headers = {"Authorization": f"Bearer {admin_token}"}
         
         start = time.time()
-        response = requests.get(f"{BASE_URL}/api/v1/admin/transfers/queue", headers=headers)
+        response = requests.get(f"{BASE_URL}/api/v1/admin/transfers", headers=headers)
         elapsed = time.time() - start
         
         assert response.status_code == 200, f"Get transfers queue failed: {response.text}"
@@ -378,7 +378,7 @@ class TestPreviousFixes:
         headers = {"Authorization": f"Bearer {admin_token}"}
         
         start = time.time()
-        response = requests.get(f"{BASE_URL}/api/v1/admin/card-requests/pending", headers=headers)
+        response = requests.get(f"{BASE_URL}/api/v1/admin/card-requests", headers=headers)
         elapsed = time.time() - start
         
         assert response.status_code == 200, f"Get card requests failed: {response.text}"
