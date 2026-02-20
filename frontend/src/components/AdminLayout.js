@@ -1,9 +1,216 @@
 // Professional Admin Layout with Sidebar
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+// Session-based notification badge manager
+// Baselines are stored in sessionStorage and reset on login/logout
+const BADGE_BASELINE_KEY = 'admin_badge_baselines';
+const BADGE_SESSION_KEY = 'admin_badge_session_id';
+
+function useBadgeManager(apiUrl, token) {
+  const [counts, setCounts] = useState({
+    kyc_pending: 0,
+    transfers_pending: 0,
+    card_requests_pending: 0,
+    tickets_unread: 0,
+    users_pending: 0
+  });
+  const [baselines, setBaselines] = useState(null);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const fetchIntervalRef = useRef(null);
+
+  // Generate a unique session ID on login
+  const getSessionId = useCallback(() => {
+    let sessionId = sessionStorage.getItem(BADGE_SESSION_KEY);
+    if (!sessionId) {
+      sessionId = `admin_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      sessionStorage.setItem(BADGE_SESSION_KEY, sessionId);
+    }
+    return sessionId;
+  }, []);
+
+  // Load baselines from sessionStorage
+  const loadBaselines = useCallback(() => {
+    const stored = sessionStorage.getItem(BADGE_BASELINE_KEY);
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch (e) {
+        return null;
+      }
+    }
+    return null;
+  }, []);
+
+  // Save baselines to sessionStorage
+  const saveBaselines = useCallback((newBaselines) => {
+    sessionStorage.setItem(BADGE_BASELINE_KEY, JSON.stringify(newBaselines));
+    setBaselines(newBaselines);
+  }, []);
+
+  // Fetch current counts from API
+  const fetchCounts = useCallback(async () => {
+    if (!apiUrl || !token) return null;
+    try {
+      const response = await fetch(`${apiUrl}/api/v1/admin/notification-counts`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch (error) {
+      console.error('[BadgeManager] Error fetching counts:', error);
+    }
+    return null;
+  }, [apiUrl, token]);
+
+  // Initialize baselines on first load (session start)
+  const initializeBaselines = useCallback(async () => {
+    const sessionId = getSessionId();
+    const storedBaselines = loadBaselines();
+    
+    // Check if we already have baselines for this session
+    if (storedBaselines && storedBaselines._sessionId === sessionId) {
+      setBaselines(storedBaselines);
+      setIsInitialized(true);
+      return;
+    }
+    
+    // New session - fetch current counts and use as baselines
+    const currentCounts = await fetchCounts();
+    if (currentCounts) {
+      const newBaselines = {
+        ...currentCounts,
+        _sessionId: sessionId,
+        _timestamp: Date.now()
+      };
+      saveBaselines(newBaselines);
+      setCounts(currentCounts);
+      setIsInitialized(true);
+    }
+  }, [getSessionId, loadBaselines, saveBaselines, fetchCounts]);
+
+  // Poll for new counts periodically
+  const startPolling = useCallback(() => {
+    if (fetchIntervalRef.current) {
+      clearInterval(fetchIntervalRef.current);
+    }
+    
+    fetchIntervalRef.current = setInterval(async () => {
+      const newCounts = await fetchCounts();
+      if (newCounts) {
+        setCounts(newCounts);
+      }
+    }, 30000); // Poll every 30 seconds
+  }, [fetchCounts]);
+
+  // Mark a section as "seen" - update baseline to current count
+  const markSectionSeen = useCallback((sectionKey) => {
+    if (!baselines || !counts) return;
+    
+    const countKey = {
+      'kyc': 'kyc_pending',
+      'ledger': 'transfers_pending',
+      'card_requests': 'card_requests_pending',
+      'support': 'tickets_unread',
+      'users': 'users_pending'
+    }[sectionKey];
+    
+    if (countKey && counts[countKey] !== undefined) {
+      const newBaselines = {
+        ...baselines,
+        [countKey]: counts[countKey]
+      };
+      saveBaselines(newBaselines);
+    }
+  }, [baselines, counts, saveBaselines]);
+
+  // Calculate badge number for a section
+  const getBadgeCount = useCallback((sectionKey) => {
+    if (!baselines || !isInitialized) return 0;
+    
+    const countKey = {
+      'kyc': 'kyc_pending',
+      'ledger': 'transfers_pending',
+      'card_requests': 'card_requests_pending',
+      'support': 'tickets_unread',
+      'users': 'users_pending'
+    }[sectionKey];
+    
+    if (!countKey) return 0;
+    
+    const current = counts[countKey] || 0;
+    const baseline = baselines[countKey] || 0;
+    
+    return Math.max(0, current - baseline);
+  }, [baselines, counts, isInitialized]);
+
+  // Initialize on mount
+  useEffect(() => {
+    if (apiUrl && token) {
+      initializeBaselines();
+    }
+  }, [apiUrl, token, initializeBaselines]);
+
+  // Start polling after initialization
+  useEffect(() => {
+    if (isInitialized) {
+      startPolling();
+    }
+    return () => {
+      if (fetchIntervalRef.current) {
+        clearInterval(fetchIntervalRef.current);
+      }
+    };
+  }, [isInitialized, startPolling]);
+
+  // Refresh counts immediately
+  const refresh = useCallback(async () => {
+    const newCounts = await fetchCounts();
+    if (newCounts) {
+      setCounts(newCounts);
+    }
+  }, [fetchCounts]);
+
+  return {
+    getBadgeCount,
+    markSectionSeen,
+    refresh,
+    isInitialized
+  };
+}
+
+// Badge component
+function NotificationBadge({ count }) {
+  if (count <= 0) return null;
+  
+  const displayCount = count > 99 ? '99+' : count;
+  
+  return (
+    <span 
+      className="absolute right-2 top-1/2 -translate-y-1/2 min-w-[20px] h-5 px-1.5 flex items-center justify-center bg-red-500 text-white text-xs font-semibold rounded-full"
+      data-testid="notification-badge"
+    >
+      {displayCount}
+    </span>
+  );
+}
 
 export function AdminSidebar({ activeSection, onSectionChange, user, logout }) {
   const navigate = useNavigate();
+  const apiUrl = process.env.REACT_APP_BACKEND_URL;
+  const token = localStorage.getItem('token');
+  
+  const { getBadgeCount, markSectionSeen, isInitialized } = useBadgeManager(apiUrl, token);
+  
+  // Handle section change - mark as seen and then change section
+  const handleSectionChange = useCallback((sectionId) => {
+    markSectionSeen(sectionId);
+    onSectionChange(sectionId);
+  }, [markSectionSeen, onSectionChange]);
+  
+  // Sections that should show badges
+  const badgeSections = ['users', 'kyc', 'card_requests', 'ledger', 'support'];
   
   const menuItems = [
     { id: 'overview', label: 'Overview', icon: 'home' },
