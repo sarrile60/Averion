@@ -1219,6 +1219,40 @@ Unique index: (admin_id, section_key)
 
 **Verification:** 100% test pass rate (iteration_102.json) - 10/10 backend tests, all frontend UI verified
 
+### Admin URL Routing Persistence (Feb 20, 2025)
+
+**Problem:** Refreshing any admin page (F5) redirected back to Overview instead of staying on the current section/tab.
+
+**Solution:** Implemented URL-based state persistence for admin navigation:
+- Section, tab, page, search, and pageSize now stored in URL query params
+- Refresh preserves all state
+- Direct URL access (deep linking) works after login redirect
+- Browser back/forward supported for section changes
+
+**URL Format Examples:**
+- `/admin` - Default overview
+- `/admin?section=ledger&tab=REJECTED` - Transfers Queue, REJECTED tab
+- `/admin?section=card_requests&tab=FULFILLED&page=2` - Card Requests, page 2
+- `/admin?section=users&search=test` - Users with search filter
+
+**Implementation:**
+- `AdminDashboard`: Reads/writes `section` param, syncs with sidebar
+- `AdminTransfersQueue`: Reads/writes `tab`, `page`, `pageSize`, `search` params
+- `AdminCardRequestsQueue`: Reads/writes `tab`, `page`, `pageSize`, `search`, `scope` params
+- `ProtectedRoute`: Saves `returnUrl` when redirecting to login
+- `LoginPage`: Reads `returnUrl` and redirects back after login
+
+**Files Changed:**
+- `/app/frontend/src/App.js` - AdminDashboard, ProtectedRoute, LoginPage with URL param handling
+- `/app/frontend/src/components/AdminTransfersQueue.js` - URL state sync
+- `/app/frontend/src/components/AdminCardRequestsQueue.js` - URL state sync
+
+**Verification:** 100% test pass rate (iteration_103.json) - All URL routing features verified:
+- Refresh persists state (section, tab, page, search)
+- Direct URL access works with login redirect
+- Deep link after logout/login works
+- URL updates on navigation
+
 ### Admin Pagination Layout Refinement (Feb 20, 2025)
 
 **Change:** Moved pagination row ABOVE the tabs row for both Admin Transfers Queue and Admin Card Requests pages.
