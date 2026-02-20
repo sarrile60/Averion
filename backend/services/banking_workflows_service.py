@@ -356,52 +356,121 @@ class BankingWorkflowsService:
             return None
         return Transfer(**serialize_doc(doc))
     
-    async def get_admin_transfers(self, status: Optional[str] = None) -> List[dict]:
-        """Admin: Get transfers filtered by status with sender information."""
+    async def get_admin_transfers(self, status: Optional[str] = None, page: int = 1, limit: int = 50) -> dict:
+        """Admin: Get transfers filtered by status with sender information.
+        
+        PERFORMANCE OPTIMIZED: Uses bulk lookups instead of N+1 queries.
+        Added pagination support for better performance with large datasets.
+        
+        Args:
+            status: Optional status filter (e.g., 'SUBMITTED', 'COMPLETED', 'REJECTED')
+            page: Page number (1-indexed)
+            limit: Items per page (default 50, max 100)
+            
+        Returns:
+            Dictionary with 'transfers' list and 'pagination' info
+        """
         from bson import ObjectId
+        
+        # Validate and cap limit
+        if limit > 100:
+            limit = 100
+        if limit < 1:
+            limit = 50
         
         query = {}
         if status:
             query["status"] = status
         
-        cursor = self.db.transfers.find(query).sort("created_at", -1).limit(100)
+        # Get total count for pagination
+        total_count = await self.db.transfers.count_documents(query)
+        
+        # Calculate pagination
+        skip = (page - 1) * limit
+        total_pages = (total_count + limit - 1) // limit if total_count > 0 else 1
+        
+        # Fetch transfers with pagination
+        cursor = self.db.transfers.find(query).sort("created_at", -1).skip(skip).limit(limit)
+        transfer_docs = await cursor.to_list(length=limit)
+        
+        if not transfer_docs:
+            return {
+                "transfers": [],
+                "pagination": {
+                    "page": page,
+                    "limit": limit,
+                    "total": total_count,
+                    "total_pages": total_pages,
+                    "has_next": False,
+                    "has_prev": page > 1
+                }
+            }
+        
+        # Collect all unique user_ids and account_ids for bulk lookup
+        user_ids = set()
+        account_ids = set()
+        
+        for doc in transfer_docs:
+            user_id = doc.get("user_id")
+            if user_id:
+                try:
+                    user_ids.add(ObjectId(user_id))
+                except:
+                    user_ids.add(user_id)
+            
+            from_account_id = doc.get("from_account_id")
+            if from_account_id:
+                account_ids.add(from_account_id)
+        
+        # BULK LOOKUP: Fetch all users in ONE query
+        users_map = {}
+        if user_ids:
+            users_cursor = self.db.users.find({"_id": {"$in": list(user_ids)}})
+            async for user in users_cursor:
+                users_map[str(user["_id"])] = user
+        
+        # BULK LOOKUP: Fetch all accounts in ONE query
+        accounts_map = {}
+        if account_ids:
+            accounts_cursor = self.db.bank_accounts.find({"_id": {"$in": list(account_ids)}})
+            async for account in accounts_cursor:
+                accounts_map[str(account["_id"])] = account
+        
+        # Build the response using the pre-fetched data (no more N+1 queries!)
         transfers = []
-        async for doc in cursor:
+        for doc in transfer_docs:
             transfer = Transfer(**serialize_doc(doc))
             transfer_dict = transfer.model_dump()
             
-            # Get sender (user) information
+            # Get sender info from pre-fetched map (O(1) lookup)
             user_id = doc.get("user_id")
-            if user_id:
-                # Try to find user - user_id is stored as string, but users collection uses ObjectId
-                try:
-                    user = await self.db.users.find_one({"_id": ObjectId(user_id)})
-                except:
-                    user = await self.db.users.find_one({"_id": user_id})
-                
-                if user:
-                    transfer_dict["sender_name"] = f"{user.get('first_name', '')} {user.get('last_name', '')}".strip()
-                    transfer_dict["sender_email"] = user.get("email", "")
-                else:
-                    transfer_dict["sender_name"] = "Unknown User"
-                    transfer_dict["sender_email"] = ""
+            user = users_map.get(str(user_id)) if user_id else None
+            
+            if user:
+                transfer_dict["sender_name"] = f"{user.get('first_name', '')} {user.get('last_name', '')}".strip()
+                transfer_dict["sender_email"] = user.get("email", "")
             else:
-                transfer_dict["sender_name"] = "Unknown"
+                transfer_dict["sender_name"] = "Unknown User" if user_id else "Unknown"
                 transfer_dict["sender_email"] = ""
             
-            # Get sender account information (IBAN)
+            # Get sender IBAN from pre-fetched map (O(1) lookup)
             from_account_id = doc.get("from_account_id")
-            if from_account_id:
-                account = await self.db.bank_accounts.find_one({"_id": from_account_id})
-                if account:
-                    transfer_dict["sender_iban"] = account.get("iban", "N/A")
-                else:
-                    transfer_dict["sender_iban"] = "N/A"
-            else:
-                transfer_dict["sender_iban"] = "N/A"
+            account = accounts_map.get(str(from_account_id)) if from_account_id else None
+            transfer_dict["sender_iban"] = account.get("iban", "N/A") if account else "N/A"
             
             transfers.append(transfer_dict)
-        return transfers
+        
+        return {
+            "transfers": transfers,
+            "pagination": {
+                "page": page,
+                "limit": limit,
+                "total": total_count,
+                "total_pages": total_pages,
+                "has_next": page < total_pages,
+                "has_prev": page > 1
+            }
+        }
     
     async def approve_transfer(
         self,
