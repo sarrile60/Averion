@@ -167,6 +167,7 @@ async def create_indexes():
         ("transfers", "status", {}),
         ("transfers", "created_at", {}),
         ("transfers", "user_id", {}),
+        ("transfers", "is_deleted", {}),  # SOFT DELETE: index for filtering deleted transfers
         
         # Card Requests (PERFORMANCE: for admin panel queries)
         ("card_requests", "status", {}),
