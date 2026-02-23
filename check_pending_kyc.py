@@ -1,6 +1,6 @@
 import requests
 
-BASE_URL = "https://admin-panel-fix-99.preview.emergentagent.com/api/v1"
+BASE_URL = "https://admin-user-phone.preview.emergentagent.com/api/v1"
 ADMIN_EMAIL = "admin@ecommbx.io"
 ADMIN_PASSWORD = "Admin@123456"
 

@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 
 class SimpleNotificationTester:
-    def __init__(self, base_url="https://admin-panel-fix-99.preview.emergentagent.com"):
+    def __init__(self, base_url="https://admin-user-phone.preview.emergentagent.com"):
         self.base_url = base_url
         self.admin_token = None
         self.tests_run = 0
