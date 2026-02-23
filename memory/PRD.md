@@ -1564,6 +1564,7 @@ const SECTION_LABELS = {
 - ~~Admin sidebar navigation slow (2-3s per section)~~ **FIXED Feb 23, 2025**
 - ~~Users section stuck on "Loading users..." (regression)~~ **FIXED Feb 23, 2025**
 - ~~Header title glitch when switching sections~~ **FIXED Feb 23, 2025**
+- ~~Audit Logs timestamps 1 hour behind (timezone issue)~~ **FIXED Feb 23, 2025**
 - Domain SSL issue: `ecommbx.group` SSL certificate not provisioning
 
 ### P1 - High Priority
