@@ -35,7 +35,10 @@ export function AdminTransfersQueue() {
   const [activeTab, setActiveTabInternal] = useState(getInitialTab);
   const [transfers, setTransfers] = useState([]);
   const [selectedTransfer, setSelectedTransfer] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // Start with loading false to prevent skeleton flash on initial mount
+  // The skeleton will show only after a brief delay if data is still loading
+  const [loading, setLoading] = useState(false);
+  const [showSkeleton, setShowSkeleton] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
   const [editingRejectReason, setEditingRejectReason] = useState(false);
   const [editedRejectReason, setEditedRejectReason] = useState('');
