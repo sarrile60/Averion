@@ -548,6 +548,7 @@ class BankingWorkflowsService:
         """Search transfers across the ENTIRE database (all statuses) with pagination.
         
         Searches by: beneficiary name, sender name, sender email, IBAN, reference number.
+        SOFT DELETE: Excludes soft-deleted transfers.
         
         Args:
             search_term: The search string to match
@@ -574,6 +575,7 @@ class BankingWorkflowsService:
         matching_user_ids = [str(u["_id"]) for u in matching_users]
         
         # Build transfer query - search in transfer fields OR by user_id
+        # SOFT DELETE: Always exclude soft-deleted transfers
         transfer_conditions = [
             {"beneficiary_name": {"$regex": search_regex}},
             {"beneficiary_iban": {"$regex": search_regex}},
@@ -584,7 +586,13 @@ class BankingWorkflowsService:
         if matching_user_ids:
             transfer_conditions.append({"user_id": {"$in": matching_user_ids}})
         
-        transfer_query = {"$or": transfer_conditions}
+        # Combine search conditions with soft-delete exclusion
+        transfer_query = {
+            "$and": [
+                {"$or": transfer_conditions},
+                {"$or": [{"is_deleted": {"$exists": False}}, {"is_deleted": False}]}
+            ]
+        }
         
         # Get total count for pagination
         total_count = await self.db.transfers.count_documents(transfer_query)
