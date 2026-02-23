@@ -2220,8 +2220,9 @@ async def get_user_auth_history(
             "source": doc.get("metadata", {}).get("source", "web"),
             "actor_email": doc.get("performed_by_email", ""),
             "actor_role": doc.get("performed_by_role", ""),
-            "created_at": doc["created_at"].isoformat(),
+            "created_at": format_timestamp_utc(doc["created_at"]),
             "metadata": doc.get("metadata", {})
+        })
         })
     
     return {
