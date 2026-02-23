@@ -90,14 +90,18 @@ export function AdminTransfersQueue() {
     updateUrlParams({ pageSize: size, page: null });
   }, [updateUrlParams]);
 
-  // Debounce search input
+  // Debounce search input - only update URL when search actually changes
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDebouncedSearch(searchQuery);
-      if (searchQuery) {
-        updateUrlParams({ search: searchQuery, page: null });
-      } else {
-        updateUrlParams({ search: null });
+      // Only update if search value actually changed
+      if (searchQuery !== prevSearchRef.current) {
+        setDebouncedSearch(searchQuery);
+        prevSearchRef.current = searchQuery;
+        if (searchQuery) {
+          updateUrlParams({ search: searchQuery, page: null });
+        } else {
+          updateUrlParams({ search: null });
+        }
       }
     }, 300);
     return () => clearTimeout(timer);
