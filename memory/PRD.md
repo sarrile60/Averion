@@ -1980,3 +1980,72 @@ import { AdminUsersTable, StatusBadge, KycBadge, CopyPhoneButton, CopyEmailButto
 
 **Production Monitoring:**
 - See /app/memory/MONITORING_PLAN.md
+
+### Auth Router Extraction Plan - PLANNING ONLY (Dec 2025)
+
+**Task:** Created comprehensive planning document for extracting auth routes from `server.py`
+
+**Deliverable:** `/app/AUTH_ROUTER_PLAN.md` - Complete extraction plan with:
+
+1. **Scope & Constraints**
+   - Planning-only mandate (NO CODE CHANGES)
+   - P1 Transfer Restore explicitly deferred
+   - 12 auth endpoints identified (lines 300-976 in server.py)
+
+2. **Auth Endpoint Inventory**
+   - signup, login, logout, verify-email, resend-verification
+   - me, mfa/setup, mfa/enable
+   - change-password, verify-password, forgot-password, reset-password
+
+3. **Dependency Map**
+   - DB collections: users, email_verifications, password_resets, sessions
+   - Services: AuthService, EmailService
+   - Core: hash_password, verify_password (from core.auth)
+   - Config: SECRET_KEY, JWT_ALGORITHM, DEBUG, REFRESH_TOKEN_EXPIRE_DAYS
+
+4. **Risk Register (14 risks identified)**
+   - R1: Circular import (auth.py ↔ dependencies.py) - HIGH
+   - R2: get_current_user duplication - HIGH
+   - R3: Cookie settings break - CRITICAL
+   - R4-R11: Medium/Low risks documented
+
+5. **Safe Extraction Sequence (7 Phases)**
+   - Phase 0: Move inline Pydantic schemas
+   - Phase 1: Create empty router
+   - Phase 2: Extract /auth/me (lowest risk)
+   - Phase 3-5: Extract remaining endpoints by risk level
+   - Phase 6: Extract /auth/login LAST (highest risk)
+   - Phase 7: Cleanup commented code
+
+6. **Regression Test Checklist**
+   - 50+ test cases documented
+   - Login flow: 10 test cases
+   - Session/token: 5 test cases
+   - MFA: 3 test cases
+   - Password: 10 test cases
+   - Signup: 5 test cases
+   - Email verification: 4 test cases
+
+7. **Production Monitoring Additions**
+   - Login failure rate thresholds
+   - Auth endpoint latency (p95)
+   - Token validation failures
+   - Rollback trigger conditions
+
+8. **Commit-Based Rollback Plan**
+   - Granular revert steps per phase
+   - Emergency full rollback procedure
+
+**Recommendation: GO**
+- Auth helpers already in dependencies.py (reduces risk)
+- Clear extraction pattern from previous router work
+- Strong rollback capability with commit-per-endpoint
+
+**Next Steps (Implementation Session):**
+1. Move 5 inline Pydantic schemas to schemas/users.py
+2. Create empty routers/auth.py
+3. Extract /auth/me as proof-of-concept
+4. Follow phased extraction plan
+5. /auth/login extracted LAST
+
+**Test Account:** ashleyalt005@gmail.com / 123456789
