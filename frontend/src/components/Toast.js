@@ -1,5 +1,5 @@
 // Toast Notification System
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
 
 const ToastContext = createContext(null);
 
@@ -29,12 +29,13 @@ export function ToastProvider({ children }) {
     setToasts(prev => prev.filter(t => t.id !== id));
   }, []);
 
-  const toast = {
+  // Memoize the toast object to prevent unnecessary re-renders in consumers
+  const toast = useMemo(() => ({
     success: (message) => addToast(message, 'success'),
     error: (message) => addToast(message, 'error'),
     info: (message) => addToast(message, 'info'),
     warning: (message) => addToast(message, 'warning')
-  };
+  }), [addToast]);
 
   return (
     <ToastContext.Provider value={toast}>
