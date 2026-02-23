@@ -2921,7 +2921,9 @@ function AdminDashboard() {
               </div>
             </div>
           )}
-          {renderContent()}
+          <div className="admin-section-content">
+            {renderContent()}
+          </div>
         </div>
       </div>
 
