@@ -784,11 +784,6 @@ async def change_password(
     return {"success": True, "message": "Password changed successfully. Please login again."}
 
 
-# Transfer Authorization - Verify Password Schema
-class VerifyPasswordRequest(BaseModel):
-    password: str
-
-
 @app.post("/api/v1/auth/verify-password")
 async def verify_user_password(
     data: VerifyPasswordRequest,
