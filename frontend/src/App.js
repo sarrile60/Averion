@@ -1921,10 +1921,13 @@ function AdminDashboard() {
     }
   }, [fetchUsers, currentPage, usersPerPage]);
 
+  // Fetch users ONLY when the users section becomes active (not on every mount)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    fetchUsers(0, 1, usersPerPage, '');
-  }, []);
+    if (activeSection === 'users' && users.length === 0 && !loading) {
+      fetchUsers(0, 1, usersPerPage, '');
+    }
+  }, [activeSection]);
 
   useEffect(() => {
     applyFilters();
