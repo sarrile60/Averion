@@ -145,6 +145,17 @@ export function AdminCardRequestsQueue() {
     }
   }, [debouncedSearch, activeTab, searchScope]);
 
+  // Delayed skeleton - only show after 150ms to prevent flash on fast loads
+  useEffect(() => {
+    let timer;
+    if (loading) {
+      timer = setTimeout(() => setShowSkeleton(true), 150);
+    } else {
+      setShowSkeleton(false);
+    }
+    return () => clearTimeout(timer);
+  }, [loading]);
+
   const fetchRequests = useCallback(async () => {
     setLoading(true);
     try {
