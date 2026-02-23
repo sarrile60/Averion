@@ -336,7 +336,7 @@ async def review_kyc(
     user_id = kyc_app.get("user_id")
     
     # Update user KYC status if approved
-    if data.status == ApplicationStatus.APPROVED:
+    if data.status == KYCStatus.APPROVED:
         if user_id:
             user_query = {"_id": user_id}
             try:
