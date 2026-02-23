@@ -2049,3 +2049,68 @@ import { AdminUsersTable, StatusBadge, KycBadge, CopyPhoneButton, CopyEmailButto
 5. /auth/login extracted LAST
 
 **Test Account:** ashleyalt005@gmail.com / 123456789
+
+---
+
+## Auth Router Extraction - IMPLEMENTATION COMPLETE (Dec 2025)
+
+### Scope Completed
+All 12 auth endpoints successfully extracted from `server.py` to `routers/auth.py`:
+1. `/api/v1/auth/login` - POST
+2. `/api/v1/auth/logout` - POST  
+3. `/api/v1/auth/signup` - POST
+4. `/api/v1/auth/me` - GET
+5. `/api/v1/auth/verify-email` - POST
+6. `/api/v1/auth/resend-verification` - POST
+7. `/api/v1/auth/mfa/setup` - POST
+8. `/api/v1/auth/mfa/enable` - POST
+9. `/api/v1/auth/change-password` - POST
+10. `/api/v1/auth/verify-password` - POST
+11. `/api/v1/auth/forgot-password` - POST
+12. `/api/v1/auth/reset-password` - POST
+
+**P1 Transfer Restore: SKIPPED (deferred as requested)**
+
+### Changes Made
+
+**Files Created:**
+- `/app/backend/routers/auth.py` (710 lines) - All auth endpoints
+
+**Files Modified:**
+- `/app/backend/server.py` - Reduced from 3227 to 2615 lines (~20% reduction)
+- `/app/backend/schemas/users.py` - Added 5 schemas: SignupRequest, PasswordChangeRequest, VerifyPasswordRequest, ForgotPasswordRequest, ResetPasswordRequest
+- `/app/backend/routers/__init__.py` - No changes (auth router registered directly in server.py)
+
+### Behavior Parity Results
+| Endpoint | Status | Notes |
+|----------|--------|-------|
+| POST /login | ✅ PASS | 200/401/403 status codes preserved |
+| POST /logout | ✅ PASS | Cookie cleared, audit logged |
+| POST /signup | ✅ PASS | 201/400/422 validation preserved |
+| GET /me | ✅ PASS* | *PRE-EXISTING BUG: Returns 404 |
+| POST /verify-email | ✅ PASS | 200/400 preserved |
+| POST /resend-verification | ✅ PASS | 200/400 preserved |
+| POST /mfa/setup | ✅ PASS* | *PRE-EXISTING BUG: Returns 404 |
+| POST /mfa/enable | ✅ PASS | 200/400 preserved |
+| POST /change-password | ✅ PASS | 200/400 preserved |
+| POST /verify-password | ✅ PASS | 200/401 preserved |
+| POST /forgot-password | ✅ PASS | Always 200 (no enumeration) |
+| POST /reset-password | ✅ PASS | 200/400 preserved |
+
+### Regression Test Results
+- **Backend:** 100% (17/17 tests passed)
+- **Frontend:** 100% (Login, Dashboard, Logout verified)
+
+### Pre-Existing Bugs Documented (NOT regressions)
+1. `/auth/me` returns 404 "User not found" - ObjectId handling in auth_service.get_user()
+2. `/auth/mfa/setup` returns 404 "User not found" - Same root cause
+
+### Rollback Capability
+Extraction done in phased commits. Each endpoint can be individually reverted if needed:
+- Phase 1: Schema move
+- Phase 2: Router scaffolding  
+- Phase 3-6: Individual endpoint migrations
+- Phase 7: Critical paths (logout, signup, login)
+
+### Test Report
+`/app/test_reports/iteration_124.json` - Full test results
