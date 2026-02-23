@@ -1567,6 +1567,36 @@ const SECTION_LABELS = {
 - ~~Audit Logs timestamps 1 hour behind (timezone issue)~~ **FIXED Feb 23, 2025**
 - Domain SSL issue: `ecommbx.group` SSL certificate not provisioning
 
+### User Details Status + KYC Colored Badges (Feb 23, 2025)
+**Feature:** Professional colored badges for Status and KYC fields in User Details view.
+
+**Problem:** Status and KYC values were plain black text, making them hard to scan quickly.
+
+**Solution:** Created reusable `StatusBadge` and `KycBadge` components matching the existing Email Verified badge style.
+
+**Badge Styling (App.js:47-199):**
+
+| Component | Status | Color | Icon |
+|-----------|--------|-------|------|
+| StatusBadge | ACTIVE | Green (bg-green-100) | ✓ Checkmark |
+| StatusBadge | PENDING | Amber (bg-amber-100) | ⏱ Clock |
+| StatusBadge | DISABLED/BLOCKED | Red (bg-red-100) | ⊘ Blocked |
+| KycBadge | APPROVED | Green (bg-green-100) | ✓ Checkmark |
+| KycBadge | PENDING/SUBMITTED | Blue (bg-blue-100) | ⏱ Clock |
+| KycBadge | REJECTED | Red (bg-red-100) | ✗ X |
+| KycBadge | Not submitted | Slate (bg-slate-100) | ℹ Info |
+
+**Design Consistency:**
+- Matches existing Email Verified badge pattern
+- Uses `inline-flex items-center px-2 py-0.5 rounded text-xs font-medium`
+- Includes relevant SVG icons for quick visual recognition
+- Neutral "Not submitted" styling (not alarming)
+
+**Files Changed:**
+- `/app/frontend/src/App.js` - Lines 47-199 (new components), 2596-2601, 2617-2622 (usage)
+
+**Testing:** All passed (iteration_116.json) - 100% frontend tests passed
+
 ### Phone Number Mandatory for Registration (Feb 23, 2025)
 **Feature:** Made phone number a required field for new user registrations.
 
