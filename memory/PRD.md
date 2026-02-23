@@ -1856,3 +1856,55 @@ import { AdminUsersTable, StatusBadge, KycBadge, CopyPhoneButton, CopyEmailButto
 
 ## Test Files
 - `/app/test_reports/` - Test reports directory
+
+### AdminUserDetails Component Extraction Refactor (Feb 23, 2025)
+**Refactor:** Extracted the User Details panel (~572 lines) from the monolithic `App.js` into a separate `AdminUserDetails.js` component.
+
+**Problem:** The `AdminDashboard` function in `App.js` had grown to over 2000 lines, making it difficult to maintain. The User Details panel (displayed when clicking a user in the admin Users section) was a ~572-line inline JSX block.
+
+**Solution:** Created a behavior-preserving refactor:
+1. Created new component `/app/frontend/src/components/AdminUserDetails.js`
+2. Moved all User Details UI rendering logic to the new component
+3. Passed all required state and handlers as props from parent `AdminDashboard`
+4. Imported and used the component in `App.js` replacing the inline code
+
+**Props passed to AdminUserDetails (25 total):**
+- User data: `selectedUser`, `setSelectedUser`, `user`
+- API/Toast: `api`, `toast`
+- Refresh functions: `fetchUsers`, `viewUserDetails`
+- Tax hold: `userTaxHold`, `taxHoldLoading`, `setShowTaxHoldModal`, `handleRemoveTaxHold`
+- Password: `showPassword`, `setShowPassword`, `setShowPasswordModal`, `setNewPassword`, `setConfirmPassword`, `setPasswordChangeError`
+- Auth history: `authHistory`, `authHistoryLoading`, `showAuthHistory`, `setShowAuthHistory`, `fetchAuthHistory`
+- IBAN: `handleOpenEditIban`
+- Delete: `handleDeleteUser`, `deleteUserLoading`
+- Notes: `userNotes`, `setUserNotes`, `editingNotes`, `setEditingNotes`, `savingNotes`, `handleSaveNotes`
+- Utilities: `EnhancedLedgerTools`, `formatCurrency`
+
+**Files Changed:**
+- `/app/frontend/src/App.js` - Line 33: Added import, Lines 2192-2226: Replaced inline JSX with component
+- `/app/frontend/src/components/AdminUserDetails.js` - NEW: 655 lines extracted component
+
+**Functionality Preserved (100%):**
+- ✅ Back to Users button
+- ✅ User Details card (Name, Email, Phone with copy buttons, Status/KYC badges)
+- ✅ Email Verified status display
+- ✅ Password display with show/hide toggle and Change button
+- ✅ View Login Activity button and auth history card
+- ✅ Admin Notes section with Edit/Save/Cancel
+- ✅ Tax Hold Management (Place/Remove Tax Hold)
+- ✅ Accounts section with Edit IBAN buttons
+- ✅ Enable/Disable user buttons
+- ✅ Delete user button (disabled for admins)
+- ✅ Clear Notifications button
+- ✅ Demote Admin button (for admin users)
+- ✅ Verify Email button (for unverified users)
+
+**Testing:** All 17/17 features verified passing (iteration_121.json):
+- Frontend: 100% success rate
+- No console errors
+- All data-testid attributes preserved
+- No functional changes - behavior-preserving refactor only
+
+**Next Steps for Stage 3 Refactor:**
+- Simplify `AdminDashboard` into a pure routing/orchestration component
+- Consider extracting other large sections (KYC, Settings, etc.) similarly
