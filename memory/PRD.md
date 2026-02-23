@@ -1567,6 +1567,41 @@ const SECTION_LABELS = {
 - ~~Audit Logs timestamps 1 hour behind (timezone issue)~~ **FIXED Feb 23, 2025**
 - Domain SSL issue: `ecommbx.group` SSL certificate not provisioning
 
+### Users Search by Phone Number (Feb 23, 2025)
+**Feature:** Enable admin Users search bar to search by phone number in addition to name/email.
+
+**Problem:** Admins could not quickly find users by phone number when clients call support.
+
+**Solution:** Added phone field to server-side MongoDB search query and frontend client-side filter.
+
+**Backend Changes (server.py:1728-1784):**
+1. Added `phone` field to `$or` query conditions with regex search
+2. Added digits-only normalization for flexible phone matching (when ≥4 digits)
+3. Used `re.escape()` for safe regex handling of special chars like `+`
+4. Supports: full number, partial digits, formatted/unformatted input
+
+**Frontend Changes (App.js:2032-2050, 3030):**
+1. Updated `applyFilters` to include phone matching with digit normalization
+2. Updated placeholder text: "Search by name, email, or phone..."
+
+**Search Examples:**
+- `+393276106073` → Exact phone match
+- `393276106073` → Digits-only match
+- `6073` → Partial match (last 4 digits)
+- `+39 327` → Partial match with formatting
+
+**Backward Compatibility:**
+- Users without phone (`null`) don't cause errors ✅
+- Existing name/email search unchanged ✅
+- Pagination unaffected when not searching ✅
+- Filters (Status/Role/Tax/Notes) work with phone search ✅
+
+**Files Changed:**
+- `/app/backend/server.py` - Lines 1728-1784
+- `/app/frontend/src/App.js` - Lines 2032-2050, 3030
+
+**Testing:** All passed (iteration_117.json) - 17/17 backend tests, 100% frontend
+
 ### User Details Status + KYC Colored Badges (Feb 23, 2025)
 **Feature:** Professional colored badges for Status and KYC fields in User Details view.
 
