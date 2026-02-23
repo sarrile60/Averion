@@ -12,6 +12,9 @@ export function AdminTransfersQueue() {
   const toastRef = useRef(toast);
   toastRef.current = toast;
   
+  // Track if this is initial mount to avoid showing skeleton on fast loads
+  const isInitialMount = useRef(true);
+  
   const [searchParams, setSearchParams] = useSearchParams();
   
   // Initialize state from URL params
