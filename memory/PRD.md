@@ -1944,3 +1944,39 @@ import { AdminUsersTable, StatusBadge, KycBadge, CopyPhoneButton, CopyEmailButto
 **Known Remaining Work:**
 - More routes can be extracted from server.py in future sessions
 - Consider extracting: auth, tickets, kyc, admin_users, etc.
+
+### Backend Router Extraction (Feb 23, 2025)
+
+**Completed Extractions:**
+1. **routers/tickets.py** (~500 lines)
+   - Customer routes: /api/v1/tickets/*
+   - Admin routes: /api/v1/admin/tickets/*
+   - 15 endpoints extracted
+
+2. **routers/kyc.py** (~400 lines)
+   - Customer routes: /api/v1/kyc/*
+   - Admin routes: /api/v1/admin/kyc/*
+   - 9 endpoints extracted
+
+3. **routers/admin_users.py** (~850 lines)
+   - Admin routes: /api/v1/admin/users/*
+   - 17 endpoints extracted
+
+4. **routers/health.py** (~150 lines)
+   - Debug routes: /api/health, /api/db-health, /api/debug/*
+
+5. **routers/audit.py** (~50 lines)
+   - Admin route: /api/v1/admin/audit-logs
+
+**Deferred:**
+- **auth router**: High risk, requires dedicated session
+- **P1 Transfer Restore**: Explicitly NOT implemented
+
+**Results:**
+- server.py reduced from 5672 → 3227 lines (43% reduction)
+- All API paths unchanged
+- 100% backward compatibility
+- Zero regressions (23/23 tests passed)
+
+**Production Monitoring:**
+- See /app/memory/MONITORING_PLAN.md
