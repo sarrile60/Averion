@@ -1448,6 +1448,38 @@ Removed the `&& !loading` condition - now correctly fetches when switching to Us
 - F5 refresh: PASS (URL and section preserved)
 - Tab functionality: PASS (Card Requests and Transfers Queue tabs work)
 
+### Header Title Glitch Fix (Feb 23, 2025)
+
+**Bug:** When switching between admin sidebar sections, the header briefly showed the raw section ID (e.g., "Ledger") instead of the proper label (e.g., "Transfers Queue").
+
+**Root Cause:** The header was using raw `activeSection` with simple capitalization:
+```javascript
+// BEFORE (wrong):
+{activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
+// This showed "Ledger" instead of "Transfers Queue"
+```
+
+**Fix Applied:**
+```javascript
+// AFTER (correct):
+// Added SECTION_LABELS mapping in AdminDashboard
+const SECTION_LABELS = {
+  'ledger': 'Transfers Queue',
+  'support': 'Support Tickets',
+  'card_requests': 'Card Requests',
+  // ... etc
+};
+
+// Header now uses:
+{getSectionLabel(activeSection)}
+```
+
+**Verification:** Testing agent verified (iteration_110.json) - 100% pass:
+- All 9 sections show correct header labels
+- No flicker during rapid switching
+- F5 refresh preserves correct header
+- Navigation remains fast (82ms avg)
+
 ### Admin Pagination Layout Refinement (Feb 20, 2025)
 
 **Change:** Moved pagination row ABOVE the tabs row for both Admin Transfers Queue and Admin Card Requests pages.
