@@ -1298,38 +1298,49 @@ Unique index: (admin_id, section_key)
 **Test Account:** ashleyalt005@gmail.com (ADMIN only)
 **Customer Flows:** NOT TESTED (no customer test account available)
 
-### Admin Transfers Queue Page Reload Bug Fix (Feb 23, 2025)
+### Admin Transfers Queue Page Reload Bug Fix - FINAL FIX (Feb 23, 2025)
 
-**Bug:** When an admin deleted a transfer from the Transfers Queue page, the page would randomly reload after ~3 seconds.
+**Bug:** When an admin deleted a transfer from the Transfers Queue page, the page would unexpectedly reload/refresh after ~2-4 seconds.
 
-**Root Cause:** The debounce useEffect in AdminTransfersQueue.js had `updateUrlParams` in its dependency array. Since `updateUrlParams` changes whenever `searchParams` changes, and the debounce effect was unconditionally calling `updateUrlParams({ search: null })` even when search was already empty, this created a cascade of URL updates that triggered page reloads.
+**ACTUAL Root Cause (found via deep debugging):** The `toast` object from `useToast()` was being recreated on every `ToastProvider` render because it wasn't memoized. This caused a cascade:
+1. Delete transfer → `toast.success('Transfer deleted')` → toast displays
+2. ToastProvider re-renders (adds toast to state) → `toast` object recreated (new reference)
+3. `fetchTransfers` useCallback has `toast` in its dependency array → `fetchTransfers` gets recreated
+4. useEffect watching `fetchTransfers` fires → calls `fetchTransfers()` again
+5. This caused perceived "reload" as the list refetched unexpectedly
 
-**Solution:** Added a `prevSearchRef` to track the previous search value and only update the URL when the search value actually changes:
-```javascript
-const prevSearchRef = useRef(getInitialSearch());
+**Why Previous Fix Didn't Work:** The earlier debounce/prevSearchRef fix only addressed URL sync issues, not the toast recreation cascade which was the actual trigger.
 
-useEffect(() => {
-  const timer = setTimeout(() => {
-    if (searchQuery !== prevSearchRef.current) {
-      setDebouncedSearch(searchQuery);
-      prevSearchRef.current = searchQuery;
-      // ... update URL
-    }
-  }, 300);
-  return () => clearTimeout(timer);
-}, [searchQuery, updateUrlParams]);
-```
+**Solution:**
+1. **AdminTransfersQueue.js & AdminCardRequestsQueue.js:** Added `toastRef` to keep a stable toast reference:
+   ```javascript
+   const toast = useToast();
+   const toastRef = useRef(toast);
+   toastRef.current = toast;
+   // In fetchTransfers: use toastRef.current.error() instead of toast.error()
+   // Removed toast from fetchTransfers dependency array
+   ```
+2. **Toast.js:** Memoized the toast object with `useMemo`:
+   ```javascript
+   const toast = useMemo(() => ({
+     success: (message) => addToast(message, 'success'),
+     error: (message) => addToast(message, 'error'),
+     // ...
+   }), [addToast]);
+   ```
 
 **Files Changed:**
-- `/app/frontend/src/components/AdminTransfersQueue.js` - Added useRef import, prevSearchRef tracking
-- `/app/frontend/src/components/AdminCardRequestsQueue.js` - Same fix applied for consistency
+- `/app/frontend/src/components/AdminTransfersQueue.js` - Added toastRef, removed toast from deps
+- `/app/frontend/src/components/AdminCardRequestsQueue.js` - Same pattern applied
+- `/app/frontend/src/components/Toast.js` - Memoized toast object with useMemo
 
-**Verification:** Testing agent verified (iteration_105.json):
-- Delete action flow: PASSED - No page reload
-- Debounce URL stability: PASSED - No spurious updates during 5+ second idle
-- Tab state preservation: PASSED - COMPLETED tab remained selected
-- URL param preservation: PASSED - section=ledger&tab=COMPLETED preserved
-- 15 second stability: PASSED - No random reloads
+**Verification:** Testing agent verified (iteration_106.json) - 100% pass rate:
+- Transfers Queue delete + 15s monitoring: PASSED (URL stable, tab preserved, no reload)
+- Second delete attempt: PASSED (no reload after 10s)
+- Card Requests delete + 10s: PASSED (delete succeeded, URL stable)
+- Search stability: PASSED (search=wowza preserved 10+ seconds)
+- Tab switching: PASSED (SUBMITTED/COMPLETED/REJECTED switching stable)
+- Close panel: PASSED (no reload when closing detail panel)
 
 ### Admin Pagination Layout Refinement (Feb 20, 2025)
 
