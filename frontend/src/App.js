@@ -1891,8 +1891,15 @@ function AdminUsersTable({ users, loading, onSelectUser, selectedUser, toast }) 
                 <div className="text-sm text-gray-600">{user.email}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-600" data-testid={`user-phone-${user.id}`}>
-                  {user.phone || <span className="text-gray-400 italic">—</span>}
+                <div className="text-sm text-gray-600 flex items-center gap-1" data-testid={`user-phone-${user.id}`}>
+                  {user.phone ? (
+                    <>
+                      <span>{user.phone}</span>
+                      <CopyPhoneButton phone={user.phone} toast={toast} size="sm" />
+                    </>
+                  ) : (
+                    <span className="text-gray-400 italic">—</span>
+                  )}
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
