@@ -3021,7 +3021,7 @@ function AdminDashboard() {
                 )}
               </div>
             ) : (
-              <AdminUsersTable users={filteredUsers} loading={loading} onSelectUser={viewUserDetails} selectedUser={selectedUser} />
+              <AdminUsersTable users={filteredUsers} loading={loading} onSelectUser={viewUserDetails} selectedUser={selectedUser} toast={toast} />
             )}
           </div>
         );
