@@ -3018,7 +3018,7 @@ function AdminDashboard() {
                   type="text" 
                   value={searchQuery} 
                   onChange={(e) => handleSearch(e.target.value)} 
-                  placeholder="Search all users..." 
+                  placeholder="Search by name, email, or phone..." 
                   className="input-field" 
                   data-testid="user-search" 
                 />
