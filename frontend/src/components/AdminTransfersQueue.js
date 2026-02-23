@@ -142,12 +142,12 @@ export function AdminTransfersQueue() {
         setPagination(response.data.pagination);
       }
     } catch (err) {
-      toast.error('Failed to load transfers');
+      toastRef.current.error('Failed to load transfers');
       setTransfers([]);
     } finally {
       setLoading(false);
     }
-  }, [activeTab, debouncedSearch, currentPage, pageSize, toast]);
+  }, [activeTab, debouncedSearch, currentPage, pageSize]);
 
   useEffect(() => {
     setSelectedTransfer(null);
