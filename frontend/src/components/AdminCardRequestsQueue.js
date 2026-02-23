@@ -6,6 +6,10 @@ import { useToast } from './Toast';
 
 export function AdminCardRequestsQueue() {
   const toast = useToast();
+  // Use ref to keep toast stable and prevent fetchRequests from being recreated
+  const toastRef = useRef(toast);
+  toastRef.current = toast;
+  
   const [searchParams, setSearchParams] = useSearchParams();
   
   // Initialize state from URL params
