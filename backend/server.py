@@ -601,27 +601,15 @@ async def logout(
 #     )
 
 
-@app.post("/api/v1/auth/mfa/setup", response_model=MFASetupResponse)
-async def setup_mfa(
-    current_user: dict = Depends(get_current_user),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """Setup MFA (get QR code)."""
-    auth_service = AuthService(db)
-    secret, qr_uri = await auth_service.setup_mfa(current_user["id"])
-    return MFASetupResponse(secret=secret, qr_code_uri=qr_uri)
+# NOTE: /api/v1/auth/mfa/setup moved to routers/auth.py
+# @app.post("/api/v1/auth/mfa/setup", response_model=MFASetupResponse)
+# async def setup_mfa(...):
+#     ... (see routers/auth.py)
 
-
-@app.post("/api/v1/auth/mfa/enable")
-async def enable_mfa(
-    data: MFAVerifyRequest,
-    current_user: dict = Depends(get_current_user),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """Enable MFA after verifying token."""
-    auth_service = AuthService(db)
-    await auth_service.enable_mfa(current_user["id"], data.token)
-    return {"success": True, "message": "MFA enabled successfully"}
+# NOTE: /api/v1/auth/mfa/enable moved to routers/auth.py
+# @app.post("/api/v1/auth/mfa/enable")
+# async def enable_mfa(...):
+#     ... (see routers/auth.py)
 
 
 @app.post("/api/v1/auth/change-password")
