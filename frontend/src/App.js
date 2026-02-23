@@ -137,7 +137,20 @@ function SignupPage() {
     e.preventDefault();
     setError('');
 
-    // Validate
+    // Validate phone number (required)
+    const trimmedPhone = formData.phone?.trim() || '';
+    if (!trimmedPhone) {
+      setError(t('phoneRequired') || 'Phone number is required');
+      return;
+    }
+    // Basic validation: at least 6 digits
+    const digitsOnly = trimmedPhone.replace(/\D/g, '');
+    if (digitsOnly.length < 6) {
+      setError(t('phoneInvalid') || 'Please enter a valid phone number');
+      return;
+    }
+
+    // Validate passwords
     if (formData.password !== formData.confirmPassword) {
       setError(t('passwordsDoNotMatch') || 'Passwords do not match');
       return;
@@ -155,7 +168,7 @@ function SignupPage() {
         password: formData.password,
         first_name: formData.first_name,
         last_name: formData.last_name,
-        phone: formData.phone || undefined,
+        phone: trimmedPhone,
         language: language
       });
       setRegisteredEmail(formData.email);
