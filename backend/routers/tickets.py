@@ -307,7 +307,7 @@ async def get_single_ticket_admin(
             if user:
                 ticket_dict["user_email"] = user.get("email", "")
                 ticket_dict["user_name"] = f"{user.get('first_name', '')} {user.get('last_name', '')}".strip()
-        except:
+        except Exception:
             pass
     
     return ticket_dict
