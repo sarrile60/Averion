@@ -1908,3 +1908,39 @@ import { AdminUsersTable, StatusBadge, KycBadge, CopyPhoneButton, CopyEmailButto
 **Next Steps for Stage 3 Refactor:**
 - Simplify `AdminDashboard` into a pure routing/orchestration component
 - Consider extracting other large sections (KYC, Settings, etc.) similarly
+
+### P0 Stage 3 + P2 Backend Refactor (Feb 23, 2025)
+
+**P0 Stage 3 - Frontend AdminDashboard Simplification:**
+- Extracted ALL Users section state (30+ variables) and handlers (20+ functions) from `AdminDashboard` into new `AdminUsersPage.js` component
+- `AdminDashboard` is now a pure routing/orchestration component (~150 lines vs ~600 before)
+- No business logic changes - 100% behavior-preserving refactor
+
+**Files Created:**
+- `/app/frontend/src/components/AdminUsersPage.js` (700 lines) - Complete Users section
+
+**Files Modified:**
+- `/app/frontend/src/App.js` - Simplified AdminDashboard, imports AdminUsersPage
+
+**P2 - Backend Router Extraction (Partial):**
+- Created `/app/backend/routers/` directory structure
+- Extracted health/debug endpoints to `/app/backend/routers/health.py`
+- Extracted audit logs endpoint to `/app/backend/routers/audit.py`
+- Created shared dependencies in `/app/backend/routers/dependencies.py`
+- Registered routers in `server.py`
+- Remaining routes kept in `server.py` for safety (future extraction)
+
+**P1 Transfer Restore: EXPLICITLY SKIPPED**
+- No changes to transfer soft-delete/restore logic
+- No new transfer restore functionality implemented
+
+**Testing Results:**
+- 100% success rate (27/27 tests)
+- All 9 admin sections verified working
+- All Users section features verified
+- Backend health/audit APIs verified
+- No regressions detected
+
+**Known Remaining Work:**
+- More routes can be extracted from server.py in future sessions
+- Consider extracting: auth, tickets, kyc, admin_users, etc.
