@@ -1373,6 +1373,7 @@ Unique index: (admin_id, section_key)
 - ~~Admin Dashboard showing all zeros~~ **FIXED Feb 17, 2025**
 - ~~Admin Panel performance bottleneck (7-23s load times)~~ **FIXED Feb 20, 2025**
 - ~~Random page reload after transfer delete~~ **FIXED Feb 23, 2025**
+- ~~Admin sidebar navigation slow (2-3s per section)~~ **FIXED Feb 23, 2025**
 - Domain SSL issue: `ecommbx.group` SSL certificate not provisioning
 
 ### P1 - High Priority
