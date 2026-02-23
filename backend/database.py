@@ -183,6 +183,8 @@ async def create_indexes():
         ("ledger_entries", [('account_id', 1), ('created_at', 1)], {}),
         # PERFORMANCE: Compound index for transfers admin queries
         ("transfers", [('status', 1), ('created_at', -1)], {}),
+        # SOFT DELETE: Compound index for soft-deleted transfers filtering
+        ("transfers", [('is_deleted', 1), ('status', 1), ('created_at', -1)], {}),
         # PERFORMANCE: Compound index for card requests admin queries
         ("card_requests", [('status', 1), ('created_at', -1)], {}),
         # PERFORMANCE: Compound index for ticket queries
