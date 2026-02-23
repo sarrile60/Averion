@@ -1734,49 +1734,7 @@ function AdminDashboard() {
       case 'overview':
         return <AnalyticsDashboard />;
       case 'users':
-        return (
-          <div className="space-y-6">
-            {selectedUser ? (
-              <AdminUserDetails
-                selectedUser={selectedUser}
-                setSelectedUser={setSelectedUser}
-                user={user}
-                api={api}
-                toast={toast}
-                fetchUsers={fetchUsers}
-                viewUserDetails={viewUserDetails}
-                userTaxHold={userTaxHold}
-                taxHoldLoading={taxHoldLoading}
-                setShowTaxHoldModal={setShowTaxHoldModal}
-                handleRemoveTaxHold={handleRemoveTaxHold}
-                showPassword={showPassword}
-                setShowPassword={setShowPassword}
-                setShowPasswordModal={setShowPasswordModal}
-                setNewPassword={setNewPassword}
-                setConfirmPassword={setConfirmPassword}
-                setPasswordChangeError={setPasswordChangeError}
-                authHistory={authHistory}
-                authHistoryLoading={authHistoryLoading}
-                showAuthHistory={showAuthHistory}
-                setShowAuthHistory={setShowAuthHistory}
-                fetchAuthHistory={fetchAuthHistory}
-                handleOpenEditIban={handleOpenEditIban}
-                handleDeleteUser={handleDeleteUser}
-                deleteUserLoading={deleteUserLoading}
-                userNotes={userNotes}
-                setUserNotes={setUserNotes}
-                editingNotes={editingNotes}
-                setEditingNotes={setEditingNotes}
-                savingNotes={savingNotes}
-                handleSaveNotes={handleSaveNotes}
-                EnhancedLedgerTools={EnhancedLedgerTools}
-                formatCurrency={formatCurrency}
-              />
-            ) : (
-              <AdminUsersTable users={filteredUsers} loading={loading} onSelectUser={viewUserDetails} selectedUser={selectedUser} toast={toast} />
-            )}
-          </div>
-        );
+        return <AdminUsersPage user={user} />;
       case 'accounts':
         return <AdminAccountsControl />;
       case 'card_requests':
