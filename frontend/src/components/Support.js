@@ -1072,7 +1072,11 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshT
       </div>
 
       {/* Messages */}
-      <div className="p-6 space-y-4 max-h-[400px] overflow-y-auto">
+      <div 
+        ref={messagesContainerRef}
+        className="p-6 space-y-4 max-h-[400px] overflow-y-auto"
+        data-testid="messages-container"
+      >
         {ticket.messages && ticket.messages.map((msg, idx) => (
           <div
             key={idx}
