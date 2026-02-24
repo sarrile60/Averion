@@ -29,6 +29,31 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 
 ## Recent Changes (February 2025)
 
+### P1/P2 Admin UX Enhancement Session (Feb 24, 2025)
+**Scope:** UI/UX polish only - no business logic changes.
+
+**New Reusable Components Created (AdminUIComponents.js):**
+- `CopyButton` - Copy-to-clipboard with "Copied!" feedback (2-second timeout)
+- `ActionButton` - Loading state + double-click protection
+- `EmptyState` - Consistent no-results UI
+- `FilterChip` - Active filter display
+- `ClearFiltersButton` - Clear all filters action
+
+**Accounts Section Updates:**
+- Copy buttons for emails and IBANs (98 total)
+- Clear search (X) button in search input
+- Active filter indicator showing search query
+- Improved action button spacing (Top Up, Withdraw, Edit IBAN)
+- Loading state on submit with double-click protection
+
+**Transfers Section Updates:**
+- Copy buttons in transfer details (Reference, Email, IBANs)
+- Clear search button with proper icon
+- Active filter indicator with "Clear filters" button
+- EmptyState for no-results scenarios
+
+**Testing:** 100% pass rate (iteration_133.json) - All components verified, no console errors
+
 ### P1 Polish Session: Cleanup + Row-Level Restore UX (Feb 24, 2025)
 **Part A: server.py Cleanup**
 - Removed 278 lines of commented-out code from extracted routers
