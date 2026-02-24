@@ -29,6 +29,58 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 
 ## Recent Changes (February 2025)
 
+### P0 Backend Refactor: Transfers Router Extraction (Feb 24, 2025)
+**Refactor:** Extracted transfers router from monolithic server.py into dedicated `routers/transfers.py` module.
+
+**Business Context:** This is a LIVE PRODUCTION banking platform with real clients. The refactor required extreme caution to preserve 100% behavior parity.
+
+**Endpoints Extracted (11 total):**
+
+| Endpoint | Method | Type |
+|----------|--------|------|
+| `/api/v1/transfers/p2p` | POST | User P2P transfer |
+| `/api/v1/transfers` | POST | User create transfer |
+| `/api/v1/transfers` | GET | User list transfers |
+| `/api/v1/transfers/{transfer_id}` | GET | User transfer detail |
+| `/api/v1/admin/transfers` | GET | Admin list transfers |
+| `/api/v1/admin/transfers/{transfer_id}/approve` | POST | Admin approve |
+| `/api/v1/admin/transfers/{transfer_id}/reject` | POST | Admin reject |
+| `/api/v1/admin/transfers/{transfer_id}/reject-reason` | PATCH | Admin update reason |
+| `/api/v1/admin/transfers/{transfer_id}` | DELETE | Admin soft-delete |
+| `/api/v1/admin/transfers/{transfer_id}/resend-email` | POST | Admin resend email |
+| `/api/v1/admin/ledger/internal-transfer` | POST | Admin internal transfer |
+
+**Critical Bug Fixed During Extraction:**
+- `routers/dependencies.py` `require_admin` was missing `FINANCE_OPS` and `COMPLIANCE_OFFICER` roles
+- Fixed to match server.py implementation
+
+**Performance Parity Verified:**
+| Endpoint | Baseline | After | Delta |
+|----------|----------|-------|-------|
+| SUBMITTED | 890ms | 910ms | +2% ✅ |
+| COMPLETED | 776ms | 781ms | +0.6% ✅ |
+| REJECTED | 767ms | 786ms | +2.5% ✅ |
+| Search | 884ms | 887ms | +0.3% ✅ |
+| User transfers | 453ms | 437ms | -3.5% ✅ |
+
+**Preserved Critical Patterns:**
+- Bulk user lookups (`users_map`) - NO N+1 regression
+- Bulk account lookups (`accounts_map`) - NO N+1 regression
+- Server-side pagination
+- Soft-delete filtering (`is_deleted` check)
+
+**Transfer Restore Feature:** EXPLICITLY DEFERRED - NOT IMPLEMENTED
+
+**Files Changed:**
+- `/app/backend/routers/transfers.py` - NEW file with all transfer endpoints
+- `/app/backend/server.py` - Old endpoints commented out, router registered
+- `/app/backend/routers/dependencies.py` - Fixed require_admin roles
+
+**Testing:** 100% pass rate (iteration_129.json)
+- All 15 backend tests passed
+- Frontend Transfers Queue verified working
+- Status tabs, pagination, search all functional
+
 ### IBAN Copy Icon Inline Fix (Feb 19, 2025)
 **Fix:** Fixed the IBAN copy icon dropping to a new line on mobile devices in the Accounts card.
 
