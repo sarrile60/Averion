@@ -238,6 +238,31 @@ export function AdminTransfersQueue() {
     }
   };
 
+  // Handle restore transfer (for soft-deleted transfers only)
+  const handleRestore = async () => {
+    if (!selectedTransfer) return;
+    
+    setRestoringTransfer(true);
+    try {
+      const response = await api.post(`/admin/transfers/${selectedTransfer.id}/restore`, {
+        reason: restoreReason || null
+      });
+      
+      toastRef.current.success(
+        `Transfer restored successfully. Status: ${response.data.restored_status || 'Previous status'}`
+      );
+      setSelectedTransfer(null);
+      setShowRestoreModal(false);
+      setRestoreReason('');
+      fetchTransfers();
+    } catch (err) {
+      const errorMsg = err.response?.data?.detail || err.message;
+      toastRef.current.error('Failed to restore: ' + errorMsg);
+    } finally {
+      setRestoringTransfer(false);
+    }
+  };
+
   const handleTabChange = (newTab) => {
     setActiveTab(newTab);
     setSelectedTransfer(null);
