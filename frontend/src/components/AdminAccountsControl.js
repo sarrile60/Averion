@@ -244,8 +244,16 @@ export function AdminAccountsControl() {
             <tbody>
               {accounts.length === 0 ? (
                 <tr>
-                  <td colSpan="5" className="text-center py-8 text-gray-500">
-                    {searchQuery ? 'No accounts found matching your search' : 'No accounts found'}
+                  <td colSpan="5">
+                    <EmptyState 
+                      title={searchQuery ? 'No accounts found' : 'No accounts yet'}
+                      description={searchQuery ? `No accounts match "${searchQuery}"` : 'Accounts will appear here once users create them'}
+                      action={searchQuery ? (
+                        <button onClick={() => setSearchQuery('')} className="btn-text text-sm">
+                          Clear search
+                        </button>
+                      ) : null}
+                    />
                   </td>
                 </tr>
               ) : (
@@ -253,18 +261,36 @@ export function AdminAccountsControl() {
                   <tr key={acc.id} data-testid={`account-row-${acc.id}`}>
                     <td>
                       <div className="font-medium">{acc.userName}</div>
-                      <div className="text-xs text-gray-600">{acc.userEmail}</div>
+                      <div className="flex items-center gap-1 text-xs text-gray-600">
+                        <span>{acc.userEmail}</span>
+                        <CopyButton value={acc.userEmail} iconOnly size="xs" />
+                      </div>
                     </td>
                     <td>{acc.account_number}</td>
                     <td className="font-semibold">{formatBalance(acc.balance, isBalanceVisible)}</td>
                     <td>
-                      <div className="font-mono text-xs">{acc.iban || 'Not set'}</div>
+                      {acc.iban ? (
+                        <div className="flex items-center gap-1">
+                          <span className="font-mono text-xs">{acc.iban}</span>
+                          <CopyButton value={acc.iban} iconOnly size="xs" />
+                        </div>
+                      ) : (
+                        <span className="text-xs text-gray-400">Not set</span>
+                      )}
                       <div className="font-mono text-xs text-gray-500">{acc.bic || ''}</div>
                     </td>
                     <td>
-                      <button onClick={() => { setSelectedAccount(acc); setOperation('topup'); setShowModal(true); }} className="btn-text text-xs mr-2">Top Up</button>
-                      <button onClick={() => { setSelectedAccount(acc); setOperation('withdraw'); setShowModal(true); }} className="btn-text text-xs mr-2">Withdraw</button>
-                      <button onClick={() => handleEditIban(acc)} className="btn-text text-xs text-blue-600">Edit IBAN</button>
+                      <div className="flex items-center gap-2">
+                        <ActionButton onClick={() => { setSelectedAccount(acc); setOperation('topup'); setShowModal(true); }} size="xs">
+                          Top Up
+                        </ActionButton>
+                        <ActionButton onClick={() => { setSelectedAccount(acc); setOperation('withdraw'); setShowModal(true); }} size="xs">
+                          Withdraw
+                        </ActionButton>
+                        <ActionButton onClick={() => handleEditIban(acc)} size="xs" className="text-blue-600">
+                          Edit IBAN
+                        </ActionButton>
+                      </div>
                     </td>
                   </tr>
                 ))
