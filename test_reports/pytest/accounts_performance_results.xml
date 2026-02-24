@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="14" skipped="0" tests="14" time="14.530" timestamp="2026-02-24T09:00:36.162626+00:00" hostname="agent-env-b4460a28-dc6f-4d79-8238-4521e43a16d7"><testcase classname="backend.tests.test_accounts_performance.TestAccountsPerformance" name="test_accounts_endpoint_performance" time="4.784"><failure message="AssertionError: Expected 200, got 401&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_accounts_performance.py:36: in test_accounts_endpoint_performance
+    assert response.status_code == 200, f"Expected 200, got {response.status_code}"
+E   AssertionError: Expected 200, got 401
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestAccountsPerformance" name="test_accounts_response_structure" time="0.762"><failure message="assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_accounts_performance.py:47: in test_accounts_response_structure
+    assert response.status_code == 200
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestAccountsPerformance" name="test_account_objects_have_correct_fields" time="0.759"><failure message="assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_accounts_performance.py:67: in test_account_objects_have_correct_fields
+    assert response.status_code == 200
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestAccountsPerformance" name="test_balances_are_populated" time="0.775"><failure message="assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_accounts_performance.py:92: in test_balances_are_populated
+    assert response.status_code == 200
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestAccountsPerformance" name="test_search_functionality" time="0.742"><failure message="assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_accounts_performance.py:114: in test_search_functionality
+    assert response.status_code == 200
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestAccountsPerformance" name="test_pagination_functionality" time="0.723"><failure message="assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_accounts_performance.py:127: in test_pagination_functionality
+    assert response_p1.status_code == 200
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestAccountsPerformance" name="test_limit_param_alias" time="0.706"><failure message="assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_accounts_performance.py:158: in test_limit_param_alias
+    assert response.status_code == 200
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestCrossSectionSmoke" name="test_admin_overview" time="0.773"><failure message="AssertionError: Overview failed: 404&#10;assert 404 == 200&#10; +  where 404 = &lt;Response [404]&gt;.status_code">backend/tests/test_accounts_performance.py:187: in test_admin_overview
+    assert response.status_code == 200, f"Overview failed: {response.status_code}"
+E   AssertionError: Overview failed: 404
+E   assert 404 == 200
+E    +  where 404 = &lt;Response [404]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestCrossSectionSmoke" name="test_admin_users" time="0.713"><failure message="AssertionError: Users failed: 401&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_accounts_performance.py:194: in test_admin_users
+    assert response.status_code == 200, f"Users failed: {response.status_code}"
+E   AssertionError: Users failed: 401
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestCrossSectionSmoke" name="test_admin_kyc_queue" time="0.695"><failure message="AssertionError: KYC failed: 405&#10;assert 405 == 200&#10; +  where 405 = &lt;Response [405]&gt;.status_code">backend/tests/test_accounts_performance.py:201: in test_admin_kyc_queue
+    assert response.status_code == 200, f"KYC failed: {response.status_code}"
+E   AssertionError: KYC failed: 405
+E   assert 405 == 200
+E    +  where 405 = &lt;Response [405]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestCrossSectionSmoke" name="test_admin_card_requests" time="0.811"><failure message="AssertionError: Card requests failed: 401&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_accounts_performance.py:208: in test_admin_card_requests
+    assert response.status_code == 200, f"Card requests failed: {response.status_code}"
+E   AssertionError: Card requests failed: 401
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestCrossSectionSmoke" name="test_admin_transfers_queue" time="0.711"><failure message="AssertionError: Transfers failed: 401&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_accounts_performance.py:215: in test_admin_transfers_queue
+    assert response.status_code == 200, f"Transfers failed: {response.status_code}"
+E   AssertionError: Transfers failed: 401
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestCrossSectionSmoke" name="test_admin_support_tickets" time="0.701"><failure message="AssertionError: Support tickets failed: 404&#10;assert 404 == 200&#10; +  where 404 = &lt;Response [404]&gt;.status_code">backend/tests/test_accounts_performance.py:222: in test_admin_support_tickets
+    assert response.status_code == 200, f"Support tickets failed: {response.status_code}"
+E   AssertionError: Support tickets failed: 404
+E   assert 404 == 200
+E    +  where 404 = &lt;Response [404]&gt;.status_code</failure></testcase><testcase classname="backend.tests.test_accounts_performance.TestCrossSectionSmoke" name="test_admin_audit_logs" time="0.726"><failure message="AssertionError: Audit logs failed: 401&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_accounts_performance.py:229: in test_admin_audit_logs
+    assert response.status_code == 200, f"Audit logs failed: {response.status_code}"
+E   AssertionError: Audit logs failed: 401
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase></testsuite></testsuites>
