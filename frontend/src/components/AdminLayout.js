@@ -56,6 +56,9 @@ function useBadgeManager(apiUrl, token) {
   const markSectionSeen = useCallback(async (sectionId) => {
     if (!apiUrl || !token) return;
     
+    console.log('[BadgeManager] markSectionSeen called for:', sectionId);
+    console.trace('[BadgeManager] Call stack');
+    
     // Map sidebar IDs to API section keys
     const sectionKeyMap = {
       'users': 'users',
@@ -66,7 +69,10 @@ function useBadgeManager(apiUrl, token) {
     };
     
     const sectionKey = sectionKeyMap[sectionId];
-    if (!sectionKey) return;
+    if (!sectionKey) {
+      console.log('[BadgeManager] No section key mapping for:', sectionId);
+      return;
+    }
     
     try {
       const response = await fetch(`${apiUrl}/api/v1/admin/notifications/seen`, {
