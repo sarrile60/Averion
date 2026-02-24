@@ -1031,53 +1031,15 @@ async def get_monthly_spending(
 
 
 # ==================== BANKING WORKFLOWS - CARDS ====================
-
-@app.post("/api/v1/card-requests")
-async def create_card_request(
-    data: CreateCardRequest,
-    current_user: dict = Depends(get_current_user),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """User creates card request."""
-    # Check for tax hold
-    tax_hold = await check_tax_hold(current_user["id"], db)
-    if tax_hold:
-        tax_amount = tax_hold["tax_amount_cents"] / 100
-        raise HTTPException(
-            status_code=403,
-            detail={
-                "code": "TAX_HOLD",
-                "message": "Your account is currently restricted due to outstanding tax obligations.",
-                "tax_amount_due": tax_amount,
-                "formatted_message": f"Account Restricted: Your account has been temporarily suspended due to outstanding tax obligations of €{tax_amount:,.2f}. Card services are unavailable until the required amount is settled. For assistance, contact our support team at support@projectatlas.eu"
-            }
-        )
-    
-    workflows = BankingWorkflowsService(db)
-    request = await workflows.create_card_request(current_user["id"], data)
-    return {"ok": True, "data": request.model_dump()}
-
-
-@app.get("/api/v1/card-requests")
-async def get_card_requests(
-    current_user: dict = Depends(get_current_user),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """Get user's card requests."""
-    workflows = BankingWorkflowsService(db)
-    requests = await workflows.get_user_card_requests(current_user["id"])
-    return {"ok": True, "data": [r.model_dump() for r in requests]}
-
-
-@app.get("/api/v1/cards")
-async def get_cards(
-    current_user: dict = Depends(get_current_user),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """Get user's cards."""
-    workflows = BankingWorkflowsService(db)
-    cards = await workflows.get_user_cards(current_user["id"])
-    return {"ok": True, "data": [c.model_dump() for c in cards]}
+# NOTE: All card endpoints moved to routers/cards.py
+# @app.post("/api/v1/card-requests")
+# @app.get("/api/v1/card-requests")
+# @app.get("/api/v1/cards")
+# @app.get("/api/v1/admin/card-requests")
+# @app.delete("/api/v1/admin/card-requests/{request_id}")
+# @app.post("/api/v1/admin/card-requests/{request_id}/fulfill")
+# @app.post("/api/v1/admin/card-requests/{request_id}/reject")
+# ... (see routers/cards.py)
 
 
 # ==================== BANKING WORKFLOWS - RECIPIENTS ====================
