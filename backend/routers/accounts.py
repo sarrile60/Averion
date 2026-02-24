@@ -477,26 +477,28 @@ async def admin_get_accounts_with_users(
                 user_ids.add(ObjectId(user_id))
             except:
                 user_ids.add(user_id)
-        ledger_account_ids.append(doc.get("ledger_account_id"))
+        ledger_id = doc.get("ledger_account_id")
+        if ledger_id:
+            ledger_account_ids.append(ledger_id)
     
-    # Bulk fetch users
+    # Bulk fetch users (single query)
     users_map = {}
     if user_ids:
         users_cursor = db.users.find({"_id": {"$in": list(user_ids)}})
         async for user in users_cursor:
             users_map[str(user["_id"])] = user
     
-    # Fetch balances
+    # PERFORMANCE FIX: Get ALL balances in a single bulk query instead of N queries
     ledger_engine = LedgerEngine(db)
-    balances = {}
-    for ledger_id in ledger_account_ids:
-        if ledger_id:
-            try:
-                balances[ledger_id] = await ledger_engine.get_balance(ledger_id)
-            except:
-                balances[ledger_id] = 0
+    balance_map = {}
+    if ledger_account_ids:
+        try:
+            balance_map = await ledger_engine.get_bulk_balances(ledger_account_ids)
+        except Exception as e:
+            logger.error(f"Failed to get bulk balances: {e}")
+            balance_map = {}
     
-    # Build response
+    # Build response (no more N+1 queries!)
     accounts = []
     for doc in account_docs:
         account_dict = serialize_doc(doc)
