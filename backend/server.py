@@ -230,6 +230,14 @@ from routers import transfers as transfers_router
 app.include_router(transfers_router.router)
 app.include_router(transfers_router.admin_router)
 app.include_router(transfers_router.admin_ledger_router)
+from routers import recipients as recipients_router
+app.include_router(recipients_router.router)
+from routers import beneficiaries as beneficiaries_router
+app.include_router(beneficiaries_router.router)
+from routers import insights as insights_router
+app.include_router(insights_router.router)
+from routers import scheduled_payments as scheduled_payments_router
+app.include_router(scheduled_payments_router.router)
 
 
 # Dependencies
