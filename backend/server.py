@@ -719,14 +719,6 @@ class ReversalRequest(BaseModel):
     reason: str
 
 
-# NOTE: InternalTransferRequest moved to routers/transfers.py
-# class InternalTransferRequest(BaseModel):
-#     from_account_id: str
-#     to_account_id: str
-#     amount: int
-#     reason: str
-
-
 @app.post("/api/v1/admin/ledger/reverse")
 async def admin_reverse_transaction(
     data: ReversalRequest,
@@ -746,219 +738,40 @@ async def admin_reverse_transaction(
     return txn.model_dump()
 
 
-# NOTE: /api/v1/admin/ledger/internal-transfer moved to routers/transfers.py
-# @app.post("/api/v1/admin/ledger/internal-transfer")
-# async def admin_internal_transfer(
-#     data: InternalTransferRequest,
-#     current_user: dict = Depends(require_admin),
-#     db: AsyncIOMotorDatabase = Depends(get_database)
-# ):
-#     """Create internal transfer between accounts (admin)."""
-#     from_account = await db.bank_accounts.find_one({"_id": data.from_account_id})
-#     to_account = await db.bank_accounts.find_one({"_id": data.to_account_id})
-#     
-#     if not from_account or not to_account:
-#         raise HTTPException(status_code=404, detail="Account not found")
-#     
-#     ledger_engine = LedgerEngine(db)
-#     import uuid
-#     txn = await ledger_engine.post_transaction(
-#         transaction_type="TRANSFER",
-#         entries=[
-#             (from_account["ledger_account_id"], data.amount, EntryDirection.DEBIT),
-#             (to_account["ledger_account_id"], data.amount, EntryDirection.CREDIT)
-#         ],
-#         external_id=f"admin_transfer_{uuid.uuid4()}",
-#         reason=data.reason,
-#         performed_by=current_user["id"]
-#     )
-#     
-#     return txn.model_dump()
-# ==================== ADMIN ANALYTICS ====================
-
-# NOTE: /api/v1/admin/analytics/overview moved to routers/analytics.py
-# @app.get("/api/v1/admin/analytics/overview")
-# async def get_admin_analytics_overview(...):
-#     ... (see routers/analytics.py)
-
-
-# NOTE: /api/v1/admin/notification-counts moved to routers/notifications.py
-# @app.get("/api/v1/admin/notification-counts")
-# async def get_admin_notification_counts(...):
-#     ... (see routers/notifications.py)
-
-# NOTE: /api/v1/admin/notifications/seen moved to routers/notifications.py
-# @app.post("/api/v1/admin/notifications/seen")
-# async def mark_admin_section_seen(...):
-#     ... (see routers/notifications.py)
-
-
-# NOTE: /api/v1/admin/analytics/monthly moved to routers/analytics.py
-# @app.get("/api/v1/admin/analytics/monthly")
-# async def get_admin_analytics_monthly(...):
-#     ... (see routers/analytics.py)
-
-
-# ==================== NOTIFICATIONS ====================
-# NOTE: All user notification endpoints moved to routers/notifications.py
-# @app.get("/api/v1/notifications")
-# @app.post("/api/v1/notifications/{notification_id}/read")
-# @app.post("/api/v1/notifications/mark-all-read")
-# ... (see routers/notifications.py)
-
-
-# ==================== P2P TRANSFERS ====================
-# NOTE: /api/v1/transfers/p2p moved to routers/transfers.py
-# @app.post("/api/v1/transfers/p2p")
-# async def create_p2p_transfer(
-#     data: P2PTransferRequest,
-#     current_user: dict = Depends(get_current_user),
-#     db: AsyncIOMotorDatabase = Depends(get_database)
-# ):
-#     """Create P2P transfer between customers using IBAN."""
-#     # Check for tax hold
-#     tax_hold = await check_tax_hold(current_user["id"], db)
-#     if tax_hold:
-#         tax_amount = tax_hold["tax_amount_cents"] / 100
-#         raise HTTPException(
-#             status_code=403,
-#             detail={
-#                 "code": "TAX_HOLD",
-#                 "message": "Your account is currently restricted due to outstanding tax obligations.",
-#                 "tax_amount_due": tax_amount,
-#                 "formatted_message": f"Account Restricted: Your account has been temporarily suspended due to outstanding tax obligations of €{tax_amount:,.2f}. To restore full access to your banking services, please settle the required amount. For assistance, contact our support team at support@projectatlas.eu"
-#             }
-#         )
-#     
-#     ledger_engine = LedgerEngine(db)
-#     transfer_service = TransferService(db, ledger_engine)
-#     
-#     result = await transfer_service.p2p_transfer(
-#         from_user_id=current_user["id"],
-#         to_iban=data.to_iban,
-#         amount=data.amount,
-#         reason=data.reason,
-#         recipient_name=data.recipient_name,
-#         instant_requested=data.instant_requested  # Store for future instant transfer support
-#     )
-#     
-#     return result
-
-
-# ==================== BENEFICIARIES ====================
-# NOTE: All beneficiary endpoints moved to routers/beneficiaries.py
-# @app.post("/api/v1/beneficiaries")
-# @app.get("/api/v1/beneficiaries")
-# @app.delete("/api/v1/beneficiaries/{beneficiary_id}")
-# ... (see routers/beneficiaries.py)
-
-
-# ==================== SCHEDULED PAYMENTS ====================
-# NOTE: All scheduled payment endpoints moved to routers/scheduled_payments.py
-# @app.post("/api/v1/scheduled-payments")
-# @app.get("/api/v1/scheduled-payments")
-# @app.delete("/api/v1/scheduled-payments/{payment_id}")
-# ... (see routers/scheduled_payments.py)
-
-
-# ==================== SPENDING INSIGHTS ====================
-# NOTE: All insights endpoints moved to routers/insights.py
-# @app.get("/api/v1/insights/spending")
-# @app.get("/api/v1/insights/monthly-spending")
-# ... (see routers/insights.py)
-
-
-# ==================== BANKING WORKFLOWS - CARDS ====================
-# NOTE: All card endpoints moved to routers/cards.py
-# @app.post("/api/v1/card-requests")
-# @app.get("/api/v1/card-requests")
-# @app.get("/api/v1/cards")
-# @app.get("/api/v1/admin/card-requests")
-# @app.delete("/api/v1/admin/card-requests/{request_id}")
-# @app.post("/api/v1/admin/card-requests/{request_id}/fulfill")
-# @app.post("/api/v1/admin/card-requests/{request_id}/reject")
-# ... (see routers/cards.py)
-
-
-# ==================== BANKING WORKFLOWS - RECIPIENTS ====================
-# NOTE: All recipient endpoints moved to routers/recipients.py
-# @app.post("/api/v1/recipients")
-# @app.get("/api/v1/recipients")
-# @app.delete("/api/v1/recipients/{recipient_id}")
-# ... (see routers/recipients.py)
-
-
-# ==================== BANKING WORKFLOWS - TRANSFERS ====================
-# NOTE: All transfer endpoints moved to routers/transfers.py
-
-# NOTE: POST /api/v1/transfers moved to routers/transfers.py
-# @app.post("/api/v1/transfers")
-# async def create_transfer(
-#     data: CreateTransfer,
-#     current_user: dict = Depends(get_current_user),
-#     db: AsyncIOMotorDatabase = Depends(get_database)
-# ):
-#     """Submit transfer - instant success, no waiting."""
-#     ... (see routers/transfers.py)
-
-# NOTE: GET /api/v1/transfers moved to routers/transfers.py
-# @app.get("/api/v1/transfers")
-# async def get_transfers(...):
-#     ... (see routers/transfers.py)
-
-# NOTE: GET /api/v1/transfers/{transfer_id} moved to routers/transfers.py
-# @app.get("/api/v1/transfers/{transfer_id}")
-# async def get_transfer_detail(...):
-#     ... (see routers/transfers.py)
-
-
-# NOTE: Admin card request endpoints moved to routers/cards.py
-# @app.get("/api/v1/admin/card-requests")
-# @app.delete("/api/v1/admin/card-requests/{request_id}")
-# @app.post("/api/v1/admin/card-requests/{request_id}/fulfill")
-# @app.post("/api/v1/admin/card-requests/{request_id}/reject")
-# ... (see routers/cards.py)
-
-# NOTE: GET /api/v1/admin/transfers moved to routers/transfers.py
-# @app.get("/api/v1/admin/transfers")
-# async def admin_get_transfers(...):
-#     ... (see routers/transfers.py)
-
-# NOTE: POST /api/v1/admin/transfers/{transfer_id}/approve moved to routers/transfers.py
-# @app.post("/api/v1/admin/transfers/{transfer_id}/approve")
-# async def admin_approve_transfer(...):
-#     ... (see routers/transfers.py)
-
-# NOTE: RejectTransferRequest moved to routers/transfers.py
-# class RejectTransferRequest(BaseModel):
-#     reason: str
-
-# NOTE: POST /api/v1/admin/transfers/{transfer_id}/reject moved to routers/transfers.py
-# @app.post("/api/v1/admin/transfers/{transfer_id}/reject")
-# async def admin_reject_transfer(...):
-#     ... (see routers/transfers.py)
-
-# NOTE: UpdateRejectReasonRequest moved to routers/transfers.py
-# class UpdateRejectReasonRequest(BaseModel):
-#     reason: str = Field(..., min_length=1, description="New rejection reason")
-
-# NOTE: PATCH /api/v1/admin/transfers/{transfer_id}/reject-reason moved to routers/transfers.py
-# @app.patch("/api/v1/admin/transfers/{transfer_id}/reject-reason")
-# async def admin_update_reject_reason(...):
-#     ... (see routers/transfers.py)
-
-# NOTE: DELETE /api/v1/admin/transfers/{transfer_id} moved to routers/transfers.py
-# @app.delete("/api/v1/admin/transfers/{transfer_id}")
-# async def admin_delete_transfer(...):
-#     """Admin soft-deletes a transfer (any status).
-#     Transfer Restore Feature is EXPLICITLY DEFERRED - not implemented.
-#     """
-#     ... (see routers/transfers.py)
-
-# NOTE: POST /api/v1/admin/transfers/{transfer_id}/resend-email moved to routers/transfers.py
-# @app.post("/api/v1/admin/transfers/{transfer_id}/resend-email")
-# async def admin_resend_transfer_email(...):
-#     ... (see routers/transfers.py)
+# ==================== EXTRACTED ROUTERS REFERENCE ====================
+# The following endpoints have been moved to dedicated router modules:
+#
+# Analytics:     routers/analytics.py
+#   - /api/v1/admin/analytics/overview
+#   - /api/v1/admin/analytics/monthly
+#
+# Notifications: routers/notifications.py
+#   - /api/v1/notifications/*
+#   - /api/v1/admin/notifications/*
+#   - /api/v1/admin/notification-counts
+#
+# Transfers:     routers/transfers.py
+#   - /api/v1/transfers/*
+#   - /api/v1/admin/transfers/*
+#   - /api/v1/admin/ledger/internal-transfer
+#
+# Recipients:    routers/recipients.py
+#   - /api/v1/recipients/*
+#
+# Beneficiaries: routers/beneficiaries.py
+#   - /api/v1/beneficiaries/*
+#
+# Insights:      routers/insights.py
+#   - /api/v1/insights/*
+#
+# Scheduled:     routers/scheduled_payments.py
+#   - /api/v1/scheduled-payments/*
+#
+# Cards:         routers/cards.py
+#   - /api/v1/card-requests/*
+#   - /api/v1/cards/*
+#   - /api/v1/admin/card-requests/*
+# ====================
 
 
 @app.get("/api/v1/admin/accounts-with-users")
