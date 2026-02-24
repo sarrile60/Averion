@@ -669,8 +669,21 @@ export function AdminTransfersQueue() {
               <tbody>
                 {transfers.length === 0 ? (
                   <tr>
-                    <td colSpan="6" className="text-center text-gray-500 py-8">
-                      {isSearchMode ? 'No results found for your search' : 'No transfers found'}
+                    <td colSpan="6">
+                      <EmptyState 
+                        title={isSearchMode ? 'No results found' : `No ${activeTab.toLowerCase()} transfers`}
+                        description={isSearchMode 
+                          ? `No transfers match "${debouncedSearch}"` 
+                          : activeTab === 'DELETED' 
+                            ? 'No deleted transfers to display'
+                            : `No transfers with ${activeTab} status`
+                        }
+                        action={isSearchMode ? (
+                          <button onClick={() => setSearchQuery('')} className="btn-text text-sm">
+                            Clear search
+                          </button>
+                        ) : null}
+                      />
                     </td>
                   </tr>
                 ) : (
