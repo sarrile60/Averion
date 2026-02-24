@@ -792,11 +792,12 @@ class ReversalRequest(BaseModel):
     reason: str
 
 
-class InternalTransferRequest(BaseModel):
-    from_account_id: str
-    to_account_id: str
-    amount: int
-    reason: str
+# NOTE: InternalTransferRequest moved to routers/transfers.py
+# class InternalTransferRequest(BaseModel):
+#     from_account_id: str
+#     to_account_id: str
+#     amount: int
+#     reason: str
 
 
 @app.post("/api/v1/admin/ledger/reverse")
@@ -818,33 +819,34 @@ async def admin_reverse_transaction(
     return txn.model_dump()
 
 
-@app.post("/api/v1/admin/ledger/internal-transfer")
-async def admin_internal_transfer(
-    data: InternalTransferRequest,
-    current_user: dict = Depends(require_admin),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """Create internal transfer between accounts (admin)."""
-    from_account = await db.bank_accounts.find_one({"_id": data.from_account_id})
-    to_account = await db.bank_accounts.find_one({"_id": data.to_account_id})
-    
-    if not from_account or not to_account:
-        raise HTTPException(status_code=404, detail="Account not found")
-    
-    ledger_engine = LedgerEngine(db)
-    import uuid
-    txn = await ledger_engine.post_transaction(
-        transaction_type="TRANSFER",
-        entries=[
-            (from_account["ledger_account_id"], data.amount, EntryDirection.DEBIT),
-            (to_account["ledger_account_id"], data.amount, EntryDirection.CREDIT)
-        ],
-        external_id=f"admin_transfer_{uuid.uuid4()}",
-        reason=data.reason,
-        performed_by=current_user["id"]
-    )
-    
-    return txn.model_dump()
+# NOTE: /api/v1/admin/ledger/internal-transfer moved to routers/transfers.py
+# @app.post("/api/v1/admin/ledger/internal-transfer")
+# async def admin_internal_transfer(
+#     data: InternalTransferRequest,
+#     current_user: dict = Depends(require_admin),
+#     db: AsyncIOMotorDatabase = Depends(get_database)
+# ):
+#     """Create internal transfer between accounts (admin)."""
+#     from_account = await db.bank_accounts.find_one({"_id": data.from_account_id})
+#     to_account = await db.bank_accounts.find_one({"_id": data.to_account_id})
+#     
+#     if not from_account or not to_account:
+#         raise HTTPException(status_code=404, detail="Account not found")
+#     
+#     ledger_engine = LedgerEngine(db)
+#     import uuid
+#     txn = await ledger_engine.post_transaction(
+#         transaction_type="TRANSFER",
+#         entries=[
+#             (from_account["ledger_account_id"], data.amount, EntryDirection.DEBIT),
+#             (to_account["ledger_account_id"], data.amount, EntryDirection.CREDIT)
+#         ],
+#         external_id=f"admin_transfer_{uuid.uuid4()}",
+#         reason=data.reason,
+#         performed_by=current_user["id"]
+#     )
+#     
+#     return txn.model_dump()
 # ==================== ADMIN ANALYTICS ====================
 
 # NOTE: /api/v1/admin/analytics/overview moved to routers/analytics.py
