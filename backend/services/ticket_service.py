@@ -59,6 +59,8 @@ class TicketService:
         ticket.messages.append(initial_message)
         
         ticket_dict = ticket.model_dump(by_alias=True)
+        # Set last_client_message_at for new client tickets (for admin notification tracking)
+        ticket_dict["last_client_message_at"] = datetime.utcnow()
         await self.db.tickets.insert_one(ticket_dict)
         
         return ticket
