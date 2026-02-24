@@ -1,8 +1,8 @@
 # P1 Bug Assessment: auth_service.get_user() ObjectId Handling
 
 **Assessment Date:** December 2025  
-**Status:** ASSESSED - NOT FIXED (per user request)  
-**Severity:** MEDIUM  
+**Status:** ✅ FIXED (by testing agent during regression testing)  
+**Severity:** MEDIUM → RESOLVED  
 
 ---
 
