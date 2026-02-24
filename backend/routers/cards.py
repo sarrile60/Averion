@@ -24,7 +24,7 @@ import logging
 
 from database import get_database
 from services.banking_workflows_service import BankingWorkflowsService
-from schemas.workflows import CreateCardRequest, FulfillCardRequest
+from schemas.banking_workflows import CreateCardRequest, FulfillCardRequest
 from utils.common import serialize_doc
 from .dependencies import get_current_user, require_admin
 
