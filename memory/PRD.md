@@ -27,6 +27,33 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 - **Email:** Resend API
 - **File Storage:** Cloudinary (for KYC docs and ticket attachments)
 
+## Recent Changes (February 2026)
+
+### P0 FINAL REDEPLOY VALIDATION COMPLETE (Feb 24, 2026)
+**Validation Result:** ✅ **GO FOR PRODUCTION REDEPLOY**
+
+**Summary:**
+- Backend: 29/29 tests PASS (100%)
+- Frontend: 9/9 admin sections PASS (100%)
+- Critical Features: ALL OPERATIONAL
+- Blockers: 0 found
+- Regressions: 0 found
+
+**Full Report:** `/app/REDEPLOY_READINESS_REPORT.md`
+
+**Key Verifications:**
+- All admin panel sections load without errors
+- Transfers module fully operational (including DELETED tab + Restore feature)
+- Support Tickets bug fixes stable (thread visibility, self-notification, auto-scroll)
+- Users module phone visibility working
+- Audit logs timestamps correct
+- Notification badge logic correct
+- All 5 extracted routers functional
+- No API contract mismatches
+- Security/RBAC enforced
+
+---
+
 ## Recent Changes (February 2025)
 
 ### P1 UX Bugfix: Support Tickets Auto-Scroll (Feb 24, 2025)
