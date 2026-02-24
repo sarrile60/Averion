@@ -927,83 +927,19 @@ async def admin_reverse_transaction(
 
 
 # ==================== BENEFICIARIES ====================
-
-@app.post("/api/v1/beneficiaries")
-async def add_beneficiary(
-    data: CreateBeneficiary,
-    current_user: dict = Depends(get_current_user),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """Add a beneficiary."""
-    ledger_engine = LedgerEngine(db)
-    advanced_service = AdvancedBankingService(db, ledger_engine)
-    beneficiary = await advanced_service.add_beneficiary(current_user["id"], data)
-    return beneficiary.model_dump()
-
-
-@app.get("/api/v1/beneficiaries")
-async def get_beneficiaries(
-    current_user: dict = Depends(get_current_user),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """Get user's beneficiaries."""
-    ledger_engine = LedgerEngine(db)
-    advanced_service = AdvancedBankingService(db, ledger_engine)
-    beneficiaries = await advanced_service.get_beneficiaries(current_user["id"])
-    return [b.model_dump() for b in beneficiaries]
-
-
-@app.delete("/api/v1/beneficiaries/{beneficiary_id}")
-async def delete_beneficiary(
-    beneficiary_id: str,
-    current_user: dict = Depends(get_current_user),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """Delete a beneficiary."""
-    ledger_engine = LedgerEngine(db)
-    advanced_service = AdvancedBankingService(db, ledger_engine)
-    success = await advanced_service.delete_beneficiary(beneficiary_id, current_user["id"])
-    return {"success": success}
+# NOTE: All beneficiary endpoints moved to routers/beneficiaries.py
+# @app.post("/api/v1/beneficiaries")
+# @app.get("/api/v1/beneficiaries")
+# @app.delete("/api/v1/beneficiaries/{beneficiary_id}")
+# ... (see routers/beneficiaries.py)
 
 
 # ==================== SCHEDULED PAYMENTS ====================
-
-@app.post("/api/v1/scheduled-payments")
-async def create_scheduled_payment(
-    data: CreateScheduledPayment,
-    current_user: dict = Depends(get_current_user),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """Create a scheduled recurring payment."""
-    ledger_engine = LedgerEngine(db)
-    advanced_service = AdvancedBankingService(db, ledger_engine)
-    payment = await advanced_service.create_scheduled_payment(current_user["id"], data)
-    return payment.model_dump()
-
-
-@app.get("/api/v1/scheduled-payments")
-async def get_scheduled_payments(
-    current_user: dict = Depends(get_current_user),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """Get user's scheduled payments."""
-    ledger_engine = LedgerEngine(db)
-    advanced_service = AdvancedBankingService(db, ledger_engine)
-    payments = await advanced_service.get_scheduled_payments(current_user["id"])
-    return [p.model_dump() for p in payments]
-
-
-@app.delete("/api/v1/scheduled-payments/{payment_id}")
-async def cancel_scheduled_payment(
-    payment_id: str,
-    current_user: dict = Depends(get_current_user),
-    db: AsyncIOMotorDatabase = Depends(get_database)
-):
-    """Cancel a scheduled payment."""
-    ledger_engine = LedgerEngine(db)
-    advanced_service = AdvancedBankingService(db, ledger_engine)
-    success = await advanced_service.cancel_scheduled_payment(payment_id, current_user["id"])
-    return {"success": success}
+# NOTE: All scheduled payment endpoints moved to routers/scheduled_payments.py
+# @app.post("/api/v1/scheduled-payments")
+# @app.get("/api/v1/scheduled-payments")
+# @app.delete("/api/v1/scheduled-payments/{payment_id}")
+# ... (see routers/scheduled_payments.py)
 
 
 # ==================== SPENDING INSIGHTS ====================
