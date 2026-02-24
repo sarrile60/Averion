@@ -202,6 +202,10 @@ body {
   flex: 1;
   background: white;
   min-height: 100vh;
+  /* Fix: Constrain width to prevent horizontal overflow on smaller monitors */
+  width: calc(100vw - 240px);
+  max-width: calc(100vw - 240px);
+  overflow-x: auto;
 }
 
 /* Smooth section content transitions - prevents layout shift during section switch */
