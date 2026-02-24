@@ -222,6 +222,10 @@ app.include_router(notifications_router.admin_router)
 from routers import cards as cards_router
 app.include_router(cards_router.router)
 app.include_router(cards_router.admin_router)
+from routers import accounts as accounts_router
+app.include_router(accounts_router.router)
+app.include_router(accounts_router.admin_ledger_router)
+app.include_router(accounts_router.admin_accounts_router)
 
 
 # Dependencies
