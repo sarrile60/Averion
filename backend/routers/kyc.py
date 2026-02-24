@@ -303,6 +303,9 @@ async def queue_user_kyc(
 class ReviewKYC(BaseModel):
     status: KYCStatus
     rejection_reason: Optional[str] = None
+    review_notes: Optional[str] = None
+    assigned_iban: Optional[str] = None
+    assigned_bic: Optional[str] = None
 
 
 @admin_router.post("/{application_id}/review")
