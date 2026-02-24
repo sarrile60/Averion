@@ -497,7 +497,7 @@ class TestSecurityRBAC:
         admin_endpoints = [
             "/api/v1/admin/users",
             "/api/v1/admin/transfers",
-            "/api/v1/admin/kyc",
+            "/api/v1/admin/kyc/pending",  # Correct KYC endpoint
             "/api/v1/admin/tickets",
             "/api/v1/admin/audit-logs"
         ]
