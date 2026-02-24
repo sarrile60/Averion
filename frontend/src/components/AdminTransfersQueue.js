@@ -20,7 +20,7 @@ export function AdminTransfersQueue() {
   // Initialize state from URL params
   const getInitialTab = () => {
     const urlTab = searchParams.get('tab');
-    return ['SUBMITTED', 'COMPLETED', 'REJECTED'].includes(urlTab) ? urlTab : 'SUBMITTED';
+    return ['SUBMITTED', 'COMPLETED', 'REJECTED', 'DELETED'].includes(urlTab) ? urlTab : 'SUBMITTED';
   };
   const getInitialPage = () => {
     const urlPage = parseInt(searchParams.get('page'));
@@ -44,6 +44,9 @@ export function AdminTransfersQueue() {
   const [editedRejectReason, setEditedRejectReason] = useState('');
   const [savingRejectReason, setSavingRejectReason] = useState(false);
   const [deletingTransfer, setDeletingTransfer] = useState(false);
+  const [restoringTransfer, setRestoringTransfer] = useState(false);
+  const [showRestoreModal, setShowRestoreModal] = useState(false);
+  const [restoreReason, setRestoreReason] = useState('');
   
   // Search state
   const [searchQuery, setSearchQuery] = useState(getInitialSearch);
