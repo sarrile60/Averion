@@ -2211,3 +2211,43 @@ Per user requirement - deferred
 - All cross-section smoke tests passed
 
 **Status:** ✅ RESOLVED
+
+---
+
+## PERFORMANCE HOTFIX: Accounts N+1 Query Fix (Dec 2025)
+
+**Issue:** Accounts section loading in 6.35 seconds (8-10x slower than other sections)
+
+**Root Cause:**
+```python
+# BEFORE (N+1 queries - 50 separate DB calls):
+for ledger_id in ledger_account_ids:
+    balances[ledger_id] = await ledger_engine.get_balance(ledger_id)
+
+# AFTER (1 bulk query):
+balance_map = await ledger_engine.get_bulk_balances(ledger_account_ids)
+```
+
+**Fix Applied:**
+- Replaced N individual `get_balance()` calls with single `get_bulk_balances()`
+- Uses single MongoDB aggregation pipeline for all accounts
+- O(1) lookup per account from pre-fetched map
+
+**Performance Results:**
+| Metric | Before | After | Improvement |
+|--------|--------|-------|-------------|
+| Accounts Latency | 6.35s | 0.89s | **7.1x faster** |
+| vs Users | 8.5x slower | Same | Parity ✅ |
+| vs Card Requests | 10x slower | Same | Parity ✅ |
+
+**API Contract:** ✅ UNCHANGED
+- Response keys: accounts, pagination
+- Fields: userName, userEmail, userId, balance (camelCase)
+- Balances correctly populated (45/50 non-zero)
+
+**Test Results:** 100% pass (iteration_128.json)
+- Search working
+- Pagination working
+- All cross-sections passing
+
+**Status:** ✅ RESOLVED - Ready for transfers extraction
