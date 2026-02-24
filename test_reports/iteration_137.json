@@ -1,0 +1,105 @@
+{
+  "summary": "P0 HOTFIX REGRESSION VALIDATION COMPLETE - BOTH FIXES VERIFIED. 1) KYC Queue now displays full personal info (full_name, nationality, country, address, date_of_birth, tax_residency, documents) when clicking application. 2) Tax Hold Amount now shows €4,157.00 correctly instead of €0. 17/17 backend API tests pass (100%). UI verification complete.",
+  "hotfix_validation": {
+    "kyc_queue_fix": {
+      "status": "VERIFIED",
+      "before": "Clicking KYC application showed blank panel with 'Select an application to review'",
+      "after": "Personal Information section displays: Full Name, Date of Birth, Nationality, Country, Address, Tax Residency. Documents section shows PASSPORT, PROOF_OF_ADDRESS, SELFIE with View buttons.",
+      "fix_location": "backend/routers/kyc.py:187-206 - /admin/kyc/pending endpoint now returns personal info fields"
+    },
+    "tax_hold_fix": {
+      "status": "VERIFIED",
+      "before": "Tax Hold Amount showed €0,00 incorrectly",
+      "after": "Tax Hold Amount correctly shows €4.157,00 for user hannan1979ma@yahoo.com (ID: 699c203fda173e07eee262b3)",
+      "fix_location": "backend/routers/admin_users.py:869 - Now reads tax_amount_cents field instead of tax_amount_due",
+      "verified_amount": "€4,157.00 (stored as 415700 cents in database)"
+    }
+  },
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_evidence": {
+    "kyc_pending_api": {
+      "endpoint": "/api/v1/admin/kyc/pending",
+      "status": "PASS - Returns personal info fields",
+      "fields_verified": ["id", "user_email", "user_name", "full_name", "nationality", "country", "street_address", "city", "postal_code", "tax_residency", "date_of_birth", "documents"]
+    },
+    "tax_hold_api": {
+      "endpoint": "/api/v1/admin/users/{user_id}/tax-hold",
+      "status": "PASS - Returns correct amount",
+      "test_user_id": "699c203fda173e07eee262b3",
+      "expected_amount": 4157.0,
+      "actual_amount": 4157.0,
+      "is_blocked": true
+    },
+    "admin_overview": "PASS - Dashboard loads with stats (91 users, 74 active, 1 pending KYC, 132 transactions)",
+    "admin_users": "PASS - List loads with pagination, TAX flag visible for tax hold users",
+    "admin_accounts": "PASS - No accounts.map error",
+    "admin_card_requests": "PASS",
+    "admin_transfers": "PASS - All tabs work (SUBMITTED/COMPLETED/REJECTED/DELETED)",
+    "admin_support_tickets": "PASS",
+    "admin_audit_logs": "PASS",
+    "notification_counts": "PASS - Badge shows count"
+  },
+  "ui_verification": {
+    "kyc_details_panel": {
+      "personal_info_visible": true,
+      "documents_visible": true,
+      "view_buttons_work": true,
+      "edit_application_button": true,
+      "review_section": true
+    },
+    "tax_hold_display": {
+      "blocked_badge_visible": true,
+      "amount_displays_correctly": "€4.157,00 (European format)",
+      "remove_tax_hold_button": true,
+      "update_amount_button": true,
+      "reason_visible": "Tax evasion investigation",
+      "blocked_since_visible": "2/23/2026, 2:27:40 PM"
+    }
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_p0_hotfix_regression.py",
+    "/app/test_reports/pytest/p0_hotfix_regression_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "KYC pending endpoint fix correctly returns all personal info fields from kyc_applications collection",
+    "Tax hold fix correctly reads tax_amount_cents (not tax_amount_due) - matches database field name",
+    "Both fixes are backward compatible with existing data"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_p0_hotfix_regression.py"
+  ],
+  "success_rate": {
+    "backend": "100% (17/17 tests passed)",
+    "frontend": "100% (All UI features verified)"
+  },
+  "test_credentials": {
+    "email": "ashleyalt005@gmail.com",
+    "password": "123456789",
+    "role": "ADMIN"
+  },
+  "seed_data_creation": "None - used existing production data",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "P0 HOTFIXES VALIDATED. KYC Queue shows personal info when clicking application. Tax Hold shows correct €4,157.00 instead of €0. All admin features working: Overview, Users, KYC Queue, Accounts, Card Requests, Transfers Queue (all tabs), Support Tickets, Audit Logs, Notifications. Platform is stable.",
+  "rca_of_issue": {
+    "kyc_queue_bug": {
+      "root_cause": "The /admin/kyc/pending endpoint was not returning personal information fields (full_name, nationality, country, street_address, city, postal_code, tax_residency, date_of_birth, tax_id) that the frontend expected to display in the details panel",
+      "fix_applied": "Added these fields to the response at lines 197-205 in kyc.py",
+      "verified": true
+    },
+    "tax_hold_bug": {
+      "root_cause": "The get_user_tax_hold endpoint was reading 'tax_amount_due' field but database stores amount in 'tax_amount_cents' field",
+      "fix_applied": "Changed line 869 to read tax_amount_cents instead of tax_amount_due",
+      "verified": true
+    }
+  }
+}
