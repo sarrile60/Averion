@@ -516,8 +516,9 @@ async def admin_get_accounts_with_users(
             account_dict["userEmail"] = ""
             account_dict["userId"] = str(user_id) if user_id else ""
         
+        # Get balance from the pre-fetched map (O(1) lookup instead of N+1 queries)
         ledger_id = doc.get("ledger_account_id")
-        account_dict["balance"] = balances.get(ledger_id, 0)
+        account_dict["balance"] = balance_map.get(ledger_id, 0) if ledger_id else 0
         
         accounts.append(account_dict)
     
