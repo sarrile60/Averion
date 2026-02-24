@@ -219,6 +219,9 @@ app.include_router(analytics_router.router)
 from routers import notifications as notifications_router
 app.include_router(notifications_router.router)
 app.include_router(notifications_router.admin_router)
+from routers import cards as cards_router
+app.include_router(cards_router.router)
+app.include_router(cards_router.admin_router)
 
 
 # Dependencies
