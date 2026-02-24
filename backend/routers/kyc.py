@@ -192,7 +192,17 @@ async def get_pending_kyc(
             "status": app_doc.get("status"),
             "documents": app_doc.get("documents", []),
             "created_at": format_timestamp_utc(app_doc.get("created_at")),
-            "submitted_at": format_timestamp_utc(app_doc.get("submitted_at"))
+            "submitted_at": format_timestamp_utc(app_doc.get("submitted_at")),
+            # Personal information fields required by admin frontend
+            "full_name": app_doc.get("full_name"),
+            "date_of_birth": app_doc.get("date_of_birth"),
+            "nationality": app_doc.get("nationality"),
+            "country": app_doc.get("country"),
+            "street_address": app_doc.get("street_address"),
+            "city": app_doc.get("city"),
+            "postal_code": app_doc.get("postal_code"),
+            "tax_residency": app_doc.get("tax_residency"),
+            "tax_id": app_doc.get("tax_id")
         })
     
     return applications
