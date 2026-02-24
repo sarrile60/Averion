@@ -47,6 +47,7 @@ export function AdminTransfersQueue() {
   const [restoringTransfer, setRestoringTransfer] = useState(false);
   const [showRestoreModal, setShowRestoreModal] = useState(false);
   const [restoreReason, setRestoreReason] = useState('');
+  const [rowRestoreTransfer, setRowRestoreTransfer] = useState(null); // For row-level restore
   
   // Search state
   const [searchQuery, setSearchQuery] = useState(getInitialSearch);
