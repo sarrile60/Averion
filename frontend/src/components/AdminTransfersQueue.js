@@ -240,12 +240,14 @@ export function AdminTransfersQueue() {
   };
 
   // Handle restore transfer (for soft-deleted transfers only)
-  const handleRestore = async () => {
-    if (!selectedTransfer) return;
+  // Supports both detail view and row-level restore
+  const handleRestore = async (transferToRestore = null) => {
+    const transfer = transferToRestore || rowRestoreTransfer || selectedTransfer;
+    if (!transfer) return;
     
     setRestoringTransfer(true);
     try {
-      const response = await api.post(`/admin/transfers/${selectedTransfer.id}/restore`, {
+      const response = await api.post(`/admin/transfers/${transfer.id}/restore`, {
         reason: restoreReason || null
       });
       
@@ -254,6 +256,7 @@ export function AdminTransfersQueue() {
       );
       setSelectedTransfer(null);
       setShowRestoreModal(false);
+      setRowRestoreTransfer(null);
       setRestoreReason('');
       fetchTransfers();
     } catch (err) {
@@ -262,6 +265,12 @@ export function AdminTransfersQueue() {
     } finally {
       setRestoringTransfer(false);
     }
+  };
+
+  // Open row-level restore modal
+  const openRowRestoreModal = (transfer) => {
+    setRowRestoreTransfer(transfer);
+    setRestoreReason('');
   };
 
   const handleTabChange = (newTab) => {
