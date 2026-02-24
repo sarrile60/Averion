@@ -29,6 +29,25 @@ ecommbx is a full-stack EU-licensed digital banking platform built with React fr
 
 ## Recent Changes (February 2026)
 
+### P0 HOTFIX - KYC Admin Review Actions Broken (Feb 24, 2026)
+**Status:** ✅ FIXED AND VERIFIED
+
+**Root Cause:** The `ReviewKYC` Pydantic model was missing fields that the frontend sends: `review_notes`, `assigned_iban`, `assigned_bic`. The router was also not using `KYCService.review_application()` method which handles IBAN/BIC validation and account creation.
+
+**Fix Applied:**
+- `backend/routers/kyc.py` line 303-308: Added `review_notes`, `assigned_iban`, `assigned_bic` to ReviewKYC model
+- `backend/routers/kyc.py` line 310-340: Rewrote review endpoint to use `KYCService.review_application()`
+- `backend/routers/kyc.py` line 23: Added `KYCReviewRequest` import
+
+**Validation:**
+- ✅ APPROVE works with IBAN/BIC
+- ✅ APPROVE without IBAN returns proper validation error
+- ✅ NEEDS_MORE_INFO works (no IBAN required)
+- ✅ REJECT works (no IBAN required)
+- ✅ All admin pages load correctly
+
+---
+
 ### P0 EMERGENCY HOTFIX - Tax Hold Users Not Restricted (Feb 24, 2026)
 **Status:** ✅ FIXED AND VERIFIED
 
