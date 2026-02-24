@@ -148,13 +148,14 @@ async def view_kyc_document(
 
 @router.post("/submit")
 async def submit_kyc_application(
+    data: KYCSubmitRequest,
     current_user: dict = Depends(get_current_user),
     db: AsyncIOMotorDatabase = Depends(get_database),
     storage: CloudinaryStorage = Depends(get_storage)
 ):
     """Submit KYC application for review."""
     kyc_service = KYCService(db, storage)
-    app = await kyc_service.submit_application(current_user["id"])
+    app = await kyc_service.submit_application(current_user["id"], data)
     return app.model_dump()
 
 
