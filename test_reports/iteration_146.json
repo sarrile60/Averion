@@ -1,0 +1,98 @@
+{
+  "summary": "P0 BUGFIX VERIFIED - User Details > Login Activity panel now correctly shows login events. Root cause: auth-history endpoint was querying 'auth_events' collection but login events are stored in 'audit_logs' collection after refactor.",
+  "hotfix_validation": {
+    "original_bug": "Login Activity section showing 'No authentication events found' even though events exist in Audit Logs",
+    "root_cause": "After refactor, login events stored in 'audit_logs' collection but get_user_auth_history() was still querying 'auth_events' collection",
+    "fix_applied": "Updated /api/v1/admin/users/{user_id}/auth-history endpoint to query audit_logs collection with auth-related action filters (USER_LOGIN_SUCCESS, ADMIN_LOGIN_SUCCESS, USER_LOGOUT, LOGIN_FAILED, etc.)",
+    "status": "VERIFIED"
+  },
+  "backend_tests": {
+    "pytest_results": {
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "file": "/app/test_reports/pytest/login_activity_bugfix_results.xml"
+    },
+    "key_validations": [
+      "✓ Auth history endpoint returns events (not empty)",
+      "✓ Events have correct fields (IP, timestamp, action, source, actor_email)",
+      "✓ Contains USER_LOGIN_SUCCESS events",
+      "✓ Events are user-specific (only shows targeted user's events)",
+      "✓ No unrelated user events leak through",
+      "✓ Audit Logs page still works (no regression)",
+      "✓ Admin login events appear in audit logs"
+    ]
+  },
+  "frontend_tests": {
+    "login_activity_panel": {
+      "status": "VERIFIED",
+      "results": [
+        "✓ Login Activity card displays after clicking 'View Login Activity'",
+        "✓ NO 'No authentication events found' message displayed",
+        "✓ Found 49 login success event badges (green)",
+        "✓ USER_LOGIN_SUCCESS events displayed",
+        "✓ ADMIN_LOGIN_SUCCESS events displayed",
+        "✓ USER_LOGOUT events displayed",
+        "✓ IP addresses shown in events",
+        "✓ Source info shown in events",
+        "✓ Refresh Login Activity button works"
+      ]
+    },
+    "audit_logs_regression": {
+      "status": "PASSED",
+      "results": [
+        "✓ Audit Logs page loads correctly",
+        "✓ Login events visible in Audit Logs",
+        "✓ Admin events visible",
+        "✓ Test user events visible"
+      ]
+    }
+  },
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_login_activity_bugfix.py",
+    "/app/test_reports/pytest/login_activity_bugfix_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "✓ Correct collection (audit_logs) now being queried",
+    "✓ Auth action filters correctly defined (USER_LOGIN_SUCCESS, ADMIN_LOGIN_SUCCESS, USER_LOGOUT, etc.)",
+    "✓ Metadata fields (ip_address, user_agent, source) correctly mapped from audit_logs format",
+    "✓ Query correctly filters by performed_by, performed_by_email, or entity_id to ensure user-specific results"
+  ],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "100% (7/7 tests passed)",
+    "frontend": "100%"
+  },
+  "test_credentials": {
+    "admin": {"email": "admin@ecommbx.io", "password": "Admin@123456"},
+    "test_user": {"email": "ashleyalt005@gmail.com", "password": "123456789", "id": "6971fed2ad8ed4d326f04041"}
+  },
+  "seed_data_creation": "None - used existing test user ashleyalt005@gmail.com",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "P0 Login Activity bugfix VERIFIED. The fix correctly changed the auth-history endpoint to query audit_logs instead of auth_events collection. Events now display correctly with IP, timestamp, action type, and source. Test user ashleyalt005@gmail.com has many login events that can be used for validation.",
+  "rca_of_the_issue": {
+    "issue": "Login Activity panel showing 'No authentication events found'",
+    "root_cause": "After refactor, login events were stored in 'audit_logs' collection but the /auth-history endpoint was still querying the old 'auth_events' collection which was empty.",
+    "reproduction_steps": [
+      "1. Login as admin",
+      "2. Navigate to Users section",
+      "3. Select a user (e.g., ashleyalt005@gmail.com)",
+      "4. Click 'View Login Activity' button",
+      "5. BEFORE FIX: Panel shows 'No authentication events found'",
+      "6. AFTER FIX: Panel shows list of login/logout events with details"
+    ],
+    "mitigation": "Updated get_user_auth_history() in admin_users.py to query audit_logs collection instead of auth_events, with proper action filters (USER_LOGIN_SUCCESS, ADMIN_LOGIN_SUCCESS, USER_LOGOUT, LOGIN_FAILED, MFA_ENABLED, MFA_DISABLED, PASSWORD_CHANGED, PASSWORD_RESET) and correct metadata field mapping."
+  }
+}
