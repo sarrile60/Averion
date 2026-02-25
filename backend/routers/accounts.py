@@ -628,12 +628,26 @@ async def admin_account_withdraw(
     if current_balance < data.amount_cents:
         raise HTTPException(status_code=400, detail=f"Insufficient balance. Current: €{current_balance/100:.2f}")
     
+    # Build professional banking metadata for client-visible transaction details
+    transaction_metadata = {
+        "display_type": data.display_type or "Withdraw",
+        "recipient_name": data.recipient_name,
+        "to_iban": data.recipient_iban,
+        "reference": data.reference,
+        "description": data.description,
+        "admin_note": data.admin_note,
+        "status": "POSTED"
+    }
+    # Remove None values to keep metadata clean
+    transaction_metadata = {k: v for k, v in transaction_metadata.items() if v is not None}
+    
     txn = await ledger_engine.withdraw(
         user_account_id=account["ledger_account_id"],
         amount=data.amount_cents,
         external_id=f"admin_withdraw_{uuid.uuid4()}",
         reason=data.description or "Admin debit",
-        performed_by=current_user["id"]
+        performed_by=current_user["id"],
+        metadata=transaction_metadata
     )
     
     # Audit
