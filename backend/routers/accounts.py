@@ -562,13 +562,28 @@ async def admin_account_topup(
     if not account:
         raise HTTPException(status_code=404, detail="Account not found")
     
+    # Build professional banking metadata for client-visible transaction details
+    transaction_metadata = {
+        "display_type": data.display_type or "Top Up",
+        "sender_name": data.sender_name,
+        "sender_iban": data.sender_iban,
+        "sender_bic": data.sender_bic,
+        "reference": data.reference,
+        "description": data.description,
+        "admin_note": data.admin_note,
+        "status": "POSTED"
+    }
+    # Remove None values to keep metadata clean
+    transaction_metadata = {k: v for k, v in transaction_metadata.items() if v is not None}
+    
     ledger_engine = LedgerEngine(db)
     txn = await ledger_engine.top_up(
         user_account_id=account["ledger_account_id"],
         amount=data.amount_cents,
         external_id=f"admin_topup_{uuid.uuid4()}",
         reason=data.description or "Admin credit",
-        performed_by=current_user["id"]
+        performed_by=current_user["id"],
+        metadata=transaction_metadata
     )
     
     # Audit
