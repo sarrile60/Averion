@@ -459,7 +459,11 @@ async def get_user_auth_history(
     current_user: dict = Depends(require_admin),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
-    """Get user's authentication/login history (admin)."""
+    """Get user's authentication/login history (admin).
+    
+    Queries from audit_logs collection for auth-related events.
+    NOTE: After refactor, login events are stored in audit_logs (not auth_events).
+    """
     from bson import ObjectId
     from bson.errors import InvalidId
     
@@ -474,12 +478,26 @@ async def get_user_auth_history(
         raise HTTPException(status_code=404, detail="User not found")
     
     actual_user_id = str(user["_id"])
+    user_email = user.get("email", "")
+    
+    # Query audit_logs for auth-related events for this user
+    # Match by performed_by (user's own actions) or entity_id (when admin acts on user)
+    auth_actions = [
+        "USER_LOGIN_SUCCESS", "ADMIN_LOGIN_SUCCESS", 
+        "USER_LOGOUT", "ADMIN_LOGOUT",
+        "LOGIN_FAILED", "MFA_ENABLED", "MFA_DISABLED",
+        "PASSWORD_CHANGED", "PASSWORD_RESET"
+    ]
     
     events = []
-    cursor = db.auth_events.find({
-        "$or": [
-            {"user_id": actual_user_id},
-            {"target_user_id": actual_user_id}
+    cursor = db.audit_logs.find({
+        "$and": [
+            {"action": {"$in": auth_actions}},
+            {"$or": [
+                {"performed_by": actual_user_id},
+                {"performed_by_email": user_email},
+                {"entity_id": actual_user_id}
+            ]}
         ]
     }).sort("created_at", -1).limit(50)
     
@@ -488,10 +506,10 @@ async def get_user_auth_history(
             "id": str(event["_id"]),
             "action": event.get("action", "UNKNOWN"),
             "description": event.get("description", ""),
-            "ip_address": event.get("ip_address", "N/A"),
-            "user_agent": event.get("user_agent", ""),
-            "source": event.get("source", ""),
-            "actor_email": event.get("actor_email"),
+            "ip_address": event.get("metadata", {}).get("ip_address", "N/A"),
+            "user_agent": event.get("metadata", {}).get("user_agent", ""),
+            "source": event.get("metadata", {}).get("source", ""),
+            "actor_email": event.get("performed_by_email"),
             "created_at": format_timestamp_utc(event.get("created_at"))
         })
     
