@@ -15,6 +15,7 @@ Full-stack banking application with KYC, transfers, admin panel, and notificatio
 - Tax hold management
 - Admin notification badge system (database-backed)
 - Admin ledger operations (credit/debit accounts)
+- User login activity history
 
 ### Recent Hotfixes (February 2026)
 1. **KYC Admin Review Actions** - Fixed API contract mismatch
@@ -23,6 +24,7 @@ Full-stack banking application with KYC, transfers, admin panel, and notificatio
 4. **Admin Panel UI Overflow** - Fixed CSS layout issues
 5. **Admin Sidebar Badges** - Verified working, fixed KYC status query
 6. **Admin Credit Account Blank Page** - Fixed amount→amount_cents field mismatch
+7. **Login Activity Panel Empty** - Fixed to query audit_logs instead of auth_events
 
 ## Architecture
 
@@ -33,9 +35,9 @@ Full-stack banking application with KYC, transfers, admin panel, and notificatio
 ├── routers/
 │   ├── auth.py            # Authentication
 │   ├── kyc.py             # KYC flows
-│   ├── admin_users.py     # Admin user management
+│   ├── admin_users.py     # Admin user management + auth history (FIXED)
 │   ├── notifications.py   # Badge system
-│   ├── accounts.py        # Ledger operations (FIXED)
+│   ├── accounts.py        # Ledger operations
 │   ├── transfers.py       # Banking transfers
 │   ├── tickets.py         # Support system
 │   └── cards.py           # Card requests
@@ -51,7 +53,8 @@ Full-stack banking application with KYC, transfers, admin panel, and notificatio
 ├── App.js                 # Main app with routing
 ├── components/
 │   ├── AdminLayout.js     # Admin sidebar + badges
-│   ├── AdminLedger.js     # Credit/Debit forms (FIXED)
+│   ├── AdminLedger.js     # Credit/Debit forms
+│   ├── AdminUserDetails.js # User details + login activity
 │   ├── KYC.js             # Client KYC flow
 │   ├── ProfessionalDashboard.js
 │   └── Admin/             # Admin pages
@@ -60,17 +63,17 @@ Full-stack banking application with KYC, transfers, admin panel, and notificatio
 ```
 
 ### Database (MongoDB)
-- Collections: users, kyc_applications, transfers, tickets, admin_section_views, tax_holds, bank_accounts, ledger_accounts, ledger_entries
+- Collections: users, kyc_applications, transfers, tickets, admin_section_views, tax_holds, bank_accounts, ledger_accounts, ledger_entries, audit_logs
 
 ## Key API Endpoints
 - `POST /api/v1/auth/login` - Login
 - `POST /api/v1/kyc/submit` - Submit KYC
 - `POST /api/v1/admin/kyc/{id}/review` - Review KYC
 - `GET /api/v1/admin/notification-counts` - Badge counts
-- `POST /api/v1/admin/notifications/seen` - Mark section seen
-- `POST /api/v1/admin/accounts/{id}/topup` - Credit account (FIXED)
-- `POST /api/v1/admin/accounts/{id}/withdraw` - Debit account (FIXED)
-- `GET /api/v1/users/me/tax-status` - Client tax status
+- `POST /api/v1/admin/accounts/{id}/topup` - Credit account
+- `POST /api/v1/admin/accounts/{id}/withdraw` - Debit account
+- `GET /api/v1/admin/users/{id}/auth-history` - User login history (FIXED)
+- `GET /api/v1/admin/audit-logs` - All audit logs
 
 ## Test Credentials
 - **Admin:** admin@ecommbx.io / Admin@123456
@@ -93,8 +96,7 @@ Full-stack banking application with KYC, transfers, admin panel, and notificatio
 - Mobile KYC ghost text issue (could not reproduce - needs user screenshots)
 - Performance optimization for large user lists
 
-## Latest Changes (Feb 24, 2026)
-- Fixed Admin Credit/Debit blank white page bug
-- Root cause: Frontend sent 'amount' but backend expected 'amount_cents'
-- Added optional professional banking fields to API models
-- Made description field optional with fallback
+## Latest Changes (Feb 25, 2026)
+- Fixed Login Activity panel to show events from audit_logs collection
+- Root cause: auth-history endpoint was querying wrong collection (auth_events)
+- Now correctly queries audit_logs with auth-related action filters
