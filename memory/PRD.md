@@ -17,6 +17,16 @@ Full-stack banking application with KYC, transfers, admin panel, and notificatio
 - Admin ledger operations (credit/debit accounts)
 - User login activity history
 - Client transaction history with professional banking details
+- **Admin Create User** - Admins can create users directly with IBAN assignment (NEW)
+
+### Recent Features (March 2026)
+1. **Admin Create User Feature** - Complete implementation allowing admins to:
+   - Create users with first name, last name, email, phone, password
+   - Assign custom IBAN and BIC to the bank account
+   - Option to skip KYC (auto-approve) or require user to complete KYC
+   - User is immediately ACTIVE with email_verified=true (no verification email sent)
+   - Backend: POST /api/v1/admin/users/create
+   - Frontend: Create User button + modal on Admin Users page
 
 ### Recent Hotfixes (February 2026)
 1. **KYC Admin Review Actions** - Fixed API contract mismatch
@@ -37,7 +47,7 @@ Full-stack banking application with KYC, transfers, admin panel, and notificatio
 ├── routers/
 │   ├── auth.py            # Authentication
 │   ├── kyc.py             # KYC flows
-│   ├── admin_users.py     # Admin user management + auth history
+│   ├── admin_users.py     # Admin user management + auth history + CREATE USER
 │   ├── notifications.py   # Badge system
 │   ├── accounts.py        # Ledger operations with professional metadata
 │   ├── transfers.py       # Banking transfers
@@ -58,6 +68,7 @@ Full-stack banking application with KYC, transfers, admin panel, and notificatio
 │   ├── AdminLayout.js     # Admin sidebar + badges
 │   ├── AdminLedger.js     # Credit/Debit forms
 │   ├── AdminUserDetails.js # User details + login activity
+│   ├── AdminUsersPage.js  # User list + CREATE USER modal (UPDATED)
 │   ├── ProfessionalDashboard.js # Client dashboard with transaction history
 │   ├── KYC.js             # Client KYC flow
 │   └── Admin/             # Admin pages
