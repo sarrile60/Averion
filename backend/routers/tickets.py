@@ -8,11 +8,14 @@ Routes:
 - Admin: /api/v1/admin/tickets/*
 """
 
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Query
+from fastapi.responses import StreamingResponse
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from typing import Optional, List
 from datetime import datetime, timezone
 from pydantic import BaseModel
+import urllib.request
+import io
 
 from database import get_database
 from services.auth_service import AuthService
@@ -71,6 +74,61 @@ async def get_my_tickets(
     ticket_service = TicketService(db)
     tickets = await ticket_service.get_user_tickets(current_user["id"])
     return tickets
+
+
+# MIME type mapping for inline file viewing
+MIME_TYPES = {
+    'pdf': 'application/pdf',
+    'jpg': 'image/jpeg', 'jpeg': 'image/jpeg',
+    'png': 'image/png', 'gif': 'image/gif',
+    'webp': 'image/webp', 'bmp': 'image/bmp',
+    'txt': 'text/plain', 'csv': 'text/csv',
+    'doc': 'application/msword',
+    'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'xls': 'application/vnd.ms-excel',
+    'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'ppt': 'application/vnd.ms-powerpoint',
+    'pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+}
+
+
+@router.get("/tickets/view-file")
+async def view_file_inline(
+    url: str = Query(..., description="Cloudinary file URL"),
+    filename: str = Query(..., description="Original filename with extension"),
+    current_user: dict = Depends(get_current_user)
+):
+    """Proxy a Cloudinary file and serve it with Content-Disposition: inline.
+    
+    This allows browsers to display PDFs and images inline instead of forcing download.
+    Only allows proxying from the configured Cloudinary account.
+    """
+    from config import settings
+    
+    # Security: only allow proxying Cloudinary URLs from our account
+    allowed_prefix = f"https://res.cloudinary.com/{settings.CLOUDINARY_CLOUD_NAME}/"
+    if not url.startswith(allowed_prefix):
+        raise HTTPException(status_code=400, detail="Invalid file URL")
+    
+    # Determine content type from filename
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else ''
+    content_type = MIME_TYPES.get(ext, 'application/octet-stream')
+    
+    try:
+        req = urllib.request.Request(url)
+        with urllib.request.urlopen(req, timeout=30) as response:
+            file_data = response.read()
+        
+        return StreamingResponse(
+            io.BytesIO(file_data),
+            media_type=content_type,
+            headers={
+                "Content-Disposition": f'inline; filename="{filename}"',
+                "Cache-Control": "public, max-age=86400",
+            }
+        )
+    except Exception:
+        raise HTTPException(status_code=502, detail="Failed to fetch file")
 
 
 @router.post("/tickets/{ticket_id}/mark-read")

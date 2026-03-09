@@ -1384,8 +1384,37 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshT
                         // Get file extension from filename
                         const fileExt = att.file_name.split('.').pop()?.toLowerCase() || '';
                         
-                        // For viewing, use the original URL 
-                        const viewUrl = att.url;
+                        // Handler to view file inline in new tab
+                        const handleViewFile = async (e) => {
+                          e.preventDefault();
+                          if (isImage) {
+                            // Images can be opened directly from Cloudinary
+                            window.open(att.url, '_blank');
+                            return;
+                          }
+                          try {
+                            // Fetch via backend proxy (serves with Content-Disposition: inline)
+                            const response = await api.get(
+                              `/tickets/view-file?url=${encodeURIComponent(att.url)}&filename=${encodeURIComponent(att.file_name)}`,
+                              { responseType: 'blob' }
+                            );
+                            // Determine content type from extension
+                            const mimeTypes = {
+                              pdf: 'application/pdf', txt: 'text/plain', csv: 'text/csv',
+                              doc: 'application/msword', xls: 'application/vnd.ms-excel',
+                            };
+                            const blobType = mimeTypes[fileExt] || response.data.type || 'application/octet-stream';
+                            const blob = new Blob([response.data], { type: blobType });
+                            const blobUrl = window.URL.createObjectURL(blob);
+                            window.open(blobUrl, '_blank');
+                            // Cleanup after a delay to allow the new tab to load
+                            setTimeout(() => window.URL.revokeObjectURL(blobUrl), 60000);
+                          } catch (error) {
+                            console.error('View file failed:', error);
+                            // Fallback: open Cloudinary URL directly
+                            window.open(att.url, '_blank');
+                          }
+                        };
                         
                         return (
                           <div
@@ -1397,15 +1426,14 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshT
                             }`}
                             data-testid={`attachment-${idx}-${attIdx}`}
                           >
-                            {/* Left side: Clickable to VIEW/ZOOM (opens in new tab) */}
-                            <a
-                              href={viewUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`flex items-center gap-2 flex-1 min-w-0 cursor-pointer ${
+                            {/* Left side: Clickable to VIEW (opens inline in new tab) */}
+                            <button
+                              onClick={handleViewFile}
+                              className={`flex items-center gap-2 flex-1 min-w-0 cursor-pointer text-left ${
                                 isDark ? 'hover:text-blue-300' : 'hover:text-blue-600'
                               }`}
                               title="Click to view"
+                              data-testid={`view-btn-${idx}-${attIdx}`}
                             >
                               {isImage ? (
                                 <img 
@@ -1442,7 +1470,7 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshT
                                   }
                                 </p>
                               </div>
-                            </a>
+                            </button>
                             
                             {/* Right side: Download button */}
                             <button
