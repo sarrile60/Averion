@@ -40,14 +40,22 @@ class CloudinaryStorage(StorageProvider):
         """
         # Determine resource type based on content_type
         resource_type = "image"  # Default to image
+        is_raw = False
         if content_type:
             if content_type.startswith("video/"):
                 resource_type = "video"
             elif not content_type.startswith("image/"):
                 resource_type = "raw"  # For PDFs, docs, etc.
+                is_raw = True
         
-        # Clean the key to use as public_id (remove extension for Cloudinary)
-        public_id = key.rsplit('.', 1)[0] if '.' in key else key
+        # For raw files (PDFs, docs), we need to keep the extension in the public_id
+        # because Cloudinary doesn't add it automatically for raw uploads
+        if is_raw:
+            # Keep full key including extension for raw files
+            public_id = key
+        else:
+            # Clean the key to use as public_id (remove extension for images/videos)
+            public_id = key.rsplit('.', 1)[0] if '.' in key else key
         
         # Read file content
         file_content = fileobj.read()
@@ -66,8 +74,14 @@ class CloudinaryStorage(StorageProvider):
             invalidate=True
         )
         
-        # Build the URL
+        # Build the URL - for raw files, ensure extension is in URL
         url = result.get("secure_url", result.get("url"))
+        
+        # For raw files, Cloudinary may not include extension - add it if missing
+        if is_raw and key and '.' in key:
+            ext = key.rsplit('.', 1)[1].lower()
+            if not url.lower().endswith(f'.{ext}'):
+                url = f"{url}.{ext}"
         
         return FileMetadata(
             key=key,
@@ -92,7 +106,8 @@ class CloudinaryStorage(StorageProvider):
     def get_presigned_url(
         self,
         key: str,
-        expires_in: int = 3600
+        expires_in: int = 3600,
+        content_type: Optional[str] = None
     ) -> str:
         """Get the public URL for a Cloudinary asset.
         
@@ -104,11 +119,27 @@ class CloudinaryStorage(StorageProvider):
         public_id = key.rsplit('.', 1)[0] if '.' in key else key
         
         # Determine the format/extension
-        ext = key.rsplit('.', 1)[1] if '.' in key else 'jpg'
+        ext = key.rsplit('.', 1)[1].lower() if '.' in key else 'jpg'
         
-        # Build Cloudinary URL
+        # Determine resource type based on extension or content_type
+        # PDFs, documents, and other non-image/video files use "raw"
+        raw_extensions = {'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 
+                         'txt', 'csv', 'zip', 'rar', '7z', 'tar', 'gz',
+                         'json', 'xml', 'html', 'css', 'js'}
+        video_extensions = {'mp4', 'mov', 'avi', 'mkv', 'webm', 'wmv', 'flv'}
+        
+        if ext in raw_extensions:
+            resource_type = "raw"
+        elif ext in video_extensions:
+            resource_type = "video"
+        else:
+            resource_type = "image"
+        
+        # Build Cloudinary URL with correct resource type
         # For images: https://res.cloudinary.com/{cloud_name}/image/upload/{public_id}.{ext}
-        url = f"https://res.cloudinary.com/{self.cloud_name}/image/upload/{public_id}.{ext}"
+        # For raw files: https://res.cloudinary.com/{cloud_name}/raw/upload/{public_id}.{ext}
+        # For videos: https://res.cloudinary.com/{cloud_name}/video/upload/{public_id}.{ext}
+        url = f"https://res.cloudinary.com/{self.cloud_name}/{resource_type}/upload/{public_id}.{ext}"
         
         return url
     

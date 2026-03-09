@@ -1381,6 +1381,35 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshT
                           att.file_name.split('.').pop()?.toLowerCase() || ''
                         );
                         
+                        // Get file extension from filename
+                        const fileExt = att.file_name.split('.').pop()?.toLowerCase() || '';
+                        
+                        // For Cloudinary raw files, we need to handle URLs that were stored without extension
+                        // The file still exists and can be downloaded, but we need proper content-type
+                        const getViewUrl = (url, filename) => {
+                          if (!url || !url.includes('cloudinary.com')) return url;
+                          
+                          const ext = filename.split('.').pop()?.toLowerCase() || '';
+                          const rawExtensions = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'csv'];
+                          
+                          // For PDFs and documents on Cloudinary raw storage, 
+                          // use fl_attachment to force proper download with filename
+                          if (rawExtensions.includes(ext) && url.includes('/raw/upload/')) {
+                            // Insert fl_attachment transformation to force download with proper filename
+                            const parts = url.split('/upload/');
+                            if (parts.length === 2) {
+                              const nameWithoutExt = filename.replace(/\.[^/.]+$/, '');
+                              // Use fl_attachment to force browser to download with correct name
+                              return `${parts[0]}/upload/fl_attachment:${encodeURIComponent(nameWithoutExt)}/${parts[1]}`;
+                            }
+                          }
+                          return url;
+                        };
+                        
+                        // For viewing, use the original URL (browser may not display it inline)
+                        // For PDFs, the download approach is better
+                        const viewUrl = att.url;
+                        
                         // Create download URL - add fl_attachment for Cloudinary to force download
                         const getDownloadUrl = (url, filename) => {
                           if (url.includes('cloudinary.com')) {
@@ -1388,16 +1417,15 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshT
                             // URL format: https://res.cloudinary.com/cloud/type/upload/v123/path
                             const parts = url.split('/upload/');
                             if (parts.length === 2) {
-                              // Remove extension from filename for fl_attachment parameter
+                              // Use filename for fl_attachment parameter
                               const nameWithoutExt = filename.replace(/\.[^/.]+$/, '');
-                              return `${parts[0]}/upload/fl_attachment:${nameWithoutExt}/${parts[1]}`;
+                              return `${parts[0]}/upload/fl_attachment:${encodeURIComponent(nameWithoutExt)}/${parts[1]}`;
                             }
                           }
                           return url;
                         };
                         
                         const downloadUrl = getDownloadUrl(att.url, att.file_name);
-                        const viewUrl = att.url; // Original URL for viewing
                         
                         return (
                           <div
@@ -1425,8 +1453,23 @@ function TicketDetails({ ticket, onUpdate, onDelete, isAdmin = false, onRefreshT
                                   alt={att.file_name}
                                   className="w-8 h-8 object-cover rounded flex-shrink-0"
                                 />
+                              ) : fileExt === 'pdf' ? (
+                                <svg className="w-6 h-6 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
+                                  <path d="M8 12h1.5v4H8v-4zm2.5 0H12c.55 0 1 .45 1 1v2c0 .55-.45 1-1 1h-1.5v-4zm1 3v-2h-.5v2h.5zm1.5-3h2v1h-1.5v.5h1.5v1h-1.5v1.5h-1V12h1.5z"/>
+                                </svg>
+                              ) : ['doc', 'docx'].includes(fileExt) ? (
+                                <svg className="w-6 h-6 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
+                                  <path d="M8 12h8v1H8v-1zm0 2h8v1H8v-1zm0 2h5v1H8v-1z"/>
+                                </svg>
+                              ) : ['xls', 'xlsx'].includes(fileExt) ? (
+                                <svg className="w-6 h-6 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
+                                  <path d="M8 12h2v2H8v-2zm3 0h2v2h-2v-2zm3 0h2v2h-2v-2zm-6 3h2v2H8v-2zm3 0h2v2h-2v-2z"/>
+                                </svg>
                               ) : (
-                                <svg className="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                               )}
