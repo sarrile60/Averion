@@ -147,6 +147,13 @@ Full-stack banking application with KYC, transfers, admin panel, and notificatio
 - **Files Modified:** `backend/providers/cloudinary_storage.py`, `frontend/src/components/Support.js`
 - **Testing:** Verified via testing agent (iteration_158) — all tests passed
 
+### CORS Fix: Production Login Failed (March 9, 2026)
+- **Problem:** Admin login on production (`ecommbx.online`) shows "Login failed" even with correct credentials
+- **Root Cause:** CORS config had `allow_origins=["*"]` with `allow_credentials=True`. Starlette returns literal `Access-Control-Allow-Origin: *` for non-preflight requests, but browsers reject `*` when `withCredentials: true` (CORS spec requires specific origin).
+- **Fix:** Changed to `allow_origin_regex=r".*"` in `server.py` which always reflects the specific request origin, making it compatible with credentialed browser requests.
+- **File Modified:** `backend/server.py` (CORS middleware config)
+- **Testing:** Verified backend returns specific origin header. Admin and client logins work on preview.
+
 ### Feature: Inline File Viewing in Support Tickets (March 9, 2026)
 - **Requirement:** Clicking a file name opens the file inline in a new tab (e.g., PDF in browser PDF viewer), while the download button saves the file
 - **Problem:** Cloudinary raw files are served with `Content-Disposition: attachment`, forcing browser to download instead of display

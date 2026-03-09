@@ -188,10 +188,12 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# CORS
+# CORS - Use allow_origin_regex to always reflect the specific origin
+# This is required because allow_origins=["*"] returns literal "*" 
+# which browsers reject when allow_credentials=True (withCredentials)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for file serving
+    allow_origin_regex=r".*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
