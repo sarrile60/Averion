@@ -1,0 +1,658 @@
+[
+  {
+    "_id": "970a53b5-4239-405d-95a0-36b859ead7ca",
+    "user_id": "customer_001",
+    "title": "Transfer completed",
+    "message": "Your transfer of \u20ac50.00 to Alice has been completed.",
+    "entity_type": "transfer",
+    "entity_id": "04d69bbc-503b-4c1f-a438-49964b96662d",
+    "is_read": false,
+    "created_at": {
+      "$date": "2026-01-10T17:31:22.193000"
+    },
+    "notification_type": "TRANSACTION",
+    "read": true,
+    "read_at": {
+      "$date": "2026-01-15T13:31:52.473000"
+    }
+  },
+  {
+    "_id": "2eb6a74c-3f98-4090-8c29-2424df9666c7",
+    "user_id": "696686ed12dec8bf6a714e7e",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "5c128715-d309-4bca-bc35-e3506ac4f7e2",
+    "is_read": false,
+    "created_at": {
+      "$date": "2026-01-13T18:34:23.596000"
+    },
+    "notification_type": "ACCOUNT",
+    "read": true,
+    "read_at": {
+      "$date": "2026-01-15T12:47:12.654000"
+    }
+  },
+  {
+    "_id": "c1cf21cb-3c7b-469a-ba9d-c50fcbb63924",
+    "user_id": "69668885c0ed8330a4b659ae",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "b5714bd6-c74b-494d-ac12-2eba3a4b7ec9",
+    "is_read": false,
+    "created_at": {
+      "$date": "2026-01-13T18:37:42.020000"
+    },
+    "notification_type": "ACCOUNT"
+  },
+  {
+    "_id": "babfb981-0cf0-47de-b6eb-2a06c88646cb",
+    "user_id": "69667e2a0039551e0feb1198",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "ff8e662d-01c1-4cca-b00d-c83ea9e9d1a9",
+    "is_read": false,
+    "created_at": {
+      "$date": "2026-01-14T09:25:16.995000"
+    },
+    "notification_type": "ACCOUNT"
+  },
+  {
+    "_id": "eeb04498-6093-4598-ae93-9afbcf286e7f",
+    "user_id": "69667e2a0039551e0feb1198",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "cf4dea9b-4877-446f-b008-66ceced7c242",
+    "is_read": false,
+    "created_at": {
+      "$date": "2026-01-14T09:28:58.268000"
+    },
+    "notification_type": "ACCOUNT"
+  },
+  {
+    "_id": "11fffbf7-6c22-408a-a519-6f8e2924278a",
+    "user_id": "customer_001",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "2356ec8e-cf20-4476-a4b6-3379ed17482c",
+    "is_read": false,
+    "created_at": {
+      "$date": "2026-01-14T09:31:24.341000"
+    },
+    "notification_type": "ACCOUNT"
+  },
+  {
+    "_id": "fe0409ec-2de7-4cb2-8972-72abc2cb5672",
+    "user_id": "customer_001",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "1347307e-f869-46d5-8e36-70ee2aa18437",
+    "is_read": false,
+    "created_at": {
+      "$date": "2026-01-14T09:34:30.289000"
+    },
+    "notification_type": "ACCOUNT",
+    "read": true,
+    "read_at": {
+      "$date": "2026-01-15T13:31:55.165000"
+    }
+  },
+  {
+    "_id": "644f2de7-3868-424b-831a-70bb0d8c041b",
+    "user_id": "customer_001",
+    "title": "Card request declined",
+    "message": "Your card request could not be processed: fun",
+    "entity_type": "card_request",
+    "entity_id": "26e5e16f-8bd2-4c0e-a280-c0b00a77ca9b",
+    "is_read": false,
+    "created_at": {
+      "$date": "2026-01-14T09:57:58.287000"
+    },
+    "notification_type": "ACCOUNT"
+  },
+  {
+    "_id": "0fa58de9-5a0d-43f3-bdae-d17b65bf9ba0",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Transfer completed",
+    "message": "Your transfer of \u20ac10.00 to Test has been completed.",
+    "entity_type": "transfer",
+    "entity_id": "5645a625-87c2-4798-a529-db5fea1af87e",
+    "read": true,
+    "created_at": {
+      "$date": "2026-01-15T11:52:45.348000"
+    },
+    "read_at": {
+      "$date": "2026-01-15T13:31:34.173000"
+    }
+  },
+  {
+    "_id": "b3b1f95b-180b-44ce-8b06-138a095d4edd",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Transfer failed",
+    "message": "Transfer failed: Hh",
+    "entity_type": "transfer",
+    "entity_id": "3b874535-8d72-404a-a245-d62709987456",
+    "read": true,
+    "created_at": {
+      "$date": "2026-01-15T11:52:52.191000"
+    },
+    "read_at": {
+      "$date": "2026-01-15T13:31:38.081000"
+    }
+  },
+  {
+    "_id": "6968fb81b7428e7b9b83e410",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac1500.00. Please contact support for assistance.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-15T14:36:49.407000"
+    }
+  },
+  {
+    "_id": "6968fc7e534a62ac6373b284",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac2000.00. Please contact support for assistance.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-15T14:41:02.582000"
+    }
+  },
+  {
+    "_id": "6968fc7e534a62ac6373b285",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Account Restriction Lifted",
+    "message": "Your account restrictions have been removed. You can now perform all banking operations.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-15T14:41:02.736000"
+    }
+  },
+  {
+    "_id": "6968fddd534a62ac6373b289",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac2000.00. Please contact support for assistance.",
+    "read": true,
+    "read_at": {
+      "$date": "2026-01-15T14:58:20.367000"
+    },
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-15T14:46:53.205000"
+    }
+  },
+  {
+    "_id": "6968ffd9534a62ac6373b28d",
+    "user_id": "6967754aee56629feac444aa",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac1750.00. Please contact support for assistance.",
+    "read": true,
+    "read_at": {
+      "$date": "2026-01-15T14:56:13.081000"
+    },
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-15T14:55:21.853000"
+    }
+  },
+  {
+    "_id": "6969046beabb788b9712a071",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac2000.00. Please contact support for assistance.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-15T15:14:51.310000"
+    }
+  },
+  {
+    "_id": "6969046beabb788b9712a072",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Account Restriction Lifted",
+    "message": "Your account restrictions have been removed. You can now perform all banking operations.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-15T15:14:51.499000"
+    }
+  },
+  {
+    "_id": "69690524eabb788b9712a077",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac2000.00. Please contact support for assistance.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-15T15:17:56.456000"
+    }
+  },
+  {
+    "_id": "696905edeabb788b9712a07c",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Account Restriction Lifted",
+    "message": "Your account restrictions have been removed. You can now perform all banking operations.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-15T15:21:17.907000"
+    }
+  },
+  {
+    "_id": "6969090bf65736b64ddd56f7",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac2500.00. Please contact support for assistance.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-15T15:34:35.641000"
+    }
+  },
+  {
+    "_id": "6d309446-b91d-400c-9a5b-ece3a42d3789",
+    "user_id": "696a1bd5a743135fb6611cda",
+    "notification_type": "ACCOUNT",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "b74c6fa9-69e8-4b44-beed-f730e1c9121c",
+    "read": true,
+    "created_at": {
+      "$date": "2026-01-16T11:11:44.396000"
+    },
+    "read_at": {
+      "$date": "2026-01-16T11:12:16.807000"
+    }
+  },
+  {
+    "_id": "c377e468-cb99-4eb7-8120-16b748954e5f",
+    "user_id": "696a1bd5a743135fb6611cda",
+    "notification_type": "ACCOUNT",
+    "title": "Card request declined",
+    "message": "Your card request could not be processed: no name",
+    "entity_type": "card_request",
+    "entity_id": "a2aa92ef-6dc3-44c1-8b62-1fcbd2c92bb1",
+    "read": true,
+    "created_at": {
+      "$date": "2026-01-16T11:11:53.592000"
+    },
+    "read_at": {
+      "$date": "2026-01-16T11:12:12.285000"
+    }
+  },
+  {
+    "_id": "b7000b27-8298-4167-a6c6-8879ff838970",
+    "user_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "notification_type": "ACCOUNT",
+    "title": "Card request declined",
+    "message": "Your card request could not be processed: fun",
+    "entity_type": "card_request",
+    "entity_id": "a53ff5ef-3a15-48d7-8930-d4dde70a0c58",
+    "read": true,
+    "created_at": {
+      "$date": "2026-01-16T15:57:30.102000"
+    },
+    "read_at": {
+      "$date": "2026-01-16T15:57:49.421000"
+    }
+  },
+  {
+    "_id": "28614b53-bdba-4dd6-8e56-66c7bf30ecea",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "ed1e5327-6938-412f-83b5-799e698e9c98",
+    "read": false,
+    "created_at": {
+      "$date": "2026-01-16T15:58:38.720000"
+    }
+  },
+  {
+    "_id": "eb54731e-bdcf-4e26-95a7-01ce11ed92ff",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "61778974-ca16-4af7-b494-7bc0fddefd67",
+    "read": false,
+    "created_at": {
+      "$date": "2026-01-16T16:09:25.950000"
+    }
+  },
+  {
+    "_id": "383ca0e4-e31d-4302-a39f-1932a3db8322",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "34eed41f-e768-483b-838d-02b86d5b8122",
+    "read": false,
+    "created_at": {
+      "$date": "2026-01-16T16:13:51.241000"
+    }
+  },
+  {
+    "_id": "afbaabc7-0aaa-4305-ac26-d14fb57c8954",
+    "user_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "notification_type": "ACCOUNT",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "d5df3a18-d7ac-4d6f-a74b-30a1fa715a1e",
+    "read": true,
+    "created_at": {
+      "$date": "2026-01-16T16:16:36.700000"
+    },
+    "read_at": {
+      "$date": "2026-01-19T09:41:20.235000"
+    }
+  },
+  {
+    "_id": "696a661d6177af49c46b7f2a",
+    "user_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac18000.00. Please contact support for assistance.",
+    "read": true,
+    "read_at": {
+      "$date": "2026-01-16T16:26:27.349000"
+    },
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-16T16:23:57.934000"
+    }
+  },
+  {
+    "_id": "eddce4e9-5102-4d44-924b-35e3706b450e",
+    "user_id": "696a67196177af49c46b7f34",
+    "notification_type": "ACCOUNT",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "0a33bdf8-19f9-45cc-b537-3c2ec04c34ed",
+    "read": false,
+    "created_at": {
+      "$date": "2026-01-16T16:32:12.778000"
+    }
+  },
+  {
+    "_id": "696a69046177af49c46b7f45",
+    "user_id": "696a67196177af49c46b7f34",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac200.00. Please contact support for assistance.",
+    "read": true,
+    "read_at": {
+      "$date": "2026-01-16T16:50:26.159000"
+    },
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-16T16:36:20.639000"
+    }
+  },
+  {
+    "_id": "696a704e6177af49c46b7f51",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac200.00. Please contact support for assistance.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-16T17:07:26.527000"
+    }
+  },
+  {
+    "_id": "696e0f15e2e18499a0b7bc92",
+    "user_id": "696e01e3e3141f70e7f5515b",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac1900.00. Please contact support for assistance.",
+    "read": true,
+    "read_at": {
+      "$date": "2026-01-19T11:58:12.311000"
+    },
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-19T11:01:41.487000"
+    }
+  },
+  {
+    "_id": "696e372d7c55866194711498",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Account Restriction Lifted",
+    "message": "Your account restrictions have been removed. You can now perform all banking operations.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-19T13:52:45.548000"
+    }
+  },
+  {
+    "_id": "696e37e57c558661947114a2",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac200.00. Please contact support for assistance.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-19T13:55:49.328000"
+    }
+  },
+  {
+    "_id": "696e39307c558661947114a4",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Account Restriction Lifted",
+    "message": "Your account restrictions have been removed. You can now perform all banking operations.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-19T14:01:20.751000"
+    }
+  },
+  {
+    "_id": "696e39987c558661947114a9",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac200.00. Please contact support for assistance.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-19T14:03:04.030000"
+    }
+  },
+  {
+    "_id": "696e3b5e7c558661947114ac",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Account Restriction Lifted",
+    "message": "Your account restrictions have been removed. You can now perform all banking operations.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-19T14:10:38.357000"
+    }
+  },
+  {
+    "_id": "696e3bd17c558661947114b2",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac200.00. Please contact support for assistance.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-19T14:12:33.670000"
+    }
+  },
+  {
+    "_id": "696e3df47c558661947114b5",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Account Restriction Lifted",
+    "message": "Your account restrictions have been removed. You can now perform all banking operations.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-19T14:21:40.250000"
+    }
+  },
+  {
+    "_id": "696e3e187c558661947114b8",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac200.00. Please contact support for assistance.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-19T14:22:16.403000"
+    }
+  },
+  {
+    "_id": "696e421df6501f7b7496e8f1",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Account Restriction Lifted",
+    "message": "Your account restrictions have been removed. You can now perform all banking operations.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-19T14:39:25.412000"
+    }
+  },
+  {
+    "_id": "37037cdf-f94b-4f9f-a8c8-a4c53ebe03ec",
+    "user_id": "696e2c4eb7111bc49f800c16",
+    "notification_type": "ACCOUNT",
+    "title": "Your card is ready!",
+    "message": "Your card has been issued and is ready to use.",
+    "entity_type": "card",
+    "entity_id": "642eca38-7a5d-4fe1-8295-08de6dc6d112",
+    "read": true,
+    "created_at": {
+      "$date": "2026-01-19T14:58:37.855000"
+    },
+    "read_at": {
+      "$date": "2026-01-19T15:03:35.989000"
+    }
+  },
+  {
+    "_id": "696e4bc0f6501f7b7496e919",
+    "user_id": "696e2c4eb7111bc49f800c16",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac15000.00. Please contact support for assistance.",
+    "read": true,
+    "read_at": {
+      "$date": "2026-01-19T15:30:45.868000"
+    },
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-19T15:20:32.716000"
+    }
+  },
+  {
+    "_id": "696f7b16a0a55585712a774b",
+    "user_id": "customer_001",
+    "notification_type": "SECURITY",
+    "title": "Account Restriction Notice",
+    "message": "Your account has been restricted due to outstanding tax obligations. Amount due: \u20ac2000.00. Please contact support for assistance.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.313000"
+    }
+  },
+  {
+    "_id": "696f7b16a0a55585712a774c",
+    "user_id": "customer_001",
+    "notification_type": "ACCOUNT",
+    "title": "Account Restriction Lifted",
+    "message": "Your account restrictions have been removed. You can now perform all banking operations.",
+    "read": false,
+    "read_at": null,
+    "action_url": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.460000"
+    }
+  }
+]

@@ -1,0 +1,1729 @@
+[
+  {
+    "_id": "6960ccb99f182f11b1c85726",
+    "user_id": "customer_001",
+    "full_name": "John Doe",
+    "date_of_birth": "2001-02-03",
+    "nationality": "DE",
+    "street_address": "Bruga Thoma Kalafi",
+    "city": "Ebusan",
+    "postal_code": "3001",
+    "country": "Germany",
+    "tax_residency": "DE",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "6960d1189f182f11b1c85748",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/customer_001/PASSPORT_d9393703-14dc-4f63-bb26-955a7f314203_photo_enhanced_4x.png",
+        "file_name": "photo_enhanced_4x.png",
+        "file_size": 1220197,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-09T09:57:44.477000"
+        }
+      },
+      {
+        "id": "6960d11f9f182f11b1c85749",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/customer_001/PROOF_OF_ADDRESS_3c7d5ea5-444a-49df-940c-1e02d76afab0_photo_enhanced_2x.png",
+        "file_name": "photo_enhanced_2x.png",
+        "file_size": 359582,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-09T09:57:51.070000"
+        }
+      },
+      {
+        "id": "6960d1239f182f11b1c8574a",
+        "document_type": "SELFIE",
+        "file_key": "kyc/customer_001/SELFIE_2f3baab3-ef30-441e-8f36-5517d9639d2e_photo_enhanced_2x.png",
+        "file_name": "photo_enhanced_2x.png",
+        "file_size": 359582,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-09T09:57:55.047000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-09T13:36:15.023000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-09T13:56:14.670000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": null,
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-09T13:36:15.023000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-09T13:36:15.023000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:39:05.191000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T13:56:14.670000"
+    }
+  },
+  {
+    "_id": "6960d490aec0df5da3e903a7",
+    "user_id": "6960d3d59d59173e05f82d20",
+    "full_name": "Davi Davi",
+    "date_of_birth": "2001-02-22",
+    "nationality": "Albanian",
+    "street_address": "Rruga 28 Nentori",
+    "city": "Elbasan",
+    "postal_code": "3001",
+    "country": "Albania",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "6960d5e9aec0df5da3e903a8",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/6960d3d59d59173e05f82d20/PASSPORT_257c3158-f7d1-4193-a85d-83ce73bafa4a_photo_enhanced_4x.png",
+        "file_name": "photo_enhanced_4x.png",
+        "file_size": 1220197,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-09T10:18:17.933000"
+        }
+      },
+      {
+        "id": "6960d5ecaec0df5da3e903a9",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/6960d3d59d59173e05f82d20/PROOF_OF_ADDRESS_ce61d521-c146-43db-81c0-3323952a2bd5_photo_enhanced_2x.png",
+        "file_name": "photo_enhanced_2x.png",
+        "file_size": 359582,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-09T10:18:20.620000"
+        }
+      },
+      {
+        "id": "6960d5f0aec0df5da3e903aa",
+        "document_type": "SELFIE",
+        "file_key": "kyc/6960d3d59d59173e05f82d20/SELFIE_d0ba93b3-13a4-4551-a0a9-02fed077d5ae_photo_enhanced_2x.png",
+        "file_name": "photo_enhanced_2x.png",
+        "file_size": 359582,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-09T10:18:24.051000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-09T10:18:57.728000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-09T10:20:37.184000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "bravo davi",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-09T10:18:57.728000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-09T10:18:57.728000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T10:12:32.380000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T10:20:37.184000"
+    }
+  },
+  {
+    "_id": "6960da7be2a99548fda31c4d",
+    "user_id": "admin_super_001",
+    "full_name": null,
+    "date_of_birth": null,
+    "nationality": null,
+    "street_address": null,
+    "city": null,
+    "postal_code": null,
+    "country": null,
+    "tax_residency": null,
+    "tax_id": null,
+    "documents": [],
+    "status": "DRAFT",
+    "submitted_at": null,
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null,
+    "rejection_reason": null,
+    "terms_accepted": false,
+    "terms_accepted_at": null,
+    "privacy_accepted": false,
+    "privacy_accepted_at": null,
+    "created_at": {
+      "$date": "2026-01-09T10:37:47.312000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T10:37:47.312000"
+    }
+  },
+  {
+    "_id": "69626eba24b815155546a2d3",
+    "user_id": "69626eb324b815155546a2d1",
+    "full_name": "sarrile tekele ",
+    "date_of_birth": "1999-10-11",
+    "nationality": "de",
+    "street_address": "Carnaby Street Kingly Court",
+    "city": "London",
+    "postal_code": "W1F 9PB",
+    "country": "germany ",
+    "tax_residency": "121212",
+    "tax_id": "21212112",
+    "documents": [
+      {
+        "id": "69626eed24b815155546a2d4",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/69626eb324b815155546a2d1/PASSPORT_feee8332-5450-4bdb-92cc-9ffe5ec0e400_5983046184324500346.jpg",
+        "file_name": "5983046184324500346.jpg",
+        "file_size": 41444,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-10T15:23:25.152000"
+        }
+      },
+      {
+        "id": "69626ef024b815155546a2d5",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/69626eb324b815155546a2d1/PROOF_OF_ADDRESS_54b3fd74-947e-4d89-816c-638905878b04_5983046184324500339.jpg",
+        "file_name": "5983046184324500339.jpg",
+        "file_size": 37293,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-10T15:23:28.449000"
+        }
+      },
+      {
+        "id": "69626ef324b815155546a2d6",
+        "document_type": "SELFIE",
+        "file_key": "kyc/69626eb324b815155546a2d1/SELFIE_f0c608f2-9f7d-4d70-b395-3d668941c5e8_5983046184324500506.jpg",
+        "file_name": "5983046184324500506.jpg",
+        "file_size": 105940,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-10T15:23:31.827000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-10T15:23:35.732000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-10T15:23:59.870000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "bnullshit",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-10T15:23:35.732000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-10T15:23:35.732000"
+    },
+    "created_at": {
+      "$date": "2026-01-10T15:22:34.801000"
+    },
+    "updated_at": {
+      "$date": "2026-01-10T15:23:59.870000"
+    }
+  },
+  {
+    "_id": "69666b2e47560b39a3e84df3",
+    "user_id": "69666b2847560b39a3e84df1",
+    "full_name": null,
+    "date_of_birth": null,
+    "nationality": null,
+    "street_address": null,
+    "city": null,
+    "postal_code": null,
+    "country": null,
+    "tax_residency": null,
+    "tax_id": null,
+    "documents": [],
+    "status": "DRAFT",
+    "submitted_at": null,
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null,
+    "rejection_reason": null,
+    "terms_accepted": false,
+    "terms_accepted_at": null,
+    "privacy_accepted": false,
+    "privacy_accepted_at": null,
+    "created_at": {
+      "$date": "2026-01-13T15:56:30.359000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T15:56:30.359000"
+    }
+  },
+  {
+    "_id": "696675727fb31c36e6360825",
+    "user_id": "6966756d7fb31c36e6360823",
+    "full_name": null,
+    "date_of_birth": null,
+    "nationality": null,
+    "street_address": null,
+    "city": null,
+    "postal_code": null,
+    "country": null,
+    "tax_residency": null,
+    "tax_id": null,
+    "documents": [],
+    "status": "DRAFT",
+    "submitted_at": null,
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null,
+    "rejection_reason": null,
+    "terms_accepted": false,
+    "terms_accepted_at": null,
+    "privacy_accepted": false,
+    "privacy_accepted_at": null,
+    "created_at": {
+      "$date": "2026-01-13T16:40:18.573000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T16:40:18.573000"
+    }
+  },
+  {
+    "_id": "69667709cd02bc3c4fe2538c",
+    "user_id": "69667700cd02bc3c4fe2538a",
+    "full_name": "test test",
+    "date_of_birth": "1990-11-11",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "ta",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "69667a30cd02bc3c4fe25396",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/69667700cd02bc3c4fe2538a/PASSPORT_5adf99db-d636-4b78-9aa7-8a0e09687eef_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:00:32.555000"
+        }
+      },
+      {
+        "id": "69667a31cd02bc3c4fe25397",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/69667700cd02bc3c4fe2538a/PROOF_OF_ADDRESS_dd3b680e-6314-4478-bcb9-327db38cead9_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:00:33.449000"
+        }
+      },
+      {
+        "id": "69667a33cd02bc3c4fe25398",
+        "document_type": "SELFIE",
+        "file_key": "kyc/69667700cd02bc3c4fe2538a/SELFIE_7471a10f-3f42-49d2-b018-9b5984d6c337_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:00:35.990000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-13T17:00:39.868000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-13T17:01:05.458000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-13T17:00:39.868000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-13T17:00:39.868000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T16:47:05.528000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T17:01:05.458000"
+    }
+  },
+  {
+    "_id": "69667bec4c12fb9524100660",
+    "user_id": "69667be64c12fb952410065e",
+    "full_name": "Andrew",
+    "date_of_birth": "1996-12-12",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "69667c004c12fb9524100661",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/69667be64c12fb952410065e/PASSPORT_0e80d692-7fbe-4607-bc77-2dd1759c3e86_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:08:16.810000"
+        }
+      },
+      {
+        "id": "69667c024c12fb9524100662",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/69667be64c12fb952410065e/PROOF_OF_ADDRESS_e35d6e65-571e-46f3-81e0-cc24bf4991bf_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:08:18.629000"
+        }
+      },
+      {
+        "id": "69667c064c12fb9524100663",
+        "document_type": "SELFIE",
+        "file_key": "kyc/69667be64c12fb952410065e/SELFIE_aaacef70-5e0a-41c9-bd60-3a7736639657_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:08:22.071000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-13T17:08:42.901000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-13T17:09:11.824000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-13T17:08:42.901000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-13T17:08:42.901000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T17:07:56.260000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T17:09:11.824000"
+    }
+  },
+  {
+    "_id": "69667e300039551e0feb119a",
+    "user_id": "69667e2a0039551e0feb1198",
+    "full_name": "test test",
+    "date_of_birth": "1996-11-11",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "tt",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "69667e440039551e0feb119b",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/69667e2a0039551e0feb1198/PASSPORT_82c47ab7-9797-44b7-8230-2aca91978a85_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:17:56.805000"
+        }
+      },
+      {
+        "id": "69667e450039551e0feb119c",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/69667e2a0039551e0feb1198/PROOF_OF_ADDRESS_d2567f89-a1d1-4d8c-b4a4-91e7fd0e86fe_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:17:57.717000"
+        }
+      },
+      {
+        "id": "69667e470039551e0feb119d",
+        "document_type": "SELFIE",
+        "file_key": "kyc/69667e2a0039551e0feb1198/SELFIE_2ff0a633-f679-4b68-b0d8-9ec01c27a431_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:17:59.629000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-13T17:18:04.148000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-13T17:37:49.523000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "good boy",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-13T17:18:04.148000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-13T17:18:04.148000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T17:17:36.724000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T17:37:49.523000"
+    }
+  },
+  {
+    "_id": "696686f312dec8bf6a714e80",
+    "user_id": "696686ed12dec8bf6a714e7e",
+    "full_name": "Andrew",
+    "date_of_birth": "1222-12-12",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "6966870112dec8bf6a714e81",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696686ed12dec8bf6a714e7e/PASSPORT_a128296a-4164-436e-96f3-6d2e79f0b4fc_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:55:13.216000"
+        }
+      },
+      {
+        "id": "6966870212dec8bf6a714e82",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696686ed12dec8bf6a714e7e/PROOF_OF_ADDRESS_10a5228d-a4c0-4cc6-8ae8-23e199c3dc38_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:55:14.573000"
+        }
+      },
+      {
+        "id": "6966870712dec8bf6a714e83",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696686ed12dec8bf6a714e7e/SELFIE_8039e9ca-5870-462e-8919-5604afb97a82_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-13T17:55:19.416000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-13T17:55:22.181000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-13T17:58:43.126000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "hh",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-13T17:55:22.181000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-13T17:55:22.181000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T17:54:59.905000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T17:58:43.126000"
+    }
+  },
+  {
+    "_id": "6966888bc0ed8330a4b659b0",
+    "user_id": "69668885c0ed8330a4b659ae",
+    "full_name": "test test",
+    "date_of_birth": "1220-12-12",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696688dbc0ed8330a4b659b1",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/69668885c0ed8330a4b659ae/PASSPORT_a44f85b4-a4a0-4744-be5f-d6cc2cd0e08c_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-13T18:03:07.838000"
+        }
+      },
+      {
+        "id": "696688ddc0ed8330a4b659b2",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/69668885c0ed8330a4b659ae/PROOF_OF_ADDRESS_27165377-e6a6-4371-ac39-5900dbf87583_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-13T18:03:09.020000"
+        }
+      },
+      {
+        "id": "696688dfc0ed8330a4b659b3",
+        "document_type": "SELFIE",
+        "file_key": "kyc/69668885c0ed8330a4b659ae/SELFIE_9809bdea-d3e9-4605-a25b-1dd1e3f7edd1_5994331816485129078.jpg",
+        "file_name": "5994331816485129078.jpg",
+        "file_size": 120377,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-13T18:03:11.232000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-13T18:03:17.026000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-13T18:08:07.218000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-13T18:03:17.026000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-13T18:03:17.026000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T18:01:47.441000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T18:08:07.218000"
+    }
+  },
+  {
+    "_id": "696771abee56629feac4449f",
+    "user_id": "696771a2ee56629feac4449d",
+    "full_name": "Joris Deli",
+    "date_of_birth": "1996-08-29",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696771c3ee56629feac444a0",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696771a2ee56629feac4449d/PASSPORT_f1cf7688-9a25-4f86-a8a0-84a74a3064f7_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-14T10:36:51.258000"
+        }
+      },
+      {
+        "id": "696771c4ee56629feac444a1",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696771a2ee56629feac4449d/PROOF_OF_ADDRESS_446989f3-959c-46b8-9530-faa1d2318ce9_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-14T10:36:52.239000"
+        }
+      },
+      {
+        "id": "696771c5ee56629feac444a2",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696771a2ee56629feac4449d/SELFIE_ff6d30a2-0ea6-42f4-83b8-1fae307dc5f6_5994331816485129078.jpg",
+        "file_name": "5994331816485129078.jpg",
+        "file_size": 120377,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-14T10:36:53.977000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-14T10:36:58.596000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-14T10:48:35.270000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "ok",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-14T10:36:58.596000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-14T10:36:58.596000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T10:36:27.918000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T10:48:35.270000"
+    }
+  },
+  {
+    "_id": "69677552ee56629feac444ac",
+    "user_id": "6967754aee56629feac444aa",
+    "full_name": "Deli Deli",
+    "date_of_birth": "2001-11-11",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "69677565ee56629feac444ad",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/6967754aee56629feac444aa/PASSPORT_6a3fe131-f027-43b9-af8d-3ca743f018ec_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-14T10:52:21.547000"
+        }
+      },
+      {
+        "id": "69677567ee56629feac444ae",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/6967754aee56629feac444aa/PROOF_OF_ADDRESS_10914ac9-1ad1-4e1b-8e07-b67ea1c463f4_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-14T10:52:23.106000"
+        }
+      },
+      {
+        "id": "69677567ee56629feac444af",
+        "document_type": "SELFIE",
+        "file_key": "kyc/6967754aee56629feac444aa/SELFIE_48f6ceaa-3664-448f-bf05-452807378f31_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-14T10:52:23.929000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-14T10:52:28.054000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-14T10:53:19.480000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "hi",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-14T10:52:28.054000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-14T10:52:28.054000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T10:52:02.645000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T10:53:19.480000"
+    }
+  },
+  {
+    "_id": "696a0ee636a0500a740d53c5",
+    "user_id": "696a0ecc36a0500a740d53c3",
+    "full_name": "Blend Deli",
+    "date_of_birth": "2000-08-07",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696a0ef836a0500a740d53c6",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696a0ecc36a0500a740d53c3/PASSPORT_7b055c1d-cf35-44bc-9209-afa44d126743_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:12:08.853000"
+        }
+      },
+      {
+        "id": "696a0efa36a0500a740d53c7",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696a0ecc36a0500a740d53c3/PROOF_OF_ADDRESS_f119f549-fd73-44ea-b9f0-fd4c4f984c37_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:12:10.466000"
+        }
+      },
+      {
+        "id": "696a0efc36a0500a740d53c8",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696a0ecc36a0500a740d53c3/SELFIE_10120bae-55c6-4a9f-b758-49a133d14056_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:12:12.207000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-16T10:12:15.400000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-16T10:14:48.465000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-16T10:12:15.400000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-16T10:12:15.400000"
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:11:50.994000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T10:14:48.465000"
+    }
+  },
+  {
+    "_id": "696a13928a0446b7b4b771ab",
+    "user_id": "696a13888a0446b7b4b771a9",
+    "full_name": "Blend Blendi",
+    "date_of_birth": "2000-02-22",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696a13a68a0446b7b4b771ac",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696a13888a0446b7b4b771a9/PASSPORT_710ff67b-13af-4fbe-a425-8a0fbdf0bda0_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:32:06.553000"
+        }
+      },
+      {
+        "id": "696a13a88a0446b7b4b771ad",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696a13888a0446b7b4b771a9/PROOF_OF_ADDRESS_a6391310-1d29-442f-9ff1-5e5c23477396_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:32:08.209000"
+        }
+      },
+      {
+        "id": "696a13a98a0446b7b4b771ae",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696a13888a0446b7b4b771a9/SELFIE_3d2c294e-3839-437a-876a-66efb22213f0_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:32:09.707000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-16T10:32:31.105000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-16T10:32:40.920000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-16T10:32:31.105000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-16T10:32:31.105000"
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:31:46.696000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T10:32:40.920000"
+    }
+  },
+  {
+    "_id": "test_kyc_validation_001",
+    "city": "Berlin",
+    "country": "Germany",
+    "created_at": {
+      "$date": "2026-01-16T10:40:54.953000"
+    },
+    "date_of_birth": "1990-01-01",
+    "documents": [],
+    "full_name": "Test User For KYC Validation",
+    "nationality": "Germany",
+    "postal_code": "10115",
+    "privacy_accepted": true,
+    "status": "APPROVED",
+    "street_address": "123 Test St",
+    "submitted_at": {
+      "$date": "2026-01-16T10:40:54.953000"
+    },
+    "tax_id": "DE123456789",
+    "tax_residency": "Germany",
+    "terms_accepted": true,
+    "updated_at": {
+      "$date": "2026-01-16T10:41:45.278000"
+    },
+    "user_id": "test_user_for_kyc",
+    "rejection_reason": null,
+    "review_notes": "Approved",
+    "reviewed_at": {
+      "$date": "2026-01-16T10:41:45.278000"
+    },
+    "reviewed_by": "admin_super_001"
+  },
+  {
+    "_id": "696a1676b1fb6891f796bf87",
+    "user_id": "696a166bb1fb6891f796bf85",
+    "full_name": "Andrew",
+    "date_of_birth": "2000-02-22",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696a1696b1fb6891f796bf88",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696a166bb1fb6891f796bf85/PASSPORT_52c0417a-efc0-4aae-ad56-eab77bc2b948_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:44:38.190000"
+        }
+      },
+      {
+        "id": "696a1698b1fb6891f796bf89",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696a166bb1fb6891f796bf85/PROOF_OF_ADDRESS_548e1a2a-a9f9-467d-926c-1d8131ee938d_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:44:40.118000"
+        }
+      },
+      {
+        "id": "696a169ab1fb6891f796bf8a",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696a166bb1fb6891f796bf85/SELFIE_864ba4fa-ca11-492e-851b-7a465d575771_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:44:42.618000"
+        }
+      }
+    ],
+    "status": "REJECTED",
+    "submitted_at": {
+      "$date": "2026-01-16T10:45:29.309000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-16T11:00:49.043000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "h",
+    "rejection_reason": "h",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-16T10:45:29.309000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-16T10:45:29.309000"
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:44:06.140000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T11:00:49.043000"
+    }
+  },
+  {
+    "_id": "test_needs_more_info_001",
+    "city": "Paris",
+    "country": "France",
+    "created_at": {
+      "$date": "2026-01-16T10:49:35.792000"
+    },
+    "date_of_birth": "1992-05-15",
+    "documents": [],
+    "full_name": "Test User Needs Info",
+    "nationality": "France",
+    "postal_code": "75001",
+    "privacy_accepted": true,
+    "review_notes": "h",
+    "status": "REJECTED",
+    "street_address": "456 Test Ave",
+    "submitted_at": {
+      "$date": "2026-01-16T10:49:35.792000"
+    },
+    "tax_id": "FR12345678901",
+    "tax_residency": "France",
+    "terms_accepted": true,
+    "updated_at": {
+      "$date": "2026-01-16T11:00:44.321000"
+    },
+    "user_id": "test_user_needs_info",
+    "rejection_reason": "h",
+    "reviewed_at": {
+      "$date": "2026-01-16T11:00:44.321000"
+    },
+    "reviewed_by": "admin_super_001"
+  },
+  {
+    "_id": "696a19eea743135fb6611ccf",
+    "user_id": "696a19e8a743135fb6611ccd",
+    "full_name": "Andrew",
+    "date_of_birth": "2000-02-02",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696a1a04a743135fb6611cd0",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696a19e8a743135fb6611ccd/PASSPORT_670633f4-92ab-4b0e-a1b6-a2e608b43d2b_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:59:16.625000"
+        }
+      },
+      {
+        "id": "696a1a05a743135fb6611cd1",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696a19e8a743135fb6611ccd/PROOF_OF_ADDRESS_bdcbc1be-1889-4bdc-8cdf-5d9697d28def_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:59:17.740000"
+        }
+      },
+      {
+        "id": "696a1a08a743135fb6611cd2",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696a19e8a743135fb6611ccd/SELFIE_11692517-c726-4312-a80b-6531e63dadeb_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T10:59:20.352000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-16T11:00:32.910000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-16T11:04:43.229000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-16T11:00:32.910000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-16T11:00:32.910000"
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:58:54.751000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T11:04:43.229000"
+    }
+  },
+  {
+    "_id": "696a1bffa743135fb6611cdc",
+    "user_id": "696a1bd5a743135fb6611cda",
+    "full_name": "Andrew",
+    "date_of_birth": "2000-02-22",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "hh",
+    "documents": [
+      {
+        "id": "696a1c11a743135fb6611cdd",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696a1bd5a743135fb6611cda/PASSPORT_0df3d4fe-50bf-4987-8ddf-bd47b0519db6_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-16T11:08:01.101000"
+        }
+      },
+      {
+        "id": "696a1c13a743135fb6611cde",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696a1bd5a743135fb6611cda/PROOF_OF_ADDRESS_5ce287ca-a7c7-416a-aa5f-7a6d62ced0b3_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T11:08:03.214000"
+        }
+      },
+      {
+        "id": "696a1c14a743135fb6611cdf",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696a1bd5a743135fb6611cda/SELFIE_a996dff8-35ad-4bbd-aa95-6a1562b3a920_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-16T11:08:04.036000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-16T11:08:07.971000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-16T11:09:35.961000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "fun",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-16T11:08:07.971000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-16T11:08:07.971000"
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:07:43.465000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T11:09:35.961000"
+    }
+  },
+  {
+    "_id": "696a5c1778ff6cb6d7f8b8b6",
+    "user_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "full_name": "Arlind Arli",
+    "date_of_birth": "2001-07-29",
+    "nationality": "ALBANIA",
+    "street_address": "Rruga 28 Nentori",
+    "city": "Elbasan",
+    "postal_code": "3001",
+    "country": "ALBANIA",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696a5c3b78ff6cb6d7f8b8b7",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696a5c0b78ff6cb6d7f8b8b4/PASSPORT_78ac6546-8a01-41ff-8fa9-f53bee30a936_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T15:41:47.930000"
+        }
+      },
+      {
+        "id": "696a5c3d78ff6cb6d7f8b8b8",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696a5c0b78ff6cb6d7f8b8b4/PROOF_OF_ADDRESS_374ac0f4-f900-4b89-83f8-d15f05f04dcd_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T15:41:49.523000"
+        }
+      },
+      {
+        "id": "696a5c3f78ff6cb6d7f8b8b9",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696a5c0b78ff6cb6d7f8b8b4/SELFIE_1e7e471c-44d1-4768-b54f-13eb2b90211b_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T15:41:51.302000"
+        }
+      },
+      {
+        "id": "696a5c4078ff6cb6d7f8b8ba",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696a5c0b78ff6cb6d7f8b8b4/PASSPORT_aece8aa3-c796-4bcc-9ca3-50313fb76943_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-16T15:41:52.563000"
+        }
+      },
+      {
+        "id": "696a5c4778ff6cb6d7f8b8bb",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696a5c0b78ff6cb6d7f8b8b4/PASSPORT_63e6d8b2-a703-4a42-9fcf-7255b167abc9_5994331816485129078.jpg",
+        "file_name": "5994331816485129078.jpg",
+        "file_size": 120377,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-16T15:41:59.135000"
+        }
+      },
+      {
+        "id": "696a5c4b78ff6cb6d7f8b8bc",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696a5c0b78ff6cb6d7f8b8b4/PASSPORT_129caf01-cba0-4239-8318-2d5caf14e677_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T15:42:03.086000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-16T15:42:38.494000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-16T15:43:47.545000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "good",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-16T15:42:38.494000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-16T15:42:38.494000"
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:41:11.325000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T15:43:47.545000"
+    }
+  },
+  {
+    "_id": "696a67216177af49c46b7f36",
+    "user_id": "696a67196177af49c46b7f34",
+    "full_name": "davi davi",
+    "date_of_birth": "2000-02-02",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696a673e6177af49c46b7f37",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696a67196177af49c46b7f34/PASSPORT_d8a4ef70-b32b-4ed8-b348-c352ab2971ec_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T16:28:46.158000"
+        }
+      },
+      {
+        "id": "696a673f6177af49c46b7f38",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696a67196177af49c46b7f34/PROOF_OF_ADDRESS_0607e389-271b-4352-9e02-3929886c0ef8_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T16:28:47.394000"
+        }
+      },
+      {
+        "id": "696a67436177af49c46b7f39",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696a67196177af49c46b7f34/SELFIE_d0910e05-2dbe-43d0-9479-2ae3fec5ac4e_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-16T16:28:51.486000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-16T16:29:02.878000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-16T16:30:45.066000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "Nice",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-16T16:29:02.878000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-16T16:29:02.878000"
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:28:17.336000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T16:30:45.066000"
+    }
+  },
+  {
+    "_id": "696e006fe3141f70e7f55157",
+    "user_id": "696e0065e3141f70e7f55155",
+    "full_name": "Arbias Arbias",
+    "date_of_birth": "2001-02-02",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696e0090e3141f70e7f55158",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696e0065e3141f70e7f55155/PASSPORT_82203875-92e0-4175-941a-3f15cdfeddb8_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-19T09:59:44.120000"
+        }
+      },
+      {
+        "id": "696e0091e3141f70e7f55159",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696e0065e3141f70e7f55155/PROOF_OF_ADDRESS_d77fe6f8-8d88-42b8-95ee-51b4f8b81c2d_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-19T09:59:45.277000"
+        }
+      },
+      {
+        "id": "696e0093e3141f70e7f5515a",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696e0065e3141f70e7f55155/SELFIE_29d024bc-344e-4d14-86b4-4e7eaeab1b0e_5994331816485129078.jpg",
+        "file_name": "5994331816485129078.jpg",
+        "file_size": 120377,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-19T09:59:47.298000"
+        }
+      }
+    ],
+    "status": "SUBMITTED",
+    "submitted_at": {
+      "$date": "2026-01-19T10:01:14.467000"
+    },
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null,
+    "rejection_reason": null,
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-19T10:01:14.467000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-19T10:01:14.467000"
+    },
+    "created_at": {
+      "$date": "2026-01-19T09:59:11.015000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T10:01:14.467000"
+    }
+  },
+  {
+    "_id": "696e01e9e3141f70e7f5515d",
+    "user_id": "696e01e3e3141f70e7f5515b",
+    "full_name": "Arbias Arbias",
+    "date_of_birth": "1996-02-22",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696e01fde3141f70e7f5515e",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696e01e3e3141f70e7f5515b/PASSPORT_ad758a6d-7b0a-407b-92e2-c2eecea95f61_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-19T10:05:49.270000"
+        }
+      },
+      {
+        "id": "696e01fee3141f70e7f5515f",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696e01e3e3141f70e7f5515b/PROOF_OF_ADDRESS_d0f70871-0c3f-4f98-a1c9-11982c36aa96_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-19T10:05:50.277000"
+        }
+      },
+      {
+        "id": "696e0201e3141f70e7f55160",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696e01e3e3141f70e7f5515b/SELFIE_4c869c9c-f408-4a0e-9e39-d0154c354a7e_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-19T10:05:53.044000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-19T10:06:17.782000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-19T10:12:09.975000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "hh",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-19T10:06:17.782000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-19T10:06:17.782000"
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:05:29.725000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T10:12:09.975000"
+    }
+  },
+  {
+    "_id": "696e2c58b7111bc49f800c18",
+    "user_id": "696e2c4eb7111bc49f800c16",
+    "full_name": "Andrew",
+    "date_of_birth": "2001-02-02",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696e2e2cb7111bc49f800c1c",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696e2c4eb7111bc49f800c16/PASSPORT_20535ecd-78b7-41cb-9141-79f3b10bf6d8_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-19T13:14:20.723000"
+        }
+      },
+      {
+        "id": "696e2e35b7111bc49f800c1d",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696e2c4eb7111bc49f800c16/PROOF_OF_ADDRESS_f5eb3a83-1679-4b19-bf8c-5343c55a2358_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-19T13:14:29.462000"
+        }
+      },
+      {
+        "id": "696e2e37b7111bc49f800c1e",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696e2c4eb7111bc49f800c16/SELFIE_fdcbcf73-f0d1-49a5-b7fe-30ad817d0abe_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-19T13:14:31.052000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-19T13:14:37.295000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-19T13:30:43.323000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-19T13:14:37.295000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-19T13:14:37.295000"
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:06:32.618000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T13:30:43.323000"
+    }
+  },
+  {
+    "_id": "696e5d0006d6d725d71480d2",
+    "user_id": "696e5cf906d6d725d71480d0",
+    "full_name": "Andrew",
+    "date_of_birth": "2001-02-22",
+    "nationality": "AL",
+    "street_address": "asdkasdk",
+    "city": "bristol",
+    "postal_code": "BH23",
+    "country": "United Kingdom",
+    "tax_residency": "AL",
+    "tax_id": "",
+    "documents": [
+      {
+        "id": "696e5d0e06d6d725d71480d3",
+        "document_type": "PASSPORT",
+        "file_key": "kyc/696e5cf906d6d725d71480d0/PASSPORT_7b3cb882-2a27-476d-a32c-d987ba11a58c_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-19T16:34:22.646000"
+        }
+      },
+      {
+        "id": "696e5d0f06d6d725d71480d4",
+        "document_type": "PROOF_OF_ADDRESS",
+        "file_key": "kyc/696e5cf906d6d725d71480d0/PROOF_OF_ADDRESS_4e431e87-bb83-46e3-9926-1030f9efb5b8_5978593514419325725.jpg",
+        "file_name": "5978593514419325725.jpg",
+        "file_size": 161213,
+        "content_type": "image/jpeg",
+        "uploaded_at": {
+          "$date": "2026-01-19T16:34:23.455000"
+        }
+      },
+      {
+        "id": "696e5d1106d6d725d71480d5",
+        "document_type": "SELFIE",
+        "file_key": "kyc/696e5cf906d6d725d71480d0/SELFIE_5a00fcbc-babe-44d6-9f46-a0c72d11552b_ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_name": "ChatGPT Image Jan 13, 2026, 02_23_56 PM.png",
+        "file_size": 2400971,
+        "content_type": "image/png",
+        "uploaded_at": {
+          "$date": "2026-01-19T16:34:25.998000"
+        }
+      }
+    ],
+    "status": "APPROVED",
+    "submitted_at": {
+      "$date": "2026-01-19T16:34:32.059000"
+    },
+    "reviewed_at": {
+      "$date": "2026-01-19T16:35:12.511000"
+    },
+    "reviewed_by": "admin_super_001",
+    "review_notes": "hh",
+    "rejection_reason": "",
+    "terms_accepted": true,
+    "terms_accepted_at": {
+      "$date": "2026-01-19T16:34:32.059000"
+    },
+    "privacy_accepted": true,
+    "privacy_accepted_at": {
+      "$date": "2026-01-19T16:34:32.059000"
+    },
+    "created_at": {
+      "$date": "2026-01-19T16:34:08.949000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T16:35:12.511000"
+    }
+  },
+  {
+    "_id": "696f7e740de1d527f2cca37d",
+    "user_id": "696f7d22942463898280fede",
+    "full_name": null,
+    "date_of_birth": null,
+    "nationality": null,
+    "street_address": null,
+    "city": null,
+    "postal_code": null,
+    "country": null,
+    "tax_residency": null,
+    "tax_id": null,
+    "documents": [],
+    "status": "DRAFT",
+    "submitted_at": null,
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null,
+    "rejection_reason": null,
+    "terms_accepted": false,
+    "terms_accepted_at": null,
+    "privacy_accepted": false,
+    "privacy_accepted_at": null,
+    "created_at": {
+      "$date": "2026-01-20T13:09:08.869000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T13:09:08.869000"
+    }
+  }
+]

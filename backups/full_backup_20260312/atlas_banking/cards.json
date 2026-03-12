@@ -1,0 +1,327 @@
+[
+  {
+    "_id": "5c128715-d309-4bca-bc35-e3506ac4f7e2",
+    "user_id": "696686ed12dec8bf6a714e7e",
+    "account_id": "bank_acc_696686ed12dec8bf6a714e7e",
+    "request_id": "6e271361-0951-44b2-a0d9-ddfc5aa0ed79",
+    "card_type": "DEBIT_PHYSICAL",
+    "status": "ACTIVE",
+    "cardholder_name": "Test Test",
+    "billing_address_line1": "Thoma Kalefi",
+    "billing_address_line2": null,
+    "city": "Elbasan",
+    "state": null,
+    "postal_code": "3001",
+    "country": "Germany",
+    "pan": "548544545",
+    "exp_month": 7,
+    "exp_year": 1996,
+    "cvv": "050",
+    "created_at": {
+      "$date": "2026-01-13T18:34:23.583000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T18:34:23.583000"
+    }
+  },
+  {
+    "_id": "b5714bd6-c74b-494d-ac12-2eba3a4b7ec9",
+    "user_id": "69668885c0ed8330a4b659ae",
+    "account_id": "bank_acc_69668885c0ed8330a4b659ae",
+    "request_id": "de77e9c8-1b23-47fd-a36d-72dd4fa28de0",
+    "card_type": "VIRTUAL",
+    "status": "ACTIVE",
+    "cardholder_name": "qwe",
+    "billing_address_line1": "asdkasdk",
+    "billing_address_line2": null,
+    "city": "bristol",
+    "state": null,
+    "postal_code": "BH23",
+    "country": "Germany",
+    "pan": "qwe",
+    "exp_month": 12,
+    "exp_year": 1990,
+    "cvv": "050",
+    "created_at": {
+      "$date": "2026-01-13T18:37:42.019000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T18:37:42.019000"
+    }
+  },
+  {
+    "_id": "ff8e662d-01c1-4cca-b00d-c83ea9e9d1a9",
+    "user_id": "69667e2a0039551e0feb1198",
+    "account_id": "bank_acc_69667e2a0039551e0feb1198",
+    "request_id": "f991a708-cc11-4f45-b3c8-9c913c97d925",
+    "card_type": "VIRTUAL",
+    "status": "ACTIVE",
+    "cardholder_name": "test test",
+    "billing_address_line1": "asdkasdk",
+    "billing_address_line2": null,
+    "city": "bristol",
+    "state": null,
+    "postal_code": "BH23",
+    "country": "Germany",
+    "pan": "218778",
+    "exp_month": 8,
+    "exp_year": 1990,
+    "cvv": "050",
+    "created_at": {
+      "$date": "2026-01-14T09:25:16.992000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T09:25:16.992000"
+    }
+  },
+  {
+    "_id": "cf4dea9b-4877-446f-b008-66ceced7c242",
+    "user_id": "69667e2a0039551e0feb1198",
+    "account_id": "bank_acc_69667e2a0039551e0feb1198",
+    "request_id": "4387a164-9a13-4b7d-a54b-6885bc844484",
+    "card_type": "DEBIT_PHYSICAL",
+    "status": "ACTIVE",
+    "cardholder_name": "qwe",
+    "billing_address_line1": "asdkasdk",
+    "billing_address_line2": null,
+    "city": "bristol",
+    "state": null,
+    "postal_code": "BH23",
+    "country": "Germany",
+    "pan": "qwe",
+    "exp_month": 8,
+    "exp_year": 1990,
+    "cvv": "050",
+    "created_at": {
+      "$date": "2026-01-14T09:28:58.268000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T09:28:58.268000"
+    }
+  },
+  {
+    "_id": "2356ec8e-cf20-4476-a4b6-3379ed17482c",
+    "user_id": "customer_001",
+    "account_id": "695fe660132ed65684c75575",
+    "request_id": "1224111a-e94b-4f27-b5e6-eb76ba923f47",
+    "card_type": "DEBIT_PHYSICAL",
+    "status": "ACTIVE",
+    "cardholder_name": "qwe",
+    "billing_address_line1": "asdkasdk",
+    "billing_address_line2": null,
+    "city": "bristol",
+    "state": null,
+    "postal_code": "BH23",
+    "country": "Germany",
+    "pan": "qwe",
+    "exp_month": 8,
+    "exp_year": 1990,
+    "cvv": "050",
+    "created_at": {
+      "$date": "2026-01-14T09:31:24.340000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T09:31:24.340000"
+    }
+  },
+  {
+    "_id": "1347307e-f869-46d5-8e36-70ee2aa18437",
+    "user_id": "customer_001",
+    "account_id": "695fe660132ed65684c75575",
+    "request_id": "c9319dd3-d9d1-4200-9af5-8cc623a494f1",
+    "card_type": "DEBIT_PHYSICAL",
+    "status": "ACTIVE",
+    "cardholder_name": "qwe",
+    "billing_address_line1": "asdkasdk",
+    "billing_address_line2": null,
+    "city": "bristol",
+    "state": null,
+    "postal_code": "BH23",
+    "country": "Germany",
+    "pan": "qwe",
+    "exp_month": 8,
+    "exp_year": 1990,
+    "cvv": "050",
+    "created_at": {
+      "$date": "2026-01-14T09:34:30.288000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T09:34:30.288000"
+    }
+  },
+  {
+    "_id": "b74c6fa9-69e8-4b44-beed-f730e1c9121c",
+    "user_id": "696a1bd5a743135fb6611cda",
+    "account_id": "bank_acc_696a1bd5a743135fb6611cda",
+    "request_id": "79d3f3f5-e00c-4155-a857-921e18957583",
+    "card_type": "DEBIT_PHYSICAL",
+    "status": "ACTIVE",
+    "cardholder_name": "Blend Deli",
+    "billing_address_line1": "Rruga Thoma Kalefi",
+    "billing_address_line2": null,
+    "city": "Elbasan",
+    "state": null,
+    "postal_code": "3001",
+    "country": "Germany",
+    "pan": "721457878788",
+    "exp_month": 8,
+    "exp_year": 2000,
+    "cvv": "050",
+    "created_at": {
+      "$date": "2026-01-16T11:11:44.392000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T11:11:44.392000"
+    }
+  },
+  {
+    "_id": "ed1e5327-6938-412f-83b5-799e698e9c98",
+    "user_id": "customer_001",
+    "account_id": "695fe660132ed65684c75575",
+    "request_id": "88c556a6-8818-48b4-a47e-109876cddd13",
+    "card_type": "VIRTUAL",
+    "status": "ACTIVE",
+    "cardholder_name": "John Doe",
+    "billing_address_line1": "123 Main St",
+    "billing_address_line2": null,
+    "city": "Berlin",
+    "state": null,
+    "postal_code": "10115",
+    "country": "Germany",
+    "pan": "4111111111111111",
+    "exp_month": 12,
+    "exp_year": 2028,
+    "cvv": "123",
+    "created_at": {
+      "$date": "2026-01-16T15:58:38.717000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T15:58:38.717000"
+    }
+  },
+  {
+    "_id": "61778974-ca16-4af7-b494-7bc0fddefd67",
+    "user_id": "customer_001",
+    "account_id": "695fe660132ed65684c75575",
+    "request_id": "6269a989-85c9-4cbf-a34b-cf52b0b6a4e7",
+    "card_type": "DEBIT_PHYSICAL",
+    "status": "ACTIVE",
+    "cardholder_name": "Test Customer",
+    "billing_address_line1": "123 Test Street",
+    "billing_address_line2": null,
+    "city": "Berlin",
+    "state": null,
+    "postal_code": "10115",
+    "country": "Germany",
+    "pan": "4111111111111111",
+    "exp_month": 12,
+    "exp_year": 2028,
+    "cvv": "123",
+    "created_at": {
+      "$date": "2026-01-16T16:09:25.943000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T16:09:25.943000"
+    }
+  },
+  {
+    "_id": "34eed41f-e768-483b-838d-02b86d5b8122",
+    "user_id": "customer_001",
+    "account_id": "695fe660132ed65684c75575",
+    "request_id": "b75f9a6b-5fac-41e1-ad15-3ce52c24107e",
+    "card_type": "DEBIT_PHYSICAL",
+    "status": "ACTIVE",
+    "cardholder_name": "John Doe",
+    "billing_address_line1": "456 Test Ave",
+    "billing_address_line2": null,
+    "city": "Munich",
+    "state": null,
+    "postal_code": "80331",
+    "country": "Germany",
+    "pan": "4222222222222222",
+    "exp_month": 6,
+    "exp_year": 2027,
+    "cvv": "456",
+    "created_at": {
+      "$date": "2026-01-16T16:13:51.240000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T16:13:51.240000"
+    }
+  },
+  {
+    "_id": "d5df3a18-d7ac-4d6f-a74b-30a1fa715a1e",
+    "user_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "account_id": "bank_acc_696a5c0b78ff6cb6d7f8b8b4",
+    "request_id": "56d70a05-2eae-40f6-a1cc-e77aaecd640b",
+    "card_type": "VIRTUAL",
+    "status": "ACTIVE",
+    "cardholder_name": "Arben Beni",
+    "billing_address_line1": "Rruga thoma kalefi",
+    "billing_address_line2": null,
+    "city": "Elbasan",
+    "state": null,
+    "postal_code": "3001",
+    "country": "Germany",
+    "pan": "71889898",
+    "exp_month": 8,
+    "exp_year": 1990,
+    "cvv": "050",
+    "created_at": {
+      "$date": "2026-01-16T16:16:36.700000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T16:16:36.700000"
+    }
+  },
+  {
+    "_id": "0a33bdf8-19f9-45cc-b537-3c2ec04c34ed",
+    "user_id": "696a67196177af49c46b7f34",
+    "account_id": "bank_acc_696a67196177af49c46b7f34",
+    "request_id": "a3a56219-0fee-4d3c-afa8-2267f69fb173",
+    "card_type": "VIRTUAL",
+    "status": "ACTIVE",
+    "cardholder_name": "David Dpk",
+    "billing_address_line1": "Rruga Clirimi",
+    "billing_address_line2": null,
+    "city": "Elbasan",
+    "state": null,
+    "postal_code": "3001",
+    "country": "Germany",
+    "pan": "87454544545",
+    "exp_month": 8,
+    "exp_year": 1990,
+    "cvv": "050",
+    "created_at": {
+      "$date": "2026-01-16T16:32:12.778000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T16:32:12.778000"
+    }
+  },
+  {
+    "_id": "642eca38-7a5d-4fe1-8295-08de6dc6d112",
+    "user_id": "696e2c4eb7111bc49f800c16",
+    "account_id": "bank_acc_696e2c4eb7111bc49f800c16",
+    "request_id": "5dd16711-499a-4e70-abf2-e869abe78320",
+    "card_type": "DEBIT_PHYSICAL",
+    "status": "ACTIVE",
+    "cardholder_name": "Blend Lulja",
+    "billing_address_line1": "Rruga Clirimi",
+    "billing_address_line2": null,
+    "city": "Elbasan",
+    "state": null,
+    "postal_code": "3001",
+    "country": "Germany",
+    "pan": "845454545",
+    "exp_month": 8,
+    "exp_year": 2000,
+    "cvv": "050",
+    "created_at": {
+      "$date": "2026-01-19T14:58:37.850000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T14:58:37.850000"
+    }
+  }
+]

@@ -1,0 +1,1634 @@
+[
+  {
+    "_id": "6960be640b14a4d0ae5d82a5",
+    "id": "6960be640b14a4d0ae5d82a5",
+    "transaction_id": "6960be640b14a4d0ae5d82a4",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T08:37:56.112000"
+    }
+  },
+  {
+    "_id": "6960be640b14a4d0ae5d82a6",
+    "id": "6960be640b14a4d0ae5d82a6",
+    "transaction_id": "6960be640b14a4d0ae5d82a4",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 100000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T08:37:56.113000"
+    }
+  },
+  {
+    "_id": "6960c6bb37ce1f94e3a9e237",
+    "id": "6960c6bb37ce1f94e3a9e237",
+    "transaction_id": "6960c6bb37ce1f94e3a9e236",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:13:31.999000"
+    }
+  },
+  {
+    "_id": "6960c6bb37ce1f94e3a9e238",
+    "id": "6960c6bb37ce1f94e3a9e238",
+    "transaction_id": "6960c6bb37ce1f94e3a9e236",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:13:31.999000"
+    }
+  },
+  {
+    "_id": "6960c6bc37ce1f94e3a9e23a",
+    "id": "6960c6bc37ce1f94e3a9e23a",
+    "transaction_id": "6960c6bc37ce1f94e3a9e239",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:13:32.118000"
+    }
+  },
+  {
+    "_id": "6960c6bc37ce1f94e3a9e23b",
+    "id": "6960c6bc37ce1f94e3a9e23b",
+    "transaction_id": "6960c6bc37ce1f94e3a9e239",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:13:32.118000"
+    }
+  },
+  {
+    "_id": "6960c6bc37ce1f94e3a9e23d",
+    "id": "6960c6bc37ce1f94e3a9e23d",
+    "transaction_id": "6960c6bc37ce1f94e3a9e23c",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:13:32.154000"
+    }
+  },
+  {
+    "_id": "6960c6bc37ce1f94e3a9e23e",
+    "id": "6960c6bc37ce1f94e3a9e23e",
+    "transaction_id": "6960c6bc37ce1f94e3a9e23c",
+    "account_id": "ledger_acc_fees",
+    "amount": 500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:13:32.155000"
+    }
+  },
+  {
+    "_id": "6960c95d80b5574f7c02bddf",
+    "id": "6960c95d80b5574f7c02bddf",
+    "transaction_id": "6960c95d80b5574f7c02bdde",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 35,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:24:45.680000"
+    }
+  },
+  {
+    "_id": "6960c95d80b5574f7c02bde0",
+    "id": "6960c95d80b5574f7c02bde0",
+    "transaction_id": "6960c95d80b5574f7c02bdde",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 35,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:24:45.681000"
+    }
+  },
+  {
+    "_id": "6960cc5d9f182f11b1c85723",
+    "id": "6960cc5d9f182f11b1c85723",
+    "transaction_id": "6960cc5d9f182f11b1c85722",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 10000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:37:33.539000"
+    }
+  },
+  {
+    "_id": "6960cc5d9f182f11b1c85724",
+    "id": "6960cc5d9f182f11b1c85724",
+    "transaction_id": "6960cc5d9f182f11b1c85722",
+    "account_id": "ledger_acc_fees",
+    "amount": 10000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:37:33.539000"
+    }
+  },
+  {
+    "_id": "6960ccb99f182f11b1c85729",
+    "id": "6960ccb99f182f11b1c85729",
+    "transaction_id": "6960ccb99f182f11b1c85728",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:39:05.473000"
+    }
+  },
+  {
+    "_id": "6960ccb99f182f11b1c8572a",
+    "id": "6960ccb99f182f11b1c8572a",
+    "transaction_id": "6960ccb99f182f11b1c85728",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:39:05.473000"
+    }
+  },
+  {
+    "_id": "6960ccb99f182f11b1c8572c",
+    "id": "6960ccb99f182f11b1c8572c",
+    "transaction_id": "6960ccb99f182f11b1c8572b",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:39:05.555000"
+    }
+  },
+  {
+    "_id": "6960ccb99f182f11b1c8572d",
+    "id": "6960ccb99f182f11b1c8572d",
+    "transaction_id": "6960ccb99f182f11b1c8572b",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:39:05.555000"
+    }
+  },
+  {
+    "_id": "6960ccb99f182f11b1c8572f",
+    "id": "6960ccb99f182f11b1c8572f",
+    "transaction_id": "6960ccb99f182f11b1c8572e",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:39:05.593000"
+    }
+  },
+  {
+    "_id": "6960ccb99f182f11b1c85730",
+    "id": "6960ccb99f182f11b1c85730",
+    "transaction_id": "6960ccb99f182f11b1c8572e",
+    "account_id": "ledger_acc_fees",
+    "amount": 500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:39:05.593000"
+    }
+  },
+  {
+    "_id": "6960ccf29f182f11b1c85735",
+    "id": "6960ccf29f182f11b1c85735",
+    "transaction_id": "6960ccf29f182f11b1c85734",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:40:02.748000"
+    }
+  },
+  {
+    "_id": "6960ccf29f182f11b1c85736",
+    "id": "6960ccf29f182f11b1c85736",
+    "transaction_id": "6960ccf29f182f11b1c85734",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:40:02.748000"
+    }
+  },
+  {
+    "_id": "6960ccf29f182f11b1c85738",
+    "id": "6960ccf29f182f11b1c85738",
+    "transaction_id": "6960ccf29f182f11b1c85737",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:40:02.823000"
+    }
+  },
+  {
+    "_id": "6960ccf29f182f11b1c85739",
+    "id": "6960ccf29f182f11b1c85739",
+    "transaction_id": "6960ccf29f182f11b1c85737",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:40:02.823000"
+    }
+  },
+  {
+    "_id": "6960ccf29f182f11b1c8573b",
+    "id": "6960ccf29f182f11b1c8573b",
+    "transaction_id": "6960ccf29f182f11b1c8573a",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:40:02.861000"
+    }
+  },
+  {
+    "_id": "6960ccf29f182f11b1c8573c",
+    "id": "6960ccf29f182f11b1c8573c",
+    "transaction_id": "6960ccf29f182f11b1c8573a",
+    "account_id": "ledger_acc_fees",
+    "amount": 500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T09:40:02.862000"
+    }
+  },
+  {
+    "_id": "6960dc06e2a99548fda31c52",
+    "id": "6960dc06e2a99548fda31c52",
+    "transaction_id": "6960dc06e2a99548fda31c51",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T10:44:22.572000"
+    }
+  },
+  {
+    "_id": "6960dc06e2a99548fda31c53",
+    "id": "6960dc06e2a99548fda31c53",
+    "transaction_id": "6960dc06e2a99548fda31c51",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T10:44:22.572000"
+    }
+  },
+  {
+    "_id": "6960dc06e2a99548fda31c55",
+    "id": "6960dc06e2a99548fda31c55",
+    "transaction_id": "6960dc06e2a99548fda31c54",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T10:44:22.648000"
+    }
+  },
+  {
+    "_id": "6960dc06e2a99548fda31c56",
+    "id": "6960dc06e2a99548fda31c56",
+    "transaction_id": "6960dc06e2a99548fda31c54",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T10:44:22.648000"
+    }
+  },
+  {
+    "_id": "6960dc06e2a99548fda31c58",
+    "id": "6960dc06e2a99548fda31c58",
+    "transaction_id": "6960dc06e2a99548fda31c57",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T10:44:22.729000"
+    }
+  },
+  {
+    "_id": "6960dc06e2a99548fda31c59",
+    "id": "6960dc06e2a99548fda31c59",
+    "transaction_id": "6960dc06e2a99548fda31c57",
+    "account_id": "ledger_acc_fees",
+    "amount": 500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T10:44:22.729000"
+    }
+  },
+  {
+    "_id": "6960ec205c255468ed181394",
+    "id": "6960ec205c255468ed181394",
+    "transaction_id": "6960ec205c255468ed181393",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1111,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T11:53:04.968000"
+    }
+  },
+  {
+    "_id": "6960ec205c255468ed181395",
+    "id": "6960ec205c255468ed181395",
+    "transaction_id": "6960ec205c255468ed181393",
+    "account_id": "6960d480aec0df5da3e903a5",
+    "amount": 1111,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T11:53:04.968000"
+    }
+  },
+  {
+    "_id": "6960edb85c255468ed18139e",
+    "id": "6960edb85c255468ed18139e",
+    "transaction_id": "6960edb85c255468ed18139d",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T11:59:52.123000"
+    }
+  },
+  {
+    "_id": "6960edb85c255468ed18139f",
+    "id": "6960edb85c255468ed18139f",
+    "transaction_id": "6960edb85c255468ed18139d",
+    "account_id": "6960d480aec0df5da3e903a5",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T11:59:52.123000"
+    }
+  },
+  {
+    "_id": "6960f6ee1ceaaff5ee0bfbba",
+    "id": "6960f6ee1ceaaff5ee0bfbba",
+    "transaction_id": "6960f6ee1ceaaff5ee0bfbb9",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T12:39:10.723000"
+    }
+  },
+  {
+    "_id": "6960f6ee1ceaaff5ee0bfbbb",
+    "id": "6960f6ee1ceaaff5ee0bfbbb",
+    "transaction_id": "6960f6ee1ceaaff5ee0bfbb9",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T12:39:10.723000"
+    }
+  },
+  {
+    "_id": "6960f8c619209ee147592826",
+    "id": "6960f8c619209ee147592826",
+    "transaction_id": "6960f8c619209ee147592825",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T12:47:02.181000"
+    }
+  },
+  {
+    "_id": "6960f8c619209ee147592827",
+    "id": "6960f8c619209ee147592827",
+    "transaction_id": "6960f8c619209ee147592825",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T12:47:02.181000"
+    }
+  },
+  {
+    "_id": "6960f9ac4ba8137f45d1b588",
+    "id": "6960f9ac4ba8137f45d1b588",
+    "transaction_id": "6960f9ac4ba8137f45d1b587",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T12:50:52.492000"
+    }
+  },
+  {
+    "_id": "6960f9ac4ba8137f45d1b589",
+    "id": "6960f9ac4ba8137f45d1b589",
+    "transaction_id": "6960f9ac4ba8137f45d1b587",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-09T12:50:52.492000"
+    }
+  },
+  {
+    "_id": "6966542c11c09d2071b61fc0",
+    "id": "6966542c11c09d2071b61fc0",
+    "transaction_id": "6966542c11c09d2071b61fbf",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T14:18:20.654000"
+    }
+  },
+  {
+    "_id": "6966542c11c09d2071b61fc1",
+    "id": "6966542c11c09d2071b61fc1",
+    "transaction_id": "6966542c11c09d2071b61fbf",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T14:18:20.654000"
+    }
+  },
+  {
+    "_id": "696664ffd07465abe8932e1d",
+    "id": "696664ffd07465abe8932e1d",
+    "transaction_id": "696664ffd07465abe8932e1c",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:30:07.186000"
+    }
+  },
+  {
+    "_id": "696664ffd07465abe8932e1e",
+    "id": "696664ffd07465abe8932e1e",
+    "transaction_id": "696664ffd07465abe8932e1c",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:30:07.187000"
+    }
+  },
+  {
+    "_id": "696664ffd07465abe8932e20",
+    "id": "696664ffd07465abe8932e20",
+    "transaction_id": "696664ffd07465abe8932e1f",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:30:07.262000"
+    }
+  },
+  {
+    "_id": "696664ffd07465abe8932e21",
+    "id": "696664ffd07465abe8932e21",
+    "transaction_id": "696664ffd07465abe8932e1f",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:30:07.262000"
+    }
+  },
+  {
+    "_id": "696664ffd07465abe8932e23",
+    "id": "696664ffd07465abe8932e23",
+    "transaction_id": "696664ffd07465abe8932e22",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:30:07.299000"
+    }
+  },
+  {
+    "_id": "696664ffd07465abe8932e24",
+    "id": "696664ffd07465abe8932e24",
+    "transaction_id": "696664ffd07465abe8932e22",
+    "account_id": "ledger_acc_fees",
+    "amount": 500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:30:07.299000"
+    }
+  },
+  {
+    "_id": "696669c647560b39a3e84de3",
+    "id": "696669c647560b39a3e84de3",
+    "transaction_id": "696669c647560b39a3e84de2",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:50:30.086000"
+    }
+  },
+  {
+    "_id": "696669c647560b39a3e84de4",
+    "id": "696669c647560b39a3e84de4",
+    "transaction_id": "696669c647560b39a3e84de2",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:50:30.086000"
+    }
+  },
+  {
+    "_id": "696669c647560b39a3e84de6",
+    "id": "696669c647560b39a3e84de6",
+    "transaction_id": "696669c647560b39a3e84de5",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:50:30.206000"
+    }
+  },
+  {
+    "_id": "696669c647560b39a3e84de7",
+    "id": "696669c647560b39a3e84de7",
+    "transaction_id": "696669c647560b39a3e84de5",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:50:30.206000"
+    }
+  },
+  {
+    "_id": "696669c647560b39a3e84de9",
+    "id": "696669c647560b39a3e84de9",
+    "transaction_id": "696669c647560b39a3e84de8",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:50:30.240000"
+    }
+  },
+  {
+    "_id": "696669c647560b39a3e84dea",
+    "id": "696669c647560b39a3e84dea",
+    "transaction_id": "696669c647560b39a3e84de8",
+    "account_id": "ledger_acc_fees",
+    "amount": 500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-13T15:50:30.241000"
+    }
+  },
+  {
+    "_id": "69677dec20917423c80fb4fe",
+    "id": "69677dec20917423c80fb4fe",
+    "transaction_id": "69677dec20917423c80fb4fd",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 9354,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T11:28:44.933000"
+    }
+  },
+  {
+    "_id": "69677dec20917423c80fb4ff",
+    "id": "69677dec20917423c80fb4ff",
+    "transaction_id": "69677dec20917423c80fb4fd",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 9354,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T11:28:44.933000"
+    }
+  },
+  {
+    "_id": "6967891b7124c6c86d72155a",
+    "id": "6967891b7124c6c86d72155a",
+    "transaction_id": "6967891b7124c6c86d721559",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:16:27.284000"
+    }
+  },
+  {
+    "_id": "6967891b7124c6c86d72155b",
+    "id": "6967891b7124c6c86d72155b",
+    "transaction_id": "6967891b7124c6c86d721559",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:16:27.285000"
+    }
+  },
+  {
+    "_id": "6967892a7124c6c86d72155e",
+    "id": "6967892a7124c6c86d72155e",
+    "transaction_id": "6967892a7124c6c86d72155d",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:16:42.086000"
+    }
+  },
+  {
+    "_id": "6967892a7124c6c86d72155f",
+    "id": "6967892a7124c6c86d72155f",
+    "transaction_id": "6967892a7124c6c86d72155d",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:16:42.087000"
+    }
+  },
+  {
+    "_id": "69678aa47124c6c86d721569",
+    "id": "69678aa47124c6c86d721569",
+    "transaction_id": "69678aa47124c6c86d721568",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:00.974000"
+    }
+  },
+  {
+    "_id": "69678aa47124c6c86d72156a",
+    "id": "69678aa47124c6c86d72156a",
+    "transaction_id": "69678aa47124c6c86d721568",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:00.974000"
+    }
+  },
+  {
+    "_id": "69678aa57124c6c86d72156c",
+    "id": "69678aa57124c6c86d72156c",
+    "transaction_id": "69678aa57124c6c86d72156b",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:01.051000"
+    }
+  },
+  {
+    "_id": "69678aa57124c6c86d72156d",
+    "id": "69678aa57124c6c86d72156d",
+    "transaction_id": "69678aa57124c6c86d72156b",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:01.051000"
+    }
+  },
+  {
+    "_id": "69678aa57124c6c86d72156f",
+    "id": "69678aa57124c6c86d72156f",
+    "transaction_id": "69678aa57124c6c86d72156e",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:01.088000"
+    }
+  },
+  {
+    "_id": "69678aa57124c6c86d721570",
+    "id": "69678aa57124c6c86d721570",
+    "transaction_id": "69678aa57124c6c86d72156e",
+    "account_id": "ledger_acc_fees",
+    "amount": 500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:01.088000"
+    }
+  },
+  {
+    "_id": "69678aac7124c6c86d721576",
+    "id": "69678aac7124c6c86d721576",
+    "transaction_id": "69678aac7124c6c86d721575",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:08.589000"
+    }
+  },
+  {
+    "_id": "69678aac7124c6c86d721577",
+    "id": "69678aac7124c6c86d721577",
+    "transaction_id": "69678aac7124c6c86d721575",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:08.589000"
+    }
+  },
+  {
+    "_id": "69678aac7124c6c86d721579",
+    "id": "69678aac7124c6c86d721579",
+    "transaction_id": "69678aac7124c6c86d721578",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:08.664000"
+    }
+  },
+  {
+    "_id": "69678aac7124c6c86d72157a",
+    "id": "69678aac7124c6c86d72157a",
+    "transaction_id": "69678aac7124c6c86d721578",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:08.665000"
+    }
+  },
+  {
+    "_id": "69678aac7124c6c86d72157c",
+    "id": "69678aac7124c6c86d72157c",
+    "transaction_id": "69678aac7124c6c86d72157b",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:08.705000"
+    }
+  },
+  {
+    "_id": "69678aac7124c6c86d72157d",
+    "id": "69678aac7124c6c86d72157d",
+    "transaction_id": "69678aac7124c6c86d72157b",
+    "account_id": "ledger_acc_fees",
+    "amount": 500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:23:08.705000"
+    }
+  },
+  {
+    "_id": "69678b377124c6c86d721583",
+    "id": "69678b377124c6c86d721583",
+    "transaction_id": "69678b377124c6c86d721582",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:25:27.035000"
+    }
+  },
+  {
+    "_id": "69678b377124c6c86d721584",
+    "id": "69678b377124c6c86d721584",
+    "transaction_id": "69678b377124c6c86d721582",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:25:27.035000"
+    }
+  },
+  {
+    "_id": "69678b3b7124c6c86d721586",
+    "id": "69678b3b7124c6c86d721586",
+    "transaction_id": "69678b3b7124c6c86d721585",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:25:31.703000"
+    }
+  },
+  {
+    "_id": "69678b3b7124c6c86d721587",
+    "id": "69678b3b7124c6c86d721587",
+    "transaction_id": "69678b3b7124c6c86d721585",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T12:25:31.704000"
+    }
+  },
+  {
+    "_id": "69679a452ea43f29f9db1b41",
+    "id": "69679a452ea43f29f9db1b41",
+    "transaction_id": "69679a452ea43f29f9db1b40",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:29:41.994000"
+    }
+  },
+  {
+    "_id": "69679a452ea43f29f9db1b42",
+    "id": "69679a452ea43f29f9db1b42",
+    "transaction_id": "69679a452ea43f29f9db1b40",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:29:41.994000"
+    }
+  },
+  {
+    "_id": "69679dd2ec8acf5d3fd978c9",
+    "id": "69679dd2ec8acf5d3fd978c9",
+    "transaction_id": "69679dd2ec8acf5d3fd978c8",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:44:50.523000"
+    }
+  },
+  {
+    "_id": "69679dd2ec8acf5d3fd978ca",
+    "id": "69679dd2ec8acf5d3fd978ca",
+    "transaction_id": "69679dd2ec8acf5d3fd978c8",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:44:50.523000"
+    }
+  },
+  {
+    "_id": "69679eaeec8acf5d3fd978d2",
+    "id": "69679eaeec8acf5d3fd978d2",
+    "transaction_id": "69679eaeec8acf5d3fd978d1",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:48:30.441000"
+    }
+  },
+  {
+    "_id": "69679eaeec8acf5d3fd978d3",
+    "id": "69679eaeec8acf5d3fd978d3",
+    "transaction_id": "69679eaeec8acf5d3fd978d1",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:48:30.441000"
+    }
+  },
+  {
+    "_id": "69679f3c919302346d254111",
+    "id": "69679f3c919302346d254111",
+    "transaction_id": "69679f3c919302346d254110",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:50:52.839000"
+    }
+  },
+  {
+    "_id": "69679f3c919302346d254112",
+    "id": "69679f3c919302346d254112",
+    "transaction_id": "69679f3c919302346d254110",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:50:52.840000"
+    }
+  },
+  {
+    "_id": "69679f82919302346d254119",
+    "id": "69679f82919302346d254119",
+    "transaction_id": "69679f82919302346d254118",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:52:02.588000"
+    }
+  },
+  {
+    "_id": "69679f82919302346d25411a",
+    "id": "69679f82919302346d25411a",
+    "transaction_id": "69679f82919302346d254118",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:52:02.588000"
+    }
+  },
+  {
+    "_id": "6967a12a919302346d254121",
+    "id": "6967a12a919302346d254121",
+    "transaction_id": "6967a12a919302346d254120",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:59:06.138000"
+    }
+  },
+  {
+    "_id": "6967a12a919302346d254122",
+    "id": "6967a12a919302346d254122",
+    "transaction_id": "6967a12a919302346d254120",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:59:06.138000"
+    }
+  },
+  {
+    "_id": "6967a139919302346d254129",
+    "id": "6967a139919302346d254129",
+    "transaction_id": "6967a139919302346d254128",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:59:21.046000"
+    }
+  },
+  {
+    "_id": "6967a139919302346d25412a",
+    "id": "6967a139919302346d25412a",
+    "transaction_id": "6967a139919302346d254128",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T13:59:21.046000"
+    }
+  },
+  {
+    "_id": "6967a164919302346d254131",
+    "id": "6967a164919302346d254131",
+    "transaction_id": "6967a164919302346d254130",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T14:00:04.705000"
+    }
+  },
+  {
+    "_id": "6967a164919302346d254132",
+    "id": "6967a164919302346d254132",
+    "transaction_id": "6967a164919302346d254130",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T14:00:04.705000"
+    }
+  },
+  {
+    "_id": "6967a199919302346d254135",
+    "id": "6967a199919302346d254135",
+    "transaction_id": "6967a199919302346d254134",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 100,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T14:00:57.586000"
+    }
+  },
+  {
+    "_id": "6967a199919302346d254136",
+    "id": "6967a199919302346d254136",
+    "transaction_id": "6967a199919302346d254134",
+    "account_id": "ledger_acc_admin",
+    "amount": 100,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-14T14:00:57.586000"
+    }
+  },
+  {
+    "_id": "6968d5acc3d9ff7819aebf41",
+    "id": "6968d5acc3d9ff7819aebf41",
+    "transaction_id": "6968d5acc3d9ff7819aebf40",
+    "account_id": "ledger_acc_69667be64c12fb952410065e",
+    "amount": 1000000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T11:55:24.970000"
+    }
+  },
+  {
+    "_id": "6968d5acc3d9ff7819aebf42",
+    "id": "6968d5acc3d9ff7819aebf42",
+    "transaction_id": "6968d5acc3d9ff7819aebf40",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T11:55:24.971000"
+    }
+  },
+  {
+    "_id": "6968d91b6497729dffb2e3bf",
+    "id": "6968d91b6497729dffb2e3bf",
+    "transaction_id": "6968d91b6497729dffb2e3be",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 50000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:10:03.782000"
+    }
+  },
+  {
+    "_id": "6968d91b6497729dffb2e3c0",
+    "id": "6968d91b6497729dffb2e3c0",
+    "transaction_id": "6968d91b6497729dffb2e3be",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 50000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:10:03.783000"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8f2",
+    "id": "6968da4f189ef0e4cceaf8f2",
+    "transaction_id": "6968da4f189ef0e4cceaf8f1",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.457000"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8f3",
+    "id": "6968da4f189ef0e4cceaf8f3",
+    "transaction_id": "6968da4f189ef0e4cceaf8f1",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.457000"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8f5",
+    "id": "6968da4f189ef0e4cceaf8f5",
+    "transaction_id": "6968da4f189ef0e4cceaf8f4",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 1000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.529000"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8f6",
+    "id": "6968da4f189ef0e4cceaf8f6",
+    "transaction_id": "6968da4f189ef0e4cceaf8f4",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.529000"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8f8",
+    "id": "6968da4f189ef0e4cceaf8f8",
+    "transaction_id": "6968da4f189ef0e4cceaf8f7",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.575000"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8f9",
+    "id": "6968da4f189ef0e4cceaf8f9",
+    "transaction_id": "6968da4f189ef0e4cceaf8f7",
+    "account_id": "ledger_acc_fees",
+    "amount": 500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.575000"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8fb",
+    "id": "6968da4f189ef0e4cceaf8fb",
+    "transaction_id": "6968da4f189ef0e4cceaf8fa",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 25000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.618000"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8fc",
+    "id": "6968da4f189ef0e4cceaf8fc",
+    "transaction_id": "6968da4f189ef0e4cceaf8fa",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 25000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.619000"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8fe",
+    "id": "6968da4f189ef0e4cceaf8fe",
+    "transaction_id": "6968da4f189ef0e4cceaf8fd",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.692000"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8ff",
+    "id": "6968da4f189ef0e4cceaf8ff",
+    "transaction_id": "6968da4f189ef0e4cceaf8fd",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.693000"
+    }
+  },
+  {
+    "_id": "6968dad4189ef0e4cceaf905",
+    "id": "6968dad4189ef0e4cceaf905",
+    "transaction_id": "6968dad4189ef0e4cceaf904",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 15000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:17:24.490000"
+    }
+  },
+  {
+    "_id": "6968dad4189ef0e4cceaf906",
+    "id": "6968dad4189ef0e4cceaf906",
+    "transaction_id": "6968dad4189ef0e4cceaf904",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 15000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:17:24.491000"
+    }
+  },
+  {
+    "_id": "6968dad8189ef0e4cceaf908",
+    "id": "6968dad8189ef0e4cceaf908",
+    "transaction_id": "6968dad8189ef0e4cceaf907",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 5000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:17:28.630000"
+    }
+  },
+  {
+    "_id": "6968dad8189ef0e4cceaf909",
+    "id": "6968dad8189ef0e4cceaf909",
+    "transaction_id": "6968dad8189ef0e4cceaf907",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 5000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:17:28.630000"
+    }
+  },
+  {
+    "_id": "6968de27189ef0e4cceaf910",
+    "id": "6968de27189ef0e4cceaf910",
+    "transaction_id": "6968de27189ef0e4cceaf90f",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 12345,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:31:35.953000"
+    }
+  },
+  {
+    "_id": "6968de27189ef0e4cceaf911",
+    "id": "6968de27189ef0e4cceaf911",
+    "transaction_id": "6968de27189ef0e4cceaf90f",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 12345,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:31:35.953000"
+    }
+  },
+  {
+    "_id": "6968de3f189ef0e4cceaf914",
+    "id": "6968de3f189ef0e4cceaf914",
+    "transaction_id": "6968de3f189ef0e4cceaf913",
+    "account_id": "ledger_acc_6967754aee56629feac444aa",
+    "amount": 7500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:31:59.329000"
+    }
+  },
+  {
+    "_id": "6968de3f189ef0e4cceaf915",
+    "id": "6968de3f189ef0e4cceaf915",
+    "transaction_id": "6968de3f189ef0e4cceaf913",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 7500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:31:59.329000"
+    }
+  },
+  {
+    "_id": "6968e059189ef0e4cceaf918",
+    "id": "6968e059189ef0e4cceaf918",
+    "transaction_id": "6968e059189ef0e4cceaf917",
+    "account_id": "ledger_acc_696686ed12dec8bf6a714e7e",
+    "amount": 50000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:40:57.132000"
+    }
+  },
+  {
+    "_id": "6968e059189ef0e4cceaf919",
+    "id": "6968e059189ef0e4cceaf919",
+    "transaction_id": "6968e059189ef0e4cceaf917",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 50000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T12:40:57.133000"
+    }
+  },
+  {
+    "_id": "6968ec72b300d43c5cf76fe8",
+    "id": "6968ec72b300d43c5cf76fe8",
+    "transaction_id": "6968ec72b300d43c5cf76fe7",
+    "account_id": "ledger_acc_6967754aee56629feac444aa",
+    "amount": 190000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T13:32:34.404000"
+    }
+  },
+  {
+    "_id": "6968ec72b300d43c5cf76fe9",
+    "id": "6968ec72b300d43c5cf76fe9",
+    "transaction_id": "6968ec72b300d43c5cf76fe7",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 190000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T13:32:34.405000"
+    }
+  },
+  {
+    "_id": "6968ecb9b300d43c5cf76ff0",
+    "id": "6968ecb9b300d43c5cf76ff0",
+    "transaction_id": "6968ecb9b300d43c5cf76fef",
+    "account_id": "ledger_acc_6967754aee56629feac444aa",
+    "amount": 10000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T13:33:45.171000"
+    }
+  },
+  {
+    "_id": "6968ecb9b300d43c5cf76ff1",
+    "id": "6968ecb9b300d43c5cf76ff1",
+    "transaction_id": "6968ecb9b300d43c5cf76fef",
+    "account_id": "ledger_acc_696686ed12dec8bf6a714e7e",
+    "amount": 10000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-15T13:33:45.171000"
+    }
+  },
+  {
+    "_id": "696a65ce6177af49c46b7f25",
+    "id": "696a65ce6177af49c46b7f25",
+    "transaction_id": "696a65ce6177af49c46b7f24",
+    "account_id": "ledger_acc_696a5c0b78ff6cb6d7f8b8b4",
+    "amount": 13200000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-16T16:22:38.675000"
+    }
+  },
+  {
+    "_id": "696a65ce6177af49c46b7f26",
+    "id": "696a65ce6177af49c46b7f26",
+    "transaction_id": "696a65ce6177af49c46b7f24",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 13200000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-16T16:22:38.676000"
+    }
+  },
+  {
+    "_id": "696a68b86177af49c46b7f41",
+    "id": "696a68b86177af49c46b7f41",
+    "transaction_id": "696a68b86177af49c46b7f40",
+    "account_id": "ledger_acc_696a67196177af49c46b7f34",
+    "amount": 20000000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-16T16:35:04.965000"
+    }
+  },
+  {
+    "_id": "696a68b86177af49c46b7f42",
+    "id": "696a68b86177af49c46b7f42",
+    "transaction_id": "696a68b86177af49c46b7f40",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 20000000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-16T16:35:04.965000"
+    }
+  },
+  {
+    "_id": "696e43f9f6501f7b7496e8fd",
+    "id": "696e43f9f6501f7b7496e8fd",
+    "transaction_id": "696e43f9f6501f7b7496e8fc",
+    "account_id": "ledger_acc_696e2c4eb7111bc49f800c16",
+    "amount": 1250000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-19T14:47:21.965000"
+    }
+  },
+  {
+    "_id": "696e43f9f6501f7b7496e8fe",
+    "id": "696e43f9f6501f7b7496e8fe",
+    "transaction_id": "696e43f9f6501f7b7496e8fc",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 1250000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-19T14:47:21.966000"
+    }
+  },
+  {
+    "_id": "696e4802f6501f7b7496e907",
+    "id": "696e4802f6501f7b7496e907",
+    "transaction_id": "696e4802f6501f7b7496e906",
+    "account_id": "ledger_acc_696e2c4eb7111bc49f800c16",
+    "amount": 50000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-19T15:04:34.157000"
+    }
+  },
+  {
+    "_id": "696e4802f6501f7b7496e908",
+    "id": "696e4802f6501f7b7496e908",
+    "transaction_id": "696e4802f6501f7b7496e906",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 50000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-19T15:04:34.157000"
+    }
+  },
+  {
+    "_id": "696e4948f6501f7b7496e90e",
+    "id": "696e4948f6501f7b7496e90e",
+    "transaction_id": "696e4948f6501f7b7496e90d",
+    "account_id": "ledger_acc_696e2c4eb7111bc49f800c16",
+    "amount": 900000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-19T15:10:00.391000"
+    }
+  },
+  {
+    "_id": "696e4948f6501f7b7496e90f",
+    "id": "696e4948f6501f7b7496e90f",
+    "transaction_id": "696e4948f6501f7b7496e90d",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 900000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-19T15:10:00.391000"
+    }
+  },
+  {
+    "_id": "696e4980f6501f7b7496e913",
+    "id": "696e4980f6501f7b7496e913",
+    "transaction_id": "696e4980f6501f7b7496e912",
+    "account_id": "ledger_acc_696e2c4eb7111bc49f800c16",
+    "amount": 60000,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-19T15:10:56.877000"
+    }
+  },
+  {
+    "_id": "696e4980f6501f7b7496e914",
+    "id": "696e4980f6501f7b7496e914",
+    "transaction_id": "696e4980f6501f7b7496e912",
+    "account_id": "6960be640b14a4d0ae5d82a3",
+    "amount": 60000,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-19T15:10:56.877000"
+    }
+  },
+  {
+    "_id": "696f7b16a0a55585712a774e",
+    "id": "696f7b16a0a55585712a774e",
+    "transaction_id": "696f7b16a0a55585712a774d",
+    "account_id": "695fe660132ed65684c75574",
+    "amount": 500,
+    "direction": "DEBIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.544000"
+    }
+  },
+  {
+    "_id": "696f7b16a0a55585712a774f",
+    "id": "696f7b16a0a55585712a774f",
+    "transaction_id": "696f7b16a0a55585712a774d",
+    "account_id": "ledger_acc_696a19e8a743135fb6611ccd",
+    "amount": 500,
+    "direction": "CREDIT",
+    "currency": "EUR",
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.545000"
+    }
+  }
+]

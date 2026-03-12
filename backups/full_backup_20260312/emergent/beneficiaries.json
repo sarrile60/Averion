@@ -1,0 +1,101 @@
+[
+  {
+    "_id": "6960f45263468a4c95f02abf",
+    "user_id": "customer_001",
+    "recipient_name": "Admin User",
+    "recipient_email": "admin@atlas.local",
+    "nickname": "Admin",
+    "created_at": {
+      "$date": "2026-01-09T12:28:02.802000"
+    },
+    "last_used": null
+  },
+  {
+    "_id": "d3771a72-32a5-424d-976c-0835977f0b19",
+    "user_id": "customer_001",
+    "recipient_name": "Test Beneficiary",
+    "recipient_email": "test_beneficiary_eqexpr@test.com",
+    "nickname": "Test_eqexpr",
+    "created_at": {
+      "$date": "2026-01-14T13:50:52.885000"
+    },
+    "last_used": null
+  },
+  {
+    "_id": "a5ce1a42-f75b-4554-83fb-cdd516d3acac",
+    "user_id": "customer_001",
+    "recipient_name": "Test Beneficiary",
+    "recipient_email": "test_beneficiary_rafovg@test.com",
+    "nickname": "Test_rafovg",
+    "created_at": {
+      "$date": "2026-01-14T13:52:02.629000"
+    },
+    "last_used": null
+  },
+  {
+    "_id": "a892cf82-58c0-41ad-a4a2-01a2eaeace20",
+    "user_id": "customer_001",
+    "recipient_name": "Test Beneficiary",
+    "recipient_email": "test_beneficiary_zvrrck@test.com",
+    "nickname": "Test_zvrrck",
+    "created_at": {
+      "$date": "2026-01-14T13:59:21.080000"
+    },
+    "last_used": null
+  },
+  {
+    "_id": "856e2c9f-c8d1-4902-a5bb-1142374f267a",
+    "user_id": "customer_001",
+    "recipient_name": "Test Beneficiary",
+    "recipient_email": "test_beneficiary_tihnfj@test.com",
+    "nickname": "Test_tihnfj",
+    "created_at": {
+      "$date": "2026-01-14T14:00:04.791000"
+    },
+    "last_used": null
+  },
+  {
+    "_id": "2e494687-491d-425b-b4b5-2dd6b21bd92b",
+    "user_id": "696686ed12dec8bf6a714e7e",
+    "recipient_name": "Jor Deli",
+    "recipient_email": "test111@gmail.com",
+    "nickname": "",
+    "created_at": {
+      "$date": "2026-01-15T13:21:55.185000"
+    },
+    "last_used": null
+  },
+  {
+    "_id": "54afa4f1-5fbc-413b-ba73-76f3edc05c1c",
+    "user_id": "customer_001",
+    "recipient_name": "Test Beneficiary",
+    "recipient_email": "test_beneficiary_rmhvzy@test.com",
+    "nickname": "Test_rmhvzy",
+    "created_at": {
+      "$date": "2026-01-15T14:41:02.187000"
+    },
+    "last_used": null
+  },
+  {
+    "_id": "f5207b50-42d7-4139-898b-4bb4b3bf2a03",
+    "user_id": "customer_001",
+    "recipient_name": "Test Beneficiary",
+    "recipient_email": "test_beneficiary_wudsdj@test.com",
+    "nickname": "Test_wudsdj",
+    "created_at": {
+      "$date": "2026-01-15T15:14:50.798000"
+    },
+    "last_used": null
+  },
+  {
+    "_id": "35069975-b4e8-48fa-b9a5-1f4966dda5ee",
+    "user_id": "customer_001",
+    "recipient_name": "Test Beneficiary",
+    "recipient_email": "test_beneficiary_bntcbj@test.com",
+    "nickname": "Test_bntcbj",
+    "created_at": {
+      "$date": "2026-01-20T12:54:45.938000"
+    },
+    "last_used": null
+  }
+]

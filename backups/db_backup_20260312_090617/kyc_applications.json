@@ -1,0 +1,40 @@
+[
+  {
+    "_id": "6996f8700f4a226eb926d5da",
+    "user_id": "6996f7f187a4971cf54176aa",
+    "status": "APPROVED"
+  },
+  {
+    "_id": "6996f8d687a4971cf54176c3",
+    "status": "APPROVED"
+  },
+  {
+    "_id": "6996f947b1e1ce94669b822b",
+    "user_id": "6996f8b887a4971cf54176ba",
+    "status": "APPROVED"
+  },
+  {
+    "_id": "69971e59235e3ccc93f7bdcf",
+    "user_id": "69971e08b3e1ab9f96e1b896",
+    "status": "APPROVED",
+    "full_name": "Layout Test",
+    "date_of_birth": "1990-01-01",
+    "nationality": "MT",
+    "country": "Malta",
+    "street_address": "123 Test Street",
+    "city": "Valletta",
+    "postal_code": "VLT1000",
+    "created_at": "2025-01-01T00:00:00Z",
+    "updated_at": "2025-01-01T00:00:00Z"
+  },
+  {
+    "_id": "699dd342c4b6325ae4fa76e6",
+    "user_id": "test_badge_bbec639d",
+    "status": "SUBMITTED",
+    "created_at": "2026-02-24T16:35:14.103000",
+    "submitted_at": "2026-02-24T16:35:14.103000",
+    "updated_at": "2026-02-24T16:35:14.103000",
+    "first_name": "Badge",
+    "last_name": "Test"
+  }
+]

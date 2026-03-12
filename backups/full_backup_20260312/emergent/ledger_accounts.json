@@ -1,0 +1,305 @@
+[
+  {
+    "_id": "ledger_acc_fees",
+    "account_type": "FEES",
+    "created_at": {
+      "$date": "2026-01-08T17:03:47.390000"
+    },
+    "currency": "EUR",
+    "status": "ACTIVE"
+  },
+  {
+    "_id": "695fe660132ed65684c75574",
+    "id": "695fe660132ed65684c75574",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "customer_001",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-08T17:16:16.833000"
+    }
+  },
+  {
+    "_id": "6960be640b14a4d0ae5d82a3",
+    "id": "6960be640b14a4d0ae5d82a3",
+    "account_type": "SANDBOX_FUNDING",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": null,
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-09T08:37:56.098000"
+    }
+  },
+  {
+    "_id": "6960d480aec0df5da3e903a5",
+    "id": "6960d480aec0df5da3e903a5",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "6960d3d59d59173e05f82d20",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-09T10:12:16.039000"
+    }
+  },
+  {
+    "_id": "ledger_acc_admin",
+    "account_type": "WALLET",
+    "user_id": "admin_super_001",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": 188852.308384015
+  },
+  {
+    "_id": "696671080027797e56f86e8a",
+    "id": "696671080027797e56f86e8a",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "69666b2847560b39a3e84df1",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-13T16:21:28.300000"
+    }
+  },
+  {
+    "_id": "6966757d7fb31c36e6360826",
+    "id": "6966757d7fb31c36e6360826",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "6966756d7fb31c36e6360823",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-13T16:40:29.967000"
+    }
+  },
+  {
+    "_id": "6966770ecd02bc3c4fe2538d",
+    "id": "6966770ecd02bc3c4fe2538d",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "69667700cd02bc3c4fe2538a",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-13T16:47:10.440000"
+    }
+  },
+  {
+    "_id": "6966770fcd02bc3c4fe2538f",
+    "id": "6966770fcd02bc3c4fe2538f",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "69667700cd02bc3c4fe2538a",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-13T16:47:11.563000"
+    }
+  },
+  {
+    "_id": "6966770fcd02bc3c4fe25391",
+    "id": "6966770fcd02bc3c4fe25391",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "69667700cd02bc3c4fe2538a",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-13T16:47:11.712000"
+    }
+  },
+  {
+    "_id": "6966770fcd02bc3c4fe25393",
+    "id": "6966770fcd02bc3c4fe25393",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "69667700cd02bc3c4fe2538a",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-13T16:47:11.859000"
+    }
+  },
+  {
+    "_id": "69667b01cd02bc3c4fe2539b",
+    "id": "69667b01cd02bc3c4fe2539b",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "69667700cd02bc3c4fe2538a",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-13T17:04:01.655000"
+    }
+  },
+  {
+    "_id": "ledger_acc_69667be64c12fb952410065e",
+    "account_type": "WALLET",
+    "user_id": "69667be64c12fb952410065e",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-13T17:09:11.825000"
+    }
+  },
+  {
+    "_id": "ledger_acc_69667e2a0039551e0feb1198",
+    "account_type": "WALLET",
+    "user_id": "69667e2a0039551e0feb1198",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-13T17:37:49.524000"
+    }
+  },
+  {
+    "_id": "ledger_acc_696686ed12dec8bf6a714e7e",
+    "account_type": "WALLET",
+    "user_id": "696686ed12dec8bf6a714e7e",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-13T17:58:43.128000"
+    }
+  },
+  {
+    "_id": "ledger_acc_69668885c0ed8330a4b659ae",
+    "account_type": "WALLET",
+    "user_id": "69668885c0ed8330a4b659ae",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-13T18:08:07.220000"
+    }
+  },
+  {
+    "_id": "ledger_acc_6967754aee56629feac444aa",
+    "account_type": "WALLET",
+    "user_id": "6967754aee56629feac444aa",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-14T10:53:19.481000"
+    }
+  },
+  {
+    "_id": "6968ec96b300d43c5cf76fec",
+    "id": "6968ec96b300d43c5cf76fec",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "696771a2ee56629feac4449d",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-15T13:33:10.302000"
+    }
+  },
+  {
+    "_id": "ledger_acc_test_user_for_kyc",
+    "account_type": "WALLET",
+    "user_id": "test_user_for_kyc",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-16T10:41:45.279000"
+    }
+  },
+  {
+    "_id": "696a1730b1fb6891f796bf8d",
+    "id": "696a1730b1fb6891f796bf8d",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "696a166bb1fb6891f796bf85",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-16T10:47:12.794000"
+    }
+  },
+  {
+    "_id": "696a1732b1fb6891f796bf8f",
+    "id": "696a1732b1fb6891f796bf8f",
+    "account_type": "WALLET",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "user_id": "696a166bb1fb6891f796bf85",
+    "metadata": {},
+    "created_at": {
+      "$date": "2026-01-16T10:47:14.153000"
+    }
+  },
+  {
+    "_id": "ledger_acc_696a19e8a743135fb6611ccd",
+    "account_type": "WALLET",
+    "user_id": "696a19e8a743135fb6611ccd",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-16T11:04:43.231000"
+    }
+  },
+  {
+    "_id": "ledger_acc_696a1bd5a743135fb6611cda",
+    "account_type": "WALLET",
+    "user_id": "696a1bd5a743135fb6611cda",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-16T11:09:35.963000"
+    }
+  },
+  {
+    "_id": "ledger_acc_696a5c0b78ff6cb6d7f8b8b4",
+    "account_type": "WALLET",
+    "user_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-16T15:43:47.547000"
+    }
+  },
+  {
+    "_id": "ledger_acc_696a67196177af49c46b7f34",
+    "account_type": "WALLET",
+    "user_id": "696a67196177af49c46b7f34",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-16T16:30:45.068000"
+    }
+  },
+  {
+    "_id": "ledger_acc_696e01e3e3141f70e7f5515b",
+    "account_type": "WALLET",
+    "user_id": "696e01e3e3141f70e7f5515b",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-19T10:12:09.978000"
+    }
+  },
+  {
+    "_id": "ledger_acc_696e2c4eb7111bc49f800c16",
+    "account_type": "WALLET",
+    "user_id": "696e2c4eb7111bc49f800c16",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-19T13:30:43.325000"
+    }
+  },
+  {
+    "_id": "ledger_acc_696e5cf906d6d725d71480d0",
+    "account_type": "WALLET",
+    "user_id": "696e5cf906d6d725d71480d0",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "created_at": {
+      "$date": "2026-01-19T16:35:12.513000"
+    }
+  }
+]

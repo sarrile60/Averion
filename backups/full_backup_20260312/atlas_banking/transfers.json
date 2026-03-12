@@ -1,0 +1,169 @@
+[
+  {
+    "_id": "04d69bbc-503b-4c1f-a438-49964b96662d",
+    "user_id": "customer_001",
+    "from_account_id": "695fe660132ed65684c75575",
+    "beneficiary_name": "Alice",
+    "beneficiary_iban": "DE89370400440532013000",
+    "amount": 5000,
+    "currency": "EUR",
+    "details": "Test",
+    "reference_number": null,
+    "scheduled_for": null,
+    "attachment_url": null,
+    "status": "COMPLETED",
+    "reject_reason": null,
+    "created_at": {
+      "$date": "2026-01-10T17:31:22.178000"
+    },
+    "updated_at": {
+      "$date": "2026-01-10T17:31:22.192000"
+    },
+    "admin_action_by": "admin_super_001",
+    "admin_action_at": {
+      "$date": "2026-01-10T17:31:22.192000"
+    }
+  },
+  {
+    "_id": "5645a625-87c2-4798-a529-db5fea1af87e",
+    "user_id": "customer_001",
+    "from_account_id": "695fe660132ed65684c75575",
+    "beneficiary_name": "Test",
+    "beneficiary_iban": "DE89370400440532013000",
+    "amount": 1000,
+    "currency": "EUR",
+    "details": "Final test",
+    "reference_number": null,
+    "scheduled_for": null,
+    "attachment_url": null,
+    "status": "COMPLETED",
+    "reject_reason": null,
+    "created_at": {
+      "$date": "2026-01-10T17:36:12.978000"
+    },
+    "updated_at": {
+      "$date": "2026-01-15T11:52:45.347000"
+    },
+    "admin_action_by": "admin_super_001",
+    "admin_action_at": {
+      "$date": "2026-01-15T11:52:45.347000"
+    }
+  },
+  {
+    "_id": "3b874535-8d72-404a-a245-d62709987456",
+    "user_id": "customer_001",
+    "from_account_id": "695fe660132ed65684c75575",
+    "beneficiary_name": "Test Recipient",
+    "beneficiary_iban": "DE89370400440532013000",
+    "amount": 1000,
+    "currency": "EUR",
+    "details": "Test transfer from automated testing",
+    "reference_number": null,
+    "scheduled_for": null,
+    "attachment_url": null,
+    "status": "REJECTED",
+    "reject_reason": "Hh",
+    "created_at": {
+      "$date": "2026-01-13T15:30:07.969000"
+    },
+    "updated_at": {
+      "$date": "2026-01-15T11:52:52.190000"
+    },
+    "admin_action_by": "admin_super_001",
+    "admin_action_at": {
+      "$date": "2026-01-15T11:52:52.190000"
+    }
+  },
+  {
+    "_id": "36bce7c0-5b0a-4426-af3f-c032625d344c",
+    "user_id": "customer_001",
+    "from_account_id": "695fe660132ed65684c75575",
+    "beneficiary_name": "Test Recipient",
+    "beneficiary_iban": "DE89370400440532013000",
+    "amount": 1000,
+    "currency": "EUR",
+    "details": "Test transfer from automated testing",
+    "reference_number": null,
+    "scheduled_for": null,
+    "attachment_url": null,
+    "status": "SUBMITTED",
+    "reject_reason": null,
+    "created_at": {
+      "$date": "2026-01-13T15:50:30.896000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T15:50:30.896000"
+    },
+    "admin_action_by": null,
+    "admin_action_at": null
+  },
+  {
+    "_id": "4ace165e-34c8-4499-ae7c-948bc95b1211",
+    "user_id": "customer_001",
+    "from_account_id": "695fe660132ed65684c75575",
+    "beneficiary_name": "Test Recipient",
+    "beneficiary_iban": "DE89370400440532013000",
+    "amount": 1000,
+    "currency": "EUR",
+    "details": "Test transfer from automated testing",
+    "reference_number": null,
+    "scheduled_for": null,
+    "attachment_url": null,
+    "status": "SUBMITTED",
+    "reject_reason": null,
+    "created_at": {
+      "$date": "2026-01-14T12:23:02.003000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T12:23:02.003000"
+    },
+    "admin_action_by": null,
+    "admin_action_at": null
+  },
+  {
+    "_id": "775a62a3-a730-4484-9973-9eb9f7631ff9",
+    "user_id": "customer_001",
+    "from_account_id": "695fe660132ed65684c75575",
+    "beneficiary_name": "Test Recipient",
+    "beneficiary_iban": "DE89370400440532013000",
+    "amount": 1000,
+    "currency": "EUR",
+    "details": "Test transfer from automated testing",
+    "reference_number": null,
+    "scheduled_for": null,
+    "attachment_url": null,
+    "status": "SUBMITTED",
+    "reject_reason": null,
+    "created_at": {
+      "$date": "2026-01-14T12:23:09.469000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T12:23:09.469000"
+    },
+    "admin_action_by": null,
+    "admin_action_at": null
+  },
+  {
+    "_id": "ff8b9614-134f-4749-b92e-471233bec746",
+    "user_id": "customer_001",
+    "from_account_id": "695fe660132ed65684c75575",
+    "beneficiary_name": "Test Recipient",
+    "beneficiary_iban": "DE89370400440532013000",
+    "amount": 1000,
+    "currency": "EUR",
+    "details": "Test transfer from automated testing",
+    "reference_number": null,
+    "scheduled_for": null,
+    "attachment_url": null,
+    "status": "SUBMITTED",
+    "reject_reason": null,
+    "created_at": {
+      "$date": "2026-01-15T12:15:12.769000"
+    },
+    "updated_at": {
+      "$date": "2026-01-15T12:15:12.769000"
+    },
+    "admin_action_by": null,
+    "admin_action_at": null
+  }
+]

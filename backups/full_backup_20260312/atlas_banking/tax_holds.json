@@ -1,0 +1,215 @@
+[
+  {
+    "_id": "cc98c435-a707-407f-848f-9177e831a339",
+    "user_id": "6967754aee56629feac444aa",
+    "tax_amount_cents": 175000,
+    "reason": "Outstanding tax obligations",
+    "is_active": true,
+    "blocked_at": {
+      "$date": "2026-01-15T14:55:21.852000"
+    },
+    "blocked_by": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-15T14:55:21.852000"
+    }
+  },
+  {
+    "_id": "8a5139ba-e408-4e23-87e5-04902fdc47f8",
+    "user_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "tax_amount_cents": 1800000,
+    "reason": "Outstanding tax obligations",
+    "is_active": true,
+    "blocked_at": {
+      "$date": "2026-01-16T16:23:57.930000"
+    },
+    "blocked_by": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-16T16:23:57.930000"
+    }
+  },
+  {
+    "_id": "6ee6c5a0-8eeb-4e4e-b00c-d714547a0a08",
+    "user_id": "696a67196177af49c46b7f34",
+    "tax_amount_cents": 20000,
+    "reason": "Outstanding tax obligations",
+    "is_active": true,
+    "blocked_at": {
+      "$date": "2026-01-16T16:36:20.639000"
+    },
+    "blocked_by": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-16T16:36:20.639000"
+    }
+  },
+  {
+    "_id": "58aa7238-3f47-4e40-ad0e-e9d9d5dcc61c",
+    "user_id": "customer_001",
+    "tax_amount_cents": 20000,
+    "reason": "Outstanding tax obligations - Test data",
+    "is_active": false,
+    "blocked_at": {
+      "$date": "2026-01-16T17:07:26.527000"
+    },
+    "blocked_by": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-16T17:07:26.527000"
+    },
+    "removed_at": {
+      "$date": "2026-01-19T13:52:45.547000"
+    },
+    "removed_by": "admin_super_001"
+  },
+  {
+    "_id": "0f10cc48-20b1-40e2-81b3-c00707b1febf",
+    "user_id": "696e01e3e3141f70e7f5515b",
+    "tax_amount_cents": 190000,
+    "reason": "Outstanding tax obligations",
+    "beneficiary_name": "Arbias Arbias",
+    "iban": "AL89999444545",
+    "bic_swift": "CODA87454",
+    "reference": "TAX20224",
+    "crypto_wallet": "qweqwerqwrrwqrwq",
+    "is_active": true,
+    "blocked_at": {
+      "$date": "2026-01-19T11:01:41.485000"
+    },
+    "blocked_by": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-19T11:01:41.485000"
+    }
+  },
+  {
+    "_id": "91bcce08-08ef-4a3b-b1cc-f1d411df9859",
+    "user_id": "customer_001",
+    "tax_amount_cents": 20000,
+    "reason": "Outstanding tax obligations - Test data",
+    "beneficiary_name": null,
+    "iban": null,
+    "bic_swift": null,
+    "reference": null,
+    "crypto_wallet": null,
+    "is_active": false,
+    "blocked_at": {
+      "$date": "2026-01-19T13:55:49.325000"
+    },
+    "blocked_by": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-19T13:55:49.325000"
+    },
+    "removed_at": {
+      "$date": "2026-01-19T14:01:20.750000"
+    },
+    "removed_by": "admin_super_001"
+  },
+  {
+    "_id": "f2e38690-a03c-4eb7-9c57-e487ccb09483",
+    "user_id": "customer_001",
+    "tax_amount_cents": 20000,
+    "reason": "Outstanding tax obligations - Test data",
+    "beneficiary_name": null,
+    "iban": null,
+    "bic_swift": null,
+    "reference": null,
+    "crypto_wallet": null,
+    "is_active": false,
+    "blocked_at": {
+      "$date": "2026-01-19T14:03:04.030000"
+    },
+    "blocked_by": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-19T14:03:04.030000"
+    },
+    "removed_at": {
+      "$date": "2026-01-19T14:10:38.356000"
+    },
+    "removed_by": "admin_super_001"
+  },
+  {
+    "_id": "47b5c5a6-a400-4da0-bbf5-bef74910812f",
+    "user_id": "customer_001",
+    "tax_amount_cents": 20000,
+    "reason": "Outstanding tax obligations - Test data",
+    "beneficiary_name": null,
+    "iban": null,
+    "bic_swift": null,
+    "reference": null,
+    "crypto_wallet": null,
+    "is_active": false,
+    "blocked_at": {
+      "$date": "2026-01-19T14:12:33.668000"
+    },
+    "blocked_by": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-19T14:12:33.668000"
+    },
+    "removed_at": {
+      "$date": "2026-01-19T14:21:40.250000"
+    },
+    "removed_by": "admin_super_001"
+  },
+  {
+    "_id": "4fcc16fe-114c-4cb7-a47b-2bcda1b607b6",
+    "user_id": "customer_001",
+    "tax_amount_cents": 20000,
+    "reason": "Outstanding tax obligations - Test data",
+    "beneficiary_name": null,
+    "iban": null,
+    "bic_swift": null,
+    "reference": null,
+    "crypto_wallet": null,
+    "is_active": false,
+    "blocked_at": {
+      "$date": "2026-01-19T14:22:16.402000"
+    },
+    "blocked_by": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-19T14:22:16.402000"
+    },
+    "removed_at": {
+      "$date": "2026-01-19T14:39:25.409000"
+    },
+    "removed_by": "admin_super_001"
+  },
+  {
+    "_id": "dcfbaa0f-d084-4dcb-ab38-f29baa7cbd3c",
+    "user_id": "696e2c4eb7111bc49f800c16",
+    "tax_amount_cents": 1500000,
+    "reason": "Unpaid VAT obligations",
+    "beneficiary_name": "GG",
+    "iban": "GG",
+    "bic_swift": "GG",
+    "reference": "GG",
+    "crypto_wallet": "GG",
+    "is_active": true,
+    "blocked_at": {
+      "$date": "2026-01-19T15:20:32.708000"
+    },
+    "blocked_by": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-19T15:20:32.708000"
+    }
+  },
+  {
+    "_id": "2720ec6e-6179-4500-9eda-07cf1d7fb83c",
+    "user_id": "customer_001",
+    "tax_amount_cents": 200000,
+    "reason": "Outstanding tax obligations",
+    "beneficiary_name": null,
+    "iban": null,
+    "bic_swift": null,
+    "reference": null,
+    "crypto_wallet": null,
+    "is_active": false,
+    "blocked_at": {
+      "$date": "2026-01-20T12:54:46.311000"
+    },
+    "blocked_by": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.311000"
+    },
+    "removed_at": {
+      "$date": "2026-01-20T12:54:46.459000"
+    },
+    "removed_by": "admin_super_001"
+  }
+]

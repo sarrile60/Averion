@@ -1,0 +1,5743 @@
+[
+  {
+    "_id": "8542db48-efd5-48e8-8945-1ad81649e40a",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:21:54.951000"
+    }
+  },
+  {
+    "_id": "943917f9-0a68-43e9-800e-55a1ce79a41a",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:21:55.040000"
+    }
+  },
+  {
+    "_id": "cd3bfa9c-0546-4488-a3be-a80a38f333b9",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:22:07.515000"
+    }
+  },
+  {
+    "_id": "dd1c97b4-03fe-40da-b5d2-b28ece019e5b",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:22:25.254000"
+    }
+  },
+  {
+    "_id": "2b72716d-b1e3-40b8-b5b3-408cb79bad35",
+    "performed_by": "SYSTEM",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "",
+    "action": "LOGIN_FAILED",
+    "entity_type": "auth",
+    "entity_id": "baduser@test.com",
+    "description": "Failed login attempt for baduser@test.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "reason": "invalid_credentials"
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:22:25.268000"
+    }
+  },
+  {
+    "_id": "ff708c18-36ba-41b7-8923-83421115df6f",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.52",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:22:37.718000"
+    }
+  },
+  {
+    "_id": "48d7e9af-9b4b-4241-aaa5-8eeb6ee9be21",
+    "performed_by": "6967754aee56629feac444aa",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test002@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "6967754aee56629feac444aa",
+    "description": "Successful login for test002@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:24:43.284000"
+    }
+  },
+  {
+    "_id": "edf42f0a-439b-4240-90d4-e6d3780e9292",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:24:54.021000"
+    }
+  },
+  {
+    "_id": "5e8fa3bd-7a7b-4ee0-9d23-ff1a7716179f",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:28:33.608000"
+    }
+  },
+  {
+    "_id": "9d5a4ca6-84fc-4b3a-8dda-a1f0a89abdb7",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.254",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:28:49.015000"
+    }
+  },
+  {
+    "_id": "cd7f1a31-3b4a-4208-881c-d29fd3a1f072",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:29:10.263000"
+    }
+  },
+  {
+    "_id": "e3d26ac2-c44d-482a-b145-98c919bf7cc9",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:30:09.301000"
+    }
+  },
+  {
+    "_id": "a9ded616-35bb-43c4-ab20-08f3367dbdb7",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.52",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:30:34.631000"
+    }
+  },
+  {
+    "_id": "ccca5d65-1c5c-406e-8bee-e553b1f046e2",
+    "performed_by": "696a0ecc36a0500a740d53c3",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test003@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a0ecc36a0500a740d53c3",
+    "description": "Successful login for test003@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:31:03.950000"
+    }
+  },
+  {
+    "_id": "bad9227c-2dde-4b35-b7db-da12a34fe941",
+    "performed_by": "696a13888a0446b7b4b771a9",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test004@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a13888a0446b7b4b771a9",
+    "description": "Successful login for test004@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:31:46.509000"
+    }
+  },
+  {
+    "_id": "1098aef5-ce18-48a4-97c5-2b56c55661eb",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:32:36.142000"
+    }
+  },
+  {
+    "_id": "cfc7da43-48d0-4265-a78d-64311641c3c8",
+    "performed_by": "696a13888a0446b7b4b771a9",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test004@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a13888a0446b7b4b771a9",
+    "description": "Successful login for test004@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:33:01.211000"
+    }
+  },
+  {
+    "_id": "4e3a5896-a34a-421b-aea2-71ab78ab643b",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:36:57.869000"
+    }
+  },
+  {
+    "_id": "c70a0104-cde5-493d-a42c-5add99f2fbae",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:37:06.093000"
+    }
+  },
+  {
+    "_id": "06d490ab-6d66-45db-bdac-568b8db5e355",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.37",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:37:32.641000"
+    }
+  },
+  {
+    "_id": "e504b705-a091-46bb-a89a-1172ac1bfa4c",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.128.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:38:16.163000"
+    }
+  },
+  {
+    "_id": "9e1a9ad2-e4eb-404f-98d3-fbe8fa6a4aa3",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:38:53.652000"
+    }
+  },
+  {
+    "_id": "f2e49b31-0ea3-4489-8102-f052cc09e782",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:39:01.704000"
+    }
+  },
+  {
+    "_id": "bca31106-1539-42a5-a3e6-a1b81d1551f1",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:39:58.405000"
+    }
+  },
+  {
+    "_id": "c08bb8a2-639e-46a8-8850-a5dbd23f1ed0",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:40:31.124000"
+    }
+  },
+  {
+    "_id": "e7e830f9-3bb1-41ee-a95b-19a4238a667a",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:41:07.373000"
+    }
+  },
+  {
+    "_id": "1e3b9d64-ba57-4704-b966-ac942cf2be14",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:41:18.281000"
+    }
+  },
+  {
+    "_id": "5f44093c-b46a-45a5-beaf-8859f67a38fa",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:41:45.265000"
+    }
+  },
+  {
+    "_id": "93ce0aee-e289-4ef3-904e-ef29c25475ef",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_APPROVED",
+    "entity_type": "kyc",
+    "entity_id": "test_kyc_validation_001",
+    "description": "KYC application APPROVED for user test_user_for_kyc",
+    "metadata": {
+      "status": "APPROVED",
+      "notes": "Approved",
+      "user_id": "test_user_for_kyc"
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:41:45.288000"
+    }
+  },
+  {
+    "_id": "dcb9c71d-c584-470d-bdd6-ec6e56dc7752",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:42:11.645000"
+    }
+  },
+  {
+    "_id": "8fa0b1fd-35d0-4fec-946a-b78e59d28053",
+    "performed_by": "696a166bb1fb6891f796bf85",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test005@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a166bb1fb6891f796bf85",
+    "description": "Successful login for test005@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:44:05.959000"
+    }
+  },
+  {
+    "_id": "815f78c1-9be8-45c3-867a-f6ad86e638ba",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:45:34.819000"
+    }
+  },
+  {
+    "_id": "224833f5-25d8-42e9-b99f-28e88462c7f3",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_NEEDS_MORE_INFO",
+    "entity_type": "kyc",
+    "entity_id": "696a1676b1fb6891f796bf87",
+    "description": "KYC application NEEDS_MORE_INFO for user 696a166bb1fb6891f796bf85",
+    "metadata": {
+      "status": "NEEDS_MORE_INFO",
+      "notes": "",
+      "user_id": "696a166bb1fb6891f796bf85"
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:45:46.313000"
+    }
+  },
+  {
+    "_id": "dc86ee17-065b-45a6-9b32-3ac6759c4271",
+    "performed_by": "696a166bb1fb6891f796bf85",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test005@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a166bb1fb6891f796bf85",
+    "description": "Successful login for test005@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.254",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:46:19.155000"
+    }
+  },
+  {
+    "_id": "75a8bc43-7a4e-4f34-8da5-a53e9f9906bf",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:49:36.374000"
+    }
+  },
+  {
+    "_id": "1f869b4f-2a0a-43ca-aabb-d829fc068a93",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:49:49.041000"
+    }
+  },
+  {
+    "_id": "c34d0da1-0d52-451c-bdec-ca24836ef9dc",
+    "performed_by": "SYSTEM",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "",
+    "action": "LOGIN_FAILED",
+    "entity_type": "auth",
+    "entity_id": "test321@gmail.com",
+    "description": "Failed login attempt for test321@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "reason": "invalid_credentials"
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:50:27.556000"
+    }
+  },
+  {
+    "_id": "810444b3-b605-406c-b833-5f29747ee87d",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:50:54.184000"
+    }
+  },
+  {
+    "_id": "77815362-d74e-494b-b1c3-b7ce3d16ad38",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:51:11.346000"
+    }
+  },
+  {
+    "_id": "7c5a75aa-9e77-4767-bdb5-db0a69cccfc2",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:51:52.845000"
+    }
+  },
+  {
+    "_id": "14cf2d90-5f56-4b31-b7b8-c13d5db75ae7",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.52",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:53:27.262000"
+    }
+  },
+  {
+    "_id": "007db02e-a285-477c-b5c0-434d0feafd12",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.37",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:58:12.355000"
+    }
+  },
+  {
+    "_id": "c8b7435d-3184-477d-add4-22b2601ab8dd",
+    "performed_by": "696a19e8a743135fb6611ccd",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test006@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a19e8a743135fb6611ccd",
+    "description": "Successful login for test006@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.128.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:58:54.564000"
+    }
+  },
+  {
+    "_id": "65b37d26-9ab2-464d-8a61-00573ca60b0b",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.52",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:59:30.691000"
+    }
+  },
+  {
+    "_id": "edb723a4-c287-42b1-98af-26f65bab07dd",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_NEEDS_MORE_INFO",
+    "entity_type": "kyc",
+    "entity_id": "696a19eea743135fb6611ccf",
+    "description": "KYC application NEEDS_MORE_INFO for user 696a19e8a743135fb6611ccd",
+    "metadata": {
+      "status": "NEEDS_MORE_INFO",
+      "notes": "",
+      "user_id": "696a19e8a743135fb6611ccd"
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:59:36.798000"
+    }
+  },
+  {
+    "_id": "66931f68-2872-4239-92bb-c5aac79069f4",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_REJECTED",
+    "entity_type": "kyc",
+    "entity_id": "696a19eea743135fb6611ccf",
+    "description": "KYC application REJECTED for user 696a19e8a743135fb6611ccd",
+    "metadata": {
+      "status": "REJECTED",
+      "notes": "hh",
+      "user_id": "696a19e8a743135fb6611ccd"
+    },
+    "created_at": {
+      "$date": "2026-01-16T10:59:53.456000"
+    }
+  },
+  {
+    "_id": "37d704e6-9a2d-4029-9195-9fe9db186a04",
+    "performed_by": "696a19e8a743135fb6611ccd",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test006@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a19e8a743135fb6611ccd",
+    "description": "Successful login for test006@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.37",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:00:16.384000"
+    }
+  },
+  {
+    "_id": "0615ced7-365c-4136-b380-026e990812d5",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:00:37.390000"
+    }
+  },
+  {
+    "_id": "e240c492-13fe-4c06-ae9c-d3de9cbc0164",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_REJECTED",
+    "entity_type": "kyc",
+    "entity_id": "test_needs_more_info_001",
+    "description": "KYC application REJECTED for user test_user_needs_info",
+    "metadata": {
+      "status": "REJECTED",
+      "notes": "h",
+      "user_id": "test_user_needs_info"
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:00:44.322000"
+    }
+  },
+  {
+    "_id": "d7be8d83-b698-44a9-adcf-99171bdf8aec",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_REJECTED",
+    "entity_type": "kyc",
+    "entity_id": "696a1676b1fb6891f796bf87",
+    "description": "KYC application REJECTED for user 696a166bb1fb6891f796bf85",
+    "metadata": {
+      "status": "REJECTED",
+      "notes": "h",
+      "user_id": "696a166bb1fb6891f796bf85"
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:00:49.044000"
+    }
+  },
+  {
+    "_id": "cc644170-0b66-4d5a-a3a6-ea57940c8037",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:03:52.336000"
+    }
+  },
+  {
+    "_id": "d6118833-6995-4075-b0de-958f6a76f17a",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:04:11.645000"
+    }
+  },
+  {
+    "_id": "82eefdbe-6535-4b49-88dd-f33990f6609c",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.128.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:04:35.136000"
+    }
+  },
+  {
+    "_id": "6d5932e7-f7f7-4e59-acfa-ca658ca01940",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_APPROVED",
+    "entity_type": "kyc",
+    "entity_id": "696a19eea743135fb6611ccf",
+    "description": "KYC application APPROVED for user 696a19e8a743135fb6611ccd",
+    "metadata": {
+      "status": "APPROVED",
+      "notes": "",
+      "user_id": "696a19e8a743135fb6611ccd"
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:04:43.232000"
+    }
+  },
+  {
+    "_id": "53db911b-348c-4edd-8391-66b0d579ef15",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.254",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:06:17.655000"
+    }
+  },
+  {
+    "_id": "707efba8-0bd7-4154-b8c8-b8e0ad6e7baf",
+    "performed_by": "696a1bd5a743135fb6611cda",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test007@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a1bd5a743135fb6611cda",
+    "description": "Successful login for test007@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.254",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:07:43.283000"
+    }
+  },
+  {
+    "_id": "538cca5a-ef13-47de-8da4-e5731bdf6f26",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:08:11.427000"
+    }
+  },
+  {
+    "_id": "373b05e7-ed40-4e3b-9987-b3c664e68024",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_APPROVED",
+    "entity_type": "kyc",
+    "entity_id": "696a1bffa743135fb6611cdc",
+    "description": "KYC application APPROVED for user 696a1bd5a743135fb6611cda",
+    "metadata": {
+      "status": "APPROVED",
+      "notes": "fun",
+      "user_id": "696a1bd5a743135fb6611cda"
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:09:35.964000"
+    }
+  },
+  {
+    "_id": "19b4a7b8-cfdf-4c31-8d3d-69b422b7a987",
+    "performed_by": "SYSTEM",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "",
+    "action": "LOGIN_FAILED",
+    "entity_type": "auth",
+    "entity_id": "test007@gmail.com",
+    "description": "Failed login attempt for test007@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "reason": "invalid_credentials"
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:09:50.418000"
+    }
+  },
+  {
+    "_id": "5b17794a-c660-46da-bd56-6874e33d7ed5",
+    "performed_by": "696a1bd5a743135fb6611cda",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test007@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a1bd5a743135fb6611cda",
+    "description": "Successful login for test007@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.128.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:09:57.320000"
+    }
+  },
+  {
+    "_id": "c9ddbd3c-8b7c-4bc9-830e-f1a5a9fbbacf",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:11:16.344000"
+    }
+  },
+  {
+    "_id": "c612a8b6-02ae-417d-88d8-80b079007d86",
+    "performed_by": "696a1bd5a743135fb6611cda",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test007@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a1bd5a743135fb6611cda",
+    "description": "Successful login for test007@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.37",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T11:12:03.533000"
+    }
+  },
+  {
+    "_id": "d47d8eee-6438-4f36-a6a6-740628f86452",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T12:50:14.826000"
+    }
+  },
+  {
+    "_id": "da47bd3b-2051-4706-90b3-8456a18f85b1",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T12:50:51.249000"
+    }
+  },
+  {
+    "_id": "d7d011a2-97e2-4712-85f3-2c12984180db",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T12:51:17.859000"
+    }
+  },
+  {
+    "_id": "6995515e-532b-4e4a-89fc-fb9dec75eb8e",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T12:51:39.346000"
+    }
+  },
+  {
+    "_id": "3f812e89-16de-4a83-82db-be99fb230131",
+    "performed_by": "696a13888a0446b7b4b771a9",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test004@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a13888a0446b7b4b771a9",
+    "description": "Successful login for test004@gmail.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T14:57:04.295000"
+    }
+  },
+  {
+    "_id": "1ad154ea-2e91-43f8-9865-0c5faaf01132",
+    "performed_by": "696a13888a0446b7b4b771a9",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test004@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a13888a0446b7b4b771a9",
+    "description": "Successful login for test004@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T14:57:20.214000"
+    }
+  },
+  {
+    "_id": "b481b713-36ac-47ea-aa82-5e066e59b983",
+    "performed_by": "696a1bd5a743135fb6611cda",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test007@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a1bd5a743135fb6611cda",
+    "description": "Successful login for test007@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T14:58:04.677000"
+    }
+  },
+  {
+    "_id": "f04fa07f-3db0-4452-9c28-6d1d7aeebe7b",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.37",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:00:28.038000"
+    }
+  },
+  {
+    "_id": "99cbe842-c11a-42cf-893f-a617ae17b63b",
+    "performed_by": "SYSTEM",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "",
+    "action": "LOGIN_FAILED",
+    "entity_type": "auth",
+    "entity_id": "test008@gmail.com",
+    "description": "Failed login attempt for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "reason": "invalid_credentials"
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:01:38.177000"
+    }
+  },
+  {
+    "_id": "881ac87c-34f2-4ed2-96c8-0c53741fa467",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:01:41.391000"
+    }
+  },
+  {
+    "_id": "8b8a2332-c2a9-4d78-8429-5d0212fc992c",
+    "performed_by": "SYSTEM",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "",
+    "action": "LOGIN_FAILED",
+    "entity_type": "auth",
+    "entity_id": "test008@gmail.com",
+    "description": "Failed login attempt for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "reason": "invalid_credentials"
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:01:54.183000"
+    }
+  },
+  {
+    "_id": "018dd823-d6a1-466f-a08b-150acc4280b2",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:02:35.343000"
+    }
+  },
+  {
+    "_id": "ed053b58-378d-4666-a954-a76571884cc1",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:02:55.282000"
+    }
+  },
+  {
+    "_id": "4d40141d-fd67-418f-8eed-e5b714b9c295",
+    "performed_by": "696a1bd5a743135fb6611cda",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test007@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a1bd5a743135fb6611cda",
+    "description": "Successful login for test007@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.37",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:13:40.407000"
+    }
+  },
+  {
+    "_id": "1dc48fbd-3224-4e19-93f1-0c0de22e1a9b",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:16:57.408000"
+    }
+  },
+  {
+    "_id": "f64a10d9-cac6-43bb-8772-39eaca0dbed1",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:18:14.466000"
+    }
+  },
+  {
+    "_id": "95849ed2-0c15-440e-9d9e-31b72b8e19ae",
+    "performed_by": "696a1bd5a743135fb6611cda",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test007@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a1bd5a743135fb6611cda",
+    "description": "Successful login for test007@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:19:22.006000"
+    }
+  },
+  {
+    "_id": "da418244-9560-4727-922b-e5825872e46b",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:22:57.103000"
+    }
+  },
+  {
+    "_id": "01900d7d-2d8b-4412-bf48-1db590358567",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:23:31.167000"
+    }
+  },
+  {
+    "_id": "ef0ddc00-c088-4bcd-b689-4f57ff7043ae",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.145",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:24:09.282000"
+    }
+  },
+  {
+    "_id": "be6fa280-bd74-41eb-929d-f0bb19c0e560",
+    "performed_by": "696a1bd5a743135fb6611cda",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test007@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a1bd5a743135fb6611cda",
+    "description": "Successful login for test007@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:25:22.131000"
+    }
+  },
+  {
+    "_id": "10331f0d-3461-4686-b1d2-af35147f07b8",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:26:56.776000"
+    }
+  },
+  {
+    "_id": "26275f35-fe4d-4c44-9e75-5ccfce24e6b3",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:27:27.090000"
+    }
+  },
+  {
+    "_id": "ff7ad64f-ef51-4bd5-9392-c02d0aaf111d",
+    "performed_by": "696a1bd5a743135fb6611cda",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test007@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a1bd5a743135fb6611cda",
+    "description": "Successful login for test007@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.254",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:28:13.794000"
+    }
+  },
+  {
+    "_id": "a1062303-2382-4d35-8b5f-9af79546bebd",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.128.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:33:38.021000"
+    }
+  },
+  {
+    "_id": "388f4ebe-7e1a-4e36-bdd5-37ed15cf5f72",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.128.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:34:28.926000"
+    }
+  },
+  {
+    "_id": "6c7acb3b-25e0-4dd9-a842-17070b0c5c5c",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:35:36.603000"
+    }
+  },
+  {
+    "_id": "999ac17e-f5be-440c-ae55-8897cd928d1c",
+    "performed_by": "696a1bd5a743135fb6611cda",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test007@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a1bd5a743135fb6611cda",
+    "description": "Successful login for test007@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.254",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:36:49.521000"
+    }
+  },
+  {
+    "_id": "d112eaea-6049-453e-b9e6-6002737b2a1d",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.254",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:39:01.446000"
+    }
+  },
+  {
+    "_id": "af8cf335-7334-4428-b1fb-52a93d33eabc",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:39:33.692000"
+    }
+  },
+  {
+    "_id": "d3cde37d-5026-43c1-9c1a-fec3c20a5e8f",
+    "performed_by": "696a1bd5a743135fb6611cda",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test007@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a1bd5a743135fb6611cda",
+    "description": "Successful login for test007@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:40:20.659000"
+    }
+  },
+  {
+    "_id": "7956671d-5dfd-4f40-866f-6ffe81dce3c7",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:41:11.137000"
+    }
+  },
+  {
+    "_id": "e7cf3e24-e413-4ced-a4c5-096a55dc0ba3",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:42:11.388000"
+    }
+  },
+  {
+    "_id": "76c859b9-c79f-4dc7-8ec2-bf64085195c5",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_NEEDS_MORE_INFO",
+    "entity_type": "kyc",
+    "entity_id": "696a5c1778ff6cb6d7f8b8b6",
+    "description": "KYC application NEEDS_MORE_INFO for user 696a5c0b78ff6cb6d7f8b8b4",
+    "metadata": {
+      "status": "NEEDS_MORE_INFO",
+      "notes": "",
+      "user_id": "696a5c0b78ff6cb6d7f8b8b4"
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:42:16.753000"
+    }
+  },
+  {
+    "_id": "c518bd4d-fe72-4714-8b93-7032baab0e74",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:42:29.532000"
+    }
+  },
+  {
+    "_id": "b7a758ce-3758-4cf1-85ed-a2b6555ee41f",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.145",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:42:47.001000"
+    }
+  },
+  {
+    "_id": "d899cb3e-29ae-4ea4-b97f-7a3aa49069d3",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:42:59.439000"
+    }
+  },
+  {
+    "_id": "09a54414-21e6-4276-bad8-98f91d0fdc3a",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_APPROVED",
+    "entity_type": "kyc",
+    "entity_id": "696a5c1778ff6cb6d7f8b8b6",
+    "description": "KYC application APPROVED for user 696a5c0b78ff6cb6d7f8b8b4",
+    "metadata": {
+      "status": "APPROVED",
+      "notes": "good",
+      "user_id": "696a5c0b78ff6cb6d7f8b8b4"
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:43:47.555000"
+    }
+  },
+  {
+    "_id": "4de4c5b0-be5f-46ca-85b0-ae33b31d2d7d",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.37",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:43:59.229000"
+    }
+  },
+  {
+    "_id": "ad1dfaae-3d9b-4438-88f3-ba23b25720e9",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:46:11.461000"
+    }
+  },
+  {
+    "_id": "020e77d1-966a-4ab7-b678-8a1806e53fbd",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.145",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:54:53.256000"
+    }
+  },
+  {
+    "_id": "396dab20-290d-4b9d-9de1-b177a5f80f31",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.145",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:56:12.303000"
+    }
+  },
+  {
+    "_id": "8e59bc93-ccfa-4b71-9808-160fc6a3920f",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:57:42.889000"
+    }
+  },
+  {
+    "_id": "3ee37fbd-4d00-49c1-8a4b-c42c5ec9ebb2",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:58:22.183000"
+    }
+  },
+  {
+    "_id": "a9285fa9-4d04-483f-a64e-2952b3f9c735",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:58:29.858000"
+    }
+  },
+  {
+    "_id": "8a0c4c49-cff2-4900-aee8-c132f5d1c2f7",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:58:38.705000"
+    }
+  },
+  {
+    "_id": "10464a57-53a6-4cbb-920a-dc059ff40642",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T15:59:33.564000"
+    }
+  },
+  {
+    "_id": "c1b9d532-00cb-44be-be8c-93ef6fa35b45",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.254",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:00:42.247000"
+    }
+  },
+  {
+    "_id": "e80a76de-c4e0-4f8b-867a-d16d903246d1",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:09:17.467000"
+    }
+  },
+  {
+    "_id": "ec31585f-cba0-4f3b-9ece-3359ed6c3611",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:09:25.927000"
+    }
+  },
+  {
+    "_id": "6b2db993-3057-463f-9a23-af94cacec6e2",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:09:43.810000"
+    }
+  },
+  {
+    "_id": "0b974023-788a-4b91-bccc-414ca2f8746f",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:10:05.305000"
+    }
+  },
+  {
+    "_id": "75a1805d-cb52-4e59-8fc8-b0c39734b8f7",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.128.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:10:16.253000"
+    }
+  },
+  {
+    "_id": "7cf67bf3-85c3-4cb8-998e-ddc1cfd88895",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.37",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:10:35.856000"
+    }
+  },
+  {
+    "_id": "576670af-9a57-4a5a-85b9-047f9e4d9482",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.128.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:10:57.933000"
+    }
+  },
+  {
+    "_id": "5260bc52-d7a8-4c21-b1e6-1ad73242867e",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:12:55.131000"
+    }
+  },
+  {
+    "_id": "d6060396-71ee-4c2a-a199-e7e2ee31bb9e",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:13:42.963000"
+    }
+  },
+  {
+    "_id": "ae243f75-da4d-43aa-ae40-d4a7838b1fa9",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:15:33.552000"
+    }
+  },
+  {
+    "_id": "e16af8a5-99bf-4bb5-9a70-38f1efdc88b7",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:16:09.848000"
+    }
+  },
+  {
+    "_id": "c0a13c1c-60e3-4732-b5e5-7c786aebe326",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.159",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:16:45.248000"
+    }
+  },
+  {
+    "_id": "a881ecf8-fd83-4fd7-9287-44ddea48799c",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:21:04.314000"
+    }
+  },
+  {
+    "_id": "1ad900b2-f054-40b8-a986-5be4b6b7797e",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:21:21.937000"
+    }
+  },
+  {
+    "_id": "6d0dddbb-7233-449d-80ed-6651cc42cfc6",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:22:47.306000"
+    }
+  },
+  {
+    "_id": "7695ada7-67a1-4880-a636-17b414473d82",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.51",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:23:22.299000"
+    }
+  },
+  {
+    "_id": "2c2c9b0d-7eb2-4c72-9f0f-dcf433c27597",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:23:27.708000"
+    }
+  },
+  {
+    "_id": "40d1acc4-519e-4485-a09d-9041b7c8698b",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_SET",
+    "entity_type": "tax_hold",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Tax hold placed on user test008@gmail.com: \u20ac18000.00",
+    "metadata": {
+      "tax_amount_eur": 18000.0,
+      "reason": "Outstanding tax obligations",
+      "user_email": "test008@gmail.com"
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:23:57.935000"
+    }
+  },
+  {
+    "_id": "c289da3f-8d64-4742-b0f2-81c1c1b058e9",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:24:10.541000"
+    }
+  },
+  {
+    "_id": "17f9489a-7a05-481d-8ee6-3bf9cc2469fe",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.130.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:25:25.172000"
+    }
+  },
+  {
+    "_id": "0c89f2fe-fb4a-436d-9f5f-c27938ad16a8",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:26:11.289000"
+    }
+  },
+  {
+    "_id": "24963cf4-6c36-4ab2-a0ca-6fec08e90ab3",
+    "performed_by": "696a67196177af49c46b7f34",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test009@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a67196177af49c46b7f34",
+    "description": "Successful login for test009@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.128.9",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:28:17.150000"
+    }
+  },
+  {
+    "_id": "9be847d1-513f-4808-8332-cfa671392275",
+    "performed_by": "696a67196177af49c46b7f34",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test009@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a67196177af49c46b7f34",
+    "description": "Successful login for test009@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:29:18.135000"
+    }
+  },
+  {
+    "_id": "9dfebee7-bb17-4c8c-813a-f10b3fdcfded",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.254",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:29:29.740000"
+    }
+  },
+  {
+    "_id": "cdd44987-9c4f-40ed-9b62-689fdb99b961",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_APPROVED",
+    "entity_type": "kyc",
+    "entity_id": "696a67216177af49c46b7f36",
+    "description": "KYC application APPROVED for user 696a67196177af49c46b7f34",
+    "metadata": {
+      "status": "APPROVED",
+      "notes": "Nice",
+      "user_id": "696a67196177af49c46b7f34"
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:30:45.081000"
+    }
+  },
+  {
+    "_id": "3e339453-ec02-4702-8153-3cdbfa98f184",
+    "performed_by": "696a67196177af49c46b7f34",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test009@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a67196177af49c46b7f34",
+    "description": "Successful login for test009@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:30:57.151000"
+    }
+  },
+  {
+    "_id": "7bfb8b98-0da3-4e70-b4d4-aba5ce26e5b1",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:31:46.004000"
+    }
+  },
+  {
+    "_id": "8999f697-9ce6-4b70-b30d-7cc55e967175",
+    "performed_by": "696a67196177af49c46b7f34",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test009@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a67196177af49c46b7f34",
+    "description": "Successful login for test009@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:32:23.448000"
+    }
+  },
+  {
+    "_id": "7e6a1892-b27f-4179-b7b2-2827dbb05ece",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:33:09.889000"
+    }
+  },
+  {
+    "_id": "a92cddef-d00d-4244-9e63-8ffba62dd0ae",
+    "performed_by": "696a67196177af49c46b7f34",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test009@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a67196177af49c46b7f34",
+    "description": "Successful login for test009@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.254",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:35:14.662000"
+    }
+  },
+  {
+    "_id": "31b56571-45fd-4e07-a77c-0ee52fa7fd1d",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.128.9",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:35:52.211000"
+    }
+  },
+  {
+    "_id": "267f4e64-d7d8-44df-9447-cd467ce3d2ca",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_SET",
+    "entity_type": "tax_hold",
+    "entity_id": "696a67196177af49c46b7f34",
+    "description": "Tax hold placed on user test009@gmail.com: \u20ac200.00",
+    "metadata": {
+      "tax_amount_eur": 200.0,
+      "reason": "Outstanding tax obligations",
+      "user_email": "test009@gmail.com"
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:36:20.640000"
+    }
+  },
+  {
+    "_id": "84522367-56e3-4c98-99ac-e7a55680488d",
+    "performed_by": "696a67196177af49c46b7f34",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test009@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a67196177af49c46b7f34",
+    "description": "Successful login for test009@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.37",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:36:33.661000"
+    }
+  },
+  {
+    "_id": "c47053ea-5736-4854-b9dd-591b58c662b1",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:37:23.466000"
+    }
+  },
+  {
+    "_id": "f463d536-5910-43a5-8f04-618e26c5c6d2",
+    "performed_by": "696a67196177af49c46b7f34",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test009@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a67196177af49c46b7f34",
+    "description": "Successful login for test009@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.242",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:37:54.305000"
+    }
+  },
+  {
+    "_id": "f9f4b150-958b-40d1-924d-67a70c58229b",
+    "performed_by": "696a67196177af49c46b7f34",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test009@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a67196177af49c46b7f34",
+    "description": "Successful login for test009@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.145",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:39:52.063000"
+    }
+  },
+  {
+    "_id": "ddc1e5d2-14dd-48eb-bc55-ecbf073a53e2",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.145",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T17:04:57.115000"
+    }
+  },
+  {
+    "_id": "092be739-1445-428f-8b44-35d2bfdd302f",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T17:06:11.411000"
+    }
+  },
+  {
+    "_id": "467d0311-c7df-48d6-98f1-8cacf376fe3d",
+    "performed_by": "SYSTEM",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "",
+    "action": "LOGIN_FAILED",
+    "entity_type": "auth",
+    "entity_id": "admin@projectatlas.com",
+    "description": "Failed login attempt for admin@projectatlas.com",
+    "metadata": {
+      "ip_address": "10.64.128.9",
+      "reason": "invalid_credentials"
+    },
+    "created_at": {
+      "$date": "2026-01-16T17:06:54.662000"
+    }
+  },
+  {
+    "_id": "13f9245b-7743-4350-95fc-cec0b6c3cd1e",
+    "performed_by": "SYSTEM",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "",
+    "action": "LOGIN_FAILED",
+    "entity_type": "auth",
+    "entity_id": "admin@projectatlas.com",
+    "description": "Failed login attempt for admin@projectatlas.com",
+    "metadata": {
+      "ip_address": "10.64.134.37",
+      "reason": "invalid_credentials"
+    },
+    "created_at": {
+      "$date": "2026-01-16T17:07:00.170000"
+    }
+  },
+  {
+    "_id": "9445b8ce-01db-4b09-b2c8-bedca3aeb730",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T17:07:14.034000"
+    }
+  },
+  {
+    "_id": "5f7ad60c-33b3-436e-96de-432a479335e2",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_SET",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold placed on user customer@demo.com: \u20ac200.00",
+    "metadata": {
+      "tax_amount_eur": 200.0,
+      "reason": "Outstanding tax obligations - Test data",
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-16T17:07:26.528000"
+    }
+  },
+  {
+    "_id": "0afe6a28-5de9-4c77-8d39-9d434af12fa9",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.36",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T17:08:16.783000"
+    }
+  },
+  {
+    "_id": "58df69d5-4914-4a17-b0fd-0c9425ecaf72",
+    "performed_by": "696a67196177af49c46b7f34",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test009@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a67196177af49c46b7f34",
+    "description": "Successful login for test009@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.145",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-16T17:09:55.060000"
+    }
+  },
+  {
+    "_id": "54744419-acc8-4c01-939d-6040241e4fa4",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T08:45:13.897000"
+    }
+  },
+  {
+    "_id": "e372f750-51db-4692-9abe-4b786baedb3d",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T08:52:03.552000"
+    }
+  },
+  {
+    "_id": "0d4084e0-a488-4731-b00f-07ad801ba792",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.74",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T09:09:05.550000"
+    }
+  },
+  {
+    "_id": "d276693c-c00e-4438-b236-f7ca7ea4034f",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T09:35:38.746000"
+    }
+  },
+  {
+    "_id": "f8784ce4-bb2b-494c-845b-edb17e6be8b7",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T09:36:35.930000"
+    }
+  },
+  {
+    "_id": "2f816315-2829-4f72-97c3-9e0cf09ece3c",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.69",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T09:54:21.412000"
+    }
+  },
+  {
+    "_id": "f4c06cc9-1ef0-432f-8c27-8aa52ad15b98",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.70",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T09:57:39.527000"
+    }
+  },
+  {
+    "_id": "e9efa5bf-9f52-46ad-a76b-28631017ffe3",
+    "performed_by": "696e0065e3141f70e7f55155",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test010@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e0065e3141f70e7f55155",
+    "description": "Successful login for test010@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.10",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T09:59:10.828000"
+    }
+  },
+  {
+    "_id": "1a5f6606-92ba-4c29-8711-0abeb51c9303",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:05:29.545000"
+    }
+  },
+  {
+    "_id": "2cae7af1-0be1-470d-b97a-38ec8b8f410a",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:06:28.164000"
+    }
+  },
+  {
+    "_id": "4245c0a1-c3fb-4e0d-9945-9d04551e33cf",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:06:45.093000"
+    }
+  },
+  {
+    "_id": "aaf6bf38-0240-4184-a52c-9fc512f723b8",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:09:46.644000"
+    }
+  },
+  {
+    "_id": "ccbe7c31-ad02-4185-9c90-ffd6c1e1dab1",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_APPROVED",
+    "entity_type": "kyc",
+    "entity_id": "696e01e9e3141f70e7f5515d",
+    "description": "KYC application APPROVED for user 696e01e3e3141f70e7f5515b",
+    "metadata": {
+      "status": "APPROVED",
+      "notes": "hh",
+      "user_id": "696e01e3e3141f70e7f5515b"
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:12:09.987000"
+    }
+  },
+  {
+    "_id": "089553b0-0c88-44b5-aac0-cf8f372af44a",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.74",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:12:19.353000"
+    }
+  },
+  {
+    "_id": "7cb7986a-53e4-4aa5-949a-8791cc470ab5",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.70",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:13:42.195000"
+    }
+  },
+  {
+    "_id": "15a481ca-6b36-43bd-97b0-8df844cfe317",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.71",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:14:48.773000"
+    }
+  },
+  {
+    "_id": "6dbeeafc-846e-4eee-8b9d-b5b260515108",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.5",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:22:32.544000"
+    }
+  },
+  {
+    "_id": "96f1240a-d60a-43e7-a0d2-a7836d19f9b6",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:30:50.145000"
+    }
+  },
+  {
+    "_id": "cc008f0d-f821-4853-b791-1856e8ce715e",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:31:07.367000"
+    }
+  },
+  {
+    "_id": "0268021d-8f71-4f6d-a12a-9da0575471a0",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.70",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:39:25.376000"
+    }
+  },
+  {
+    "_id": "a73aaa74-e1f9-4e8e-9b3b-36e9ddc493a3",
+    "performed_by": "696a67196177af49c46b7f34",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test009@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a67196177af49c46b7f34",
+    "description": "Successful login for test009@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.28",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T10:43:19.611000"
+    }
+  },
+  {
+    "_id": "e91ff5ca-5129-4cb6-b42c-c1d632ff8fcb",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:00:53.341000"
+    }
+  },
+  {
+    "_id": "275e8662-98d3-42b4-812b-5ae0167df534",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_SET",
+    "entity_type": "tax_hold",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Tax hold placed on user test011@gmail.com: \u20ac1900.00",
+    "metadata": {
+      "tax_amount_eur": 1900.0,
+      "reason": "Outstanding tax obligations",
+      "user_email": "test011@gmail.com"
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:01:41.491000"
+    }
+  },
+  {
+    "_id": "1d8b05c0-4280-4f16-bb61-80e9585aae0d",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:02:02.388000"
+    }
+  },
+  {
+    "_id": "19575831-22b6-44b6-b198-cd27a36f0153",
+    "performed_by": "SYSTEM",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "",
+    "action": "LOGIN_FAILED",
+    "entity_type": "auth",
+    "entity_id": "test011@gmail.com",
+    "description": "Failed login attempt for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.5",
+      "reason": "invalid_credentials"
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:06:49.929000"
+    }
+  },
+  {
+    "_id": "0d5635b6-1760-4f74-960b-84818a155b91",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.198",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:06:57.922000"
+    }
+  },
+  {
+    "_id": "3c782e39-683f-4286-9108-f81cd32e3ec0",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.5",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:22:19.071000"
+    }
+  },
+  {
+    "_id": "26013ff5-ba34-4987-93fe-29523f293ed4",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:23:23.397000"
+    }
+  },
+  {
+    "_id": "a9dc5414-f4f9-4500-85d2-e649bd019576",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.71",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:23:34.620000"
+    }
+  },
+  {
+    "_id": "bce70f90-0477-4fea-a8f6-d8c83b1c38ab",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.5",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:23:47.584000"
+    }
+  },
+  {
+    "_id": "831ce791-4315-46e6-8e92-03ef6ad5b58b",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.138.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:26:09.580000"
+    }
+  },
+  {
+    "_id": "e954ac39-8dcf-4fc3-9a4e-2aef8325d9d6",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.138.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:29:17.989000"
+    }
+  },
+  {
+    "_id": "c0af845a-cfd9-4f06-a78f-569c21e5a2c9",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.79",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:49:30.514000"
+    }
+  },
+  {
+    "_id": "3a6b6353-08bb-4ac9-9fb6-4f86b0ee5472",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.5",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:51:33.081000"
+    }
+  },
+  {
+    "_id": "8ad5dcc2-074d-4096-aff5-b7e1f9683fb0",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.5",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:53:17.394000"
+    }
+  },
+  {
+    "_id": "d9de335c-092e-4fc6-8914-397b1080398b",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T11:56:22.263000"
+    }
+  },
+  {
+    "_id": "21ae32bd-68f6-40ce-b104-5599da11583f",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.71",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T12:00:43.556000"
+    }
+  },
+  {
+    "_id": "a9a7a94e-005e-4516-8ad9-fd0c8c76d0e2",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.71",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T12:01:25.124000"
+    }
+  },
+  {
+    "_id": "4e09100d-1908-4905-9aa1-c3e55b29d01d",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T12:04:22.034000"
+    }
+  },
+  {
+    "_id": "729ef8ea-d766-43e7-9a04-1a44f4d1ad00",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.198",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T12:05:59.661000"
+    }
+  },
+  {
+    "_id": "59f609cc-105b-41be-a4fd-03876b2363c6",
+    "performed_by": "696e01e3e3141f70e7f5515b",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test011@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e01e3e3141f70e7f5515b",
+    "description": "Successful login for test011@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.198",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T12:06:54.284000"
+    }
+  },
+  {
+    "_id": "7c636762-5774-4b9a-a1bf-1b8ffb780645",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T12:10:06.076000"
+    }
+  },
+  {
+    "_id": "b109fbd5-373c-43fc-8647-d5431cfda024",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.198",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T12:10:38.472000"
+    }
+  },
+  {
+    "_id": "45a6d532-f8d0-4aff-be4f-b2fa09e591d5",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T12:12:46.962000"
+    }
+  },
+  {
+    "_id": "1d46c7b4-3559-43b3-92f5-6edbd497b508",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:06:32.413000"
+    }
+  },
+  {
+    "_id": "8241eb78-47f5-466d-a2ae-febc49d62785",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:10:29.325000"
+    }
+  },
+  {
+    "_id": "60a12598-e0a7-4842-9e48-bf4090e51143",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.198",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:12:16.269000"
+    }
+  },
+  {
+    "_id": "5e97e7ee-87d9-48ac-8f49-1090d0e3cedb",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.198",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:13:34.553000"
+    }
+  },
+  {
+    "_id": "5583c060-0591-432f-87ff-d0643c06690a",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:16:34.201000"
+    }
+  },
+  {
+    "_id": "f2f25d4a-4e30-40b4-be39-4ef765c6270b",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:23:12.913000"
+    }
+  },
+  {
+    "_id": "219546ae-2e9c-4e28-b551-f30707abc717",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:23:49.893000"
+    }
+  },
+  {
+    "_id": "f1b69da6-7348-43c5-8e76-620505fcfbcb",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.133.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:27:10.567000"
+    }
+  },
+  {
+    "_id": "4f2f87ec-d174-4c76-94e5-85212f87f2d8",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:28:18.432000"
+    }
+  },
+  {
+    "_id": "f612101f-edb6-4b77-97f4-0d0fde712404",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_APPROVED",
+    "entity_type": "kyc",
+    "entity_id": "696e2c58b7111bc49f800c18",
+    "description": "KYC application APPROVED for user 696e2c4eb7111bc49f800c16",
+    "metadata": {
+      "status": "APPROVED",
+      "notes": "",
+      "user_id": "696e2c4eb7111bc49f800c16"
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:30:43.351000"
+    }
+  },
+  {
+    "_id": "020d2167-7e32-4ea6-a565-4fa274b95f24",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:35:38.485000"
+    }
+  },
+  {
+    "_id": "45d790f5-56cf-4c7e-a387-1029541ca84a",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.237",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:46:37.409000"
+    }
+  },
+  {
+    "_id": "7ac06a5f-0db5-4523-83df-9abeb5ccd25a",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.16",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:46:54.688000"
+    }
+  },
+  {
+    "_id": "0b266b2a-4014-41b9-9187-e819c0c9b30f",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.28",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:47:15.930000"
+    }
+  },
+  {
+    "_id": "e73cfbdd-2711-4c07-bbfb-57ceda067282",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.10",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:47:36.251000"
+    }
+  },
+  {
+    "_id": "e73ec4d1-9dba-4686-97bc-f7d5e2901e2a",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:47:53.327000"
+    }
+  },
+  {
+    "_id": "c82eafd0-1d7e-4e6c-80b7-0d2a989c3b08",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:48:10.361000"
+    }
+  },
+  {
+    "_id": "cb8942d1-c5ee-4fc0-ad8a-53ef592250a8",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.74",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:48:32.326000"
+    }
+  },
+  {
+    "_id": "7009c52d-f706-4535-80b3-e96d614ad31e",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.198",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:48:56.108000"
+    }
+  },
+  {
+    "_id": "20c3e79c-2d3d-44f1-b7c8-7ada1906a0b8",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.10",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:50:01.144000"
+    }
+  },
+  {
+    "_id": "e06f4ff7-2d46-4d78-bec8-724b67f3ff99",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:51:21.938000"
+    }
+  },
+  {
+    "_id": "c56b0425-5f76-4d65-8fa9-657fd46cfb0e",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:51:30.801000"
+    }
+  },
+  {
+    "_id": "fe4ed824-13a6-48e6-9d01-a05e6869faa8",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:52:28.027000"
+    }
+  },
+  {
+    "_id": "3a3fdfd6-0d04-4d3f-b6ec-67cbbde76829",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:52:45.531000"
+    }
+  },
+  {
+    "_id": "8d963439-f758-4a91-b661-019990d229f7",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_REMOVED",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold removed from user customer@demo.com",
+    "metadata": {
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:52:45.550000"
+    }
+  },
+  {
+    "_id": "5e2986e1-9c92-4afd-bbc8-b98461a71ea8",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:53:01.550000"
+    }
+  },
+  {
+    "_id": "254aee81-8a5d-44dd-ae80-52135f6425c6",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:53:28.800000"
+    }
+  },
+  {
+    "_id": "a47c56da-f8d8-4da7-81f6-6ec7f2b6b6a7",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:53:54.113000"
+    }
+  },
+  {
+    "_id": "b87a83ac-8a73-45ec-9d00-369674cc306b",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.10",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:54:24.080000"
+    }
+  },
+  {
+    "_id": "59ef8a8f-e8f6-433e-b9d1-f65d4452c0b6",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:54:49.628000"
+    }
+  },
+  {
+    "_id": "59218fba-2165-4300-830a-626079de781a",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.28",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:55:13.782000"
+    }
+  },
+  {
+    "_id": "bfd94ae5-2162-47e0-b8e8-b37883ff6754",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.74",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:55:20.746000"
+    }
+  },
+  {
+    "_id": "225f53fc-53ba-4c6a-879b-3fba928d4edc",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:55:37.920000"
+    }
+  },
+  {
+    "_id": "37eae1fa-0a7a-4f94-b94e-170dfeb5ec2b",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:55:49.310000"
+    }
+  },
+  {
+    "_id": "08ea56f0-f094-4697-8d19-5d0e1f9754cb",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_SET",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold placed on user customer@demo.com: \u20ac200.00",
+    "metadata": {
+      "tax_amount_eur": 200.0,
+      "reason": "Outstanding tax obligations - Test data",
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-19T13:55:49.329000"
+    }
+  },
+  {
+    "_id": "b1c9748d-157b-48fa-80e9-31a90c2b4eab",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:01:20.735000"
+    }
+  },
+  {
+    "_id": "dd8274df-0295-487e-a0f9-3d9ccfab0361",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_REMOVED",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold removed from user customer@demo.com",
+    "metadata": {
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:01:20.751000"
+    }
+  },
+  {
+    "_id": "d11d9610-39cb-4ce6-93a3-c7d8bd843477",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.74",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:01:38.729000"
+    }
+  },
+  {
+    "_id": "43026889-5db4-48da-b7f7-0570076bc0e8",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:02:18.945000"
+    }
+  },
+  {
+    "_id": "d86069f2-25e8-4abb-acc0-c68c5449a611",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.240",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:02:42.708000"
+    }
+  },
+  {
+    "_id": "1d71b437-807d-4869-835a-406b3cd4373f",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:03:04.015000"
+    }
+  },
+  {
+    "_id": "ff163e15-c090-413a-954b-a545ccd46040",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_SET",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold placed on user customer@demo.com: \u20ac200.00",
+    "metadata": {
+      "tax_amount_eur": 200.0,
+      "reason": "Outstanding tax obligations - Test data",
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:03:04.031000"
+    }
+  },
+  {
+    "_id": "f9a224b9-7ca0-4d31-a2eb-da9ebcfc6c0d",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.10",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:03:42.012000"
+    }
+  },
+  {
+    "_id": "50884d7b-fff5-4f2e-94fc-e6f323042620",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:10:38.340000"
+    }
+  },
+  {
+    "_id": "2770cab2-04c0-43d2-bcdf-6bc8f8efc851",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_REMOVED",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold removed from user customer@demo.com",
+    "metadata": {
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:10:38.358000"
+    }
+  },
+  {
+    "_id": "cecdeec6-c759-4286-bf5d-661d6718037e",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:10:53.898000"
+    }
+  },
+  {
+    "_id": "0fe03a6e-d7d0-4c76-bbe4-36f482577f06",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:11:18.956000"
+    }
+  },
+  {
+    "_id": "da5dfff4-db6b-4c27-9b16-0e48da87e292",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:11:45.773000"
+    }
+  },
+  {
+    "_id": "0c430220-7bec-4f78-94e6-6ff4c72767ce",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:12:10.007000"
+    }
+  },
+  {
+    "_id": "b4e7e579-fe1a-444a-ae3d-6f346ed0dec5",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:12:33.653000"
+    }
+  },
+  {
+    "_id": "291c1b52-2901-44ea-aeac-c3db4aafb619",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_SET",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold placed on user customer@demo.com: \u20ac200.00",
+    "metadata": {
+      "tax_amount_eur": 200.0,
+      "reason": "Outstanding tax obligations - Test data",
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:12:33.670000"
+    }
+  },
+  {
+    "_id": "95f80902-9ca3-47cb-90a9-b26f62d99b82",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.10",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:14:28.431000"
+    }
+  },
+  {
+    "_id": "7ad66481-178a-481e-a382-913b0a3b97ee",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:21:40.232000"
+    }
+  },
+  {
+    "_id": "508a969c-bf76-4af2-921c-2feacf38ca8b",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_REMOVED",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold removed from user customer@demo.com",
+    "metadata": {
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:21:40.251000"
+    }
+  },
+  {
+    "_id": "098b86ed-e185-4762-a9a0-2e61fd01bcb2",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.10",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:21:55.130000"
+    }
+  },
+  {
+    "_id": "c7918552-b769-427a-a6d8-baab76bf7c15",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:22:16.387000"
+    }
+  },
+  {
+    "_id": "6a6c8901-54b4-4d29-9fdc-6b0721c0a6ef",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_SET",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold placed on user customer@demo.com: \u20ac200.00",
+    "metadata": {
+      "tax_amount_eur": 200.0,
+      "reason": "Outstanding tax obligations - Test data",
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:22:16.403000"
+    }
+  },
+  {
+    "_id": "5b63ebcd-305c-4ea9-9101-d3c777dbc519",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:24:32.818000"
+    }
+  },
+  {
+    "_id": "74090220-0055-4dae-af16-8e4b3776ed7c",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:27:56.353000"
+    }
+  },
+  {
+    "_id": "911a7141-1ac7-47d1-9c00-2f0af9cbf5bb",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:30:47.777000"
+    }
+  },
+  {
+    "_id": "f5e88f8e-c87b-4dc1-b0fe-20e1003f863e",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:31:55.266000"
+    }
+  },
+  {
+    "_id": "c28e0f2e-2f22-4d5a-8fdb-8f68cd5c1f49",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.28",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:33:04.676000"
+    }
+  },
+  {
+    "_id": "10e034b3-d09d-47db-9556-760aec86fa57",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:39:17.112000"
+    }
+  },
+  {
+    "_id": "c7a01e6f-cdf0-4e47-978e-1c3473264083",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_REMOVED",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold removed from user customer@demo.com",
+    "metadata": {
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:39:25.417000"
+    }
+  },
+  {
+    "_id": "57d37364-2240-4106-93c8-7992eec73985",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:39:38.597000"
+    }
+  },
+  {
+    "_id": "37a1027d-d6eb-414d-b372-fbaaa4176087",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.198",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:41:07.599000"
+    }
+  },
+  {
+    "_id": "b853a0ea-50bc-4358-8c14-9f41392358f7",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.198",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:43:29.245000"
+    }
+  },
+  {
+    "_id": "877f3d09-9de0-436e-95ab-f11734449b7c",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.28",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:43:45.670000"
+    }
+  },
+  {
+    "_id": "a4a309fc-6cdc-433d-a29e-4746115bb155",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:43:59.813000"
+    }
+  },
+  {
+    "_id": "0c20e089-281a-4cb2-a102-787907c59c74",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:44:21.015000"
+    }
+  },
+  {
+    "_id": "becd3448-4f69-4241-929e-56e8671ad4e7",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:44:39.881000"
+    }
+  },
+  {
+    "_id": "93ba2cd1-2a40-42f0-aa5c-319fb53ac7b2",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.6",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:45:11.242000"
+    }
+  },
+  {
+    "_id": "f846dbd9-9697-4c26-83ff-615687a199b5",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.74",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:46:08.999000"
+    }
+  },
+  {
+    "_id": "03877d36-1787-4422-a71d-b22490c4560d",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.138.28",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:46:33.327000"
+    }
+  },
+  {
+    "_id": "d1d96a35-0d5a-476f-ad20-bb92af5a86c0",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.130.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:47:40.451000"
+    }
+  },
+  {
+    "_id": "2f787a9e-fb13-470e-8162-892576282500",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:52:53.998000"
+    }
+  },
+  {
+    "_id": "8c5f4155-19de-475a-aa48-b53bf020b8ce",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.5",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:56:56.246000"
+    }
+  },
+  {
+    "_id": "0759c0cf-20f5-44ab-83a9-6b5d4ef1fba1",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:58:10.414000"
+    }
+  },
+  {
+    "_id": "e3e4acd8-6a73-4c47-a8ee-3a95463b1e55",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:58:52.868000"
+    }
+  },
+  {
+    "_id": "01516ee0-6f29-49c7-8d67-99352d64762c",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.28",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:03:33.377000"
+    }
+  },
+  {
+    "_id": "9769e51b-064a-4981-b7c7-ac1a871cf2f5",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:04:09.061000"
+    }
+  },
+  {
+    "_id": "421bff49-2e01-4733-9312-e5ba7ab76fc8",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.28",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:04:45.481000"
+    }
+  },
+  {
+    "_id": "ddc8f46b-caa4-4f6a-95c7-1773be11f933",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.138.74",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:04:53.616000"
+    }
+  },
+  {
+    "_id": "093305a0-84c9-4c44-bb5b-f4c8e68b8494",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.28",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:09:31.146000"
+    }
+  },
+  {
+    "_id": "8e5adf8d-b14c-4057-9bb6-888186d6d907",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.138.28",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:09:45.938000"
+    }
+  },
+  {
+    "_id": "bb6f4e01-0b8b-438c-b1be-6c8af37b188f",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.74",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:10:20.592000"
+    }
+  },
+  {
+    "_id": "d1ae3ee5-8fa4-47bc-b3fe-e92f14997077",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:10:42.651000"
+    }
+  },
+  {
+    "_id": "516ee218-eba1-45a2-8650-9204b64d419d",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:11:05.286000"
+    }
+  },
+  {
+    "_id": "b31cd2a3-9173-48a0-96c6-834b5b0c49b3",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:11:10.964000"
+    }
+  },
+  {
+    "_id": "c310c207-e781-4be1-afd2-250a1dabf1fb",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:15:11.356000"
+    }
+  },
+  {
+    "_id": "5101a76c-4d4e-4216-9fcd-8374df1bcf63",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.134.68",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:15:34.379000"
+    }
+  },
+  {
+    "_id": "1c1891ba-4d00-4a7e-97b9-ea75d930439f",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_SET",
+    "entity_type": "tax_hold",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Tax hold placed on user test012@gmail.com: \u20ac15000.00",
+    "metadata": {
+      "tax_amount_eur": 15000.0,
+      "reason": "Unpaid VAT obligations",
+      "user_email": "test012@gmail.com"
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:20:32.716000"
+    }
+  },
+  {
+    "_id": "e6d2cdb3-53dd-4458-8ec2-3b704aee068f",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:20:40.389000"
+    }
+  },
+  {
+    "_id": "b2ccba52-62d6-4620-8797-5f440f20a69d",
+    "performed_by": "696e5cf906d6d725d71480d0",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "ashleyalt003@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e5cf906d6d725d71480d0",
+    "description": "Successful login for ashleyalt003@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.200",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T16:34:08.754000"
+    }
+  },
+  {
+    "_id": "2238fe85-c151-46bf-8d0a-821ba1353d81",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.131.198",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T16:34:51.117000"
+    }
+  },
+  {
+    "_id": "8469fa73-6a9f-49b9-b5bb-086af458d0ba",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "KYC_APPROVED",
+    "entity_type": "kyc",
+    "entity_id": "696e5d0006d6d725d71480d2",
+    "description": "KYC application APPROVED for user 696e5cf906d6d725d71480d0",
+    "metadata": {
+      "status": "APPROVED",
+      "notes": "hh",
+      "user_id": "696e5cf906d6d725d71480d0"
+    },
+    "created_at": {
+      "$date": "2026-01-19T16:35:12.517000"
+    }
+  },
+  {
+    "_id": "852cf58a-4e9f-49fc-85bc-474de616804c",
+    "performed_by": "696e5cf906d6d725d71480d0",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "ashleyalt003@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e5cf906d6d725d71480d0",
+    "description": "Successful login for ashleyalt003@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.10",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T16:35:20.033000"
+    }
+  },
+  {
+    "_id": "22174604-dd98-4d95-8aaf-cb5a90f2c39b",
+    "performed_by": "SYSTEM",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "",
+    "action": "LOGIN_FAILED",
+    "entity_type": "auth",
+    "entity_id": "ashleyalt003@gmail.com",
+    "description": "Failed login attempt for ashleyalt003@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.202",
+      "reason": "invalid_credentials"
+    },
+    "created_at": {
+      "$date": "2026-01-19T16:46:52.451000"
+    }
+  },
+  {
+    "_id": "65ea9036-9e5d-491e-99f2-ae6310522fad",
+    "performed_by": "696e5cf906d6d725d71480d0",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "ashleyalt003@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e5cf906d6d725d71480d0",
+    "description": "Successful login for ashleyalt003@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.131.200",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T16:47:00.678000"
+    }
+  },
+  {
+    "_id": "ff292cb9-3fab-4ed3-8307-bcc282c0a149",
+    "performed_by": "696e5cf906d6d725d71480d0",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "ashleyalt003@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e5cf906d6d725d71480d0",
+    "description": "Successful login for ashleyalt003@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.133.138",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T16:50:28.937000"
+    }
+  },
+  {
+    "_id": "4acc740d-4160-4d16-a2db-a4f6f734a596",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T17:20:02.652000"
+    }
+  },
+  {
+    "_id": "27c70b00-0b5c-45a8-824b-0026229faa89",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T17:21:58.456000"
+    }
+  },
+  {
+    "_id": "327e01c0-1b9c-47c2-8a71-81c58b24a415",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T17:22:33.860000"
+    }
+  },
+  {
+    "_id": "4ae1eb7f-1c9d-4844-8b78-a268ca815160",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.90",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T17:24:15.399000"
+    }
+  },
+  {
+    "_id": "601af8bc-423a-4848-9a59-2aef149a63cb",
+    "performed_by": "696e2c4eb7111bc49f800c16",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test012@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696e2c4eb7111bc49f800c16",
+    "description": "Successful login for test012@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.133.146",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T17:28:00.366000"
+    }
+  },
+  {
+    "_id": "3bbfe42d-561c-48d0-9993-cee7025520fb",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.200",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T17:30:21.813000"
+    }
+  },
+  {
+    "_id": "3e202eee-1675-427b-a1a2-57c0ecae930d",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.134.10",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T17:54:37.265000"
+    }
+  },
+  {
+    "_id": "86ec0ebd-33dc-436f-94e8-678c40290a4a",
+    "performed_by": "696a5c0b78ff6cb6d7f8b8b4",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "description": "Successful login for test008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.138.74",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T17:57:23.002000"
+    }
+  },
+  {
+    "_id": "07586087-4a45-43ae-85b3-a7c6411db842",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.134.5",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T18:05:21.613000"
+    }
+  },
+  {
+    "_id": "498e5186-3f47-4de3-b133-5765687f9a3d",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.138.11",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-19T18:05:49.764000"
+    }
+  },
+  {
+    "_id": "49517f4d-2089-457a-81b5-4a7720797b00",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.138.43",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T08:29:35.856000"
+    }
+  },
+  {
+    "_id": "5403977a-145a-426c-8bff-caba2337c8e0",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.133.175",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T08:59:52.034000"
+    }
+  },
+  {
+    "_id": "779d6ca9-1b91-4047-b5b5-ce7a1a1e72ba",
+    "performed_by": "696f79a0349ecc1362685e5e",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "flowtest@example.com",
+    "action": "LOGIN_BLOCKED",
+    "entity_type": "auth",
+    "entity_id": "696f79a0349ecc1362685e5e",
+    "description": "Login blocked for unverified email: flowtest@example.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "reason": "email_not_verified"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:48:32.421000"
+    }
+  },
+  {
+    "_id": "f4558217-febd-42e2-a568-1be1ffcc6f6f",
+    "performed_by": "696f79a0349ecc1362685e5e",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "flowtest@example.com",
+    "action": "EMAIL_VERIFIED",
+    "entity_type": "auth",
+    "entity_id": "696f79a0349ecc1362685e5e",
+    "description": "Email verified for flowtest@example.com",
+    "metadata": {
+      "email": "flowtest@example.com"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:48:33.119000"
+    }
+  },
+  {
+    "_id": "b8964395-ff0f-4561-9c92-f51f34dce343",
+    "performed_by": "696f79a0349ecc1362685e5e",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "flowtest@example.com",
+    "action": "LOGIN_BLOCKED",
+    "entity_type": "auth",
+    "entity_id": "696f79a0349ecc1362685e5e",
+    "description": "Login blocked for unverified email: flowtest@example.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "reason": "email_not_verified"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:48:33.205000"
+    }
+  },
+  {
+    "_id": "3f17a94e-8124-4a4a-92f3-6600f4d40e3b",
+    "performed_by": "696f79ecda8033f76258143e",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "flowtest2@example.com",
+    "action": "LOGIN_BLOCKED",
+    "entity_type": "auth",
+    "entity_id": "696f79ecda8033f76258143e",
+    "description": "Login blocked for unverified email: flowtest2@example.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "reason": "email_not_verified"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:49:48.658000"
+    }
+  },
+  {
+    "_id": "a8271da3-9af5-4251-b034-bcf128f45184",
+    "performed_by": "696f79ecda8033f76258143e",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "flowtest2@example.com",
+    "action": "EMAIL_VERIFIED",
+    "entity_type": "auth",
+    "entity_id": "696f79ecda8033f76258143e",
+    "description": "Email verified for flowtest2@example.com",
+    "metadata": {
+      "email": "flowtest2@example.com"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:49:49.324000"
+    }
+  },
+  {
+    "_id": "6dcd128d-b9f0-455f-a193-ccc87672683e",
+    "performed_by": "696f79ecda8033f76258143e",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "flowtest2@example.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696f79ecda8033f76258143e",
+    "description": "Successful login for flowtest2@example.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:49:50.051000"
+    }
+  },
+  {
+    "_id": "6ffdf8e6-3441-4777-8abf-20cc1f50fdc2",
+    "performed_by": "696f7a3ada8033f762581441",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "uitest@example.com",
+    "action": "EMAIL_VERIFIED",
+    "entity_type": "auth",
+    "entity_id": "696f7a3ada8033f762581441",
+    "description": "Email verified for uitest@example.com",
+    "metadata": {
+      "email": "uitest@example.com"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:51:17.190000"
+    }
+  },
+  {
+    "_id": "fafe90ef-a8a0-4b23-ad6d-cd8b0915ddfb",
+    "performed_by": "696f7a3ada8033f762581441",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "uitest@example.com",
+    "action": "EMAIL_VERIFIED",
+    "entity_type": "auth",
+    "entity_id": "696f7a3ada8033f762581441",
+    "description": "Email verified for uitest@example.com",
+    "metadata": {
+      "email": "uitest@example.com"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:51:17.190000"
+    }
+  },
+  {
+    "_id": "8e50d930-2202-4fe3-baaf-ff580d8217ed",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "127.0.0.1",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:51:51.766000"
+    }
+  },
+  {
+    "_id": "15ddfb9e-d8b7-4ca3-a490-3a7014b8a976",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.129.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:45.183000"
+    }
+  },
+  {
+    "_id": "55f726a7-1d84-45c8-8c59-cb9770bc94a1",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "admin_super_001",
+    "description": "Successful login for admin@atlas.local",
+    "metadata": {
+      "ip_address": "10.64.129.8",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:45.266000"
+    }
+  },
+  {
+    "_id": "78338660-85e9-49a9-83ea-1746fe6713b9",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.135.153",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:45.383000"
+    }
+  },
+  {
+    "_id": "b7d86136-5800-4a61-bc32-22949c1a7f96",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "USER_STATUS_CHANGED",
+    "entity_type": "user",
+    "entity_id": "customer_001",
+    "description": "User customer@demo.com status changed from ACTIVE to DISABLED",
+    "metadata": {
+      "old_status": "ACTIVE",
+      "new_status": "DISABLED"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:45.420000"
+    }
+  },
+  {
+    "_id": "049f4723-769b-4081-a275-38be1360e27a",
+    "performed_by": "customer_001",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_BLOCKED",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Login blocked for disabled account: customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.131.202",
+      "reason": "account_disabled"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:45.495000"
+    }
+  },
+  {
+    "_id": "a047e791-9192-46ad-95bc-c6578113841b",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "USER_STATUS_CHANGED",
+    "entity_type": "user",
+    "entity_id": "customer_001",
+    "description": "User customer@demo.com status changed from DISABLED to ACTIVE",
+    "metadata": {
+      "old_status": "DISABLED",
+      "new_status": "ACTIVE"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:45.532000"
+    }
+  },
+  {
+    "_id": "b4fc298d-5f8b-47ea-a59d-473230e09624",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.135.153",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:45.605000"
+    }
+  },
+  {
+    "_id": "49b7428f-c4e8-4cbe-b32e-fb14fdde0bf0",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.133.151",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:45.686000"
+    }
+  },
+  {
+    "_id": "57421332-00c1-434a-9bf9-f1c1a117369a",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_SET",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold placed on user customer@demo.com: \u20ac2000.00",
+    "metadata": {
+      "tax_amount_eur": 2000.0,
+      "reason": "Outstanding tax obligations",
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.315000"
+    }
+  },
+  {
+    "_id": "cf4048db-93a0-4a17-9aff-534132453a63",
+    "performed_by": "admin_super_001",
+    "performed_by_role": "SUPER_ADMIN",
+    "performed_by_email": "admin@atlas.local",
+    "action": "TAX_HOLD_REMOVED",
+    "entity_type": "tax_hold",
+    "entity_id": "customer_001",
+    "description": "Tax hold removed from user customer@demo.com",
+    "metadata": {
+      "user_email": "customer@demo.com"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.460000"
+    }
+  },
+  {
+    "_id": "16103044-094b-40b6-863a-e47c2f7e973a",
+    "performed_by": "customer_001",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "customer@demo.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "customer_001",
+    "description": "Successful login for customer@demo.com",
+    "metadata": {
+      "ip_address": "10.64.129.7",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.619000"
+    }
+  },
+  {
+    "_id": "8fc6da43-49f4-4158-b142-08253ad77bbd",
+    "performed_by": "696f7b16a0a55585712a7751",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "test_user_p9b6c1md@test.com",
+    "action": "LOGIN_BLOCKED",
+    "entity_type": "auth",
+    "entity_id": "696f7b16a0a55585712a7751",
+    "description": "Login blocked for unverified email: test_user_p9b6c1md@test.com",
+    "metadata": {
+      "ip_address": "10.64.131.206",
+      "reason": "email_not_verified"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.983000"
+    }
+  },
+  {
+    "_id": "f0beb73f-ac1f-43a7-8a09-32054e09b9a5",
+    "performed_by": "696f7b16a0a55585712a7751",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "test_user_p9b6c1md@test.com",
+    "action": "EMAIL_VERIFIED",
+    "entity_type": "auth",
+    "entity_id": "696f7b16a0a55585712a7751",
+    "description": "Email verified for test_user_p9b6c1md@test.com",
+    "metadata": {
+      "email": "test_user_p9b6c1md@test.com"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:47.310000"
+    }
+  },
+  {
+    "_id": "b64f68e6-1c73-483a-b370-67c4ae85365e",
+    "performed_by": "696f7b16a0a55585712a7751",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "test_user_p9b6c1md@test.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696f7b16a0a55585712a7751",
+    "description": "Successful login for test_user_p9b6c1md@test.com",
+    "metadata": {
+      "ip_address": "10.64.135.151",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:47.383000"
+    }
+  },
+  {
+    "_id": "0b859d04-030f-4808-8308-43ab756a8591",
+    "performed_by": "696f7b7ea0a55585712a7754",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "ashleyalt004@gmail.com",
+    "action": "LOGIN_BLOCKED",
+    "entity_type": "auth",
+    "entity_id": "696f7b7ea0a55585712a7754",
+    "description": "Login blocked for unverified email: ashleyalt004@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.133.151",
+      "reason": "email_not_verified"
+    },
+    "created_at": {
+      "$date": "2026-01-20T13:01:10.337000"
+    }
+  },
+  {
+    "_id": "dd5d1886-14ec-4b93-838d-80ca56ddb7c7",
+    "performed_by": "696f7d22942463898280fede",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "ashleyalt008@gmail.com",
+    "action": "LOGIN_BLOCKED",
+    "entity_type": "auth",
+    "entity_id": "696f7d22942463898280fede",
+    "description": "Login blocked for unverified email: ashleyalt008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.129.9",
+      "reason": "email_not_verified"
+    },
+    "created_at": {
+      "$date": "2026-01-20T13:08:48.392000"
+    }
+  },
+  {
+    "_id": "8965e6fe-0614-4889-aa66-305aa6cfab6b",
+    "performed_by": "696f7d22942463898280fede",
+    "performed_by_role": "SYSTEM",
+    "performed_by_email": "ashleyalt008@gmail.com",
+    "action": "EMAIL_VERIFIED",
+    "entity_type": "auth",
+    "entity_id": "696f7d22942463898280fede",
+    "description": "Email verified for ashleyalt008@gmail.com",
+    "metadata": {
+      "email": "ashleyalt008@gmail.com"
+    },
+    "created_at": {
+      "$date": "2026-01-20T13:09:01.290000"
+    }
+  },
+  {
+    "_id": "b5117959-a205-4813-b662-c3d3d1c138e7",
+    "performed_by": "696f7d22942463898280fede",
+    "performed_by_role": "CUSTOMER",
+    "performed_by_email": "ashleyalt008@gmail.com",
+    "action": "LOGIN_SUCCESS",
+    "entity_type": "auth",
+    "entity_id": "696f7d22942463898280fede",
+    "description": "Successful login for ashleyalt008@gmail.com",
+    "metadata": {
+      "ip_address": "10.64.129.9",
+      "mfa_used": false
+    },
+    "created_at": {
+      "$date": "2026-01-20T13:09:08.679000"
+    }
+  }
+]

@@ -1,0 +1,266 @@
+[
+  {
+    "_id": "695fe660132ed65684c75575",
+    "user_id": "customer_001",
+    "account_number": "ACC904174586445",
+    "iban": "DE99810925273416006053",
+    "bic": "ATLASDE99XXX",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "695fe660132ed65684c75574",
+    "opened_at": {
+      "$date": "2026-01-08T17:16:16.833000"
+    },
+    "closed_at": null
+  },
+  {
+    "_id": "6960d480aec0df5da3e903a6",
+    "user_id": "6960d3d59d59173e05f82d20",
+    "account_number": "ACC944671475940",
+    "iban": "DE99388170274373542537",
+    "bic": "ATLASDE99XXX",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "6960d480aec0df5da3e903a5",
+    "opened_at": {
+      "$date": "2026-01-09T10:12:16.040000"
+    },
+    "closed_at": null
+  },
+  {
+    "_id": "bank_acc_admin",
+    "user_id": "admin_super_001",
+    "account_number": "ACC000000099",
+    "iban": "DE99999999999999999999",
+    "bic": "ATLASDE99XXX",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_admin",
+    "opened_at": 188852.30896492
+  },
+  {
+    "_id": "696671080027797e56f86e8b",
+    "user_id": "69666b2847560b39a3e84df1",
+    "account_number": "ACC627757083373",
+    "iban": "DE99346183287894505343",
+    "bic": "ATLASDE99XXX",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "696671080027797e56f86e8a",
+    "opened_at": {
+      "$date": "2026-01-13T16:21:28.303000"
+    },
+    "closed_at": null
+  },
+  {
+    "_id": "6966757d7fb31c36e6360827",
+    "user_id": "6966756d7fb31c36e6360823",
+    "account_number": "ACC377799237259",
+    "iban": null,
+    "bic": null,
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "6966757d7fb31c36e6360826",
+    "opened_at": {
+      "$date": "2026-01-13T16:40:29.968000"
+    },
+    "closed_at": null
+  },
+  {
+    "_id": "69667b01cd02bc3c4fe2539c",
+    "user_id": "69667700cd02bc3c4fe2538a",
+    "account_number": "ACC967418391815",
+    "iban": "DE99453802062585692367",
+    "bic": "ATLASDE99XXX",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "69667b01cd02bc3c4fe2539b",
+    "opened_at": {
+      "$date": "2026-01-13T17:04:01.655000"
+    },
+    "closed_at": null
+  },
+  {
+    "_id": "bank_acc_69667be64c12fb952410065e",
+    "user_id": "69667be64c12fb952410065e",
+    "account_number": "ACC491425751168",
+    "iban": "DE99530442420925668632",
+    "bic": "ATLASDE99XXX",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_69667be64c12fb952410065e",
+    "opened_at": {
+      "$date": "2026-01-13T17:09:11.825000"
+    }
+  },
+  {
+    "_id": "bank_acc_69667e2a0039551e0feb1198",
+    "user_id": "69667e2a0039551e0feb1198",
+    "account_number": "ACC685806557093",
+    "iban": "LT78454545454545458",
+    "bic": "ATLASDE99XXX",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_69667e2a0039551e0feb1198",
+    "opened_at": {
+      "$date": "2026-01-13T17:37:49.525000"
+    }
+  },
+  {
+    "_id": "bank_acc_696686ed12dec8bf6a714e7e",
+    "user_id": "696686ed12dec8bf6a714e7e",
+    "account_number": "ACC708670895177",
+    "iban": "LT454454545454545",
+    "bic": null,
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_696686ed12dec8bf6a714e7e",
+    "opened_at": {
+      "$date": "2026-01-13T17:58:43.128000"
+    }
+  },
+  {
+    "_id": "bank_acc_69668885c0ed8330a4b659ae",
+    "user_id": "69668885c0ed8330a4b659ae",
+    "account_number": "ACC526161941832",
+    "iban": "LTWJLEKLWEKWEKL",
+    "bic": "ATLASWEWE",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_69668885c0ed8330a4b659ae",
+    "opened_at": {
+      "$date": "2026-01-13T18:08:07.220000"
+    }
+  },
+  {
+    "_id": "bank_acc_6967754aee56629feac444aa",
+    "user_id": "6967754aee56629feac444aa",
+    "account_number": "ACC402135570341",
+    "iban": "LT00000000000000000001",
+    "bic": "ATLAS21XXXW",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_6967754aee56629feac444aa",
+    "opened_at": {
+      "$date": "2026-01-14T10:53:19.487000"
+    }
+  },
+  {
+    "_id": "6968ec96b300d43c5cf76fed",
+    "user_id": "696771a2ee56629feac4449d",
+    "account_number": "ACC413723724959",
+    "iban": "DE99036198638246226092",
+    "bic": "ATLASDE99XXX",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "6968ec96b300d43c5cf76fec",
+    "opened_at": {
+      "$date": "2026-01-15T13:33:10.305000"
+    },
+    "closed_at": null
+  },
+  {
+    "_id": "bank_acc_test_user_for_kyc",
+    "user_id": "test_user_for_kyc",
+    "account_number": "ACC488993811593",
+    "iban": "LT733550010000042779",
+    "bic": "ATLSLT21",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_test_user_for_kyc",
+    "opened_at": {
+      "$date": "2026-01-16T10:41:45.286000"
+    }
+  },
+  {
+    "_id": "bank_acc_696a19e8a743135fb6611ccd",
+    "user_id": "696a19e8a743135fb6611ccd",
+    "account_number": "ACC155648730154",
+    "iban": "DE89370400440532013000",
+    "bic": "COBADEFF",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_696a19e8a743135fb6611ccd",
+    "opened_at": {
+      "$date": "2026-01-16T11:04:43.231000"
+    }
+  },
+  {
+    "_id": "bank_acc_696a1bd5a743135fb6611cda",
+    "user_id": "696a1bd5a743135fb6611cda",
+    "account_number": "ACC726834975986",
+    "iban": "AL0078454545453",
+    "bic": "ATSLEW21",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_696a1bd5a743135fb6611cda",
+    "opened_at": {
+      "$date": "2026-01-16T11:09:35.963000"
+    }
+  },
+  {
+    "_id": "bank_acc_696a5c0b78ff6cb6d7f8b8b4",
+    "user_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "account_number": "ACC805957294991",
+    "iban": "AL7777777777777777",
+    "bic": "ATLSAL22",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_696a5c0b78ff6cb6d7f8b8b4",
+    "opened_at": {
+      "$date": "2026-01-16T15:43:47.553000"
+    }
+  },
+  {
+    "_id": "bank_acc_696a67196177af49c46b7f34",
+    "user_id": "696a67196177af49c46b7f34",
+    "account_number": "ACC961788602241",
+    "iban": "MA4578785454544",
+    "bic": "MALTAL22",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_696a67196177af49c46b7f34",
+    "opened_at": {
+      "$date": "2026-01-16T16:30:45.075000"
+    }
+  },
+  {
+    "_id": "bank_acc_696e01e3e3141f70e7f5515b",
+    "user_id": "696e01e3e3141f70e7f5515b",
+    "account_number": "ACC705887366533",
+    "iban": "LT75245454587878",
+    "bic": "ATSLAL21",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_696e01e3e3141f70e7f5515b",
+    "opened_at": {
+      "$date": "2026-01-19T10:12:09.985000"
+    }
+  },
+  {
+    "_id": "bank_acc_696e2c4eb7111bc49f800c16",
+    "user_id": "696e2c4eb7111bc49f800c16",
+    "account_number": "ACC059004716983",
+    "iban": "GD5454521214545",
+    "bic": "ATSLDD21",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_696e2c4eb7111bc49f800c16",
+    "opened_at": {
+      "$date": "2026-01-19T13:30:43.348000"
+    }
+  },
+  {
+    "_id": "bank_acc_696e5cf906d6d725d71480d0",
+    "user_id": "696e5cf906d6d725d71480d0",
+    "account_number": "ACC485059086726",
+    "iban": "LT45454545454545",
+    "bic": "ATSLDE21",
+    "currency": "EUR",
+    "status": "ACTIVE",
+    "ledger_account_id": "ledger_acc_696e5cf906d6d725d71480d0",
+    "opened_at": {
+      "$date": "2026-01-19T16:35:12.515000"
+    }
+  }
+]

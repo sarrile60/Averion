@@ -1,0 +1,218 @@
+[
+  {
+    "_id": "033330cb-bc09-4cc0-b42c-203cafdfee3d",
+    "admin_id": "admin_super_001",
+    "account_id": "695fe660132ed65684c75575",
+    "adjustment_type": "WITHDRAW",
+    "amount": 9354,
+    "currency": "EUR",
+    "reason": "hhh",
+    "created_at": {
+      "$date": "2026-01-14T11:28:44.937000"
+    }
+  },
+  {
+    "_id": "60f8fa61-158c-41fe-9498-b2455db0de97",
+    "admin_id": "admin_super_001",
+    "account_id": "695fe660132ed65684c75575",
+    "adjustment_type": "TOPUP",
+    "amount": 1000,
+    "currency": "EUR",
+    "reason": "Test topup",
+    "created_at": {
+      "$date": "2026-01-14T12:16:27.300000"
+    }
+  },
+  {
+    "_id": "adc90bf7-a7fe-4d54-aef9-a9fb2adbe25a",
+    "admin_id": "admin_super_001",
+    "account_id": "695fe660132ed65684c75575",
+    "adjustment_type": "WITHDRAW",
+    "amount": 500,
+    "currency": "EUR",
+    "reason": "Test withdrawal",
+    "created_at": {
+      "$date": "2026-01-14T12:16:42.088000"
+    }
+  },
+  {
+    "_id": "a3955452-b3e6-4bf6-be7e-8b14814db129",
+    "admin_id": "admin_super_001",
+    "account_id": "695fe660132ed65684c75575",
+    "adjustment_type": "TOPUP",
+    "amount": 50000,
+    "currency": "EUR",
+    "reason": "Salary Payment January 2024",
+    "created_at": {
+      "$date": "2026-01-15T12:10:03.783000"
+    }
+  },
+  {
+    "_id": "23f0fc1d-466e-49f3-bfe5-7a47623fd612",
+    "admin_id": "admin_super_001",
+    "account_id": "695fe660132ed65684c75575",
+    "adjustment_type": "TOPUP",
+    "amount": 25000,
+    "currency": "EUR",
+    "reason": "Salary Payment January 2024",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.620000"
+    }
+  },
+  {
+    "_id": "1c4a03f5-88df-42a6-9411-f150c0fa1877",
+    "admin_id": "admin_super_001",
+    "account_id": "695fe660132ed65684c75575",
+    "adjustment_type": "WITHDRAW",
+    "amount": 5000,
+    "currency": "EUR",
+    "reason": "Monthly subscription payment",
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.694000"
+    }
+  },
+  {
+    "_id": "32a852ac-66cb-4bdb-94a5-21049103f5f9",
+    "admin_id": "admin_super_001",
+    "account_id": "695fe660132ed65684c75575",
+    "adjustment_type": "TOPUP",
+    "amount": 15000,
+    "currency": "EUR",
+    "reason": "Test professional credit",
+    "created_at": {
+      "$date": "2026-01-15T12:17:24.492000"
+    }
+  },
+  {
+    "_id": "7992dab1-4f1c-48a3-9e3f-19fa601f838b",
+    "admin_id": "admin_super_001",
+    "account_id": "695fe660132ed65684c75575",
+    "adjustment_type": "WITHDRAW",
+    "amount": 5000,
+    "currency": "EUR",
+    "reason": "Admin debit",
+    "created_at": {
+      "$date": "2026-01-15T12:17:28.631000"
+    }
+  },
+  {
+    "_id": "3de97dcd-db36-491d-a23f-28a99d7516d9",
+    "admin_id": "admin_super_001",
+    "account_id": "695fe660132ed65684c75575",
+    "adjustment_type": "TOPUP",
+    "amount": 12345,
+    "currency": "EUR",
+    "reason": "Testing euro input",
+    "created_at": {
+      "$date": "2026-01-15T12:31:35.955000"
+    }
+  },
+  {
+    "_id": "c129872d-1f25-4972-a259-3e61f4f66889",
+    "admin_id": "admin_super_001",
+    "account_id": "bank_acc_6967754aee56629feac444aa",
+    "adjustment_type": "TOPUP",
+    "amount": 7500,
+    "currency": "EUR",
+    "reason": "International wire transfer",
+    "created_at": {
+      "$date": "2026-01-15T12:31:59.330000"
+    }
+  },
+  {
+    "_id": "46606f32-94ba-49ee-b4ae-7284cd65479b",
+    "admin_id": "admin_super_001",
+    "account_id": "bank_acc_696686ed12dec8bf6a714e7e",
+    "adjustment_type": "TOPUP",
+    "amount": 50000,
+    "currency": "EUR",
+    "reason": "MONEY",
+    "created_at": {
+      "$date": "2026-01-15T12:40:57.133000"
+    }
+  },
+  {
+    "_id": "6bed4723-6824-40ab-a37c-ba666bd4f2be",
+    "admin_id": "admin_super_001",
+    "account_id": "bank_acc_6967754aee56629feac444aa",
+    "adjustment_type": "TOPUP",
+    "amount": 190000,
+    "currency": "EUR",
+    "reason": "Admin credit",
+    "created_at": {
+      "$date": "2026-01-15T13:32:34.411000"
+    }
+  },
+  {
+    "_id": "6a55f13c-436f-45fc-89e0-35a51c14c93a",
+    "admin_id": "admin_super_001",
+    "account_id": "bank_acc_696a5c0b78ff6cb6d7f8b8b4",
+    "adjustment_type": "TOPUP",
+    "amount": 13200000,
+    "currency": "EUR",
+    "reason": "Withdrawal",
+    "created_at": {
+      "$date": "2026-01-16T16:22:38.681000"
+    }
+  },
+  {
+    "_id": "d34b9e7e-9fd3-4647-890d-c2ee910dd5c2",
+    "admin_id": "admin_super_001",
+    "account_id": "bank_acc_696a67196177af49c46b7f34",
+    "adjustment_type": "TOPUP",
+    "amount": 20000000,
+    "currency": "EUR",
+    "reason": "Recovery",
+    "created_at": {
+      "$date": "2026-01-16T16:35:04.966000"
+    }
+  },
+  {
+    "_id": "9b2b1ab8-8145-41b0-a9ac-d695539b896c",
+    "admin_id": "admin_super_001",
+    "account_id": "bank_acc_696e2c4eb7111bc49f800c16",
+    "adjustment_type": "TOPUP",
+    "amount": 1250000,
+    "currency": "EUR",
+    "reason": "Ricevuta ",
+    "created_at": {
+      "$date": "2026-01-19T14:47:21.977000"
+    }
+  },
+  {
+    "_id": "11566aa4-44d9-4065-90f0-8388b6f69941",
+    "admin_id": "admin_super_001",
+    "account_id": "bank_acc_696e2c4eb7111bc49f800c16",
+    "adjustment_type": "TOPUP",
+    "amount": 50000,
+    "currency": "EUR",
+    "reason": "transferimento paga",
+    "created_at": {
+      "$date": "2026-01-19T15:04:34.158000"
+    }
+  },
+  {
+    "_id": "613e92c5-cd99-4e77-a72c-7c87291ac554",
+    "admin_id": "admin_super_001",
+    "account_id": "bank_acc_696e2c4eb7111bc49f800c16",
+    "adjustment_type": "TOPUP",
+    "amount": 900000,
+    "currency": "EUR",
+    "reason": "gg",
+    "created_at": {
+      "$date": "2026-01-19T15:10:00.392000"
+    }
+  },
+  {
+    "_id": "d6b9edcb-b2c9-4e90-934b-22750854827f",
+    "admin_id": "admin_super_001",
+    "account_id": "bank_acc_696e2c4eb7111bc49f800c16",
+    "adjustment_type": "TOPUP",
+    "amount": 60000,
+    "currency": "EUR",
+    "reason": "gg",
+    "created_at": {
+      "$date": "2026-01-19T15:10:56.878000"
+    }
+  }
+]

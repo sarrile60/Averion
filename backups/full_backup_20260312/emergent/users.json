@@ -1,0 +1,1143 @@
+[
+  {
+    "_id": "admin_super_001",
+    "email": "admin@atlas.local",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$YQPfKY+0/8q2pFrfSBjVJg$xqNbCO/x+H3xjq2l3B1fNFsIff8wJraC9bxpSmJiZgs",
+    "first_name": "Super",
+    "last_name": "Admin",
+    "role": "SUPER_ADMIN",
+    "status": "ACTIVE",
+    "email_verified": true,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-08T17:03:23.965000"
+    },
+    "updated_at": {
+      "$date": "2026-01-08T17:03:23.965000"
+    },
+    "last_login_at": {
+      "$date": "2026-01-21T13:47:45.732000"
+    }
+  },
+  {
+    "_id": "customer_001",
+    "email": "customer@demo.com",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$8kEfB9Pyk9WzjUXOSZkmpw$s8htTVqxgs3J4JuAnADjUeUiHpg807GyC9l/PNhTxy4",
+    "first_name": "John",
+    "last_name": "Doe",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": true,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-08T17:03:24.014000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T12:54:45.531000"
+    },
+    "last_login_at": {
+      "$date": "2026-01-20T14:23:52.568000"
+    },
+    "mfa_secret": "XBSNV2YZJXTPVPLHFOSD4FZ5AEUQMAHA",
+    "tax_hold": {
+      "is_blocked": true,
+      "reason": "Outstanding tax obligations",
+      "tax_amount_due": 200.0,
+      "blocked_at": {
+        "$date": "2026-01-16T17:02:22.166000"
+      },
+      "blocked_by": "admin_super_001"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6960d3d59d59173e05f82d20"
+    },
+    "email": "davi@gmail.com",
+    "first_name": "Davi",
+    "last_name": "Davi",
+    "phone": "067 577 1195",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$pQcLxudJ+9TTVvl13h1abg$pW5R5Fm7+1yaSOzwPb5sfESEUiFokAsAB4/58hP/ik0",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-09T10:09:25.845000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T10:09:25.845000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6960d4219d59173e05f82d23"
+    },
+    "email": "test123@example.com",
+    "first_name": "Test",
+    "last_name": "User",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$aWLIif4gp2pflpQsMIWIKw$8SrPfsu7NuPUWLnRT/7lzjIYw7WIk/wF2eOmWt+2Ep0",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-09T10:10:41.117000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T10:10:41.117000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6960dc1ee2a99548fda31c5c"
+    },
+    "email": "testuser_aunohwvc@test.com",
+    "first_name": "Test",
+    "last_name": "User",
+    "phone": "+49123456789",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$XwpJKYZ209AJ9B6eB986MQ$KCvSDWrXiAJhjjxhlUTCfFPgVvd89s8W6eZI97S4C/E",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-09T10:44:46.506000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T10:44:46.506000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6960dc58e2a99548fda31c5e"
+    },
+    "email": "testuser_qfi8gdnd@test.com",
+    "first_name": "John",
+    "last_name": "Doe",
+    "phone": "+49123456789",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$xg8oEutA45Qwsb9FPHTIiQ$NJFcoak/3KZs0dS3GfKsZaDiQPRBWaGJK9fRk5qzJOE",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-09T10:45:44.846000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T10:45:44.846000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "69626eb324b815155546a2d1"
+    },
+    "email": "sarrile60@proton.me",
+    "first_name": "sarrile",
+    "last_name": "tekel",
+    "phone": "+355692311180",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$TqLb1KyPVgdDuZAftr2tlg$JqU+GkNdcqPzZUFqAsxp0+KDEiacuGNf62V4MCACpas",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-10T15:22:27.243000"
+    },
+    "updated_at": {
+      "$date": "2026-01-10T15:22:27.243000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "69666b2847560b39a3e84df1"
+    },
+    "email": "settings@gmail.com",
+    "first_name": "Settings",
+    "last_name": "Settings",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$S5/IS4bTJQnWUImnRQqzcg$bIVMgyJrBlKvfVVrQ90Me3tmf0L1oiZqzCVi12MoB38",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-13T15:56:24.209000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T15:56:24.209000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6966756d7fb31c36e6360823"
+    },
+    "email": "test@gmail.com",
+    "first_name": "test",
+    "last_name": "test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$XEx/SB2L1IeL3LP0pE1SPQ$V23OHGl+TwfO96Jb2cfcv+09erRUqhkLwdsN7xiOVuk",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-13T16:40:13.404000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T13:22:25.711000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "69667700cd02bc3c4fe2538a"
+    },
+    "email": "test123@gmail.com",
+    "first_name": "test",
+    "last_name": "test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$XrLaTGKr7NElwP/Mo4Y/2w$UHQoDWbR3fy6RuWAZY9ZPEEOl4tXWrOOXchBP4g4MRM",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-13T16:46:56.946000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T13:35:19.504000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "69667be64c12fb952410065e"
+    },
+    "email": "test321@gmail.com",
+    "first_name": "test",
+    "last_name": "test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$3c4AYEQhqH4tCSYkHTzIqA$HQUX7p6HkNYWXv0rtMI0NPZRTG+ajVE5i0M9fpVGm7U",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-13T17:07:50.229000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T17:07:50.229000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "69667e2a0039551e0feb1198"
+    },
+    "email": "test111@gmail.com",
+    "first_name": "test",
+    "last_name": "test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$hpHFArqGSjQOTmFx8ejxWg$LkOG3KMr7ZALaU3PAfcIqp01RCAiaymSqyzStCQw7yk",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-13T17:17:30.252000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T17:17:30.252000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696686ed12dec8bf6a714e7e"
+    },
+    "email": "test222@gmail.com",
+    "first_name": "test",
+    "last_name": "test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$CJnErTpcOrUxPTajYD+9kw$L9dUDfuk6Ut5Z7mKtJoyDhCSoea+mfpf0wAGWCFGl8w",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-13T17:54:53.396000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T17:54:53.396000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "69668885c0ed8330a4b659ae"
+    },
+    "email": "test333@gmail.com",
+    "first_name": "test",
+    "last_name": "test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$D5QAULOxyiPjGG0fkD4NVw$uJlLLz4esydaRn5t7duM2+yB/mb1ZFWwr5PshRUlTog",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-13T18:01:41.117000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T13:24:20.904000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696771a2ee56629feac4449d"
+    },
+    "email": "test001@gmail.com",
+    "first_name": "Joris",
+    "last_name": "Deli",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$oRc9StQ+uieyzmYMKWH1GQ$jNnUJTHDJ+RiiVwm4X1Mn5VSKGxhwtgvARDyB0f8BIw",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-14T10:36:18.767000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T10:36:18.767000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6967754aee56629feac444aa"
+    },
+    "email": "test002@gmail.com",
+    "first_name": "Deli",
+    "last_name": "Deli",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$xjeUU11cOthFmZTav8SXYg$jzvSfFi8+sU155gUw6pHIln4+jR02pH+6RJc/o4UJ1M",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-14T10:51:54.679000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T13:33:41.836000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696a0ecc36a0500a740d53c3"
+    },
+    "email": "test003@gmail.com",
+    "first_name": "Blend",
+    "last_name": "Deli",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$w3TKxVzdgStKQrHUVLnkTA$bfk3+poMj1PEUdnbw2o30uy6V+LiCfYyITPNtDuBRQ4",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-16T10:11:24.108000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T10:11:24.108000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696a13888a0446b7b4b771a9"
+    },
+    "email": "test004@gmail.com",
+    "first_name": "Blend",
+    "last_name": "Blendi",
+    "phone": "+8125487878",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$Hs0yZb0oThC4hRvUVB3Fzg$Fqh57Z/8RjsMeeab7GGVNBYmxLc3BCn1XQjj9E0IRHU",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-16T10:31:36.488000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T10:31:36.488000"
+    }
+  },
+  {
+    "_id": "test_user_for_kyc",
+    "created_at": {
+      "$date": "2026-01-16T10:40:54.956000"
+    },
+    "email": "testkyc@example.com",
+    "first_name": "Test",
+    "last_name": "User",
+    "role": "CUSTOMER",
+    "status": "ACTIVE"
+  },
+  {
+    "_id": {
+      "$oid": "696a166bb1fb6891f796bf85"
+    },
+    "email": "test005@gmail.com",
+    "first_name": "blend",
+    "last_name": "testuesi",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$j2/IHW8mVg7jNB7/RGUmiA$Ub5nkZtc/Cr9SuZ2ilXWoXyfhn9ibzqfA58VNh12Qos",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-16T10:43:55.089000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T10:43:55.089000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696a19e8a743135fb6611ccd"
+    },
+    "email": "test006@gmail.com",
+    "first_name": "blend",
+    "last_name": "csgo",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$1g63LDy/L83a6TAGtW+V4w$5beJClB4cgsnk+X/59ajLee7+il2DzybE4PGVwp804Y",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-16T10:58:48.778000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T10:58:48.778000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696a1bd5a743135fb6611cda"
+    },
+    "email": "test007@gmail.com",
+    "first_name": "bb",
+    "last_name": "bb",
+    "phone": "+787414",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$ZcMAXWjoeko6hIU4qtreNQ$ikjCIGIqP5UhYCcvCV5VmgxylSB0Kev4qjbYP5c3+os",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-16T11:07:01.764000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T11:07:01.764000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696a5c0b78ff6cb6d7f8b8b4"
+    },
+    "email": "test008@gmail.com",
+    "first_name": "Arlind",
+    "last_name": "Arli",
+    "phone": "+49157787845",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$fhHCRXiLDa0Ohz8kE6vYCg$0TDRn24v3vCsROpe5h5cGWD3a2NYoOYg0ja3CVtiJ6o",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-16T15:40:59.862000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T15:40:59.862000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696a67196177af49c46b7f34"
+    },
+    "email": "test009@gmail.com",
+    "first_name": "davi",
+    "last_name": "davi",
+    "phone": "+748784578",
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$6IaLirHzeKaw1KTqExDx0Q$QDSAJkfoj5uIayzQyuz61iyVVe8t7D/b7qqiUx5TfIM",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-16T16:28:09.342000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T16:28:09.342000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696e0065e3141f70e7f55155"
+    },
+    "email": "test010@gmail.com",
+    "first_name": "Arbias",
+    "last_name": "Arbias",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$hKCSl62axxQ1f5Wreu6FBw$aD0A0r5YlDCvOuyagdMfcQ/Yun8Si8UeG5+RhOAmFQQ",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-19T09:59:01.789000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T09:59:01.789000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696e01e3e3141f70e7f5515b"
+    },
+    "email": "test011@gmail.com",
+    "first_name": "Arbias",
+    "last_name": "Arbias",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$jDPbhWoV5lJmpNrHepu9jA$GtoHk768U4sBafR1Mv6hGKbgKkzL74YYdEz2TNunHhw",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-19T10:05:23.273000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T10:05:23.273000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696e2b32b7111bc49f800c14"
+    },
+    "email": "testuser999@test.com",
+    "first_name": "Test",
+    "last_name": "User",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$SZofDy2Y5FREHxJGjCHXuA$LAlBPlAeMt3gpZxhJMy3BdfkQO1poWWPlUME4Zy0Slo",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-19T13:01:38.758000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T13:01:38.758000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696e2b53b7111bc49f800c15"
+    },
+    "email": "mario.rossi.1768827731@test.com",
+    "first_name": "Mario",
+    "last_name": "Rossi",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$qeUyuhSeN77xYX3kCzuIRg$uUWMZoOerBqNMBepIqgveePT1uQ+B4OAltplFqhG+xA",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-19T13:02:11.881000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T13:02:11.881000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696e2c4eb7111bc49f800c16"
+    },
+    "email": "test012@gmail.com",
+    "first_name": "Blend",
+    "last_name": "Lulja",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$GrDEWL+xoRas4yy9Tqk8oQ$RqGv+21l4LiayI/FPE5eL/mvqg521HT6Y+LL9gcHqz4",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-19T13:06:22.823000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T13:06:22.823000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696e5cf906d6d725d71480d0"
+    },
+    "email": "ashleyalt003@gmail.com",
+    "first_name": "Testing",
+    "last_name": "Agent",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$lR81wzRkXqnGlDLx9M7egw$irzpulKXUAUF+/vl6rcPLSwrT23uvfwUoIoDvpXNPow",
+    "role": "CUSTOMER",
+    "status": "ACTIVE",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-19T16:34:01.775000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T16:50:10.752000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f794e349ecc1362685e5b"
+    },
+    "email": "testuser1768913229@example.com",
+    "first_name": "Test",
+    "last_name": "User",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$w5MHa7gu6T/hc3UQ6EImCQ$nGqRT/Tok0lNMp9Wds+c2owqsAkGNr98lXwh5obgvV0",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T12:47:10.074000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T12:47:10.074000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f7965349ecc1362685e5c"
+    },
+    "email": "testdirect@example.com",
+    "first_name": "Direct",
+    "last_name": "Test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$B7fyv/RPgbg27OgWSjsy5Q$5aCb7fPXVTifqpdGqr+ZaMyTdaRSjiOIKzWqbaCEFgw",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T12:47:33.224000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T12:47:33.224000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f7972349ecc1362685e5d"
+    },
+    "email": "newuser1768913266@test.com",
+    "first_name": "New",
+    "last_name": "User",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$WIMeZzY3Mt0ZINi7aGJT0A$vNfjdn+rbk0Er7VKwpPC6azM+rH7zz4n4oDOA2nrJlo",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T12:47:46.711000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T12:47:46.711000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f79a0349ecc1362685e5e"
+    },
+    "email": "flowtest@example.com",
+    "first_name": "Flow",
+    "last_name": "Test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$LQDBJVD+wX4sBxSaispYww$EYvEmI1wren9FEZhXTuRKujTWTq26EpCzLG+cUIGhi8",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": true,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T12:48:32.144000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T12:48:32.144000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f79ecda8033f76258143e"
+    },
+    "email": "flowtest2@example.com",
+    "first_name": "Flow",
+    "last_name": "Test2",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$Kl90Yuuh0hpFrHZnhfEgQA$BpP97OzEbNG7hUEJ8bcLLt1jVxQIluGhO2wvQx2fLi8",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": true,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T12:49:48.362000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T12:49:49.323000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f79feda8033f762581440"
+    },
+    "email": "resendtest@example.com",
+    "first_name": "Resend",
+    "last_name": "Test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$73L/k07qfUkjvHH3O1EFFg$nrLGmXvM8DuzwyMomiBBaO1dYjRTU9wO9/NL8YXIcHM",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T12:50:06.077000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T12:50:06.077000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f7a3ada8033f762581441"
+    },
+    "email": "uitest@example.com",
+    "first_name": "UI",
+    "last_name": "Test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$byw88yiynRFUEgpWyyMlUA$nvfeoaOt3hc+ogHQgEVPvifa1+dpLjj94sdtdqnkXfc",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": true,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T12:51:06.402000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T12:51:17.189000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f7b16a0a55585712a7751"
+    },
+    "email": "test_user_p9b6c1md@test.com",
+    "first_name": "Test",
+    "last_name": "User",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$C/aLe7xiFtZWxk0EP+wfsg$g8fk38JNodzlXmsXzPxtIswtqA0dAQze9Xe72KmeZ+g",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": true,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.691000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T12:54:47.309000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f7b17a0a55585712a7753"
+    },
+    "email": "test_italian_3fgzs4tm@test.com",
+    "first_name": "Test",
+    "last_name": "Italiano",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$GGMbLEi75/4/DKrlcFY9IQ$vviUNagc/nLThXj/rCvCCgtpSYlwUqevuXhSdPdKnVU",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T12:54:47.494000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T12:54:47.494000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f7b7ea0a55585712a7754"
+    },
+    "email": "ashleyalt004@gmail.com",
+    "first_name": "Ash",
+    "last_name": "Ash",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$4B455LiKZ0a7URVXD1rnqA$PDwCxRSoFCsK1Eqb8mmARi4WRgmc4GdtYG0UK5eW0oM",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T12:56:30.505000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T12:56:30.505000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f7d22942463898280fede"
+    },
+    "email": "ashleyalt008@gmail.com",
+    "first_name": "Ash",
+    "last_name": "Ash",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$qwiMRRcq6tA4z7FRvU/NnA$FEwowzFeOmdvZwjTpg9vlqB7Kqtm5rj1kDblbjCXoTE",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": true,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T13:03:30.320000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T13:09:01.288000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f821fe92014794ed88de5"
+    },
+    "email": "testlocal@example.com",
+    "first_name": "Test",
+    "last_name": "Local",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$fAchoLKgvZHalQNGbHhkOg$o5a2Syci2eCFu2yKxw5r9JIKGG49kvCHCLZPpfNrqG8",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T13:24:47.108000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T13:24:47.108000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f84afe92014794ed88de6"
+    },
+    "email": "pierangelamarcio232@gmail.com",
+    "first_name": "Angela",
+    "last_name": "Angela",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$k+VTYirvhXtlI58ghj4HGg$o7ebP5pkPvMFaQlFchiqrZH8hi/Gi17E0e6DICBh03g",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T13:35:43.286000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T13:35:43.286000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f84fd25afbe3dc6f4c88a"
+    },
+    "email": "testfix@example.com",
+    "first_name": "Test",
+    "last_name": "Fix",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$VlYM/xabBU0Suys9EDtFZA$lWLFAjmpJTnZjcgypALSaAwD/VmYkdAM9oHkw6+xH8Q",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T13:37:01.475000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T13:37:01.475000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f853825afbe3dc6f4c88b"
+    },
+    "email": "qweqwe@gmail.com",
+    "first_name": "wqe",
+    "last_name": "qwe",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$0O7o66RYBOiaM0qltkllcg$bb4xKJgcBgxggEcLKORlUdPm8K0EBMsrhkLNaJiCaN4",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T13:38:00.509000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T13:38:00.509000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f87e4c77dd2befacdd1e8"
+    },
+    "email": "testfinal@example.com",
+    "first_name": "Test",
+    "last_name": "Final",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$geekBzZM5ms0q6wFQJaZ3A$2vB/yDAIkGTarIsk6b8F6Ty7xMojKErLr6uY9W7nI4M",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T13:49:24.881000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T13:49:24.881000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f88e2b8be88e35bec6220"
+    },
+    "email": "testfinalfinal@example.com",
+    "first_name": "Test",
+    "last_name": "Final",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$L7S2tm9dtE/RwPfjn8ozeg$hTvEemEaoD9zm4fKbCwrMbTpOyyzjIVwKRSVKcX6pEU",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T13:53:38.926000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T13:53:38.926000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f893b222f81d50b284d05"
+    },
+    "email": "testlogging@example.com",
+    "first_name": "Test",
+    "last_name": "Logging",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$JWS2EQNTdk5EV2LFmJAteQ$DXgsFXJfxR9n61OENQEYlGF/cSFknmw/84jXxUyp3xQ",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T13:55:07.397000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T13:55:07.397000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f8becc61a63c74ff6796f"
+    },
+    "email": "qwewq@gmail.com",
+    "first_name": "qwe",
+    "last_name": "qwe",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$43GcS4Qv5l9sjgattc9egA$ZU3pkpCPh8AIHC9n/uJmVAOhLyHyZWpOrfqYLzqcHig",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T14:06:36.941000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T14:06:36.941000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f923ca755b1a158c8e01f"
+    },
+    "email": "localtest999@example.com",
+    "first_name": "Local",
+    "last_name": "Test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$kdxMf3ak4zfP4H+m0wH52g$llftftbqk6mmkmBkfQk526zcamekFG9SCt7eFEQCwCg",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T14:33:32.677000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T14:33:32.677000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f92d55a782649e74b0fba"
+    },
+    "email": "smarttest@example.com",
+    "first_name": "Smart",
+    "last_name": "Test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$XgY4RNnnswL59fWjL0iupg$h29gZ6GZXZC89s2ttOUqPOgyiVIcbKZs0VRTmcWSXtM",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T14:36:05.020000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T14:36:05.020000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696f98f31e69c948b54cf1a0"
+    },
+    "email": "test_debug_1768921331@test.com",
+    "first_name": "Test",
+    "last_name": "User",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$MNlNUxZXS80m3OZT2I1e/A$zaboKUUqMiAD6ufp3l8zWgUIig/N3UxnItofrj7sBzM",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T15:02:11.860000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T15:02:11.860000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "696fa3ea6cccff66e0f69e94"
+    },
+    "email": "qwe@gmail.com",
+    "first_name": "qwe",
+    "last_name": "eqwe",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$s3Zm4agiU2Zc98jd5dl9dQ$+Kuu6eS55S4Cumph+p8JOTSq5ZcokRh0l2X0sCGPBCk",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-20T15:48:58.242000"
+    },
+    "updated_at": {
+      "$date": "2026-01-20T15:48:58.242000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6970c148792a8e23feb803d4"
+    },
+    "email": "test-user-123@test.com",
+    "first_name": "Test",
+    "last_name": "User",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$znKOdmDjzcD77HBZgRWCjg$qB3cR8+GXM3vqxL+MwEehlSPkDoP9+43fNuzayWyjMI",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-21T12:06:32.763000"
+    },
+    "updated_at": {
+      "$date": "2026-01-21T12:06:32.763000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6970c692c3eff380225697f9"
+    },
+    "email": "qwekwqk@gmail.com",
+    "first_name": "qwoe",
+    "last_name": "qewkklq",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$OwXHjo00roFPqgLhyNIlMQ$JA+DdHOhQllUZugyvsXGSzjCc+zIDYZOT04aJ4zxzB8",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-21T12:29:06.142000"
+    },
+    "updated_at": {
+      "$date": "2026-01-21T12:29:06.142000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6970d7bd3b8243ad0862aac8"
+    },
+    "email": "final-test@test.com",
+    "first_name": "Final",
+    "last_name": "Test",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$/UTWkDZcQvOpzY8EhKoyrQ$gwXWLdv3aqT1heYUiqQInzFY5doIgafwI4WSF1PV2Zc",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-21T13:42:21.188000"
+    },
+    "updated_at": {
+      "$date": "2026-01-21T13:42:21.188000"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6970d9013b8243ad0862aaca"
+    },
+    "email": "health-check-1769003265@test.com",
+    "first_name": "Health",
+    "last_name": "Check",
+    "phone": null,
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$G/+ICIxHQQQJ4S2VQb2naQ$hZNTxKz3fQRWxuhKREV7yDWgNJTIgePeQWhR4KpgZmg",
+    "role": "CUSTOMER",
+    "status": "PENDING",
+    "email_verified": false,
+    "mfa_enabled": false,
+    "created_at": {
+      "$date": "2026-01-21T13:47:45.433000"
+    },
+    "updated_at": {
+      "$date": "2026-01-21T13:47:45.433000"
+    }
+  }
+]

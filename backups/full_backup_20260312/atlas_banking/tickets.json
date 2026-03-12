@@ -1,0 +1,702 @@
+[
+  {
+    "_id": "6960ccf39f182f11b1c8573d",
+    "user_id": "customer_001",
+    "subject": "Test ticket from automated testing",
+    "description": "This is a test ticket created during automated testing.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "6960ccf39f182f11b1c8573e",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "This is a test ticket created during automated testing.",
+        "created_at": {
+          "$date": "2026-01-09T09:40:03.159000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-09T09:40:03.159000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T09:40:03.159000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "6960cd609f182f11b1c85740",
+    "user_id": "customer_001",
+    "subject": "Test Support Ticket",
+    "description": "This is a test ticket for automated testing.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "6960cd609f182f11b1c85741",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "This is a test ticket for automated testing.",
+        "created_at": {
+          "$date": "2026-01-09T09:41:52.777000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-09T09:41:52.777000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T09:41:52.777000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "6960dc07e2a99548fda31c5a",
+    "user_id": "customer_001",
+    "subject": "Test ticket from automated testing",
+    "description": "This is a test ticket created during automated testing.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "6960dc07e2a99548fda31c5b",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "This is a test ticket created during automated testing.",
+        "created_at": {
+          "$date": "2026-01-09T10:44:23.101000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-09T10:44:23.101000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T10:44:23.101000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "6960dcc7e2a99548fda31c61",
+    "user_id": "customer_001",
+    "subject": "Test ticket from automated testing",
+    "description": "This is a test ticket created during automated testing.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "6960dcc7e2a99548fda31c62",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "This is a test ticket created during automated testing.",
+        "created_at": {
+          "$date": "2026-01-09T10:47:35.276000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-09T10:47:35.276000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T10:47:35.276000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "6960defed576c325487cf429",
+    "user_id": "customer_001",
+    "subject": "test",
+    "description": "test",
+    "status": "CLOSED",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "6960defed576c325487cf42a",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "test",
+        "created_at": {
+          "$date": "2026-01-09T10:57:02.456000"
+        }
+      }
+    ],
+    "assigned_to": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-09T10:57:02.456000"
+    },
+    "updated_at": {
+      "$date": "2026-01-09T12:45:54.719000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "696664ffd07465abe8932e25",
+    "user_id": "customer_001",
+    "subject": "Test ticket from automated testing",
+    "description": "This is a test ticket created during automated testing.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "696664ffd07465abe8932e26",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "This is a test ticket created during automated testing.",
+        "created_at": {
+          "$date": "2026-01-13T15:30:07.715000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-13T15:30:07.715000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T15:30:07.715000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "696669c647560b39a3e84deb",
+    "user_id": "customer_001",
+    "subject": "Test ticket from automated testing",
+    "description": "This is a test ticket created during automated testing.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "696669c647560b39a3e84dec",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "This is a test ticket created during automated testing.",
+        "created_at": {
+          "$date": "2026-01-13T15:50:30.655000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-13T15:50:30.655000"
+    },
+    "updated_at": {
+      "$date": "2026-01-13T15:50:30.655000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "69678aa57124c6c86d721571",
+    "user_id": "customer_001",
+    "subject": "Test ticket from automated testing",
+    "description": "This is a test ticket created during automated testing.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "69678aa57124c6c86d721572",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "This is a test ticket created during automated testing.",
+        "created_at": {
+          "$date": "2026-01-14T12:23:01.685000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-14T12:23:01.685000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T12:23:01.685000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "69678aad7124c6c86d72157e",
+    "user_id": "customer_001",
+    "subject": "Test ticket from automated testing",
+    "description": "This is a test ticket created during automated testing.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "69678aad7124c6c86d72157f",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "This is a test ticket created during automated testing.",
+        "created_at": {
+          "$date": "2026-01-14T12:23:09.223000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-14T12:23:09.223000"
+    },
+    "updated_at": {
+      "$date": "2026-01-14T12:23:09.223000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "6968da50189ef0e4cceaf900",
+    "user_id": "customer_001",
+    "subject": "Test ticket from automated testing",
+    "description": "This is a test ticket created during automated testing.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "6968da50189ef0e4cceaf901",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "This is a test ticket created during automated testing.",
+        "created_at": {
+          "$date": "2026-01-15T12:15:12.384000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-15T12:15:12.384000"
+    },
+    "updated_at": {
+      "$date": "2026-01-15T12:15:12.384000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "696902ad534a62ac6373b298",
+    "user_id": "customer_001",
+    "subject": "Test ticket",
+    "description": "Testing ticket creation",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "696902ad534a62ac6373b299",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "Testing ticket creation",
+        "created_at": {
+          "$date": "2026-01-15T15:07:25.382000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-15T15:07:25.382000"
+    },
+    "updated_at": {
+      "$date": "2026-01-15T15:07:25.382000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "6969039aeabb788b9712a06a",
+    "user_id": "customer_001",
+    "subject": "Request to lift account restriction",
+    "description": "I have received a notification about tax obligations on my account. I believe this may be an error. Please review my account status and advise on the steps needed to resolve this issue.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "6969039aeabb788b9712a06b",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "I have received a notification about tax obligations on my account. I believe this may be an error. Please review my account status and advise on the steps needed to resolve this issue.",
+        "created_at": {
+          "$date": "2026-01-15T15:11:22.335000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-15T15:11:22.335000"
+    },
+    "updated_at": {
+      "$date": "2026-01-15T15:11:22.335000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "696904cbeabb788b9712a074",
+    "user_id": "customer_001",
+    "subject": "Test Ticket - Tax Hold Issue",
+    "description": "I need help with my tax hold restriction. Please assist.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "696904cbeabb788b9712a075",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "I need help with my tax hold restriction. Please assist.",
+        "created_at": {
+          "$date": "2026-01-15T15:16:27.147000"
+        }
+      },
+      {
+        "id": "69690706eabb788b9712a085",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "This is a test message from customer",
+        "created_at": {
+          "$date": "2026-01-15T15:25:58.247000"
+        }
+      },
+      {
+        "id": "6969075df65736b64ddd56ec",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "Hello, I would like an update on my ticket. Thank you!",
+        "created_at": {
+          "$date": "2026-01-15T15:27:25.807000"
+        }
+      },
+      {
+        "id": "69690778f65736b64ddd56ee",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "Testing message functionality - this should work now!",
+        "created_at": {
+          "$date": "2026-01-15T15:27:52.933000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-15T15:16:27.147000"
+    },
+    "updated_at": {
+      "$date": "2026-01-15T15:27:52.933000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "696906c9eabb788b9712a081",
+    "user_id": "6967754aee56629feac444aa",
+    "subject": "nn",
+    "description": "hhh",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "696906c9eabb788b9712a082",
+        "sender_id": "6967754aee56629feac444aa",
+        "sender_name": "test002@gmail.com",
+        "is_staff": false,
+        "content": "hhh",
+        "created_at": {
+          "$date": "2026-01-15T15:24:57.216000"
+        }
+      },
+      {
+        "id": "696907e4f65736b64ddd56f1",
+        "sender_id": "6967754aee56629feac444aa",
+        "sender_name": "test002@gmail.com",
+        "is_staff": false,
+        "content": "hh",
+        "created_at": {
+          "$date": "2026-01-15T15:29:40.578000"
+        }
+      },
+      {
+        "id": "696907edf65736b64ddd56f2",
+        "sender_id": "6967754aee56629feac444aa",
+        "sender_name": "test002@gmail.com",
+        "is_staff": false,
+        "content": "qw",
+        "created_at": {
+          "$date": "2026-01-15T15:29:49.671000"
+        }
+      },
+      {
+        "id": "696907eff65736b64ddd56f3",
+        "sender_id": "6967754aee56629feac444aa",
+        "sender_name": "test002@gmail.com",
+        "is_staff": false,
+        "content": "qwe",
+        "created_at": {
+          "$date": "2026-01-15T15:29:51.005000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-15T15:24:57.216000"
+    },
+    "updated_at": {
+      "$date": "2026-01-15T15:29:51.006000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "69690b52f65736b64ddd5700",
+    "user_id": "customer_001",
+    "subject": "Tax Hold Resolution Request - Automated Test",
+    "description": "I am writing to request assistance with resolving the tax hold on my account. The amount due is \u20ac2,500.00. Please provide guidance on the next steps to settle this matter.",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "69690b52f65736b64ddd5701",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "I am writing to request assistance with resolving the tax hold on my account. The amount due is \u20ac2,500.00. Please provide guidance on the next steps to settle this matter.",
+        "created_at": {
+          "$date": "2026-01-15T15:44:18.448000"
+        }
+      },
+      {
+        "id": "69690b56f65736b64ddd5702",
+        "sender_id": "customer_001",
+        "sender_name": "John Doe",
+        "is_staff": false,
+        "content": "This is a follow-up message. I would like to know the timeline for resolving this tax hold issue.",
+        "created_at": {
+          "$date": "2026-01-15T15:44:22.130000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-15T15:44:18.448000"
+    },
+    "updated_at": {
+      "$date": "2026-01-15T15:44:22.130000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "69690f8af65736b64ddd5706",
+    "user_id": "6967754aee56629feac444aa",
+    "subject": "Erd",
+    "description": "Eree",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "69690f8af65736b64ddd5707",
+        "sender_id": "6967754aee56629feac444aa",
+        "sender_name": "test002@gmail.com",
+        "is_staff": false,
+        "content": "Eree",
+        "created_at": {
+          "$date": "2026-01-15T16:02:18.426000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-15T16:02:18.426000"
+    },
+    "updated_at": {
+      "$date": "2026-01-15T16:02:18.426000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "696a0c2936a0500a740d53ba",
+    "user_id": "6967754aee56629feac444aa",
+    "subject": "hh",
+    "description": "hh",
+    "status": "IN_PROGRESS",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "696a0c2936a0500a740d53bb",
+        "sender_id": "6967754aee56629feac444aa",
+        "sender_name": "test002@gmail.com",
+        "is_staff": false,
+        "content": "hh",
+        "created_at": {
+          "$date": "2026-01-16T10:00:09.633000"
+        }
+      },
+      {
+        "id": "696a0c2e36a0500a740d53bc",
+        "sender_id": "6967754aee56629feac444aa",
+        "sender_name": "test002@gmail.com",
+        "is_staff": false,
+        "content": "h",
+        "created_at": {
+          "$date": "2026-01-16T10:00:14.227000"
+        }
+      }
+    ],
+    "assigned_to": "admin_super_001",
+    "created_at": {
+      "$date": "2026-01-16T10:00:09.633000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T10:13:01.869000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "696a66646177af49c46b7f2c",
+    "user_id": "696a5c0b78ff6cb6d7f8b8b4",
+    "subject": "WITHDRAWAL",
+    "description": "I need my money",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "696a66646177af49c46b7f2d",
+        "sender_id": "696a5c0b78ff6cb6d7f8b8b4",
+        "sender_name": "test008@gmail.com",
+        "is_staff": false,
+        "content": "I need my money",
+        "created_at": {
+          "$date": "2026-01-16T16:25:08.825000"
+        }
+      },
+      {
+        "id": "696a66706177af49c46b7f2e",
+        "sender_id": "696a5c0b78ff6cb6d7f8b8b4",
+        "sender_name": "test008@gmail.com",
+        "is_staff": false,
+        "content": "hhh",
+        "created_at": {
+          "$date": "2026-01-16T16:25:20.185000"
+        }
+      },
+      {
+        "id": "696a667c6177af49c46b7f30",
+        "sender_id": "admin_super_001",
+        "sender_name": "Super Admin",
+        "is_staff": true,
+        "content": "Hh",
+        "created_at": {
+          "$date": "2026-01-16T16:25:32.197000"
+        }
+      },
+      {
+        "id": "696a667d6177af49c46b7f31",
+        "sender_id": "admin_super_001",
+        "sender_name": "Super Admin",
+        "is_staff": true,
+        "content": "Hh",
+        "created_at": {
+          "$date": "2026-01-16T16:25:33.909000"
+        }
+      },
+      {
+        "id": "696a66906177af49c46b7f32",
+        "sender_id": "admin_super_001",
+        "sender_name": "Super Admin",
+        "is_staff": true,
+        "content": "h",
+        "created_at": {
+          "$date": "2026-01-16T16:25:52.312000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-16T16:25:08.825000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T16:25:52.312000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "696a69396177af49c46b7f47",
+    "user_id": "696a67196177af49c46b7f34",
+    "subject": "UNBLOCK ACCOUNT",
+    "description": "help",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "696a69396177af49c46b7f48",
+        "sender_id": "696a67196177af49c46b7f34",
+        "sender_name": "test009@gmail.com",
+        "is_staff": false,
+        "content": "help",
+        "created_at": {
+          "$date": "2026-01-16T16:37:13.208000"
+        }
+      },
+      {
+        "id": "696a693d6177af49c46b7f49",
+        "sender_id": "696a67196177af49c46b7f34",
+        "sender_name": "test009@gmail.com",
+        "is_staff": false,
+        "content": "h",
+        "created_at": {
+          "$date": "2026-01-16T16:37:17.737000"
+        }
+      },
+      {
+        "id": "696a694a6177af49c46b7f4b",
+        "sender_id": "admin_super_001",
+        "sender_name": "Super Admin",
+        "is_staff": true,
+        "content": "hhh",
+        "created_at": {
+          "$date": "2026-01-16T16:37:30.374000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-16T16:37:13.208000"
+    },
+    "updated_at": {
+      "$date": "2026-01-16T16:37:30.374000"
+    },
+    "resolved_at": null
+  },
+  {
+    "_id": "696e4e2ff6501f7b7496e91b",
+    "user_id": "696e2c4eb7111bc49f800c16",
+    "subject": "hi",
+    "description": "hi",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "messages": [
+      {
+        "id": "696e4e2ff6501f7b7496e91c",
+        "sender_id": "696e2c4eb7111bc49f800c16",
+        "sender_name": "test012@gmail.com",
+        "is_staff": false,
+        "content": "hi",
+        "created_at": {
+          "$date": "2026-01-19T15:30:55.407000"
+        }
+      }
+    ],
+    "assigned_to": null,
+    "created_at": {
+      "$date": "2026-01-19T15:30:55.407000"
+    },
+    "updated_at": {
+      "$date": "2026-01-19T15:30:55.407000"
+    },
+    "resolved_at": null
+  }
+]

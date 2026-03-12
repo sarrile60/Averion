@@ -1,0 +1,262 @@
+[
+  {
+    "_id": "b258c1ab-31c4-49b2-87e4-29042e0cfc23",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-09T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-08T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-09T12:47:02.287000"
+    }
+  },
+  {
+    "_id": "069cebca-0b25-4409-945f-21e11ad643e6",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-09T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-08T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-09T12:50:52.610000"
+    }
+  },
+  {
+    "_id": "19144dc3-7a87-4ee2-bb34-013c4b715cdd",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-13T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-12T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-13T14:18:20.763000"
+    }
+  },
+  {
+    "_id": "4d324a9e-e8e6-405b-8a3d-da09fc257686",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-14T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-13T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:29:42.109000"
+    }
+  },
+  {
+    "_id": "6b9bb044-9c97-42e4-9f99-c53384bab350",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-14T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-13T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:44:50.636000"
+    }
+  },
+  {
+    "_id": "bfb08998-3c0d-41c6-ae22-b111c87f5e3d",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-14T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-13T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:48:30.554000"
+    }
+  },
+  {
+    "_id": "40f9b655-bcd4-45af-864d-467dbdaa3965",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-14T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-13T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:50:52.958000"
+    }
+  },
+  {
+    "_id": "d092e3e7-cfe5-43b4-9823-4c4482308b0f",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-14T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-13T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:52:02.698000"
+    }
+  },
+  {
+    "_id": "70b3d72e-c143-4391-bc18-11898cf7dad6",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-14T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-13T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:59:21.145000"
+    }
+  },
+  {
+    "_id": "0167c346-9e49-45bf-bd66-316fb0a37e59",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-14T00:00:00"
+    },
+    "end_date": null,
+    "active": false,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-13T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-14T14:00:04.857000"
+    }
+  },
+  {
+    "_id": "27a984b5-aa15-4987-bd76-c906ddf6747d",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-15T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-14T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-15T14:41:02.266000"
+    }
+  },
+  {
+    "_id": "9c889790-1ac9-46c0-852e-7946800b1068",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-15T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-14T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-15T15:14:50.910000"
+    }
+  },
+  {
+    "_id": "6f79fc24-3b5d-48b7-9a99-c0a253d74258",
+    "user_id": "customer_001",
+    "recipient_email": "admin@atlas.local",
+    "amount": 500,
+    "reason": "Monthly subscription",
+    "frequency": "MONTHLY",
+    "start_date": {
+      "$date": "2026-01-20T00:00:00"
+    },
+    "end_date": null,
+    "active": true,
+    "last_executed": null,
+    "next_execution": {
+      "$date": "2026-02-19T00:00:00"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.017000"
+    }
+  }
+]

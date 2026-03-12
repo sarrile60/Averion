@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "699dd342c4758b4028768fa2",
+    "section_key": "users",
+    "admin_id": "admin_super_001",
+    "created_at": "2026-02-24T16:35:14.103000",
+    "last_seen_at": "2026-02-24T14:38:26.669000",
+    "updated_at": "2026-02-24T16:36:00.378000"
+  },
+  {
+    "_id": "699dd342c4758b4028768fa4",
+    "section_key": "kyc",
+    "admin_id": "admin_super_001",
+    "created_at": "2026-02-24T16:35:14.103000",
+    "last_seen_at": "2026-02-24T14:38:26.669000",
+    "updated_at": "2026-02-24T16:36:00.378000"
+  },
+  {
+    "_id": "699dd342c4758b4028768fa6",
+    "section_key": "card_requests",
+    "admin_id": "admin_super_001",
+    "created_at": "2026-02-24T16:35:14.103000",
+    "last_seen_at": "2026-02-24T14:38:26.669000",
+    "updated_at": "2026-02-24T16:36:00.378000"
+  },
+  {
+    "_id": "699dd342c4758b4028768fa8",
+    "section_key": "transfers",
+    "admin_id": "admin_super_001",
+    "created_at": "2026-02-24T16:35:14.103000",
+    "last_seen_at": "2026-02-24T14:38:26.669000",
+    "updated_at": "2026-02-24T16:36:00.378000"
+  },
+  {
+    "_id": "699dd342c4758b4028768faa",
+    "section_key": "tickets",
+    "admin_id": "admin_super_001",
+    "created_at": "2026-02-24T16:35:14.103000",
+    "last_seen_at": "2026-02-24T14:38:26.669000",
+    "updated_at": "2026-02-24T16:36:00.378000"
+  }
+]

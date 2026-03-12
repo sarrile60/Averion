@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "test_badge_bbec639d",
+    "email": "testbadge_560b5b1d@test.com",
+    "first_name": "Badge",
+    "last_name": "Test",
+    "role": "CLIENT",
+    "status": "PENDING",
+    "created_at": {
+      "$date": "2026-02-24T16:35:14.103000"
+    },
+    "updated_at": {
+      "$date": "2026-02-24T16:35:14.103000"
+    }
+  }
+]

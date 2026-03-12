@@ -1,0 +1,1403 @@
+[
+  {
+    "_id": "6960be640b14a4d0ae5d82a4",
+    "id": "6960be640b14a4d0ae5d82a4",
+    "external_id": "admin_topup_916aa510-6745-457f-bc7f-f1363dced6ca",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T08:37:56.108000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T08:37:56.108000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "n/a",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960c6bb37ce1f94e3a9e236",
+    "id": "6960c6bb37ce1f94e3a9e236",
+    "external_id": "admin_topup_83337f9b-6aaa-44d1-b54e-4b3cdaf90902",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T09:13:31.999000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:13:31.999000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test top-up from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960c6bc37ce1f94e3a9e239",
+    "id": "6960c6bc37ce1f94e3a9e239",
+    "external_id": "admin_withdraw_08de8608-e93d-4ce6-9db2-31a520d42c26",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T09:13:32.117000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:13:32.117000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test withdrawal from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960c6bc37ce1f94e3a9e23c",
+    "id": "6960c6bc37ce1f94e3a9e23c",
+    "external_id": "admin_fee_8110d437-5a6c-44ac-8de3-291c2eef6f81",
+    "transaction_type": "FEE",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T09:13:32.153000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:13:32.153000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test fee charge from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960c95d80b5574f7c02bdde",
+    "id": "6960c95d80b5574f7c02bdde",
+    "external_id": "admin_withdraw_8142d444-605f-4f0c-8220-c54e7ecfae5d",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T09:24:45.680000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:24:45.680000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "test",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960cc5d9f182f11b1c85722",
+    "id": "6960cc5d9f182f11b1c85722",
+    "external_id": "admin_fee_d91ffdf2-9c1c-4796-9458-13ae53dc05fa",
+    "transaction_type": "FEE",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T09:37:33.538000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:37:33.538000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "fee",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960ccb99f182f11b1c85728",
+    "id": "6960ccb99f182f11b1c85728",
+    "external_id": "admin_topup_8a1f8b7a-f1b6-434d-9322-e7224c89731d",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T09:39:05.472000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:39:05.472000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test top-up from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960ccb99f182f11b1c8572b",
+    "id": "6960ccb99f182f11b1c8572b",
+    "external_id": "admin_withdraw_101508e6-7912-447a-949d-b1b2eca395e5",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T09:39:05.554000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:39:05.554000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test withdrawal from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960ccb99f182f11b1c8572e",
+    "id": "6960ccb99f182f11b1c8572e",
+    "external_id": "admin_fee_75c79a79-86cf-4974-b05e-80ee300a6f39",
+    "transaction_type": "FEE",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T09:39:05.592000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:39:05.592000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test fee charge from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960ccf29f182f11b1c85734",
+    "id": "6960ccf29f182f11b1c85734",
+    "external_id": "admin_topup_954f48ef-b058-4301-82ea-66acb0b3fce3",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T09:40:02.747000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:40:02.747000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test top-up from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960ccf29f182f11b1c85737",
+    "id": "6960ccf29f182f11b1c85737",
+    "external_id": "admin_withdraw_7b9efa73-cdf2-49e2-8961-4930089a7612",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T09:40:02.821000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:40:02.822000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test withdrawal from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960ccf29f182f11b1c8573a",
+    "id": "6960ccf29f182f11b1c8573a",
+    "external_id": "admin_fee_bd9568aa-c344-4769-b0a0-4db6bf9d84a9",
+    "transaction_type": "FEE",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T09:40:02.861000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T09:40:02.861000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test fee charge from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960dc06e2a99548fda31c51",
+    "id": "6960dc06e2a99548fda31c51",
+    "external_id": "admin_topup_b687e9b7-f756-45b3-91a6-f159c6c92e15",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T10:44:22.571000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T10:44:22.571000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test top-up from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960dc06e2a99548fda31c54",
+    "id": "6960dc06e2a99548fda31c54",
+    "external_id": "admin_withdraw_7095edbb-60ae-4b0f-b3c2-6567387aa906",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T10:44:22.647000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T10:44:22.647000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test withdrawal from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960dc06e2a99548fda31c57",
+    "id": "6960dc06e2a99548fda31c57",
+    "external_id": "admin_fee_72e3a3d7-b2aa-4824-827b-c79cf67bb4cd",
+    "transaction_type": "FEE",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T10:44:22.728000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T10:44:22.728000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test fee charge from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6960ec205c255468ed181393",
+    "id": "6960ec205c255468ed181393",
+    "external_id": "p2p_701f08af-2e40-4e7c-8d4a-861bec0f6d4b",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T11:53:04.967000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T11:53:04.967000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "test",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "6960d3d59d59173e05f82d20",
+      "to_email": "davi@gmail.com"
+    }
+  },
+  {
+    "_id": "6960edb85c255468ed18139d",
+    "id": "6960edb85c255468ed18139d",
+    "external_id": "p2p_375182f0-bbc9-4da3-bc67-d16683754035",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T11:59:52.122000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T11:59:52.122000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer from automation",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "6960d3d59d59173e05f82d20",
+      "to_email": "davi@gmail.com"
+    }
+  },
+  {
+    "_id": "6960f6ee1ceaaff5ee0bfbb9",
+    "id": "6960f6ee1ceaaff5ee0bfbb9",
+    "external_id": "p2p_72036e67-1bc0-4c93-926d-e79874b23b39",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T12:39:10.722000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T12:39:10.722000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "6960f8c619209ee147592825",
+    "id": "6960f8c619209ee147592825",
+    "external_id": "p2p_43c3215f-cba6-4c8e-bd43-723eda91f04d",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T12:47:02.180000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T12:47:02.180000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "6960f9ac4ba8137f45d1b587",
+    "id": "6960f9ac4ba8137f45d1b587",
+    "external_id": "p2p_879c9c1c-6054-46d0-a547-8906cdf1e127",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-09T12:50:52.491000"
+    },
+    "created_at": {
+      "$date": "2026-01-09T12:50:52.491000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "6966542c11c09d2071b61fbf",
+    "id": "6966542c11c09d2071b61fbf",
+    "external_id": "p2p_2df6a347-b77d-4a5f-ae59-17032ddcff19",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-13T14:18:20.651000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T14:18:20.651000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "696664ffd07465abe8932e1c",
+    "id": "696664ffd07465abe8932e1c",
+    "external_id": "admin_topup_618dd64d-b35a-4b64-b890-4486cdb79df8",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-13T15:30:07.186000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T15:30:07.186000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test top-up from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "696664ffd07465abe8932e1f",
+    "id": "696664ffd07465abe8932e1f",
+    "external_id": "admin_withdraw_df27be05-4cc7-4b35-b7cc-58b0816413f3",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-13T15:30:07.261000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T15:30:07.261000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test withdrawal from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "696664ffd07465abe8932e22",
+    "id": "696664ffd07465abe8932e22",
+    "external_id": "admin_fee_b26dfbda-614a-4d50-af8e-4e8a3f52081c",
+    "transaction_type": "FEE",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-13T15:30:07.298000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T15:30:07.298000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test fee charge from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "696669c647560b39a3e84de2",
+    "id": "696669c647560b39a3e84de2",
+    "external_id": "admin_topup_f2d8bb3a-405d-4434-ae3a-5d1f3d8bad20",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-13T15:50:30.085000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T15:50:30.085000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test top-up from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "696669c647560b39a3e84de5",
+    "id": "696669c647560b39a3e84de5",
+    "external_id": "admin_withdraw_e308f4c2-a3e4-4880-a87f-c37277e4a839",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-13T15:50:30.205000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T15:50:30.205000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test withdrawal from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "696669c647560b39a3e84de8",
+    "id": "696669c647560b39a3e84de8",
+    "external_id": "admin_fee_984bc375-cd3e-495f-9b90-2370f687161e",
+    "transaction_type": "FEE",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-13T15:50:30.240000"
+    },
+    "created_at": {
+      "$date": "2026-01-13T15:50:30.240000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test fee charge from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "69677dec20917423c80fb4fd",
+    "id": "69677dec20917423c80fb4fd",
+    "external_id": "admin_withdraw_4358dd8a-2472-4431-910a-0f6f17b6d932",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T11:28:44.931000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T11:28:44.931000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "hhh",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6967891b7124c6c86d721559",
+    "id": "6967891b7124c6c86d721559",
+    "external_id": "admin_topup_21bbb6c7-3d1c-4bee-a948-1e0d390c3329",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T12:16:27.274000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T12:16:27.274000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test topup",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6967892a7124c6c86d72155d",
+    "id": "6967892a7124c6c86d72155d",
+    "external_id": "admin_withdraw_ce450f62-4c9a-4eca-8d43-f3c141675995",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T12:16:42.086000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T12:16:42.086000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test withdrawal",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "69678aa47124c6c86d721568",
+    "id": "69678aa47124c6c86d721568",
+    "external_id": "admin_topup_31bc077e-9193-47ec-8f72-877e4148d44c",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T12:23:00.973000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T12:23:00.973000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test top-up from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "69678aa57124c6c86d72156b",
+    "id": "69678aa57124c6c86d72156b",
+    "external_id": "admin_withdraw_da64973e-3a22-4f4c-95e4-b70595c5f6d1",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T12:23:01.050000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T12:23:01.050000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test withdrawal from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "69678aa57124c6c86d72156e",
+    "id": "69678aa57124c6c86d72156e",
+    "external_id": "admin_fee_8ad80600-ae23-4fc7-8930-ebbe87e7d2d1",
+    "transaction_type": "FEE",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T12:23:01.087000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T12:23:01.087000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test fee charge from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "69678aac7124c6c86d721575",
+    "id": "69678aac7124c6c86d721575",
+    "external_id": "admin_topup_1abdf3a9-26e8-4448-bc89-5117261b40f9",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T12:23:08.588000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T12:23:08.588000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test top-up from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "69678aac7124c6c86d721578",
+    "id": "69678aac7124c6c86d721578",
+    "external_id": "admin_withdraw_1cb852c5-0db7-4ec5-a8ae-1fcb48e3c37d",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T12:23:08.664000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T12:23:08.664000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test withdrawal from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "69678aac7124c6c86d72157b",
+    "id": "69678aac7124c6c86d72157b",
+    "external_id": "admin_fee_2ba03b55-55c7-426c-99ee-f3686d1b0fe9",
+    "transaction_type": "FEE",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T12:23:08.704000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T12:23:08.704000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test fee charge from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "69678b377124c6c86d721582",
+    "id": "69678b377124c6c86d721582",
+    "external_id": "admin_topup_8112d7aa-d9a7-4563-89e8-2aa86536e949",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T12:25:27.034000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T12:25:27.034000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test top-up from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "69678b3b7124c6c86d721585",
+    "id": "69678b3b7124c6c86d721585",
+    "external_id": "admin_withdraw_b2dacf3c-e7a8-4c6b-849c-f1a01fdfd3ec",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T12:25:31.702000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T12:25:31.702000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test withdrawal from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "69679a452ea43f29f9db1b40",
+    "id": "69679a452ea43f29f9db1b40",
+    "external_id": "p2p_c526c007-c0a3-4d67-a34a-535734bb17a1",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T13:29:41.992000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:29:41.992000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "69679dd2ec8acf5d3fd978c8",
+    "id": "69679dd2ec8acf5d3fd978c8",
+    "external_id": "p2p_5b14aa9d-9b2f-41ff-ba76-b65e7cab24cf",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T13:44:50.522000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:44:50.522000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "69679eaeec8acf5d3fd978d1",
+    "id": "69679eaeec8acf5d3fd978d1",
+    "external_id": "p2p_c8bd8ecb-2d51-45af-bc6b-03835271f260",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T13:48:30.440000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:48:30.440000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "69679f3c919302346d254110",
+    "id": "69679f3c919302346d254110",
+    "external_id": "p2p_ba8bebe6-7ca2-4d35-b196-66536a20ec6e",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T13:50:52.838000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:50:52.838000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "69679f82919302346d254118",
+    "id": "69679f82919302346d254118",
+    "external_id": "p2p_00372741-c8e6-4690-9e9a-01bd5e20f577",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T13:52:02.587000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:52:02.587000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "6967a12a919302346d254120",
+    "id": "6967a12a919302346d254120",
+    "external_id": "p2p_9f2c4dc4-6113-4e37-bf85-2a44f2fef2e2",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T13:59:06.137000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:59:06.137000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "6967a139919302346d254128",
+    "id": "6967a139919302346d254128",
+    "external_id": "p2p_310917b2-0ac3-46c0-9c7f-6fc3ee03b2b0",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T13:59:21.045000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T13:59:21.045000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "6967a164919302346d254130",
+    "id": "6967a164919302346d254130",
+    "external_id": "p2p_255199cb-415e-4e5c-84d9-92122f1494bb",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T14:00:04.704000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T14:00:04.704000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "6967a199919302346d254134",
+    "id": "6967a199919302346d254134",
+    "external_id": "p2p_f076dc11-0106-48c3-b905-9464ace22767",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-14T14:00:57.585000"
+    },
+    "created_at": {
+      "$date": "2026-01-14T14:00:57.585000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer from UI",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "admin_super_001",
+      "to_email": "admin@atlas.local"
+    }
+  },
+  {
+    "_id": "6968d5acc3d9ff7819aebf40",
+    "id": "6968d5acc3d9ff7819aebf40",
+    "external_id": "admin_topup_6dfd06e8-1e55-4042-b120-3f1b07e05b07",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T11:55:24.963000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T11:55:24.963000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Hhhh",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6968d91b6497729dffb2e3be",
+    "id": "6968d91b6497729dffb2e3be",
+    "external_id": "admin_topup_d15902b1-04ba-4710-aeba-f0ee2bda3944",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T12:10:03.781000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T12:10:03.781000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Salary Payment January 2024",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "SEPA Transfer",
+      "sender_name": "Deutsche Bank AG",
+      "sender_iban": "DE89370400440532013000",
+      "sender_bic": "DEUTDEDB",
+      "reference": "TRF2024011500123",
+      "description": "Salary Payment January 2024",
+      "admin_note": "Test professional transfer",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8f1",
+    "id": "6968da4f189ef0e4cceaf8f1",
+    "external_id": "admin_topup_0efa95d6-685f-44be-b4ee-88ad8e8a4a71",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T12:15:11.456000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.456000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test top-up from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8f4",
+    "id": "6968da4f189ef0e4cceaf8f4",
+    "external_id": "admin_withdraw_89e72e27-4789-4af7-9367-828f35eda180",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T12:15:11.528000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.528000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test withdrawal from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8f7",
+    "id": "6968da4f189ef0e4cceaf8f7",
+    "external_id": "admin_fee_02c3556c-6344-4337-959f-3e56e5b5b348",
+    "transaction_type": "FEE",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T12:15:11.574000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.574000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test fee charge from automated testing",
+    "performed_by": "admin_super_001",
+    "metadata": {}
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8fa",
+    "id": "6968da4f189ef0e4cceaf8fa",
+    "external_id": "admin_topup_0e376c2a-a222-4bb3-b604-b45e1c4c50fa",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T12:15:11.617000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.617000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Salary Payment January 2024",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "SEPA Transfer",
+      "sender_name": "Deutsche Bank AG",
+      "sender_iban": "DE89370400440532013000",
+      "sender_bic": "DEUTDEDB",
+      "reference": "TRF2024011500123",
+      "description": "Salary Payment January 2024",
+      "admin_note": "Test professional credit from automated testing",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "6968da4f189ef0e4cceaf8fd",
+    "id": "6968da4f189ef0e4cceaf8fd",
+    "external_id": "admin_withdraw_96decef6-9f73-4217-b553-8729f776ee82",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T12:15:11.691000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T12:15:11.691000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Monthly subscription payment",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "Withdrawal",
+      "recipient_name": "Amazon EU",
+      "recipient_iban": "LU280019400644750000",
+      "reference": "INV-2024-001",
+      "description": "Monthly subscription payment",
+      "admin_note": "Test professional debit from automated testing",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "6968dad4189ef0e4cceaf904",
+    "id": "6968dad4189ef0e4cceaf904",
+    "external_id": "admin_topup_01ad3964-de3d-429f-a92d-cbbdd8cd69f5",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T12:17:24.488000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T12:17:24.488000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test professional credit",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "SEPA Transfer",
+      "sender_name": "Test Bank AG",
+      "sender_iban": "DE89370400440532013000",
+      "reference": "TEST-REF-001",
+      "description": "Test professional credit",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "6968dad8189ef0e4cceaf907",
+    "id": "6968dad8189ef0e4cceaf907",
+    "external_id": "admin_withdraw_7fa93d25-8a4f-44cf-8bbf-0e92cf8a66d3",
+    "transaction_type": "WITHDRAW",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T12:17:28.629000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T12:17:28.629000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Withdrawal",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "Withdrawal",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "6968de27189ef0e4cceaf90f",
+    "id": "6968de27189ef0e4cceaf90f",
+    "external_id": "admin_topup_3927e25d-33aa-4a4a-aac5-a5302f904cfe",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T12:31:35.951000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T12:31:35.951000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Testing euro input",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "SEPA Transfer",
+      "sender_name": "Euro Test Bank",
+      "description": "Testing euro input",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "6968de3f189ef0e4cceaf913",
+    "id": "6968de3f189ef0e4cceaf913",
+    "external_id": "admin_topup_339059df-e5d2-4f34-b7a9-8ba6c2f95cac",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T12:31:59.328000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T12:31:59.328000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "International wire transfer",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "Wire Transfer",
+      "sender_name": "HSBC Bank UK",
+      "reference": "WIRE-2024-TEST",
+      "description": "International wire transfer",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "6968e059189ef0e4cceaf917",
+    "id": "6968e059189ef0e4cceaf917",
+    "external_id": "admin_topup_8070fd13-8c8b-4670-be6c-c023b20cb8d9",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T12:40:57.132000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T12:40:57.132000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "MONEY",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "SEPA Transfer",
+      "sender_name": "Cripto.com",
+      "sender_iban": "WE54455115545",
+      "sender_bic": "DEUT852",
+      "reference": "TR01",
+      "description": "MONEY",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "6968ec72b300d43c5cf76fe7",
+    "id": "6968ec72b300d43c5cf76fe7",
+    "external_id": "admin_topup_6f7e454e-9eb2-4af3-baac-a5017160f7e7",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T13:32:34.399000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T13:32:34.399000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Bank Transfer",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "Bank Transfer",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "6968ecb9b300d43c5cf76fef",
+    "id": "6968ecb9b300d43c5cf76fef",
+    "external_id": "p2p_bbafad52-d39e-49b9-b7ab-4d2bed528d03",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-15T13:33:45.170000"
+    },
+    "created_at": {
+      "$date": "2026-01-15T13:33:45.170000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Fun",
+    "performed_by": "6967754aee56629feac444aa",
+    "metadata": {
+      "from_user": "6967754aee56629feac444aa",
+      "to_user": "696686ed12dec8bf6a714e7e",
+      "to_iban": "LT454454545454545"
+    }
+  },
+  {
+    "_id": "696a65ce6177af49c46b7f24",
+    "id": "696a65ce6177af49c46b7f24",
+    "external_id": "admin_topup_88c10201-fc98-44b5-8627-11025a404c89",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-16T16:22:38.664000"
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:22:38.664000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Withdrawal",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "SEPA Transfer",
+      "sender_name": "Crypto.com",
+      "sender_iban": "CR457787814545",
+      "sender_bic": "CRYT874545",
+      "reference": "TR5478784887",
+      "description": "Withdrawal",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "696a68b86177af49c46b7f40",
+    "id": "696a68b86177af49c46b7f40",
+    "external_id": "admin_topup_b401a428-6f90-4a7c-87dd-e9fa8f80b09c",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-16T16:35:04.964000"
+    },
+    "created_at": {
+      "$date": "2026-01-16T16:35:04.964000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Recovery",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "SEPA Transfer",
+      "sender_name": "Coinbase Limited",
+      "sender_iban": "DE35465787",
+      "sender_bic": "DASRAW3",
+      "reference": "Crypto Recovery",
+      "description": "Recovery",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "696e43f9f6501f7b7496e8fc",
+    "id": "696e43f9f6501f7b7496e8fc",
+    "external_id": "admin_topup_978bed8d-0ec8-4613-8ad6-839497f4f528",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-19T14:47:21.950000"
+    },
+    "created_at": {
+      "$date": "2026-01-19T14:47:21.950000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Ricevuta ",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "SEPA Transfer",
+      "sender_name": "Crypto.com",
+      "sender_iban": "CR84214545454545",
+      "sender_bic": "CRYPTOAA88",
+      "reference": "TR5454545",
+      "description": "Ricevuta ",
+      "admin_note": "hh",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "696e4802f6501f7b7496e906",
+    "id": "696e4802f6501f7b7496e906",
+    "external_id": "admin_topup_5833ae8f-43cb-437b-a7d2-33b88b27c7f0",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-19T15:04:34.156000"
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:04:34.156000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "transferimento paga",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "Wire Transfer",
+      "sender_name": "gg",
+      "sender_iban": "gd5445454545454545",
+      "sender_bic": "wqewqe",
+      "reference": "qweqweqew",
+      "description": "transferimento paga",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "696e4948f6501f7b7496e90d",
+    "id": "696e4948f6501f7b7496e90d",
+    "external_id": "admin_topup_93c1ae0f-63d3-44cc-a033-01d90783aca8",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-19T15:10:00.390000"
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:10:00.390000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "gg",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "Cash Deposit",
+      "sender_name": "gg",
+      "sender_iban": "gg",
+      "sender_bic": "gg",
+      "reference": "gg",
+      "description": "gg",
+      "admin_note": "gg",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "696e4980f6501f7b7496e912",
+    "id": "696e4980f6501f7b7496e912",
+    "external_id": "admin_topup_a0646b17-56f8-4d87-b6aa-cd8e7a0f84ce",
+    "transaction_type": "TOP_UP",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-19T15:10:56.876000"
+    },
+    "created_at": {
+      "$date": "2026-01-19T15:10:56.876000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "gg",
+    "performed_by": "admin_super_001",
+    "metadata": {
+      "display_type": "Account Correction",
+      "sender_name": "gg",
+      "sender_iban": "gg",
+      "sender_bic": "gg",
+      "reference": "gg",
+      "description": "gg",
+      "admin_note": "gg",
+      "admin_id": "admin_super_001"
+    }
+  },
+  {
+    "_id": "696f7b16a0a55585712a774d",
+    "id": "696f7b16a0a55585712a774d",
+    "external_id": "p2p_edb342dc-ca52-45e5-bbef-137bc83a9e4c",
+    "transaction_type": "P2P_TRANSFER",
+    "status": "POSTED",
+    "value_date": {
+      "$date": "2026-01-20T12:54:46.541000"
+    },
+    "created_at": {
+      "$date": "2026-01-20T12:54:46.541000"
+    },
+    "reverses_txn_id": null,
+    "reversed_by_txn_id": null,
+    "reason": "Test transfer after hold removed",
+    "performed_by": "customer_001",
+    "metadata": {
+      "from_user": "customer_001",
+      "to_user": "696a19e8a743135fb6611ccd",
+      "to_iban": "DE89370400440532013000"
+    }
+  }
+]
