@@ -35,11 +35,10 @@ import BalanceToggle from './components/BalanceToggle';
 import { Sun, Moon, Mail, CheckCircle, XCircle, Loader2, Eye, EyeOff } from 'lucide-react';
 import { formatCurrency, formatCentsToNumber, formatEuroAmount } from './utils/currency';
 
-// Styled Logo Component - displays "ecomm" with "bx" in red
+// Styled Logo Component - displays "Averion" brand
 const StyledLogo = ({ className = '', isDark = false }) => (
   <span className={className}>
-    <span className={isDark ? 'text-white' : ''}>ecomm</span>
-    <span className="text-red-500">bx</span>
+    <span className={isDark ? 'text-white' : ''}>Averion</span>
   </span>
 );
 
@@ -1759,10 +1758,10 @@ function AdminDashboard() {
       <div className="admin-content">
         <div className="border-b border-gray-200 bg-white">
           <div className="px-8 py-4 flex justify-between items-center w-full">
-            {/* Left side - Section Title and ECOMMBX badge with space */}
+            {/* Left side - Section Title and AVERION badge with space */}
             <div className="flex items-center">
               <h2 className="text-lg font-semibold">{getSectionLabel(activeSection)}</h2>
-              <span className="badge badge-info ml-4">ECOMMBX</span>
+              <span className="badge badge-info ml-4">AVERION</span>
             </div>
             {/* Far right - Notification Bell */}
             <div className="flex items-center">

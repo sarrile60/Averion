@@ -1,4 +1,4 @@
-# ecommbx Banking Platform - Product Requirements Document
+# Averion Banking Platform - Product Requirements Document
 
 ## Original Problem Statement
 A full-stack banking application (React frontend + FastAPI backend + MongoDB) that has been migrated from the Emergent platform to Vercel (frontend) + Railway (backend). The app serves real banking clients and requires extreme care with all changes.
@@ -6,7 +6,7 @@ A full-stack banking application (React frontend + FastAPI backend + MongoDB) th
 ## Tech Stack
 - **Frontend:** React, TailwindCSS, Shadcn/UI components, hosted on Vercel
 - **Backend:** FastAPI (Python), hosted on Railway
-- **Database:** MongoDB Atlas (ecommbx-prod)
+- **Database:** MongoDB Atlas (averion-prod)
 - **Email:** Resend (transactional emails)
 - **File Storage:** Cloudinary
 
@@ -58,7 +58,7 @@ A full-stack banking application (React frontend + FastAPI backend + MongoDB) th
 - **P2: _id Format Migration** — Standardize all user _ids to ObjectId format
 
 ## Test Credentials
-- **Admin:** admin@ecommbx.io / Admin@123456
+- **Admin:** admin@averion.com / Admin@123456
 - **Test User:** ashleyalt004@gmail.com / 12345678
 
 ## Key Architecture Notes

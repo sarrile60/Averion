@@ -1,4 +1,4 @@
-"""Seed script for Project Atlas - Create initial data."""
+"""Seed script for Averion - Create initial data."""
 
 import asyncio
 import sys
@@ -105,7 +105,7 @@ async def seed_database():
             "user_id": "customer_001",
             "account_number": "ACC000000001",
             "iban": "DE99123456789012345678",
-            "bic": "ATLASDE99XXX",
+            "bic": "AVERIONDE99",
             "currency": "EUR",
             "status": "ACTIVE",
             "ledger_account_id": "ledger_acc_customer_001",

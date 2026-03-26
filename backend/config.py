@@ -1,4 +1,4 @@
-"""Configuration management for ecommbx Banking Platform."""
+"""Configuration management for Averion Banking Platform."""
 
 import os
 from functools import lru_cache
@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
     
     # App
-    APP_NAME: str = Field(default="ecommbx")
+    APP_NAME: str = Field(default="Averion")
     APP_ENV: str = Field(default="production")
     DEBUG: bool = Field(default=False)
     
@@ -36,7 +36,7 @@ class Settings(BaseSettings):
     S3_ACCESS_KEY: str | None = None
     S3_SECRET_KEY: str | None = None
     S3_REGION: str = "us-east-1"
-    S3_BUCKET: str = "ecommbx-storage"
+    S3_BUCKET: str = "averion-storage"
     S3_USE_SSL: bool = False
     STORAGE_BASE_PATH: str = "/app/storage"
     

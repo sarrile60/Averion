@@ -1,1 +1,1 @@
-"""Core domain logic for Project Atlas banking platform."""
+"""Core domain logic for Averion banking platform."""

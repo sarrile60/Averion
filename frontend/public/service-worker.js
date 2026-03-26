@@ -1,6 +1,6 @@
-/* Service Worker for Project Atlas PWA */
+/* Service Worker for Averion PWA */
 
-const CACHE_NAME = 'atlas-banking-v1';
+const CACHE_NAME = 'averion-banking-v1';
 const urlsToCache = [
   '/',
   '/static/css/main.css',
@@ -68,7 +68,7 @@ self.addEventListener('activate', (event) => {
 // Push notification event (placeholder for future)
 self.addEventListener('push', (event) => {
   const data = event.data ? event.data.json() : {};
-  const title = data.title || 'Project Atlas';
+  const title = data.title || 'Averion';
   const options = {
     body: data.body || 'You have a new notification',
     icon: '/logo192.png',

@@ -249,7 +249,7 @@ export function AdminSidebar({ activeSection, onSectionChange, user, logout }) {
       {/* Sidebar Header */}
       <div className="p-6 border-b border-gray-200 dark:border-gray-700">
         <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
-          <span>ecomm</span><span className="text-red-500">bx</span>
+          <span>Averion</span>
         </h1>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Admin Portal</p>
       </div>
@@ -280,7 +280,7 @@ export function AdminSidebar({ activeSection, onSectionChange, user, logout }) {
       <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
         <div className="text-xs text-gray-600 dark:text-gray-300 mb-2">
           <p className="font-medium text-gray-900 dark:text-white">{user?.email}</p>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">ECOMMBX</p>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">AVERION</p>
         </div>
         <button
           onClick={logout}
@@ -304,7 +304,7 @@ export function AdminLayout({ user, logout, children }) {
             <h2 className="text-lg font-semibold text-gray-900">Admin Dashboard</h2>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">{user?.first_name} {user?.last_name}</span>
-              <span className="badge badge-info ml-2">ECOMMBX</span>
+              <span className="badge badge-info ml-2">AVERION</span>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-"""Main FastAPI application for Project Atlas banking platform."""
+"""Main FastAPI application for Averion banking platform."""
 
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Request, Response, Form
 from fastapi.middleware.cors import CORSMiddleware
@@ -153,7 +153,7 @@ async def lifespan(app: FastAPI):
     """Startup and shutdown events with error handling for production resilience."""
     try:
         logger.info("=" * 60)
-        logger.info("APPLICATION STARTUP - ecommbx Banking Platform")
+        logger.info("APPLICATION STARTUP - Averion Banking Platform")
         logger.info("=" * 60)
         logger.info(f"MONGO_URL: {settings.MONGO_URL[:50]}...")
         logger.info(f"DATABASE_NAME: {settings.DATABASE_NAME}")
@@ -183,7 +183,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="ecommbx API",
+    title="Averion API",
     version="1.0.0",
     lifespan=lifespan
 )

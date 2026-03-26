@@ -161,7 +161,7 @@ class KYCService:
             # Basic BIC format validation (8 or 11 characters)
             bic_clean = review.assigned_bic.replace(" ", "").upper()
             if not re.match(r'^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$', bic_clean):
-                raise HTTPException(status_code=400, detail="Invalid BIC/SWIFT format. Must be 8 or 11 characters (e.g., ATLASLT21 or ATLASLT21XXX)")
+                raise HTTPException(status_code=400, detail="Invalid BIC/SWIFT format. Must be 8 or 11 characters (e.g., AVERIONDE21 or AVERIONDE2XXX)")
         
         # For APPROVED status, create/update account FIRST before updating KYC status
         if review.status == KYCStatus.APPROVED:

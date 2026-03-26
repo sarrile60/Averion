@@ -8,14 +8,14 @@ const LanguageContext = createContext(null);
 export function LanguageProvider({ children }) {
   const [language, setLanguage] = useState(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('atlas_language');
+      const saved = localStorage.getItem('averion_language');
       return saved || 'en';
     }
     return 'en';
   });
 
   useEffect(() => {
-    localStorage.setItem('atlas_language', language);
+    localStorage.setItem('averion_language', language);
     document.documentElement.lang = language;
   }, [language]);
 
@@ -57,7 +57,7 @@ const ThemeContext = createContext(null);
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('atlas_theme');
+      const saved = localStorage.getItem('averion_theme');
       if (saved) return saved;
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         return 'dark';
@@ -67,7 +67,7 @@ export function ThemeProvider({ children }) {
   });
 
   useEffect(() => {
-    localStorage.setItem('atlas_theme', theme);
+    localStorage.setItem('averion_theme', theme);
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {

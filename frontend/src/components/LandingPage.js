@@ -1,4 +1,4 @@
-// ecommbx - Professional Landing Page (Inspired by ECOMMBANX)
+// Averion - Professional Landing Page
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage, useTheme } from '../contexts/AppContext';
@@ -88,9 +88,9 @@ export function LandingPage() {
             {/* Logo */}
             <div className="flex items-center space-x-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
               <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+                <span className="text-white font-bold text-lg">A</span>
               </div>
-              <span className={`text-xl sm:text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>ecomm<span className="text-red-500">bx</span></span>
+              <span className={`text-xl sm:text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Averion</span>
             </div>
 
             {/* Desktop Menu */}
@@ -617,7 +617,7 @@ export function LandingPage() {
             <div>
               <div className="flex items-center space-x-2 mb-6">
                 <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">E</span>
+                  <span className="text-white font-bold text-lg">A</span>
                 </div>
                 <span className="text-xl font-bold text-white">ecomm<span className="text-red-500">bx</span></span>
               </div>
@@ -654,7 +654,7 @@ export function LandingPage() {
             </div>
           </div>
           <div className={`border-t mt-12 pt-8 text-sm text-center ${isDark ? 'border-gray-800' : 'border-gray-800'}`}>
-            <p>© 2026 ecommbx. {t('allRightsReserved')} {t('licensedBy')}</p>
+            <p>© 2026 Averion. {t('allRightsReserved')} {t('licensedBy')}</p>
           </div>
         </div>
       </footer>

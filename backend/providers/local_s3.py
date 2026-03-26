@@ -20,7 +20,7 @@ class LocalS3Storage(StorageProvider):
     Suitable for development/POC. In production, use real S3 or MinIO.
     """
     
-    def __init__(self, base_path: str = "/tmp/project_atlas_storage"):
+    def __init__(self, base_path: str = "/tmp/averion_storage"):
         """Initialize local storage.
         
         Args:

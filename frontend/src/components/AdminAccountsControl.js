@@ -409,7 +409,7 @@ export function AdminAccountsControl() {
                   value={ibanFormData.bic} 
                   onChange={(e) => setIbanFormData({...ibanFormData, bic: e.target.value.toUpperCase()})} 
                   className="input-field font-mono" 
-                  placeholder="ATLASLT21" 
+                  placeholder="AVERIONDE21" 
                 />
               </div>
               <div className="flex space-x-3">

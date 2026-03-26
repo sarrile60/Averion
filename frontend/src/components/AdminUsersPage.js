@@ -972,7 +972,7 @@ function AdminUsersPage({ user }) {
                   onChange={(e) => setEditBicValue(e.target.value.toUpperCase())}
                   onFocus={(e) => e.stopPropagation()}
                   onClick={(e) => e.stopPropagation()}
-                  placeholder="ATLASLT21"
+                  placeholder="AVERIONDE21"
                   className="input-field font-mono w-full"
                   data-testid="edit-bic-input"
                   autoComplete="off"
@@ -1407,13 +1407,13 @@ function AdminUsersPage({ user }) {
                   type="text"
                   value={domainChangeNewDomain}
                   onChange={(e) => setDomainChangeNewDomain(e.target.value)}
-                  placeholder="e.g., online-ecommbx.com"
+                  placeholder="e.g., averion.im"
                   className="input-field w-full"
                   data-testid="domain-change-new-domain-input"
                   autoComplete="off"
                   autoFocus
                 />
-                <p className="text-xs text-gray-500 mt-1">Enter the domain without https:// (e.g., online-ecommbx.com)</p>
+                <p className="text-xs text-gray-500 mt-1">Enter the domain without https:// (e.g., averion.im)</p>
               </div>
             </div>
 

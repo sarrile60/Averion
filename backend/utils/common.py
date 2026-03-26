@@ -59,4 +59,4 @@ def generate_sandbox_iban(country: str = "DE") -> str:
 
 def generate_bic() -> str:
     """Generate a sandbox BIC (not real)."""
-    return "ATLASDE99XXX"
+    return "AVERIONDE99"
