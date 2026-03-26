@@ -15,7 +15,7 @@ from datetime import datetime
 from typing import Optional, Dict, Any, List
 
 class ComprehensiveAPITester:
-    def __init__(self, base_url="https://user-alert-system-2.preview.emergentagent.com"):
+    def __init__(self, base_url="https://slug3-7.preview.emergentagent.com"):
         self.base_url = base_url
         self.admin_token = None
         self.admin_user = None
