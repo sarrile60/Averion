@@ -1,8 +1,8 @@
-# Project Atlas – EU Digital Banking Platform Design System
+# Averion – EU Digital Banking Platform Design System
 
 ## Executive Summary
 
-This design system defines the visual language, component patterns, and interaction principles for **Project Atlas**, a production-grade EU digital banking platform. The system is designed to convey **trust, professionalism, security, and modern European fintech excellence** while remaining distinct from existing competitors like Revolut, N26, and Monzo.
+This design system defines the visual language, component patterns, and interaction principles for **Averion**, a production-grade EU digital banking platform. The system is designed to convey **trust, professionalism, security, and modern European fintech excellence** while remaining distinct from existing competitors like Revolut, N26, and Monzo.
 
 **Design Philosophy:** Clean, minimal, bank-like aesthetic with high trust signals, excellent readability for financial data, and subtle professional animations. Light theme default with full dark mode support.
 

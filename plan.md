@@ -1,4 +1,4 @@
-# Project Atlas — Verify & Stabilize Plan (Option 1)
+# Averion — Verify & Stabilize Plan (Option 1)
 
 ## 1) Objectives
 - **Prove and continuously verify** that **ledger-derived balance** is the single source of truth (no persisted `bank_accounts.balance`) with repeatable integrity checks.

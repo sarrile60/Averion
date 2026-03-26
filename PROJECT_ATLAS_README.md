@@ -1,4 +1,4 @@
-# Project Atlas - EU Digital Banking Platform
+# Averion - EU Digital Banking Platform
 
 A production-grade banking platform with double-entry ledger, KYC workflows, and comprehensive admin tools.
 
@@ -158,4 +158,4 @@ Built a working banking platform with proven double-entry ledger, authentication
 
 ---
 
-**Project Atlas** - A production-grade banking platform demonstrating core-first development principles. ✅
+**Averion** - A production-grade banking platform demonstrating core-first development principles. ✅
