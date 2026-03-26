@@ -1,6 +1,6 @@
 {
-  "name": "ecommbx - Digital Banking",
-  "short_name": "ecommbx",
+  "name": "Averion - Digital Banking",
+  "short_name": "Averion",
   "id": "/",
   "start_url": "/",
   "scope": "/",
@@ -43,7 +43,7 @@
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "ecommbx Mobile Banking"
+      "label": "Averion Mobile Banking"
     }
   ],
   "shortcuts": [
