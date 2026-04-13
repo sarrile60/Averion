@@ -7,7 +7,7 @@ import requests
 import sys
 
 # Backend URL
-BASE_URL = "https://slug3-7.preview.emergentagent.com/api/v1"
+BASE_URL = "https://recursing-chatterjee-8.preview.emergentagent.com/api/v1"
 
 # Admin credentials
 ADMIN_EMAIL = "admin@ecommbx.io"

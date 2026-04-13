@@ -3,7 +3,7 @@
 
 **Report Date:** February 24, 2026  
 **Validation Type:** Full Platform Redeploy Readiness  
-**Environment:** Preview (https://slug3-7.preview.emergentagent.com)  
+**Environment:** Preview (https://recursing-chatterjee-8.preview.emergentagent.com)  
 **Production Target:** https://averion.im
 
 ---

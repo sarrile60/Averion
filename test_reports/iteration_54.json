@@ -125,7 +125,7 @@
   },
   
   "test_environment": {
-    "backend_url": "https://slug3-7.preview.emergentagent.com",
+    "backend_url": "https://recursing-chatterjee-8.preview.emergentagent.com",
     "test_date": "2026-02-03",
     "admin_credentials": "admin@ecommbx.io",
     "test_user": "ashleyalt003@gmail.com",

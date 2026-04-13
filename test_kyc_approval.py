@@ -9,7 +9,7 @@ from datetime import datetime
 import time
 
 # Backend URL
-BASE_URL = "https://slug3-7.preview.emergentagent.com/api/v1"
+BASE_URL = "https://recursing-chatterjee-8.preview.emergentagent.com/api/v1"
 
 # Test credentials
 TEST_USER_EMAIL = f"kyctest_{int(time.time())}@test.com"
