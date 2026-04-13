@@ -66,3 +66,4 @@ A full-stack banking application (React frontend + FastAPI backend + MongoDB) th
 - Frontend API client at `src/api.js` uses baseURL `${BACKEND_URL}/api/v1`
 - Router prefix for admin users: `/api/v1/admin/users`
 - Email sending requires verified domain on Resend
+- Domain migrated from averion.im to averion-eu.com (July 2025)
