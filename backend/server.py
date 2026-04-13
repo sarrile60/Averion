@@ -200,6 +200,13 @@ app.add_middleware(
     expose_headers=["*"]
 )
 
+# Anti-crawler middleware - adds X-Robots-Tag to all responses
+@app.middleware("http")
+async def add_noindex_header(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Robots-Tag"] = "noindex, nofollow, noarchive, nosnippet"
+    return response
+
 # Include extracted routers
 from routers import health as health_router
 from routers import audit as audit_router

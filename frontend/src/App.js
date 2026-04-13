@@ -34,6 +34,7 @@ import { useBalanceVisibility, formatBalance } from './hooks/useBalanceVisibilit
 import BalanceToggle from './components/BalanceToggle';
 import { Sun, Moon, Mail, CheckCircle, XCircle, Loader2, Eye, EyeOff } from 'lucide-react';
 import { formatCurrency, formatCentsToNumber, formatEuroAmount } from './utils/currency';
+import { AccessGate } from './components/AccessGate';
 
 // Styled Logo Component - displays "Averion" brand
 const StyledLogo = ({ className = '', isDark = false }) => (
@@ -2082,6 +2083,7 @@ function TaxHoldRestrictedRoute({ children }) {
 // Main App
 function App() {
   return (
+    <AccessGate>
     <Router>
       <ToastProvider>
         <AuthProvider>
@@ -2216,6 +2218,7 @@ function App() {
       </AuthProvider>
       </ToastProvider>
     </Router>
+    </AccessGate>
   );
 }
 
