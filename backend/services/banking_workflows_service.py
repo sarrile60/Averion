@@ -516,11 +516,13 @@ class BankingWorkflowsService:
         
         # Collect all unique user_ids and account_ids for bulk lookup
         user_ids = set()
+        user_ids_str = set()
         account_ids = set()
         
         for doc in transfer_docs:
             user_id = doc.get("user_id")
             if user_id:
+                user_ids_str.add(str(user_id))
                 try:
                     user_ids.add(ObjectId(user_id))
                 except:
@@ -530,10 +532,11 @@ class BankingWorkflowsService:
             if from_account_id:
                 account_ids.add(from_account_id)
         
-        # BULK LOOKUP: Fetch all users in ONE query
+        # BULK LOOKUP: Fetch all users in ONE query (try both ObjectId and string formats)
         users_map = {}
-        if user_ids:
-            users_cursor = self.db.users.find({"_id": {"$in": list(user_ids)}})
+        if user_ids or user_ids_str:
+            all_id_variants = list(user_ids) + list(user_ids_str)
+            users_cursor = self.db.users.find({"_id": {"$in": all_id_variants}})
             async for user in users_cursor:
                 users_map[str(user["_id"])] = user
         
@@ -558,8 +561,8 @@ class BankingWorkflowsService:
                 transfer_dict["sender_name"] = f"{user.get('first_name', '')} {user.get('last_name', '')}".strip()
                 transfer_dict["sender_email"] = user.get("email", "")
             else:
-                transfer_dict["sender_name"] = "Unknown User" if user_id else "Unknown"
-                transfer_dict["sender_email"] = ""
+                transfer_dict["sender_name"] = doc.get("sender_name") or ("Unknown User" if user_id else "Unknown")
+                transfer_dict["sender_email"] = doc.get("sender_email", "")
             
             # Get sender IBAN from pre-fetched map (O(1) lookup)
             from_account_id = doc.get("from_account_id")
@@ -685,7 +688,7 @@ class BankingWorkflowsService:
                 "status": doc.get("previous_status", doc.get("status", "UNKNOWN")),  # Show previous status
                 "created_at": doc.get("created_at").isoformat() if doc.get("created_at") else None,
                 "reference_number": doc.get("reference_number"),
-                "sender_name": f"{user.get('first_name', '')} {user.get('last_name', '')}".strip() if user else "Unknown",
+                "sender_name": f"{user.get('first_name', '')} {user.get('last_name', '')}".strip() if user else (doc.get("sender_name") or "Unknown"),
                 "sender_email": user.get("email") if user else None,
                 "sender_iban": account.get("iban") if account else doc.get("sender_iban"),
                 "reject_reason": doc.get("reject_reason"),
@@ -796,11 +799,13 @@ class BankingWorkflowsService:
         
         # Collect all unique user_ids and account_ids for bulk lookup
         user_ids = set()
+        user_ids_str = set()
         account_ids = set()
         
         for doc in all_transfer_docs:
             user_id = doc.get("user_id")
             if user_id:
+                user_ids_str.add(str(user_id))
                 try:
                     user_ids.add(ObjectId(user_id))
                 except:
@@ -810,10 +815,11 @@ class BankingWorkflowsService:
             if from_account_id:
                 account_ids.add(from_account_id)
         
-        # BULK LOOKUP: Fetch all users in ONE query
+        # BULK LOOKUP: Fetch all users in ONE query (try both ObjectId and string formats)
         users_map = {}
-        if user_ids:
-            users_cursor = self.db.users.find({"_id": {"$in": list(user_ids)}})
+        if user_ids or user_ids_str:
+            all_id_variants = list(user_ids) + list(user_ids_str)
+            users_cursor = self.db.users.find({"_id": {"$in": all_id_variants}})
             async for user in users_cursor:
                 users_map[str(user["_id"])] = user
         
@@ -838,8 +844,8 @@ class BankingWorkflowsService:
                 transfer_dict["sender_name"] = f"{user.get('first_name', '')} {user.get('last_name', '')}".strip()
                 transfer_dict["sender_email"] = user.get("email", "")
             else:
-                transfer_dict["sender_name"] = "Unknown User" if user_id else "Unknown"
-                transfer_dict["sender_email"] = ""
+                transfer_dict["sender_name"] = doc.get("sender_name") or ("Unknown User" if user_id else "Unknown")
+                transfer_dict["sender_email"] = doc.get("sender_email", "")
             
             # Get sender IBAN from pre-fetched map
             from_account_id = doc.get("from_account_id")
