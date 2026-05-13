@@ -269,6 +269,7 @@ class BankingWorkflowsService:
         from bson import ObjectId
         from datetime import timezone
         from services.email_service import EmailService
+        import re
         
         # Validate account
         account = await self.db.bank_accounts.find_one({"_id": data.from_account_id})
@@ -278,6 +279,28 @@ class BankingWorkflowsService:
         # Validate amount
         if data.amount <= 0:
             raise HTTPException(status_code=400, detail="Amount must be greater than 0")
+        
+        # Validate transfer method specific fields
+        transfer_method = (data.transfer_method or "SEPA").upper()
+        
+        if transfer_method == "BSB":
+            # Validate BSB: must be 6 digits (with optional hyphen: XXX-XXX or XXXXXX)
+            if not data.beneficiary_bsb:
+                raise HTTPException(status_code=400, detail="BSB number is required for BSB transfers")
+            bsb_clean = data.beneficiary_bsb.replace("-", "").replace(" ", "")
+            if not re.match(r'^\d{6}$', bsb_clean):
+                raise HTTPException(status_code=400, detail="BSB number must be 6 digits (e.g. 012-345)")
+            
+            # Validate account number: 6-10 digits
+            if not data.beneficiary_account_number:
+                raise HTTPException(status_code=400, detail="Account number is required for BSB transfers")
+            acct_clean = data.beneficiary_account_number.replace("-", "").replace(" ", "")
+            if not re.match(r'^\d{6,10}$', acct_clean):
+                raise HTTPException(status_code=400, detail="Account number must be 6-10 digits")
+        else:
+            # SEPA - validate IBAN
+            if not data.beneficiary_iban:
+                raise HTTPException(status_code=400, detail="IBAN is required for SEPA transfers")
         
         transfer = Transfer(
             user_id=user_id,
@@ -289,11 +312,22 @@ class BankingWorkflowsService:
             details=data.details,
             reference_number=data.reference_number,
             scheduled_for=data.scheduled_for,
-            attachment_url=data.attachment_url
+            attachment_url=data.attachment_url,
+            transfer_method=transfer_method,
+            beneficiary_bsb=data.beneficiary_bsb,
+            beneficiary_account_number=data.beneficiary_account_number
         )
         
         trans_dict = transfer.model_dump(by_alias=True)
         await self.db.transfers.insert_one(trans_dict)
+        
+        # Determine transfer type label and beneficiary routing info for email
+        if transfer_method == "BSB":
+            transfer_type_label = "BSB Transfer"
+            beneficiary_routing = f"BSB: {data.beneficiary_bsb} / Acct: {data.beneficiary_account_number}"
+        else:
+            transfer_type_label = "SEPA Transfer"
+            beneficiary_routing = data.beneficiary_iban or "N/A"
         
         # Send transfer confirmation email with comprehensive status tracking
         email_warning = None
@@ -323,9 +357,9 @@ class BankingWorkflowsService:
                     reference_number=transfer.reference_number or transfer.id[:8].upper(),
                     amount_cents=data.amount,
                     beneficiary_name=data.beneficiary_name,
-                    beneficiary_iban=data.beneficiary_iban,
+                    beneficiary_iban=beneficiary_routing,
                     sender_iban=sender_iban,
-                    transfer_type="SEPA Transfer",
+                    transfer_type=transfer_type_label,
                     transfer_date=transfer.created_at,
                     language=language
                 )
@@ -571,6 +605,8 @@ class BankingWorkflowsService:
             query["$or"] = [
                 {"beneficiary_name": search_regex},
                 {"beneficiary_iban": search_regex},
+                {"beneficiary_bsb": search_regex},
+                {"beneficiary_account_number": search_regex},
                 {"reference_number": search_regex},
                 {"details": search_regex}
             ]
@@ -653,6 +689,10 @@ class BankingWorkflowsService:
                 "sender_email": user.get("email") if user else None,
                 "sender_iban": account.get("iban") if account else doc.get("sender_iban"),
                 "reject_reason": doc.get("reject_reason"),
+                # Transfer method support
+                "transfer_method": doc.get("transfer_method", "SEPA"),
+                "beneficiary_bsb": doc.get("beneficiary_bsb"),
+                "beneficiary_account_number": doc.get("beneficiary_account_number"),
                 # Deletion metadata
                 "is_deleted": True,
                 "deleted_at": doc.get("deleted_at").isoformat() if doc.get("deleted_at") else None,
@@ -709,6 +749,8 @@ class BankingWorkflowsService:
         transfer_conditions = [
             {"beneficiary_name": {"$regex": search_regex}},
             {"beneficiary_iban": {"$regex": search_regex}},
+            {"beneficiary_bsb": {"$regex": search_regex}},
+            {"beneficiary_account_number": {"$regex": search_regex}},
             {"reference_number": {"$regex": search_regex}},
             {"details": {"$regex": search_regex}}
         ]

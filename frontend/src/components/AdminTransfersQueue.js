@@ -308,7 +308,7 @@ export function AdminTransfersQueue() {
         <div className="relative">
           <input
             type="text"
-            placeholder="Search by beneficiary, sender, email, IBAN, reference... (searches ALL statuses)"
+            placeholder="Search by beneficiary, sender, email, IBAN, BSB, reference... (searches ALL statuses)"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
@@ -474,11 +474,39 @@ export function AdminTransfersQueue() {
               <CopyButton value={selectedTransfer.sender_iban} iconOnly size="xs" />
             </div>
             <div><span className="text-sm text-gray-600">Beneficiary:</span> <span className="font-medium">{selectedTransfer.beneficiary_name}</span></div>
-            <div className="col-span-2 flex items-center gap-2">
-              <span className="text-sm text-gray-600">Beneficiary IBAN:</span> 
-              <span className="font-mono text-sm">{selectedTransfer.beneficiary_iban}</span>
-              <CopyButton value={selectedTransfer.beneficiary_iban} iconOnly size="xs" />
+            
+            {/* Transfer Method Badge */}
+            <div>
+              <span className="text-sm text-gray-600">Method:</span>{' '}
+              <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                selectedTransfer.transfer_method === 'BSB' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'
+              }`}>
+                {selectedTransfer.transfer_method || 'SEPA'}
+              </span>
             </div>
+
+            {/* Show IBAN for SEPA, BSB+Account for BSB */}
+            {(!selectedTransfer.transfer_method || selectedTransfer.transfer_method === 'SEPA') && selectedTransfer.beneficiary_iban && (
+              <div className="col-span-2 flex items-center gap-2">
+                <span className="text-sm text-gray-600">Beneficiary IBAN:</span> 
+                <span className="font-mono text-sm">{selectedTransfer.beneficiary_iban}</span>
+                <CopyButton value={selectedTransfer.beneficiary_iban} iconOnly size="xs" />
+              </div>
+            )}
+            {selectedTransfer.transfer_method === 'BSB' && (
+              <>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-600">BSB:</span> 
+                  <span className="font-mono text-sm font-semibold">{selectedTransfer.beneficiary_bsb}</span>
+                  <CopyButton value={selectedTransfer.beneficiary_bsb} iconOnly size="xs" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-600">Account No:</span> 
+                  <span className="font-mono text-sm font-semibold">{selectedTransfer.beneficiary_account_number}</span>
+                  <CopyButton value={selectedTransfer.beneficiary_account_number} iconOnly size="xs" />
+                </div>
+              </>
+            )}
             <div className="col-span-2"><span className="text-sm text-gray-600">Details:</span> <span className="text-sm">{selectedTransfer.details || 'N/A'}</span></div>
             
             {selectedTransfer.status === 'REJECTED' && (
@@ -696,7 +724,12 @@ export function AdminTransfersQueue() {
                       </td>
                       <td>
                         <div className="font-medium text-sm">{t.beneficiary_name}</div>
-                        <div className="text-xs text-gray-500 font-mono">{t.beneficiary_iban?.substring(0, 12)}...</div>
+                        <div className="text-xs text-gray-500 font-mono">
+                          {t.transfer_method === 'BSB' 
+                            ? `BSB: ${t.beneficiary_bsb || 'N/A'}`
+                            : `${(t.beneficiary_iban || '').substring(0, 12)}...`
+                          }
+                        </div>
                       </td>
                       <td className="font-semibold">{formatCurrency(t.amount)}</td>
                       <td>

@@ -91,6 +91,11 @@ class FulfillCardRequest(BaseModel):
 
 # ==================== TRANSFERS ====================
 
+class TransferMethod(str, Enum):
+    SEPA = "SEPA"       # EU - uses IBAN
+    BSB = "BSB"         # Australia - uses BSB + Account Number
+
+
 class TransferStatus(str, Enum):
     SUBMITTED = "SUBMITTED"
     COMPLETED = "COMPLETED"
@@ -124,13 +129,18 @@ class Transfer(BaseModel):
     user_id: str
     from_account_id: str
     beneficiary_name: str
-    beneficiary_iban: str  # Display only
+    beneficiary_iban: Optional[str] = None  # For SEPA transfers
     amount: int  # In cents
     currency: str = "EUR"
     details: str
     reference_number: Optional[str] = None
     scheduled_for: Optional[datetime] = None
     attachment_url: Optional[str] = None
+    
+    # Transfer method support
+    transfer_method: str = TransferMethod.SEPA  # SEPA or BSB
+    beneficiary_bsb: Optional[str] = None       # BSB number (6 digits, e.g. 012-345)
+    beneficiary_account_number: Optional[str] = None  # Account number for BSB transfers
     
     status: TransferStatus = TransferStatus.SUBMITTED
     reject_reason: Optional[str] = None
@@ -160,13 +170,18 @@ class Transfer(BaseModel):
 class CreateTransfer(BaseModel):
     from_account_id: str
     beneficiary_name: str
-    beneficiary_iban: str
+    beneficiary_iban: Optional[str] = None  # Required for SEPA
     amount: int
     currency: str = "EUR"
     details: str
     reference_number: Optional[str] = None
     scheduled_for: Optional[datetime] = None
     attachment_url: Optional[str] = None
+    
+    # Transfer method support
+    transfer_method: str = "SEPA"  # SEPA or BSB
+    beneficiary_bsb: Optional[str] = None           # Required for BSB
+    beneficiary_account_number: Optional[str] = None  # Required for BSB
 
 
 # ==================== ADMIN ADJUSTMENTS ====================
