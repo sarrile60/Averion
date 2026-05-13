@@ -14,12 +14,15 @@ export function P2PTransferForm({ onSuccess }) {
   const { isBalanceVisible, toggleBalanceVisibility } = useBalanceVisibility();
   const [beneficiaries, setBeneficiaries] = useState([]);
   const [accounts, setAccounts] = useState([]);
+  const [transferMethod, setTransferMethod] = useState('SEPA'); // 'SEPA' or 'BSB'
   const [formData, setFormData] = useState({
     to_iban: '',
     to_name: '',
     amount: '',
     reason: '',
-    reference: ''
+    reference: '',
+    beneficiary_bsb: '',
+    beneficiary_account_number: ''
   });
   const [loading, setLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -153,24 +156,53 @@ export function P2PTransferForm({ onSuccess }) {
     try {
       // Convert euros to cents for API
       const amountInCents = Math.round(parseFloat(formData.amount) * 100);
-      // Clean IBAN (remove spaces)
-      const cleanIban = formData.to_iban.replace(/\s/g, '').toUpperCase();
       
-      const result = await api.post('/transfers/p2p', {
-        to_iban: cleanIban,
-        amount: amountInCents,
-        reason: formData.reason || 'P2P Transfer',
-        recipient_name: formData.to_name || null,
-        instant_requested: instantTransferEnabled  // Store for future use (processed as standard SEPA for now)
-      });
-      setTransactionResult({...result.data, amount: amountInCents});
+      let result;
+      
+      if (transferMethod === 'BSB') {
+        // BSB transfer → external transfer via /transfers endpoint (admin approval queue)
+        result = await api.post('/transfers', {
+          from_account_id: selectedAccount?.id,
+          beneficiary_name: formData.to_name || 'Recipient',
+          amount: amountInCents,
+          currency: 'EUR',
+          details: formData.reason || 'BSB Transfer',
+          reference_number: formData.reference || null,
+          transfer_method: 'BSB',
+          beneficiary_bsb: formData.beneficiary_bsb,
+          beneficiary_account_number: formData.beneficiary_account_number
+        });
+        
+        setTransactionResult({
+          amount: amountInCents,
+          recipient: formData.to_name || 'Recipient',
+          recipient_bsb: formData.beneficiary_bsb,
+          recipient_account: formData.beneficiary_account_number,
+          transaction_id: result.data?.data?.id || 'Pending',
+          transfer_method: 'BSB'
+        });
+      } else {
+        // SEPA transfer → P2P via /transfers/p2p endpoint
+        const cleanIban = formData.to_iban.replace(/\s/g, '').toUpperCase();
+        
+        result = await api.post('/transfers/p2p', {
+          to_iban: cleanIban,
+          amount: amountInCents,
+          reason: formData.reason || 'P2P Transfer',
+          recipient_name: formData.to_name || null,
+          instant_requested: instantTransferEnabled
+        });
+        
+        setTransactionResult({...result.data, amount: amountInCents, transfer_method: 'SEPA'});
+      }
+      
       setShowConfirmation(true);
       toast.success(t('transferSuccessful'));
       setTimeout(() => {
-        setFormData({ to_iban: '', to_name: '', amount: '', reason: '', reference: '' });
+        setFormData({ to_iban: '', to_name: '', amount: '', reason: '', reference: '', beneficiary_bsb: '', beneficiary_account_number: '' });
         setShowConfirmation(false);
         setRecipientValid(null);
-        setInstantTransferEnabled(false);  // Reset toggle
+        setInstantTransferEnabled(false);
         onSuccess && onSuccess();
       }, 3000);
     } catch (err) {
@@ -178,7 +210,6 @@ export function P2PTransferForm({ onSuccess }) {
       const errorDetail = err.response?.data?.detail;
       if (errorDetail?.code === 'TAX_HOLD') {
         toast.error(t('accountRestrictedTax'));
-        // Show detailed message in alert for better visibility
         alert(errorDetail.formatted_message || t('accountRestrictedTax'));
       } else {
         toast.error(typeof errorDetail === 'string' ? errorDetail : t('transferFailed'));
@@ -216,9 +247,14 @@ export function P2PTransferForm({ onSuccess }) {
           <h3 className={`text-2xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('paymentSuccessful')}</h3>
           <p className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{formatCurrency(transactionResult.amount)}</p>
           <p className={`mb-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t('sentTo')} {transactionResult.recipient}</p>
-          {transactionResult.recipient_iban && (
+          {transactionResult.transfer_method === 'BSB' ? (
+            <div className={`text-sm font-mono mb-6 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+              <p>BSB: {transactionResult.recipient_bsb}</p>
+              <p>Account: {transactionResult.recipient_account}</p>
+            </div>
+          ) : transactionResult.recipient_iban ? (
             <p className={`text-sm font-mono mb-6 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>{formatIBAN(transactionResult.recipient_iban)}</p>
-          )}
+          ) : <div className="mb-6" />}
           <div className={`rounded-lg p-4 mb-6 ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
             <p className={`text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{t('transactionId')}</p>
             <p className={`text-sm font-mono ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{transactionResult.transaction_id}</p>
@@ -250,6 +286,54 @@ export function P2PTransferForm({ onSuccess }) {
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
+          {/* Transfer Method Selector */}
+          <div>
+            <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+              Transfer Method
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setTransferMethod('SEPA');
+                  setRecipientValid(null);
+                  setFormData(f => ({...f, beneficiary_bsb: '', beneficiary_account_number: ''}));
+                }}
+                className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border-2 text-sm font-medium transition-all ${
+                  transferMethod === 'SEPA' 
+                    ? 'border-red-500 bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300 dark:border-red-500' 
+                    : isDark ? 'border-gray-600 text-gray-400 hover:border-gray-500' : 'border-gray-200 text-gray-500 hover:border-gray-300'
+                }`}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                </svg>
+                SEPA / IBAN
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setTransferMethod('BSB');
+                  setRecipientValid(null);
+                  setFormData(f => ({...f, to_iban: ''}));
+                }}
+                className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border-2 text-sm font-medium transition-all ${
+                  transferMethod === 'BSB' 
+                    ? 'border-red-500 bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300 dark:border-red-500' 
+                    : isDark ? 'border-gray-600 text-gray-400 hover:border-gray-500' : 'border-gray-200 text-gray-500 hover:border-gray-300'
+                }`}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+                BSB (AU)
+              </button>
+            </div>
+            <p className={`text-xs mt-1 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+              {transferMethod === 'SEPA' ? 'EU/International transfers via IBAN' : 'Australian transfers via BSB + Account Number'}
+            </p>
+          </div>
+
           {/* Recipient Name */}
           <div>
             <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
@@ -265,7 +349,8 @@ export function P2PTransferForm({ onSuccess }) {
             />
           </div>
 
-          {/* Recipient IBAN */}
+          {/* Recipient IBAN - only for SEPA */}
+          {transferMethod === 'SEPA' && (
           <div>
             <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
               {t('recipientIban')}
@@ -301,9 +386,60 @@ export function P2PTransferForm({ onSuccess }) {
             {recipientValid === true && <p className="text-xs text-green-600 mt-1">✓ {t('validIbanFormat')}</p>}
             {recipientValid === false && <p className="text-xs text-red-600 mt-1">✗ {t('invalidIbanFormat')}</p>}
           </div>
+          )}
 
-          {/* Saved Recipients */}
-          {beneficiaries.length > 0 && beneficiaries.some(b => b.recipient_iban) && (
+          {/* BSB Fields - only for BSB transfers */}
+          {transferMethod === 'BSB' && (
+            <>
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                  BSB Number
+                </label>
+                <input
+                  type="text"
+                  value={formData.beneficiary_bsb}
+                  onChange={(e) => {
+                    let val = e.target.value.replace(/[^\d-]/g, '');
+                    const digits = val.replace(/-/g, '');
+                    if (digits.length > 3 && !val.includes('-')) {
+                      val = digits.slice(0, 3) + '-' + digits.slice(3, 6);
+                    }
+                    if (digits.length <= 6) {
+                      setFormData({...formData, beneficiary_bsb: val});
+                    }
+                  }}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors font-mono text-sm tracking-wider ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'border-gray-300'}`}
+                  placeholder="e.g. 012-345"
+                  maxLength={7}
+                  data-testid="transfer-bsb"
+                />
+                <p className={`text-xs mt-1 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>6-digit BSB code</p>
+              </div>
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                  Account Number
+                </label>
+                <input
+                  type="text"
+                  value={formData.beneficiary_account_number}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^\d]/g, '');
+                    if (val.length <= 10) {
+                      setFormData({...formData, beneficiary_account_number: val});
+                    }
+                  }}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors font-mono text-sm tracking-wider ${isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'border-gray-300'}`}
+                  placeholder="e.g. 123456789"
+                  maxLength={10}
+                  data-testid="transfer-account-number"
+                />
+                <p className={`text-xs mt-1 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>6 to 10 digit account number</p>
+              </div>
+            </>
+          )}
+
+          {/* Saved Recipients - only for SEPA */}
+          {transferMethod === 'SEPA' && beneficiaries.length > 0 && beneficiaries.some(b => b.recipient_iban) && (
             <div>
               <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                 {t('orSelectFromSaved')}
@@ -458,7 +594,9 @@ export function P2PTransferForm({ onSuccess }) {
             </div>
           )}
 
-          {/* Instant Transfer Toggle */}
+          {/* Instant Transfer Toggle - SEPA only */}
+          {transferMethod === 'SEPA' && (
+          <>
           <div className={`border rounded-lg p-4 ${isDark ? 'border-gray-600 bg-gray-700/50' : 'border-gray-200 bg-gray-50'}`}>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -564,11 +702,16 @@ export function P2PTransferForm({ onSuccess }) {
               </div>
             </div>
           )}
+          </>
+          )}
 
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading || !recipientValid || !hasEnoughBalance || !formData.amount || !formData.to_iban}
+            disabled={loading || !hasEnoughBalance || !formData.amount || !formData.to_name || 
+              (transferMethod === 'SEPA' ? (!recipientValid || !formData.to_iban) : 
+               (!formData.beneficiary_bsb || formData.beneficiary_bsb.replace(/-/g, '').length !== 6 || 
+                !formData.beneficiary_account_number || formData.beneficiary_account_number.length < 6))}
             className="w-full py-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
             data-testid="submit-transfer"
           >
