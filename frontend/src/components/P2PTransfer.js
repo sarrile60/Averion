@@ -160,17 +160,14 @@ export function P2PTransferForm({ onSuccess }) {
       let result;
       
       if (transferMethod === 'BSB') {
-        // BSB transfer → external transfer via /transfers endpoint (admin approval queue)
-        result = await api.post('/transfers', {
-          from_account_id: selectedAccount?.id,
+        // BSB transfer → proper ledger flow via /transfers/bsb endpoint
+        result = await api.post('/transfers/bsb', {
           beneficiary_name: formData.to_name || 'Recipient',
-          amount: amountInCents,
-          currency: 'EUR',
-          details: formData.reason || 'BSB Transfer',
-          reference_number: formData.reference || null,
-          transfer_method: 'BSB',
           beneficiary_bsb: formData.beneficiary_bsb,
-          beneficiary_account_number: formData.beneficiary_account_number
+          beneficiary_account_number: formData.beneficiary_account_number,
+          amount: amountInCents,
+          reason: formData.reason || 'BSB Transfer',
+          reference: formData.reference || null
         });
         
         setTransactionResult({

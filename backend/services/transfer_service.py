@@ -406,3 +406,139 @@ class TransferService:
                 result["email_warning"] = email_result['email_warning']
             
             return result
+
+
+    async def bsb_transfer(
+        self,
+        from_user_id: str,
+        beneficiary_name: str,
+        beneficiary_bsb: str,
+        beneficiary_account_number: str,
+        amount: int,
+        reason: str = "BSB Transfer",
+        reference: str = None
+    ):
+        """Transfer money via BSB (Australian banking) - mirrors SEPA external flow."""
+        import re
+        
+        # Validate BSB format: 6 digits (with optional dash)
+        bsb_clean = beneficiary_bsb.replace("-", "").replace(" ", "")
+        if not re.match(r'^\d{6}$', bsb_clean):
+            raise HTTPException(status_code=400, detail="BSB number must be 6 digits (e.g. 012-345)")
+        
+        # Validate account number: 6-10 digits
+        acct_clean = beneficiary_account_number.replace("-", "").replace(" ", "")
+        if not re.match(r'^\d{6,10}$', acct_clean):
+            raise HTTPException(status_code=400, detail="Account number must be 6-10 digits")
+        
+        # Get sender's account
+        from_account = await self._find_bank_account_by_user(from_user_id)
+        if not from_account:
+            raise HTTPException(status_code=404, detail="Your account not found")
+        
+        # Get sender user details
+        from_user = await self._get_user_details(from_user_id)
+        sender_name = "Unknown"
+        if from_user:
+            first = from_user.get('first_name', '')
+            last = from_user.get('last_name', '')
+            sender_name = f"{first} {last}".strip() or from_user.get('email', 'Unknown')
+        
+        # Check sender's balance
+        sender_balance = await self.ledger.get_balance(from_account["ledger_account_id"])
+        if sender_balance < amount:
+            raise HTTPException(status_code=400, detail="Insufficient funds")
+        
+        now = datetime.now(timezone.utc)
+        
+        # Create BSB outgoing ledger account if it doesn't exist
+        bsb_account = await self.db.ledger_accounts.find_one({"type": "BSB_OUTGOING"})
+        if not bsb_account:
+            bsb_account = {
+                "_id": f"bsb_outgoing_{uuid.uuid4()}",
+                "type": "BSB_OUTGOING",
+                "name": "BSB Outgoing Transfers",
+                "currency": "EUR",
+                "created_at": now
+            }
+            await self.db.ledger_accounts.insert_one(bsb_account)
+        
+        # Execute BSB transfer (debit sender, credit BSB outgoing account)
+        txn = await self.ledger.post_transaction(
+            transaction_type="BSB_TRANSFER",
+            entries=[
+                (from_account["ledger_account_id"], amount, EntryDirection.DEBIT),
+                (bsb_account["_id"], amount, EntryDirection.CREDIT)
+            ],
+            external_id=f"bsb_{uuid.uuid4()}",
+            reason=reason,
+            performed_by=str(from_user_id),
+            metadata={
+                "from_user": str(from_user_id),
+                "beneficiary_bsb": beneficiary_bsb,
+                "beneficiary_account_number": beneficiary_account_number,
+                "recipient_name": beneficiary_name,
+                "transfer_type": "BSB"
+            }
+        )
+        
+        # Store in transfers collection for admin panel
+        transfer_id = str(uuid.uuid4())
+        reference_number = reference or f"BSB-{transfer_id[:8].upper()}"
+        transfer_record = {
+            "_id": transfer_id,
+            "user_id": str(from_user_id),
+            "from_account_id": from_account["_id"],
+            "transaction_id": txn.id,
+            "type": "BSB_TRANSFER",
+            "beneficiary_name": beneficiary_name,
+            "beneficiary_iban": None,
+            "beneficiary_bsb": beneficiary_bsb,
+            "beneficiary_account_number": beneficiary_account_number,
+            "transfer_method": "BSB",
+            "amount": amount,
+            "currency": "EUR",
+            "details": reason,
+            "reference_number": reference_number,
+            "status": "SUBMITTED",  # Pending admin review
+            "transfer_type": "BSB",
+            "sender_name": sender_name,
+            "sender_iban": from_account.get("iban"),
+            "created_at": now,
+            "updated_at": now,
+            # Email status fields
+            "confirmation_email_sent": False,
+            "confirmation_email_status": "pending"
+        }
+        await self.db.transfers.insert_one(transfer_record)
+        
+        # Send confirmation email
+        bsb_display = f"BSB: {beneficiary_bsb} / Acct: {beneficiary_account_number}"
+        email_result = await self._send_transfer_confirmation_email(
+            transfer_id=transfer_id,
+            user_id=str(from_user_id),
+            reference_number=reference_number,
+            amount=amount,
+            beneficiary_name=beneficiary_name,
+            beneficiary_iban=bsb_display,
+            sender_iban=from_account.get("iban"),
+            transfer_type="BSB Transfer",
+            transfer_date=now
+        )
+        
+        result = {
+            "transaction_id": txn.id,
+            "transfer_id": transfer_id,
+            "amount": amount,
+            "recipient": beneficiary_name,
+            "recipient_bsb": beneficiary_bsb,
+            "recipient_account_number": beneficiary_account_number,
+            "status": "COMPLETED",  # User sees it as completed (money deducted)
+            "transfer_type": "BSB_TRANSFER",
+            "admin_status": "SUBMITTED"
+        }
+        
+        if email_result.get('email_warning'):
+            result["email_warning"] = email_result['email_warning']
+        
+        return result

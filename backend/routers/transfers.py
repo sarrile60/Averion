@@ -63,6 +63,15 @@ class InternalTransferRequest(BaseModel):
     reason: str
 
 
+class BSBTransferRequest(BaseModel):
+    beneficiary_name: str
+    beneficiary_bsb: str
+    beneficiary_account_number: str
+    amount: int
+    reason: str = "BSB Transfer"
+    reference: Optional[str] = None
+
+
 # ==================== HELPER FUNCTIONS ====================
 
 async def check_tax_hold(user_id: str, db: AsyncIOMotorDatabase):
@@ -118,6 +127,43 @@ async def create_p2p_transfer(
         reason=data.reason,
         recipient_name=data.recipient_name,
         instant_requested=data.instant_requested  # Store for future instant transfer support
+    )
+    
+    return result
+
+
+@router.post("/transfers/bsb")
+async def create_bsb_transfer(
+    data: BSBTransferRequest,
+    current_user: dict = Depends(get_current_user),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+):
+    """Create BSB transfer (Australian banking) - deducts balance, enters admin queue."""
+    # Check for tax hold
+    tax_hold = await check_tax_hold(current_user["id"], db)
+    if tax_hold:
+        tax_amount = tax_hold["tax_amount_cents"] / 100
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "code": "TAX_HOLD",
+                "message": "Your account is currently restricted due to outstanding tax obligations.",
+                "tax_amount_due": tax_amount,
+                "formatted_message": f"Account Restricted: Your account has been temporarily suspended due to outstanding tax obligations of €{tax_amount:,.2f}. Transfer services are unavailable until the required amount is settled. For assistance, contact our support team at support@averion-eu.com"
+            }
+        )
+    
+    ledger_engine = LedgerEngine(db)
+    transfer_service = TransferService(db, ledger_engine)
+    
+    result = await transfer_service.bsb_transfer(
+        from_user_id=current_user["id"],
+        beneficiary_name=data.beneficiary_name,
+        beneficiary_bsb=data.beneficiary_bsb,
+        beneficiary_account_number=data.beneficiary_account_number,
+        amount=data.amount,
+        reason=data.reason,
+        reference=data.reference
     )
     
     return result
